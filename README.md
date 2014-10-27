@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/germTheory/germTheoryWebApp.png?label=ready&title=Ready)](https://waffle.io/germTheory/germTheoryWebApp)
 
 # Angular and Single Page Applications (SPA)
 
