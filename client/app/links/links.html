@@ -1,0 +1,30 @@
+<div id='container'>
+  <!-- Your html here -->
+  <!-- START SOLUTION -->
+  <nav class="navigation">
+    <ul>
+      <li>
+          <a class="selected" href="#/links">Links</a>
+      </li>
+       <li>
+          <a href="#/shorten">Shorten</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<input type='text' ng-model='search' placeholder='filter' />
+<div class="links">
+  <div class="link"
+      ng-repeat="link in data.links | filter:search | orderBy:'created_at'">
+    <img src="assets/redirect_icon.png">
+    <div class="info">
+      <div class="visits">
+        <span class="count">{{ link.visits }}</span>Visits
+      </div>
+      <div class="title">{{ link.title }}</div>
+      <div class="original">{{ link.url }}</div>
+      <a href="http://localhost:8000/api/links/{{ link.code }}">{{ link.base_url }}/{{ link.code }}</a>
+    </div>
+  </div>
+  <!-- END SOLUTION -->
+</div>

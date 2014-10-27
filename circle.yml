@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: v0.10.29
+  environment:
+    DOWNSTREAM: hackreactor/shortly-angular
+dependencies:
+  pre:
+    - npm install -g bower
+    - npm install -g hackreactor-labs/problemify
+    - git clone git@github.com:hackreactor-labs/scripts.git ../scripts
+test:
+  pre:
+    - bower install
+deployment:
+  master:
+    branch: master
+    commands:
+      - ../scripts/circle-ci/deploy/publish-to-hackreactor.sh
