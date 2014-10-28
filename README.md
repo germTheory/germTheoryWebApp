@@ -10,3 +10,5 @@ Wiki: https://github.com/germTheory/germTheoryWebApp/wiki
 
 Project Management: https://waffle.io/germTheory/germTheoryWebApp
 
+Design Docs: https://docs.google.com/document/d/135PdnF0FdMeehDu25nNPRnJEHLl9OSmO2EipeA_Na1c/edit#
+
