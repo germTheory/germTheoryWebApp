@@ -18,11 +18,6 @@ module.exports = function (app, express) {
   app.use('/api/users', userRouter); // use user router for all user request
   app.use('/api/locations', locationRouter); // location router for all generalizedlocation data
 
-  // app.get('/mobile', function(req, res){
-  //   console.log("trying");
-  //   res.status(200).sendFile(path.resolve(__dirname + "./../../mobile/www/index.html"));
-  // });
-
   // authentication middleware used to decode token and made available on the request
   // app.use('/api/locations', helpers.decode);
   app.use(helpers.errorLogger);
