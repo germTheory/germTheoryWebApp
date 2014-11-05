@@ -16,5 +16,9 @@ require('./config/middleware.js')(app, express);
 // configure our server with the knex schema setup
 // require('./config/dbConfig.js');
 
-// export our app for testing and flexibility, required by index.js
-module.exports = app;
+// set port
+var port = process.env.PORT || 4568;
+
+app.listen(port);
+
+console.log('Server now listening on port ' + port);

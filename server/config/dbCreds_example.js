@@ -8,4 +8,4 @@ module.exports= {
     charset  : 'utf8',
     ssl      : true
   }
-});
+};
