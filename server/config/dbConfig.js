@@ -37,7 +37,7 @@ db.knex.schema.hasTable('location').then(function(exists) {
               .inTable('users');
       location.float('longitude');
       location.float('latitude');
-      // timestamp needs: time when geolocation was obtained + 
+      // timestamp needs: time when geolocation was obtained +
       // time when info. was inserted to DB.
       location.timestamps();
     }).then(function (table) {
@@ -79,4 +79,5 @@ db.knex.schema.hasTable('proximity').then(function(exists) {
   }
 });
 
+<<<<<<< HEAD
 module.exports = db;*/
