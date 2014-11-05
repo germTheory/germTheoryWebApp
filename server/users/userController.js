@@ -7,7 +7,30 @@ module.exports = {
   signin: function (req, res, next) {
     var username = req.body.username,
         password = req.body.password;
-    // TODO: INSERT CODE TO SIGN USER IN
+      //TODO: Implement findUser functionality in userModel. However, this will be replaced with OAUTH
+      // nbind promisifies the findUser function so we can apply .then()
+      var findUser = Q.nbind(User.findUser, User);
+        findUser({username: username})
+          .then(function (user) {
+            if (!user) {
+              next(new Error('User does not exist'));
+            } else {
+              // TODO: Implement comparePasswords functionality
+              return user.comparePasswords(password)
+                .then(function(foundUser) {
+                  if (foundUser) {
+                    var token = jwt.encode(user, 'secret');
+                    res.json({token: token});
+                  } else {
+                    return next(new Error('No user'));
+                  }
+                });
+            }
+          })
+          .fail(function (error) {
+            next(error);
+          });
+
     res.send(200, true);
   },
 
@@ -16,11 +39,12 @@ module.exports = {
         password  = req.body.password,
         create,
         newUser;
-    // TODO: INSERT CODE TO ADD USER
+    // TODO: INSERT CODE TO ADD USER, TO BE IMPLEMENTED WITH OAUTH
     // check to see if user already exists
-        // make a new user if does not exist
-        // then...
-            // create token to send back for auth
+    
+      // make a new user if does not exist
+      // then...
+          // create token to send back for auth
         res.send(200, true);
   },
 
@@ -40,13 +64,35 @@ module.exports = {
   },
 
   getUserCode: function (req, res, next, code){
-  	// TODO: INSERT CODE TO CHECK IF USER EXISTS
-  	req.code = code;
-  	next();
+    var findUser = Q.nbind(User.findUser, User);
+      
+      findUser({username: username})
+        .then(function (user) {
+          if (!user) {
+            next(new Error('User does not exist'));
+          } else {
+	           req.code = code;
+	           next();
+          }
+        })
+        .fail(function (error) {
+          next(error);
+        });
   },
 
   getUserLocations: function(req, res, next){
-  	// TODO: RETURN THE LOCATIONS OF A SINGLE USER BY FILTERING LOCATION BY UID
-  	res.send(200, req.code);
+    var uid = code;
+    var getLoc = Q.nbind(User.fetchUserLocations, User);
+    getLoc({id: uid})
+      .then(function(locations){
+        if(!locations){
+          next(new Error('No locations found for given userId'));
+        } else {
+          return locations;
+        }
+      })
+      .fail(function(error){
+        next(error);
+      });
   }
 };
