@@ -1,23 +1,21 @@
 var bcrypt   = require('bcrypt-nodejs'),
     Q        = require('q'),
-    Bookshelf = require('bookshelf');
+    // bookshelf = app.get('bookshelf');
     SALT_WORK_FACTOR  = 10;
 
-var Users = Bookshelf.Model.extend({
+// var Users = bookshelf.Model.extend({
 
-  tableName: 'documents',
+//   tableName: 'users',
 
-  constructor: function() {
-    bookshelf.Model.apply(this, arguments);
-    this.on('saving', function(model, attrs, options) {
-      options.query.where('type', '=', 'book');
-    });
-  }
+//   constructor: function() {
+//     bookshelf.Model.apply(this, arguments);
+//     this.on('saving', function(model, attrs, options) {
+//     });
+//   }
+// });
 
-});
-
-//TODO: Implement addUser, likely using Google OAUTH and jwt
-var addUser = function(data){
+//TODO: Implement addUser and add to bookshelf, likely using Google OAUTH and jwt
+var _addUser = function(data){
 
 }
 // TODO: Implement findUser
@@ -31,4 +29,9 @@ var _fetchUserLocations = function(){
 }
 
 
-module.exports = Bookshelf.model('Users', Users);
+module.exports = {
+	addUser: _addUser,
+	findUser: _findUser,
+	fetchUserLocations: _fetchUserLocations
+}; 
+//bookshelf.model('Users', Users);
