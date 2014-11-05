@@ -4,23 +4,7 @@ var request = require('request'),
 
 
 module.exports = {
-  getUrlTitle: function(url) {
-    var defer = Q.defer();
-    request(url, function(err, res, html) {
-      if (err) {
-        defer.reject(err);
-      } else {
-        var tag = /<title>(.*)<\/title>/;
-        var match = html.match(tag);
-        var title = match ? match[1] : url;
-        defer.resolve(title);
-      }
-    });
-    return defer.promise;
-  },
 
-  isValidUrl: function(url) {
-    return url.match(rValidUrl);
-  }
+  
 };
 
