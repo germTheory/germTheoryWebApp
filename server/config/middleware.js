@@ -13,9 +13,9 @@ module.exports = function (app, express) {
   app.use(express.static(__dirname + '/../../client')); 
 
   app.use('/api/users', userRouter); // use user router for all user request
-  app.use('/api/locations', locationRouter);
-  // authentication middleware used to decode token and made available on the request
+  app.use('/api/locations', locationRouter); // location router for all generalizedlocation data
   
+  // authentication middleware used to decode token and made available on the request
   // app.use('/api/locations', helpers.decode);
   app.use(helpers.errorLogger);
   app.use(helpers.errorHandler);
