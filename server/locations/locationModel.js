@@ -5,4 +5,4 @@ var Location = bookshelf.Model.extend({
   hasTimestamps: ['createdAt', 'updatedAt']
 });
 
-module.exports = Location;
+module.exports = ('Location', Location);
