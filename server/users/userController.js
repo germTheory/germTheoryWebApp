@@ -1,3 +1,4 @@
+// THIS FILE STORES ALL FUNCTIONS RELATED TO USER BEHAVIOR
 var User = require('./userModel.js'),
     Q    = require('q'),
     jwt  = require('jwt-simple');
