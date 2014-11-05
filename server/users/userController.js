@@ -1,3 +1,4 @@
+// THIS FILE STORES ALL FUNCTIONS RELATED TO USER BEHAVIOR
 var User = require('./userModel.js'),
     Q    = require('q'),
     jwt  = require('jwt-simple');
@@ -6,27 +7,8 @@ module.exports = {
   signin: function (req, res, next) {
     var username = req.body.username,
         password = req.body.password;
-
-    var findUser = Q.nbind(User.findOne, User);
-    findUser({username: username})
-      .then(function (user) {
-        if (!user) {
-          next(new Error('User does not exist'));
-        } else {
-          return user.comparePasswords(password)
-            .then(function(foundUser) {
-              if (foundUser) {
-                var token = jwt.encode(user, 'secret');
-                res.json({token: token});
-              } else {
-                return next(new Error('No user'));
-              }
-            });
-        }
-      })
-      .fail(function (error) {
-        next(error);
-      });
+    // TODO: INSERT CODE TO SIGN USER IN
+    res.send(200, true);
   },
 
   signup: function (req, res, next) {
@@ -34,36 +16,16 @@ module.exports = {
         password  = req.body.password,
         create,
         newUser;
-
-    var findOne = Q.nbind(User.findOne, User);
-
+    // TODO: INSERT CODE TO ADD USER
     // check to see if user already exists
-    findOne({username: username})
-      .then(function(user) {
-        if (user) {
-          next(new Error('User already exist!'));
-        } else {
-          // make a new user if not one
-          create = Q.nbind(User.create, User);
-          newUser = {
-            username: username,
-            password: password
-          };
-          return create(newUser);
-        }
-      })
-      .then(function (user) {
-        // create token to send back for auth
-        var token = jwt.encode(user, 'secret');
-        res.json({token: token});
-      })
-      .fail(function (error) {
-        next(error);
-      });
+        // make a new user if does not exist
+        // then...
+            // create token to send back for auth
+        res.send(200, true);
   },
 
   checkAuth: function (req, res, next) {
-    // checking to see if the user is authenticated
+	// checking to see if the user is authenticated
     // grab the token in the header is any
     // then decode the token, which we end up being the user object
     // check to see if that user exists in the database
@@ -72,18 +34,19 @@ module.exports = {
       next(new Error('No token'));
     } else {
       var user = jwt.decode(token, 'secret');
-      var findUser = Q.nbind(User.findOne, User);
-      findUser({username: user.username})
-        .then(function (foundUser) {
-          if (foundUser) {
-            res.send(200);
-          } else {
-            res.send(401);
-          }
-        })
-        .fail(function (error) {
-          next(error);
-        });
+      // find user with that username.  If there is a user, send the page
     }
+    res.send(200, true);
+  },
+
+  getUserCode: function (req, res, next, code){
+  	// TODO: INSERT CODE TO CHECK IF USER EXISTS
+  	req.code = code;
+  	next();
+  },
+
+  getUserLocations: function(req, res, next){
+  	// TODO: RETURN THE LOCATIONS OF A SINGLE USER BY FILTERING LOCATION BY UID
+  	res.send(200, req.code);
   }
 };
