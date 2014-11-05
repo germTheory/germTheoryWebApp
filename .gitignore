@@ -28,6 +28,7 @@ results
 
 npm-debug.log
 node_modules
+server/node_modules
 bower_components
 
 .idea/
