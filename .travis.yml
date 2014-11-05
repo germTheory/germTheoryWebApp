@@ -18,3 +18,4 @@ deploy:
   api_key: 
     secure: a+5e3Ib9O5HJlVcPmBiTb0eF7TAGQGsm0bMJgtxBolVwjaNf5zW5ZBssCnQa6ZXNSgSvBPHPYa4371n6SWe+AB0NzxrRwhm3E46a5FuCQJSru51+b6YLj7SWiv2SFgUhxXNo8maxRPa0ERvLQYE71fT3P85r0KJ0lyGAifZQfgs=
   app: germ-tracker
+  strategy: git
