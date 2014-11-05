@@ -1,14 +1,16 @@
+notifications: 
+  email: 
+    recipients: 
+    - ryojiosawa@gmail.com
+    - supriya.bhat@gmail.com
+    on_success: 
+    - change
+    on_failure: 
+    - always
+node_js: 
+- "0.11"
 language: node_js
-
-node_js:
-- '0.11'
-
-notifications:
-  email:
-    recipients:
-      - ryojiosawa@gmail.com
-      - supriya.bhat@gmail.com
-    on_success:
-      - change
-    on_failure:
-      - always
+deploy: 
+  provider: heroku
+  api_key: 
+    secure: a+5e3Ib9O5HJlVcPmBiTb0eF7TAGQGsm0bMJgtxBolVwjaNf5zW5ZBssCnQa6ZXNSgSvBPHPYa4371n6SWe+AB0NzxrRwhm3E46a5FuCQJSru51+b6YLj7SWiv2SFgUhxXNo8maxRPa0ERvLQYE71fT3P85r0KJ0lyGAifZQfgs=
