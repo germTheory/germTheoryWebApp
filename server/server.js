@@ -1,6 +1,6 @@
 var express = require('express');
 
-// var dbConfig = require('./dbConfig.example.js');
+// var dbConfig = require('./config/dbConfig.js');
 // var knex = require('knex')(dbConfig);
 // var bookshelf = require('bookshelf')(knex);
 
