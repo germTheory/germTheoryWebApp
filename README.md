@@ -1,6 +1,7 @@
 # Welcome to germTheory
 =======
 [![Stories in Ready](https://badge.waffle.io/germTheory/germTheoryWebApp.png?label=ready&title=Ready)](https://waffle.io/germTheory/germTheoryWebApp)
+[![Build Status](https://travis-ci.org/germTheory/germTheoryWebApp.svg)](https://travis-ci.org/germTheory/germTheoryWebApp)
 
 ## Please visit us on: www.germtheory.heroku.com
 
