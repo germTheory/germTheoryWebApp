@@ -6,7 +6,7 @@ var express = require('express');
 
 var app = express();
 
-// to get bookshelf elsewhere in the app, simply write 'var bookshelf = app.get('bookshelf');'
+// to use bookshelf elsewhere in the app, simply write 'var bookshelf = app.get('bookshelf');'
 // app.set('bookshelf', bookshelf);
 
 // configure our server with all the middleware and routing

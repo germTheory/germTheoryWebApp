@@ -3,10 +3,9 @@ var bcrypt   = require('bcrypt-nodejs'),
     // bookshelf = app.get('bookshelf');
     SALT_WORK_FACTOR  = 10;
 
+// BOOKSHELF SCHEMA HERE
 // var Users = bookshelf.Model.extend({
-
 //   tableName: 'users',
-
 //   constructor: function() {
 //     bookshelf.Model.apply(this, arguments);
 //     this.on('saving', function(model, attrs, options) {
@@ -34,4 +33,4 @@ module.exports = {
 	findUser: _findUser,
 	fetchUserLocations: _fetchUserLocations
 }; 
-//bookshelf.model('Users', Users);
+// EVENTUAL EXPORTS: bookshelf.model('Users', Users);
