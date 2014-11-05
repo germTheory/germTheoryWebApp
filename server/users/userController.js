@@ -7,7 +7,7 @@ module.exports = {
   signin: function (req, res, next) {
     var username = req.body.username,
         password = req.body.password;
-    // INSERT CODE TO SIGN USER IN
+    // TODO: INSERT CODE TO SIGN USER IN
     res.send(200, true);
   },
 
@@ -16,7 +16,7 @@ module.exports = {
         password  = req.body.password,
         create,
         newUser;
-    // INSERT CODE TO ADD USER
+    // TODO: INSERT CODE TO ADD USER
     // check to see if user already exists
         // make a new user if does not exist
         // then...
@@ -37,5 +37,16 @@ module.exports = {
       // find user with that username.  If there is a user, send the page
     }
     res.send(200, true);
+  },
+
+  getUserCode: function (req, res, next, code){
+  	// TODO: INSERT CODE TO CHECK IF USER EXISTS
+  	req.code = code;
+  	next();
+  },
+
+  getUserLocations: function(req, res, next){
+  	// TODO: RETURN THE LOCATIONS OF A SINGLE USER BY FILTERING LOCATION BY UID
+  	res.send(200, req.code);
   }
 };
