@@ -12,5 +12,8 @@ var app = express();
 // configure our server with all the middleware and routing
 require('./config/middleware.js')(app, express);
 
-// export our app for testing and flexibility, required by index.js
-module.exports = app;
+var port = process.env.PORT || 4568;
+
+app.listen(port);
+
+console.log('Server now listening on port ' + port);
