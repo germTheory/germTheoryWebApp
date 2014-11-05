@@ -1,10 +1,10 @@
-var Location = require('./locationmodel.js');
+var Location = require('./locationModel.js');
 // insert other dependencies here
 
 module.exports = {
 	allLocations: function(req, res, next){
 		Location.getLocations().then(function(data){
-			res.send(200, true);
+			res.send(200);
 		});
 	},
 

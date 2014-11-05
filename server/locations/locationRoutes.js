@@ -1,4 +1,4 @@
-var locationController = require('./locationcontroller');
+var locationController = require('./locationController');
 
 module.exports = function (app) {
   // app === linkRouter injected from middleware.js
