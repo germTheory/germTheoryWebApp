@@ -8,6 +8,7 @@ module.exports = {
     var username = req.body.username,
         password = req.body.password;
     // INSERT CODE TO SIGN USER IN
+    res.send(200, true);
   },
 
   signup: function (req, res, next) {
@@ -20,6 +21,7 @@ module.exports = {
         // make a new user if does not exist
         // then...
             // create token to send back for auth
+        res.send(200, true);
   },
 
   checkAuth: function (req, res, next) {
@@ -34,5 +36,6 @@ module.exports = {
       var user = jwt.decode(token, 'secret');
       // find user with that username.  If there is a user, send the page
     }
+    res.send(200, true);
   }
 };
