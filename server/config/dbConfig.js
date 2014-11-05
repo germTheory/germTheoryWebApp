@@ -43,7 +43,7 @@ db.knex.schema.hasTable('locations').then(function(exists) {
     db.knex.schema.createTable('locations', function (location) {
       location.integer('user_id')
       		    .references('id')
-              .inTable('users'));
+              .inTable('users');
       location.float('longitude');
       location.float('latitude');
       // timestamp needs: time when geolocation was obtained + 
