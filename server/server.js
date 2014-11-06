@@ -1,6 +1,6 @@
 var express = require('express');
 
-var dbCreds = require('./config/dbCreds.js');
+var dbCreds = require('./config/dbCreds_example.js');
 var knex = require('knex')(dbCreds);
 var bookshelf = require('bookshelf')(knex);
 
