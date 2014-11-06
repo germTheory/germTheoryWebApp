@@ -1,8 +1,8 @@
-var bookshelf = require('../config/dbConfig');
+// // var bookshelf = require('../config/dbConfig');
 
-var Location = bookshelf.Model.extend({
-  tableName: 'location',
-  hasTimestamps: ['createdAt', 'updatedAt']
-});
+// var Location = bookshelf.Model.extend({
+//   tableName: 'location',
+//   hasTimestamps: ['createdAt', 'updatedAt']
+// });
 
-module.exports = ('Location', Location);
+// module.exports = ('Location', Location);
