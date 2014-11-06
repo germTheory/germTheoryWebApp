@@ -2,7 +2,7 @@ var userController = require('./userController.js');
 
 
 module.exports = function (app) {
-  // our app is the userRouter injected from middleware.js
+  // our app is the userRouter injected from serverConfig.js
 
   // Params
   app.param('userId', userController.getUserCode);
