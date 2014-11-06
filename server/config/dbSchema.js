@@ -6,37 +6,38 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 	port: 5432
 });
 
-console.log(dbCreds.username);
-
 // Location table schema
 var Locations = sequelize.define('Locations', {
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
 	latitude: { type: Sequelize.FLOAT },
 	longitude: { type: Sequelize.FLOAT },
-	timestamps: true
 });
+
+Locations.sync();
 
 // Diseases table schema
 var Diseases = sequelize.define('Diseases', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
-  timestamps: true
 });
+
+Diseases.sync();
 
 // User table schema
 var Users = sequelize.define('Users', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
-  timestamps: true
 });
+
+Users.sync();
 
 // Proximity table schema
 var Proximity = sequelize.define('Proximity', {
 	value: { type: Sequelize.FLOAT },
-	timestamps: true
 });
 
+Proximity.sync();
 /*
 DEFINE RELATIONSHIPS
 */
@@ -59,13 +60,11 @@ Proximity
 sequelize
 	.authenticate()
 	.complete(function(err){
-		if(err){ 
+		if(err){
 			console.log("Unable to connect to database: ", err);
 		} else {
 			console.log("Established connection to database.");
 		}
 	});
-sequelize
-	.sync().then(function() {
-		console.log("SUCCESSSS");
-	});
+
+	
