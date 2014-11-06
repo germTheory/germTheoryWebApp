@@ -9,8 +9,15 @@ module.exports = {
 	},
 
 	newLocation: function(req, res, next){
-		// TODO: WRITE CODE TO POST A LOCATION TO THE DATABASE
-		res.send(200, true);
+		var reqLatitude = req.body.latitude,
+			reqLongitude = req.body.longitude,
+			userId = req.body.user_id;
+		// save our location to the database
+		new Location({ user_id: userId, latitude: latitude, longitude: longitude }).save()
+			.then(function(model){
+				console.log(model);
+				res.send(201);
+			});
 	},
 
 	findUser: function(req, res, next, code){
