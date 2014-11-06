@@ -1,4 +1,4 @@
-var dbCreds = require('./dbCreds.js');
+var dbCreds = require('./dbCreds_example.js');
 var knex = require('knex')(dbCreds);
 var db = require('bookshelf')(knex);
 
