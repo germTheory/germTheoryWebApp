@@ -1,4 +1,4 @@
-var locationController = require('./locationController');
+var locationController = require('../controllers/locationController');
 
 module.exports = function (app) {
   // app === linkRouter injected from serverConfig.js

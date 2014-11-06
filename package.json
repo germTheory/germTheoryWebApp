@@ -28,7 +28,8 @@
     "passport-local": "^1.0.0",
     "pg": "^3.6.2",
     "q": "^1.0.1",
-    "request": "^2.47.0"
+    "request": "^2.47.0",
+    "sequelize": "^2.0.0-rc2"
   },
   "engines": {
     "node": ">= 0.8.0"

@@ -1,4 +1,4 @@
-var userController = require('./userController.js');
+var userController = require('../controllers/userController.js');
 
 
 module.exports = function (app) {
