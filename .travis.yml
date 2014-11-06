@@ -36,7 +36,7 @@ after_script:
   # Download and install Heroku toolbelt locally
   - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   # Clear your current Heroku SSH keys:
-  - heroku keys:clear
+  # - heroku keys:clear
   # Add a new SSH key to Heroku
   - yes | heroku keys:add
   # Push to Heroku!
