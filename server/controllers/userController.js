@@ -1,6 +1,6 @@
 // THIS FILE STORES ALL FUNCTIONS RELATED TO USER BEHAVIOR
 var db = require('../database/dbSchema.js'),
-    Users = db.Users;
+    User = db.User;
     Q    = require('q'),
     jwt  = require('jwt-simple');
 

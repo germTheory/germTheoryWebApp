@@ -1,5 +1,5 @@
 var db = require('../database/dbSchema'),
-	Locations = db.Locations;
+	Location = db.Location;
 
 // insert other dependencies here
 

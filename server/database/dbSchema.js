@@ -5,61 +5,56 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 	dialect: 'postgres',
 	port: 5432
 });
-var db = {}; // stores all methods
+var db = {}; // stores all models that we will export
 
 // Location table schema
-var Locations = sequelize.define('Locations', {
+var Location = sequelize.define('location', {
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
 	latitude: { type: Sequelize.FLOAT },
 	longitude: { type: Sequelize.FLOAT },
+}, {
+	tableName: 'locations'
 });
-
-Locations.sync();
 
 // Diseases table schema
-var Diseases = sequelize.define('Diseases', {
+var Disease = sequelize.define('disease', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
+}, {
+	tableName: 'diseases'
 });
 
-Diseases.sync();
-
-
 // User table schema
-var Users = sequelize.define('Users', {
+var User = sequelize.define('user', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
+}, {
+	tableName: 'users'
 });
-
-Users.sync();
 
 // Proximity table schema
-var Proximity = sequelize.define('Proximity', {
+var Proximity = sequelize.define('proximity', {
 	value: { type: Sequelize.FLOAT },
+}, {
+	tableName: 'proximity'
 });
-
-Proximity.sync();
 
 /*
 DEFINE RELATIONSHIPS
 */
-Users
-	.hasMany(Locations, { foreignKey: 'userId', foreignKeyConstraint: true });
+// Has many relationships
+User.hasMany(Location);
+Disease.hasMany(Proximity);
+
+// has one relationships
+User.hasOne(Proximity);
 
 // Build join table between users and diseases
-Diseases
-	.hasMany(Users, { joinTableName: 'user_diseases' });
-Users
-	.hasMany(Diseases, { joinTableName: 'user_diseases' });
+Disease.hasMany(User, { joinTableName: 'user_diseases' });
+User.hasMany(Disease, { joinTableName: 'user_diseases' });
 
-// Proximity Relationships
-Proximity
-	.hasOne(Users, { foreignKey: 'userId', foreignKeyConstraint: true });
-Proximity
-	.hasOne(Diseases, { foreignKey: 'diseaseId', foreignKeyConstraint: true });
-
-
+// Authenticate, connect, and create tables if they are not already defined
 sequelize
 	.authenticate()
 	.complete(function(err){
@@ -67,12 +62,14 @@ sequelize
 			console.log("Unable to connect to database: ", err);
 		} else {
 			console.log("Established connection to database.");
+			sequelize.sync();
 		}
 	});
 
-db['Locations'] = Locations;
-db['Diseases'] = Diseases;
-db['Users'] = Users;
+// Assign keys to be exported
+db['Location'] = Location;
+db['Disease'] = Disease;
+db['User'] = User;
 db['Proximity'] = Proximity;
 
 module.exports = db;
