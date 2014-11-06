@@ -25,7 +25,7 @@ after_script:
   # Install the Heroku package (or the Heroku toolbelt)
   - npm install heroku
   # Add your Heroku git repo:
-  - git remote add heroku git@heroku.com:HEROKU_REPO_HERE.git
+  - git remote add heroku git@heroku.com:germ-tracker.git
   # Add your Heroku API key:
   - export HEROKU_API_KEY=hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
   # Turn off warnings about SSH keys:
