@@ -15,7 +15,7 @@ var Location = sequelize.define('Location', {
 	longitude: { type: Sequelize.FLOAT },
 });
 
-Locations.sync();
+Location.sync();
 
 // Diseases table schema
 var Disease = sequelize.define('Disease', {
@@ -24,7 +24,7 @@ var Disease = sequelize.define('Disease', {
   name: { type: Sequelize.STRING },
 });
 
-Diseases.sync();
+Disease.sync();
 
 
 // User table schema
@@ -35,7 +35,7 @@ var User = sequelize.define('User', {
   gender: { type: Sequelize.STRING },
 });
 
-Users.sync();
+User.sync();
 
 // Proximity table schema
 var Proximity = sequelize.define('Proximity', {
