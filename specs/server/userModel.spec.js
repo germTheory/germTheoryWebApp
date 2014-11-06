@@ -1,11 +1,11 @@
-var request = require('supertest');
+// var request = require('supertest');
 var should = require('should');
 // var User = require('../../users/userModel');
 // var dbCreds = require('./dbCreds_example.js');
-var knex = require('knex')(dbCreds);
-var db = require('bookshelf')(knex);
-var expect = require('../../node_modules/chai/chai').expect;
-var express = require('express');
+// var knex = require('knex')(dbCreds);
+// var db = require('bookshelf')(knex);
+// var expect = require('../../node_modules/chai/chai').expect;
+// var express = require('express');
 
 xdescribe('Location Model',function(){
   xit('Database should have a function called _addUser', function() {
