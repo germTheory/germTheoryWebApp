@@ -1,4 +1,6 @@
-var Location = require('./locationModel.js');
+var db = require('../database/dbSchema'),
+	Locations = db.Locations;
+
 // insert other dependencies here
 
 module.exports = {

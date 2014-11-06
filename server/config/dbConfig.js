@@ -1,4 +1,6 @@
-var dbCreds = require('./dbCreds');
+// STILL INCLUDED FOR REFERENCE ONLY
+
+/*var dbCreds = require('./dbCreds');
 var knex = require('knex')(dbCreds);
 var db = require('bookshelf')(knex);
 
@@ -77,4 +79,4 @@ db.knex.schema.hasTable('proximity').then(function(exists) {
   }
 });
 
-module.exports = db;
+module.exports = db;*/
