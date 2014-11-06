@@ -6,7 +6,12 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "grunt": "^0.4.5",
-    "istanbul": "^0.3.2",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.5.7",
+    "grunt-mocha-test": "^0.12.2",
+    "grunt-nodemon": "^0.3.0",
+    "grunt-npm-install": "^0.1.0",
     "mocha": "^1.20.1",
     "should": "^4.1.0",
     "supertest": "^0.14.0"
@@ -29,7 +34,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "mocha --reporter spec --bail --check-leaks --require should specs/server/",
+    "test": "grunt test",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks --require should specs/server/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks --require should specs/server/"
   }
