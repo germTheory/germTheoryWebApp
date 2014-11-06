@@ -9,41 +9,38 @@ var db = {}; // stores all methods
 
 // Location table schema
 var Location = sequelize.define('Location', {
-	tableName: 'locations',
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
 	latitude: { type: Sequelize.FLOAT },
 	longitude: { type: Sequelize.FLOAT },
+}, {
+	tableName: 'locations'
 });
-
-Location.sync();
 
 // Diseases table schema
 var Disease = sequelize.define('Disease', {
-	tableName: 'diseases',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
+}, {
+	tableName: 'diseases'
 });
-
-Disease.sync();
-
 
 // User table schema
 var User = sequelize.define('User', {
-  tableName: 'users',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
+}, {
+	tableName: 'users'
 });
 
-User.sync();
+ // User.sync();
 
 // Proximity table schema
 var Proximity = sequelize.define('Proximity', {
-	tableName: 'proximity',
 	value: { type: Sequelize.FLOAT },
+}, {
+	tableName: 'proximity'
 });
-
-Proximity.sync();
 
 /*
 DEFINE RELATIONSHIPS
@@ -71,6 +68,7 @@ sequelize
 			console.log("Unable to connect to database: ", err);
 		} else {
 			console.log("Established connection to database.");
+			sequelize.sync();
 		}
 	});
 
