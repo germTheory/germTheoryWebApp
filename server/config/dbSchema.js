@@ -5,6 +5,7 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 	dialect: 'postgres',
 	port: 5432
 });
+var db = {}; // stores all methods
 
 // Location table schema
 var Locations = sequelize.define('Locations', {
@@ -23,6 +24,7 @@ var Diseases = sequelize.define('Diseases', {
 
 Diseases.sync();
 
+
 // User table schema
 var Users = sequelize.define('Users', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
@@ -38,6 +40,7 @@ var Proximity = sequelize.define('Proximity', {
 });
 
 Proximity.sync();
+
 /*
 DEFINE RELATIONSHIPS
 */
@@ -67,4 +70,9 @@ sequelize
 		}
 	});
 
-	
+db['Locations'] = Locations;
+db['Diseases'] = Diseases;
+db['Users'] = Users;
+db['Proximity'] = Proximity;
+
+module.exports = db;
