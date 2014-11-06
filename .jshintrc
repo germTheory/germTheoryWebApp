@@ -13,9 +13,8 @@
     "quotmark": "single",
     "regexp": true,
     "undef": true,
-    "unused": true,
+    "unused": "vars",
     "strict": false,
     "trailing": true,
-    "smarttabs": true,
-    "white": true
+    "smarttabs": true
 }
