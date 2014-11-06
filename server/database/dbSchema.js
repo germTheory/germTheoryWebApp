@@ -3,7 +3,10 @@ var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
 var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.password, {
 	dialect: 'postgres',
-	port: 5432
+	port: 5432,
+	define: {
+		underscored: true
+	}
 });
 var db = {}; // stores all models that we will export
 
