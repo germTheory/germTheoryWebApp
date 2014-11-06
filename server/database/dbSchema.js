@@ -9,6 +9,7 @@ var db = {}; // stores all methods
 
 // Location table schema
 var Locations = sequelize.define('Locations', {
+	tableName: 'locations',
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
 	latitude: { type: Sequelize.FLOAT },
 	longitude: { type: Sequelize.FLOAT },
@@ -18,6 +19,7 @@ Locations.sync();
 
 // Diseases table schema
 var Diseases = sequelize.define('Diseases', {
+	tableName: 'diseases',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
 });
@@ -27,6 +29,7 @@ Diseases.sync();
 
 // User table schema
 var Users = sequelize.define('Users', {
+  tableName: 'users',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
@@ -36,6 +39,7 @@ Users.sync();
 
 // Proximity table schema
 var Proximity = sequelize.define('Proximity', {
+	tableName: 'proximity',
 	value: { type: Sequelize.FLOAT },
 });
 
