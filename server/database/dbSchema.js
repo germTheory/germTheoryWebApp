@@ -8,7 +8,7 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 var db = {}; // stores all methods
 
 // Location table schema
-var Locations = sequelize.define('Locations', {
+var Location = sequelize.define('Location', {
 	tableName: 'locations',
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
 	latitude: { type: Sequelize.FLOAT },
@@ -18,7 +18,7 @@ var Locations = sequelize.define('Locations', {
 Locations.sync();
 
 // Diseases table schema
-var Diseases = sequelize.define('Diseases', {
+var Disease = sequelize.define('Disease', {
 	tableName: 'diseases',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
@@ -28,7 +28,7 @@ Diseases.sync();
 
 
 // User table schema
-var Users = sequelize.define('Users', {
+var User = sequelize.define('User', {
   tableName: 'users',
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
@@ -48,20 +48,20 @@ Proximity.sync();
 /*
 DEFINE RELATIONSHIPS
 */
-Users
-	.hasMany(Locations, { foreignKey: 'userId', foreignKeyConstraint: true });
+User
+	.hasMany(Location, { foreignKey: 'userId', foreignKeyConstraint: true });
 
 // Build join table between users and diseases
-Diseases
-	.hasMany(Users, { joinTableName: 'user_diseases' });
-Users
-	.hasMany(Diseases, { joinTableName: 'user_diseases' });
+Disease
+	.hasMany(User, { joinTableName: 'user_diseases' });
+User
+	.hasMany(Disease, { joinTableName: 'user_diseases' });
 
 // Proximity Relationships
 Proximity
-	.hasOne(Users, { foreignKey: 'userId', foreignKeyConstraint: true });
+	.hasOne(User, { foreignKey: 'userId', foreignKeyConstraint: true });
 Proximity
-	.hasOne(Diseases, { foreignKey: 'diseaseId', foreignKeyConstraint: true });
+	.hasOne(Disease, { foreignKey: 'diseaseId', foreignKeyConstraint: true });
 
 
 sequelize
@@ -74,9 +74,9 @@ sequelize
 		}
 	});
 
-db['Locations'] = Locations;
-db['Diseases'] = Diseases;
-db['Users'] = Users;
+db['Location'] = Location;
+db['Disease'] = Disease;
+db['User'] = User;
 db['Proximity'] = Proximity;
 
 module.exports = db;
