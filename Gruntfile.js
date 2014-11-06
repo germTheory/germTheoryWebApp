@@ -3,6 +3,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    DB: {
+      DBUser: process.env.DB_USER || 'postgres',
+      DBName: process.env.DB_NAME || 'germtracker'
+    },
+
     mochaTest: {
       test: {
         options: {
@@ -52,6 +57,51 @@ module.exports = function(grunt) {
           destination: 'doc'
         }
       }
+    },
+
+    shell: {
+      setupDB: {
+        command: 'psql -U postgres -l | grep ' + grunt.config.get('DB.DBName') + ' | wc -l',
+        options: {
+          callback: function(err, stdout) {
+            var done = this.async();
+
+            if (!parseInt(stdout)) {
+              grunt.task.run('shell:createDB');
+            } else {
+              grunt.log.writeln('"' + grunt.config.get('DB.DBName') + '" already exists.');
+            }
+            done();
+          }
+        }
+      },
+      createDB: {
+        command: 'psql -U postgres -c "CREATE DATABASE ' +  grunt.config.get('DB.DBName') + '"',
+        options: {
+          callback: function(err, stdout) {
+            var done = this.async();
+            if (!err) {
+              grunt.log.writeln('Database \"' + grunt.config.get('DB.DBName') + '\" has been created successfully.');
+            }
+            done();
+          }
+        }
+      },
+      dropDB: {
+        command: 'psql -U postgres -c "DROP DATABASE ' +  grunt.config.get('DB.DBName') + '"',
+        options: {
+          callback: function(err, stdout) {
+            var done = this.async();
+            if (!err) {
+              grunt.log.writeln('Database \"' + grunt.config.get('DB.DBName') + '\" has been deleted successfully.');
+            }
+            done();
+          }
+        }
+      },
+      checkDB: {
+        command: 'psql -U postgres -l | grep ' + grunt.config.get('DB.DBName') + ' | wc -l'
+      }
     }
   });
 
@@ -61,6 +111,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-npm-install');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -75,18 +126,21 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
-  grunt.registerTask('test', [
-    'jshint',
+  grunt.registerTask('setupDB', 'Create a new PostgreSQL database if not exist','shell:setupDB');
+  grunt.registerTask('createDB', 'Create a new PostgreSQL database', 'shell:createDB');
+  grunt.registerTask('dropDB', 'Drop the existing PostgreSQL database','shell:dropDB');
+
+  grunt.registerTask('test', 'Setup database and run mocha tests', [
+    'setupDB',
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build', 'Run npm-install, jshint, mochaTest and jsdoc tasks', [
     'npm-install',
     'jshint',
-    'mochaTest',
+    'test',
     'jsdoc'
   ]);
 
   grunt.registerTask('default', ['build']);
 };
-
