@@ -79,5 +79,4 @@ db.knex.schema.hasTable('proximity').then(function(exists) {
   }
 });
 
-<<<<<<< HEAD
 module.exports = db;*/
