@@ -1,29 +1,43 @@
 language: node_js
+node_js: 
+- "0.11"
+notifications: 
+  email: 
+    recipients: 
+    - ryojiosawa@gmail.com
+    - supriya.bhat@gmail.com
+    - jamesongamble@gmail.com
+    - kevin.a.meurer@gmail.com
+    - jomerinog@gmail.com
+    on_success: 
+    - change
+    on_failure: 
+    - always
+before_script: 
+- npm install -g grunt-cli
+# deploy: 
+#   provider: heroku
+#   api_key: 
+#     secure: hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
+#   app: germ-tracker
 
-node_js:
-  - "0.11"
-
-before_script:
-  - npm install -g grunt-cli
-  - psql -c 'create database germTracker;' -U postgres
-install: npm install
-script: grunt test
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
-  app: germ-tracker
-
-notifications:
-  email:
-    recipients:
-      - ryojiosawa@gmail.com
-      - supriya.bhat@gmail.com
-      - jamesongamble@gmail.com
-      - kevin.a.meurer@gmail.com
-      - jomerinog@gmail.com
-    on_success:
-      - change
-    on_failure:
-      - always
+after_script:
+  # Install the Heroku package (or the Heroku toolbelt)
+  - npm install heroku
+  # Add your Heroku git repo:
+  - git remote add heroku git@heroku.com:germ-tracker.git
+  # Add your Heroku API key:
+  - export HEROKU_API_KEY=hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
+  # Turn off warnings about SSH keys:
+  - echo "Host heroku.com" >> ~/.ssh/config
+  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  - echo "   CheckHostIP no" >> ~/.ssh/config
+  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # Download and install Heroku toolbelt locally
+  - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  # Clear your current Heroku SSH keys:
+  - heroku keys:clear
+  # Add a new SSH key to Heroku
+  - yes | heroku keys:add
+  # Push to Heroku!
+  - yes | git push heroku master
