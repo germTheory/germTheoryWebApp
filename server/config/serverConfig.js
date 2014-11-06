@@ -24,4 +24,7 @@ module.exports = function (app, express) {
   // inject our routers into their respective route files
   require('../users/userRoutes.js')(userRouter);
   require('../locations/locationRoutes.js')(locationRouter);
+
+  // create schemas and connect to database
+  require('./config/dbConfig');
 };
