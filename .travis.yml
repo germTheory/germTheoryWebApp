@@ -20,14 +20,14 @@ before_script:
 #   api_key: 
 #     secure: hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
 #   app: germ-tracker
+global:
+  secure: ca/LBK+PIncH/D5U39+Bzqt82uLEqBjyVBDyiaNZd4j/LiO/47Ak3OUmNe9i4NLHtJixbk25RwrHMyBgVFXcxiLIFMwoNkSLv3W29fhI+8FZDdgdK2cdqfF3kkKCNhKcD/3b8AH8rSUNXFm1MVOZ9RJ+AYyjcNtVmvN7JJZPWs0=
 
 after_script:
   # Install the Heroku package (or the Heroku toolbelt)
   - npm install heroku
   # Add your Heroku git repo:
   - git remote add heroku git@heroku.com:germ-tracker.git
-  # Add your Heroku API key:
-  - export HEROKU_API_KEY=hq7OzqMO0xYRcC9ovApnKbbghd382Q8msAJiQ7GH+SPX5htuIf/UDB+vgT/uHuoOdHV2i0h2fy8r4GRkw+EY2VKz00oA2CTM5/Ztf25kV0Pq/D2cJ2gWJpkBDKtzF4i2F5pT/7uKeyBwjHFsG+v9/73DwenoShqVTZ/KXewDUCM=
   # Turn off warnings about SSH keys:
   - echo "Host heroku.com" >> ~/.ssh/config
   - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
@@ -36,7 +36,7 @@ after_script:
   # Download and install Heroku toolbelt locally
   - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   # Clear your current Heroku SSH keys:
-  - heroku keys:clear
+  # - heroku keys:clear
   # Add a new SSH key to Heroku
   - yes | heroku keys:add
   # Push to Heroku!
