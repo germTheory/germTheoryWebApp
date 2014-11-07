@@ -16,13 +16,23 @@ var _getUserCode = function (req, res, next, code){
 };
 
 // return a 405 if the API does not support the desired function
-var _invalidMethod = function(req, res, next) {
+var _invalidMethod = function(req, res, next){
   res.send(405, "Invalid Method for API endpoint");
 };
 
+var _getUserIndex = function(req, res, next){
+  Proximity
+    .find({ where: { user_id: req.body.user_id } })
+    .success(function( userEntry ){
+      res.send(200, userEntry);
+    })
+    .error(function(err){
+      res.send(err);
+    });
+}
 
 // Create new entry in proximity table.  Accessed via '/api/proximity' and '/api/proximity/:user_id'
-var _newUserIndex = function(req, res, next) {
+var _newUserIndex = function(req, res, next){
   if( !req.body.user_id ) {
     res.send(400, "Bad Request: Did not supply a user_id in url or in request body");
   }
@@ -89,6 +99,7 @@ var _deleteUserIndex = function(req, res, next) {
 module.exports = {
   invalidMethod: _invalidMethod,
   getUserCode: _getUserCode,
+  getUserIndex: _getUserIndex,
   newUserIndex: _newUserIndex,
   updateUserIndex: _updateUserIndex,
   getAllIndexes: _getAllIndexes,
