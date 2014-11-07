@@ -6,8 +6,7 @@ node_js:
 before_script:
   - npm install -g grunt-cli
   - psql -c 'create database travis_ci_test;' -U postgres
-install: npm install
-script: grunt test
+
 notifications:
   email:
     recipients:
@@ -16,11 +15,8 @@ notifications:
       - jamesongamble@gmail.com
       - kevin.a.meurer@gmail.com
       - jomerinog@gmail.com
-    on_success: always|never|change # default: always
-    on_failure: always|never|change # default: always 
-
-before_script: 
-- npm install -g grunt-cli
+    on_success: change
+    on_failure: always
 
 after_script:
   # Install the Heroku package (or the Heroku toolbelt)
