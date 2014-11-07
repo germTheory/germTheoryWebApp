@@ -6,7 +6,8 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 	port: 5432,
 	define: {
 		underscored: true
-	}
+	},
+  logging: false
 });
 var db = {}; // stores all models that we will export
 
