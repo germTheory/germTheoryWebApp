@@ -1,28 +1,32 @@
 var db = require('../../server/database/dbSchema.js');
 var request = require('supertest');
 var mocha = require('mocha');
+var expect = require('expect.js')
 
 describe('Proximity',function(){
   var fakeProximity = [];
   var lastid;
   before(function(done){
       db.sequelize.sync({force: true}).then(function(){
-        db.User.bulkCreate([{ id: 1, name: 'Jose Merino', gender:'M'}, { id: 2, name: 'John Smith', gender: 'M'}]).then(function(user){
-          lastid = 2;
-          var fakeProx1 = {
-                user_id: 1,
-                value: .64,
-                id: 1
-              },
-              fakeProx2 = {
-                user_id: 2,
-                value: .29,
-                id: 2
-              };
-          fakeProximity.push(fakeProx1);
-          fakeProximity.push(fakeProx2);
-          done();
-        });
+        db.Disease.create({name: "Ebola"})
+          .then(function(){
+            db.User.bulkCreate([{ id: 1, name: 'Jose Merino', gender:'M'}, { id: 2, name: 'John Smith', gender: 'M'}]).then(function(user){
+              lastid = 2;
+              var fakeProx1 = {
+                    user_id: 1,
+                    value: .64,
+                    disease_id: 1
+                  },
+                  fakeProx2 = {
+                    user_id: 2,
+                    value: .53,
+                    disease_id: 1
+                  };
+              fakeProximity.push(fakeProx1);
+              fakeProximity.push(fakeProx2);
+              done();
+            });
+          });
       });
   });
 
@@ -55,27 +59,44 @@ describe('Proximity',function(){
       app = require('../../server/server.js');
     });
 
-    beforeEach(function(done){
-      db.Proximity.destroy().then(function(items, error){
-          if(error) {
-            done("Error: Unable to remove items from Proximity table");
-          }
-          db.Proximity.bulkCreate(fakeProximity).then(function(items, err){
-            if(err){ 
-              done('Error: Unable to create items in Proximity table');
-            }
-            done();
-          }); 
-        });
-    });
-
     describe('Routes: /api/proximity/', function(){
-      
-      it('should have proximity endpoint',function(done){
+      beforeEach(function(done){
+        db.Disease.destroy()
+          .then(function(item){
+            db.Proximity.destroy()
+              .then(function(items){
+                db.Disease.create({ id: 1, name: "Ebola" })
+                  .then(function(disease){
+                    db.Proximity.bulkCreate(fakeProximity)
+                      .then(function(complete){
+                          done();
+                          return;
+                      }, function(err4){
+                          done(err4);
+                          return;
+                        }); // end of bulkCreate
+                    }, function(err3){
+                        console.log("Error: Unable to create item in Disease Table");
+                        done(err3);
+                        return;
+                      }); // end of disease create
+                }, function(err2){
+                    done("Error: Unable to Destroy items in Proximity Table");
+                    return;
+                  }); // end of Proximity Destroy
+              }, function(err1){
+                done("Error: Unable to destroy items in disease table");
+                return
+            }); // end of Disease Destroy
+      });
+
+      it('should accept GET requests to /api/proximity',function(done){
         request(app)
           .get('/api/proximity')
-          .expect(200);
-        done();
+          .expect(200)
+          .end(function(err, res){
+            done();
+          });
       });
 
       it('should return all user indexes for a GET request to /api/proximity/', function(done){
@@ -85,18 +106,90 @@ describe('Proximity',function(){
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res){
-            if (err) return done(err);
-            console.log(res.body);
+            if (err) {
+              done(err);
+              return;
+            }
             expect(res).to.be.ok();
             expect(res.body.length).to.eql(2);
             done();
           });
       });
+
+      it('should return a 400 error for bad POST requests to /api/proximity', function(done){
+        request(app)
+          .post("/api/proximity")
+          .send({ user_id: "hello", value: "something", disease_id: 1 })
+          .expect(400)
+          .end(function(err, res) {
+            if(err) {
+              done(err);
+              return;
+            }
+            done();
+          });
+      });
+
+      it('should add a user index to the proximity table for a POST request to /api/proximity', function(done){
+        db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M'})
+          .then(function(user){
+            request(app)
+              .post("/api/proximity")
+              .send({ user_id: 3, value: .8, disease_id: 1 })
+              .expect(201)
+              .end(function(err, res) {
+                if(err) {
+                  done(err);
+                  return;
+                }
+                done();
+              });
+          }, function(error){
+            done(error);
+            return;
+          });
+      });
+
+      it('should update a user entry when receiving a PUT request to /api/proximity', function(done){
+        request(app)
+          .put("/api/proximity")
+          .send({ user_id: 1, value: .24 })
+          .expect(200)
+          .end(function(err, res){
+            console.log(res);
+            if(err) {
+              done(err);
+              return;
+            }
+            db.Proximity.find( {where: { user_id: 1 } } )
+              .then(function(item){
+                expect(item.value).to.eql(.24);
+                done();
+              })
+          });
+      });
+
+      it('should return a 405 error for DELETE requests to /api/proximity', function(done){
+        
+      });
     });
 
     describe('Routes: /api/proximity/:userId',function(){
-      // beforeEach(function(){
-      // });
+      
+      beforeEach(function(done){
+        db.Proximity.destroy().then(function(items, error){
+            if(error) {
+              done("Error: Unable to remove items from Proximity table");
+            }
+            db.Proximity.bulkCreate(fakeProximity).then(function(items, err){
+              if(err){ 
+                done('Error: Unable to create items in Proximity table');
+              }
+              done();
+            }); 
+          });
+      });
+
       xit('should have proximity endpoint',function(){
         request(app)
           .get('proximity')
