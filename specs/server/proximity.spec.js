@@ -279,5 +279,38 @@ describe('Proximity',function(){
 
     });
 
+    it('should update a user entry when receiving a PUT request to /api/proximity/:userId', function(done){
+        request(app)
+          .put("/api/proximity/1")
+          .send({ value: .24 })
+          .expect(200)
+          .end(function(err, res){
+            if(err) {
+              done(err);
+              return;
+            }
+            db.Proximity.find( {where: { user_id: 1 } } )
+              .then(function(item){
+                expect(item.value).to.eql(.24);
+                done();
+              });
+          });
+    });
+
+    it('should delete a user entry when receiving a DELETE request to /api/proximity/:userId', function(done){
+      request(app)
+        .delete("/api/proximity/2")
+        .end(function(err, res){
+          if(err) {
+            done(err);
+            return;
+          }
+          db.Proximity.find( {where: { user_id: 1 } } )
+            .then(function(item){
+              expect(item).to.be.null;
+              done();
+            });
+        });
+    });
   });
 });

@@ -83,7 +83,7 @@ var _deleteUserIndex = function(req, res, next) {
     res.status(400).send("Bad Request: Did not supply a user_id in url or in request body");
   }
   Proximity
-    .destroy( { user_id: req.body.user_id } )
+    .destroy( {where: { user_id: req.body.user_id }} )
     .then( function( affectedRows ){
       res.status(200).send(affectedRows);
     }, function(err){
