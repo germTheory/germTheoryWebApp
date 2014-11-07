@@ -7,17 +7,6 @@ before_script:
   - npm install -g grunt-cli
   - psql -c 'create database travis_ci_test;' -U postgres
 
-notifications:
-  email:
-    recipients:
-      - ryojiosawa@gmail.com
-      - supriya.bhat@gmail.com
-      - jamesongamble@gmail.com
-      - kevin.a.meurer@gmail.com
-      - jomerinog@gmail.com
-    on_success: change
-    on_failure: always
-
 after_script:
   # Install the Heroku package (or the Heroku toolbelt)
   - npm install heroku
@@ -36,4 +25,13 @@ after_script:
   - yes | heroku keys:add
   # Push to Heroku!
   - yes | git push heroku master
-
+notifications:
+  email:
+    recipients:
+      - ryojiosawa@gmail.com
+      - supriya.bhat@gmail.com
+      - jamesongamble@gmail.com
+      - kevin.a.meurer@gmail.com
+      - jomerinog@gmail.com
+    on_success: always
+    on_failure: always
