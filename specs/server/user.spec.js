@@ -3,27 +3,44 @@ var expect = require('chai').expect;
 var db = require('../../server/database/dbSchema.js');
 
 xdescribe('User REST resource',function(){
+  var app;
 
   before(function(done){
     db.sequelize.sync({force: true})
       .success(function(){
         done();
       });
+    app = require('../../server/server.js');
   });
 
-  it('GET /api/users should return a list of User records', function(done) {
-    request(app)
-      .get('/users')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+  xit('GET /api/users should return a list of User records', function(done) {
+    // request(app)
+    //   .get('/users')
+    //   .set('Accept', 'application/json')
+    //   .expect('Content-Type', /json/)
+    //   .expect(200)
+    //   .expect(function(res) {
+    //     expect(res.body).to.be.ok;
+    //   })
+    //   .end(done);
+
+
+    db.User.create({
+      name: "sup"
+    }).then(function(created){
+      request(app)
+      .get('/api/users/:'+created.id)
       .expect(200)
-      .expect(function(res) {
+      .end(function(err,res){
+        console.log("Reached END");
         expect(res.body).to.be.ok;
-      })
-      .end(done);
+        // expect(res.body.name).to.equal("sup");
+        done();
+      });
+    });
   });
 
-  it('GET /api/user/:id should return a specified User record', function(done){
+  xit('GET /api/user/:id should return a specified User record', function(done){
     sequelize.query("INSERT INTO users VALUES (?, ?)", null, null, ['John Smith', 'M'])
       .success(function(user) {
         console.log(user);
@@ -40,7 +57,7 @@ xdescribe('User REST resource',function(){
       });
   });
 
-  it('POST /api/user should insert a new User record', function(done) {
+  xit('POST /api/user should insert a new User record', function(done) {
     request(app)
       .post('/users')
       .send({
