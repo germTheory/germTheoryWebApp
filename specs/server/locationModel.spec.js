@@ -3,16 +3,18 @@ var Location = db.Location;
 
 describe('Location Model',function(){
   var lastid;
-  beforeEach(function(){
-    db.sequelize.sync().success(function(){
+  beforeEach(function(done){
+    db.sequelize.sync({force: true}).success(function(){
       db.User.create({name: 'jose'}).success(function(user){
         lastid = user.values.id;
+        done();
       });
 
     });
   });
-  it('should create rows in database',function(done){
-    db.Location.create({ userId: lastid, latitude: 12.252, longitude: 21.5234234  })
+  it('should be able to create rows in database',function(done){
+    console.log('creating stuff');
+    db.Location.create({ user_id: lastid, latitude: 12.252, longitude: 21.5234234  })
     .then(function(model){
       done();
     },
@@ -21,7 +23,7 @@ describe('Location Model',function(){
     });
   });
   it('should fail if parameters are wrong',function(done){
-    db.Location.create({ userId: lastid, latitude: 'a'+12.252, longitude: 21.5234234  })
+    db.Location.create({ user_id: lastid, latitude: 'a'+12.252, longitude: 21.5234234  })
     .then(function(model){
       done('Error, expected db operation to fail, but it worked.');
     },
