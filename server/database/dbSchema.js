@@ -104,14 +104,14 @@ sequelize
   */
 var saveUser =  function(_username, cb){
   var newUser = User.build({name: _username, gender:"none"});
-  newUser.save().complete(function(err) {
+  newUser.save().complete(function(err, usr) {
     if (!!err){
-    console.log('An error occured while saving User: ', _username);
+    console.log('An error occured while saving User: ', usr);
     } else {
 
       /* This callback function is called once saving succeeds. */
-      console.log("User saved: ", _username);
-      cb(_username);
+      // console.log("User saved: ", usr.dataValues);
+      cb(usr.dataValues);
     }
   });
   
@@ -125,12 +125,37 @@ var findUser = function(_username, cb){
 	    console.log('An error occured while finding User: ', _username);
 	  } else {
 	    // This function is called back with an array of matches.
-	    // console.log("findUser list of users: ", usrs[0].dataValues);
-	    cb(usrs[0].dataValues);
+	    // console.log("findUser list of users: ", usrs);
+	    cb(usrs);
 	  }
 	});
 };
-
+var findAllUsers = function(cb){
+// Retrieve user from the database:
+  User.findAll().complete(function(err, usrs) {
+                  // attributes: [name, gender] }).complete(function(err, usrs) {
+    if (!!err){
+      console.log('An error occured while finding User: ', _username);
+    } else {
+      // This function is called back with an array of matches.
+      // console.log("findUser list of users: ", usrs);
+      cb(usrs);
+    }
+  });
+};
+var findUserById = function(id, cb){
+// Retrieve user from the database:
+  User.findAll({ where: {id: id} }).complete(function(err, usrs) {
+                  // attributes: [name, gender] }).complete(function(err, usrs) {
+    if (!!err){
+      console.log('An error occured while finding User: ', id);
+    } else {
+      // This function is called back with an array of matches.
+      // console.log("findUser list of users: ", usrs);
+      cb(usrs);
+    }
+  });
+};
 // Assign keys to be exported
 db.Location = Location;
 db.Disease = Disease;
@@ -139,4 +164,6 @@ db.Proximity = Proximity;
 db.sequelize = sequelize;
 db.saveUser = saveUser;
 db.findUser = findUser;
+db.findUserById = findUserById;
+db.findAllUsers = findAllUsers;
 module.exports = db;
