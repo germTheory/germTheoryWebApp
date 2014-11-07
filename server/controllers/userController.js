@@ -30,7 +30,7 @@ var userController = {
   */
   signup: function (req, res, next) {
     // TODO: remove hack
-    var username  = req.body.username,
+    var username  = req.body.username;
 
     // TO BE IMPLEMENTED WITH OAUTH
 
