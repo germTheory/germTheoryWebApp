@@ -10,8 +10,10 @@ var userController = {
   Signin to the app if already a user.
   */
   signin: function (req, res, next) {
+    console.log("Here 1");
     // TODO: remove hack
-    var username = req.body.username;
+    // var username = req.body.username;
+    var username = "test";
 
     db.findUser(_username, function(results){
       if (results.length === 0) {
@@ -30,7 +32,9 @@ var userController = {
   */
   signup: function (req, res, next) {
     // TODO: remove hack
-    var username  = req.body.username,
+    // var username  = req.body.username,
+    var username = "hello";
+    console.log("In signup");
 
     // TO BE IMPLEMENTED WITH OAUTH
 
