@@ -1,4 +1,4 @@
-var proximityController = require('../controllers/proximityController.js');
+var proximityController = require('../controllers/proximityController');
 
 module.exports = function (app) {
   
