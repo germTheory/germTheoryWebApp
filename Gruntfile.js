@@ -3,11 +3,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    DB: {
-      DBUser: process.env.DB_USER || 'postgres',
-      DBName: process.env.DB_NAME || 'germtracker'
-    },
-
     mochaTest: {
       test: {
         options: {
@@ -61,46 +56,57 @@ module.exports = function(grunt) {
 
     shell: {
       setupDB: {
-        command: 'psql -U postgres -l | grep ' + grunt.config.get('DB.DBName') + ' | wc -l',
+        command: function(DBName) {
+          grunt.config.set('DBName', DBName);
+          return 'psql -U postgres -l | grep ' + DBName + ' | wc -l';
+        },
         options: {
           callback: function(err, stdout) {
             var done = this.async();
 
             if (!parseInt(stdout)) {
-              grunt.task.run('shell:createDB');
+              grunt.task.run('shell:createDB:' + grunt.config.get('DBName'));
             } else {
-              grunt.log.writeln('"' + grunt.config.get('DB.DBName') + '" already exists.');
+              grunt.log.writeln('"' + grunt.config.get('DBName') + '" already exists.');
             }
             done();
           }
         }
       },
       createDB: {
-        command: 'psql -U postgres -c "CREATE DATABASE ' +  grunt.config.get('DB.DBName') + '"',
+        command: function(DBName) {
+          grunt.config.set('DBName', DBName);
+          return 'psql -U postgres -c "CREATE DATABASE ' + DBName + '"';
+        },
         options: {
           callback: function(err, stdout) {
             var done = this.async();
             if (!err) {
-              grunt.log.writeln('Database \"' + grunt.config.get('DB.DBName') + '\" has been created successfully.');
+              grunt.log.writeln(grunt.config.get('DBName') + ' has been created successfully.');
             }
             done();
           }
         }
       },
       dropDB: {
-        command: 'psql -U postgres -c "DROP DATABASE ' +  grunt.config.get('DB.DBName') + '"',
+        command: function(DBName) {
+          grunt.config.set('DBName', DBName);
+          return 'psql -U postgres -c "DROP DATABASE ' +  DBName + '"';
+        },
         options: {
           callback: function(err, stdout) {
             var done = this.async();
             if (!err) {
-              grunt.log.writeln('Database \"' + grunt.config.get('DB.DBName') + '\" has been deleted successfully.');
+              grunt.log.writeln(grunt.config.get('DBName') + ' has been deleted successfully.');
             }
             done();
           }
         }
       },
       checkDB: {
-        command: 'psql -U postgres -l | grep ' + grunt.config.get('DB.DBName') + ' | wc -l'
+        command: function(DBName) {
+          return 'psql -U postgres -l | grep ' + DBName + ' | wc -l';
+        }
       }
     }
   });
@@ -126,10 +132,15 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
-  grunt.registerTask('setupDB', 'Create a new PostgreSQL database if not exist','shell:setupDB');
-  grunt.registerTask('createDB', 'Create a new PostgreSQL database', 'shell:createDB');
-  grunt.registerTask('dropDB', 'Drop the existing PostgreSQL database','shell:dropDB');
-
+  grunt.registerTask('setupDB', 'Create a new PostgreSQL database if not exist', function(DBName) {
+    grunt.task.run('shell:setupDB:' + DBName);
+  });
+  grunt.registerTask('createDB', 'Create a new PostgreSQL database', function(DBName) {
+    grunt.task.run('shell:createDB:' + DBName);
+  });
+  grunt.registerTask('dropDB', 'Drop the existing PostgreSQL database', function(DBName) {
+    grunt.task.run('shell:dropDB:' + DBName);
+  });
   grunt.registerTask('test', 'Setup database and run mocha tests', [
     //'setupDB',
     'mochaTest'
