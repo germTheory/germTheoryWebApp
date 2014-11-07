@@ -4,18 +4,17 @@ var db = require('../database/dbSchema'),
 // insert other dependencies here
 
   module.exports = {
-    allLocations: function(req, res, next){
+    findAll: function(req, res, next){
       Location.findAll({limit:50}).then(function(data){
         res.status(200).send(data);
       });
     },
-    getLocation: function(req,res,next){
+    find: function(req,res,next){
       Location.find(req.params.id).then(function(found){
         res.status(200).send(found);
       });
-
     },
-    newLocation: function(req, res, next){
+    create: function(req, res, next){
       var reqLatitude = req.body.latitude,
       reqLongitude = req.body.longitude,
       userId = req.body.user_id;

@@ -5,8 +5,8 @@ module.exports = function (app) {
   // ALL ROUTES ARE PREPENDED WITH /api/location
   // currently unused route param
   app.route('/')
-    .get(locationController.allLocations)
-    .post(locationController.newLocation);
+    .get(locationController.findAll)
+    .post(locationController.create);
   app.route('/:id')
-    .get(locationController.getLocation);
+    .get(locationController.find);
 };
