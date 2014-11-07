@@ -19,8 +19,6 @@ notifications:
 before_script:
   - npm install -g grunt-cli
   - psql -c 'create database travis_ci_test;' -U postgres
-install: npm install
-script: grunt test
 
 after_script:
   # Install the Heroku package (or the Heroku toolbelt)
