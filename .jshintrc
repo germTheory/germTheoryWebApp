@@ -15,5 +15,6 @@
     "unused": "vars",
     "strict": false,
     "trailing": true,
-    "smarttabs": true
+    "smarttabs": true,
+    "predef": ["angular"]
 }
