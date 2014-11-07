@@ -70,10 +70,10 @@ sequelize
   });
 
 // Assign keys to be exported
-module.exports.db = {
-  Location: Location,
-  Disease: Disease,
-  User: User,
-  Proximity: Proximity,
-  sequelize: sequelize
-};
+var db = {};
+db.Location = Location;
+db.Disease = Disease;
+db.User = User;
+db.Proximity = Proximity;
+db.sequelize = sequelize;
+module.exports = db;
