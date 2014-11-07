@@ -4,49 +4,53 @@ var db = require('../database/dbSchema.js'),
     Q    = require('q'),
     jwt  = require('jwt-simple');
 
-module.exports = {
-  signin: function (req, res, next) {
-    var username = req.body.username,
-        password = req.body.password;
-      //TODO: Implement findUser functionality in userModel. However, this will be replaced with OAUTH
-      // nbind promisifies the findUser function so we can apply .then()
-      var findUser = Q.nbind(User.findUser, User);
-        findUser({username: username})
-          .then(function (user) {
-            if (!user) {
-              next(new Error('User does not exist'));
-            } else {
-              // TODO: Implement comparePasswords functionality
-              return user.comparePasswords(password)
-                .then(function(foundUser) {
-                  if (foundUser) {
-                    var token = jwt.encode(user, 'secret');
-                    res.json({token: token});
-                  } else {
-                    return next(new Error('No user'));
-                  }
-                });
-            }
-          })
-          .fail(function (error) {
-            next(error);
-          });
+var userController = {
 
-    res.send(200, true);
+  /*
+  Signin to the app if already a user.
+  */
+  signin: function (req, res, next) {
+    var username = req.body.username;
+    db.findUser(_username, function(results){
+      if (results === 0) {
+        console.log("User does not exist!");
+        res.send(500, true);
+      } else {
+        // sign-up the user using google Auth
+        // save location information
+        res.send(200, true);
+      }
+    });
   },
 
+  /*
+  Signup if you want to use the app.
+  */
   signup: function (req, res, next) {
     var username  = req.body.username,
-        password  = req.body.password,
-        create,
         newUser;
-    // TODO: INSERT CODE TO ADD USER, TO BE IMPLEMENTED WITH OAUTH
-    // check to see if user already exists
+    // TO BE IMPLEMENTED WITH OAUTH
 
-      // make a new user if does not exist
-      // then...
-          // create token to send back for auth
-        res.send(200, true);
+    // check to see if user exists
+    db.findUser(_username, function(err, results){
+      if (results === 0) {
+        console.log("User does not exist, adding new user...");
+        db.saveUser(_username, function(results){
+          if (results) {
+            console.log("User successfully added");
+            res.send(200, "Added User");
+          }
+        });
+      } else {
+        // sign-up the user using google Auth
+        // save location information
+        console.log("User already exists. Try signing in!");
+        res.send(503, true);
+      }
+    });
+    
+    // TODO: create token to send back for auth
+
   },
 
   checkAuth: function (req, res, next) {
@@ -64,35 +68,42 @@ module.exports = {
     res.send(200, true);
   },
 
-  getUserCode: function (req, res, next, code){
-    var findUser = Q.nbind(User.findUser, User);
-      findUser({username: username})
-        .then(function (user) {
-          if (!user) {
-            next(new Error('User does not exist'));
-          } else {
-	           req.code = code;
-	           next();
-          }
-        })
-        .fail(function (error) {
-          next(error);
-        });
+  /* Obtain the user's information from database,
+  which is: id, name, gender,
+  and diseases that the person has???*/
+  getUserInfo: function(req, res, next){
+    var username  = req.body.username;
+
+    db.findUser(username, function(result){
+      if (result.length > 0){
+        console.log("Sucess finding user in database for: ", username);
+        res.send(200, result);
+      } else {
+        console.log("Could not find user in database for : ", username);
+        res.send(404, "Could not find user in database");
+      }
+    });
+    
   },
 
-  getUserLocations: function(req, res, next){
-    var uid = code;
-    var getLoc = Q.nbind(User.fetchUserLocations, User);
-    getLoc({id: uid})
-      .then(function(locations){
-        if(!locations){
-          next(new Error('No locations found for given userId'));
-        } else {
-          return locations;
-        }
-      })
-      .fail(function(error){
-        next(error);
-      });
+  getUserCode: function (req, res, next, code){
+  //   var username  = req.body.username;
+  //   var findUser = Q.nbind(User.findUser, User);
+    
+  //   findUser({username: username})
+  //     .then(function (user) {
+  //       if (!user) {
+  //         next(new Error('User does not exist'));
+  //       } else {
+  //               req.code = code;
+  //               next();
+  //       }
+  //     })
+  //     .fail(function (error) {
+  //       next(error);
+  //     });
   }
+
 };
+
+module.exports = userController;

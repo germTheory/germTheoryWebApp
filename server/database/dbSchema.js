@@ -1,14 +1,32 @@
 var dbCreds   = require('./dbCreds');
 var Sequelize = require('sequelize');
 var env       = process.env.NODE_ENV || 'development';
-var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.password, {
-	dialect: 'postgres',
-	port: 5432,
-	define: {
-		underscored: true
-	},
-  logging: false
+
+
+/*Database connection string created depending of whether
+  it is a development or deployment environment.*/
+var is_native = false;
+
+var connection_string = dbCreds.dialect + '://' + dbCreds.username + ':' + dbCreds.password + 
+                        '@' + dbCreds.host + ':5432/' + dbCreds.database;
+
+if (process.env.NODE_ENV){
+  connection_string =  process.env.DATABASE_URL;
+  is_native = true;
+}
+
+// console.log("connection_string: ", connection_string);
+
+var sequelize = new Sequelize(connection_string, {
+  define: {
+    underscored: true
+  },
+  logging: console.log,
+  logging: false,
+  protocol: 'postgres',
+  native: is_native
 });
+
 var db = {}; // stores all models that we will export
 
 // Location table schema
@@ -81,10 +99,44 @@ sequelize
   }
 });
 
+
+/* Saves the user to the database.
+  */
+var saveUser =  function(_username, cb){
+  var newUser = User.build({name: _username, gender:"none"});
+  newUser.save().complete(function(err) {
+    if (!!err){
+    console.log('An error occured while saving User: ', _username);
+    } else {
+
+      /* This callback function is called once saving succeeds. */
+      console.log("User saved: ", _username);
+      cb(_username);
+    }
+  });
+  
+};
+
+var findUser = function(_username, cb){
+// Retrieve user from the database:
+	User.findAll({ where: {name: _username} }).complete(function(err, usrs) {
+	                // attributes: [name, gender] }).complete(function(err, usrs) {
+	  if (!!err){
+	    console.log('An error occured while finding User: ', _username);
+	  } else {
+	    // This function is called back with an array of matches.
+	    // console.log("findUser list of users: ", usrs[0].dataValues);
+	    cb(usrs[0].dataValues);
+	  }
+	});
+};
+
 // Assign keys to be exported
 db.Location = Location;
 db.Disease = Disease;
 db.User = User;
 db.Proximity = Proximity;
 db.sequelize = sequelize;
+db.saveUser = saveUser;
+db.findUser = findUser;
 module.exports = db;
