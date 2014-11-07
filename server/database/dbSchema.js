@@ -1,7 +1,10 @@
-var dbCreds   = require('./dbCreds');
 var Sequelize = require('sequelize');
 var env       = process.env.NODE_ENV || 'development';
-var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.password, {
+var dbUser    = process.env.DB_USER || 'postgres';
+var dbPassword = process.env.DB_PASSWORD || 'postgres';
+var dbName    = process.env.DB_NAME || 'germtracker';
+
+var sequelize = new Sequelize(dbName, dbUser, dbPassword, {
 	dialect: 'postgres',
 	port: 5432,
 	define: {
@@ -9,37 +12,33 @@ var sequelize = new Sequelize(dbCreds.database, dbCreds.username, dbCreds.passwo
 	},
   logging: false
 });
-var db = {}; // stores all models that we will export
 
-// Location table schema
 var Location = sequelize.define('location', {
-  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  latitude: { type: Sequelize.FLOAT },
-  longitude: { type: Sequelize.FLOAT },
+  id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+  latitude: {type: Sequelize.FLOAT},
+  longitude: {type: Sequelize.FLOAT}
 }, {
   tableName: 'locations'
 });
 
-// Diseases table schema
 var Disease = sequelize.define('disease', {
-  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING },
+  id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+  name: {type: Sequelize.STRING}
 }, {
   tableName: 'diseases'
 });
 
-// User table schema
 var User = sequelize.define('user', {
-  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING },
-  gender: { type: Sequelize.STRING },
+  id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+  name: {type: Sequelize.STRING},
+  gender: {type: Sequelize.STRING}
 }, {
   tableName: 'users'
 });
 
-// Proximity table schema
+
 var Proximity = sequelize.define('proximity', {
-  value: { type: Sequelize.FLOAT },
+  value: {type: Sequelize.FLOAT}
 }, {
   tableName: 'proximity'
 });
@@ -60,20 +59,21 @@ User.hasMany(Disease, { joinTableName: 'user_diseases' });
 
 // Authenticate, connect, and create tables if they are not already defined
 sequelize
-.authenticate()
-.complete(function(err){
-  if(err){
-    console.log('Unable to connect to database: ', err);
-  } else {
-    console.log('Established connection to database.');
-    sequelize.sync();
-  }
-});
+  .authenticate()
+  .complete(function(err){
+    if(err){
+      console.log('Unable to connect to database: ', err);
+    } else {
+      console.log('Established connection to database.');
+      sequelize.sync();
+    }
+  });
 
 // Assign keys to be exported
-db.Location = Location;
-db.Disease = Disease;
-db.User = User;
-db.Proximity = Proximity;
-db.sequelize = sequelize;
-module.exports = db;
+module.exports.db = {
+  Location: Location,
+  Disease: Disease,
+  User: User,
+  Proximity: Proximity,
+  sequelize: sequelize
+};

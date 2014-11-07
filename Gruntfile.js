@@ -131,8 +131,9 @@ module.exports = function(grunt) {
   grunt.registerTask('dropDB', 'Drop the existing PostgreSQL database','shell:dropDB');
 
   grunt.registerTask('test', 'Setup database and run mocha tests', [
-    //'setupDB',
-    'mochaTest'
+    'setupDB',
+    'mochaTest',
+    'jshint'
   ]);
 
   grunt.registerTask('build', 'Run npm-install, jshint, mochaTest and jsdoc tasks', [
