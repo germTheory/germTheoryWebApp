@@ -1,4 +1,2 @@
 xdescribe('Schema',function(){
-
-
-})
+});
