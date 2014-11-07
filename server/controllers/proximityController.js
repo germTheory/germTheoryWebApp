@@ -2,6 +2,7 @@ var db = require('../database/dbSchema.js'),
   Proximity = db.Proximity,
   User = db.User;
 
+// process params to ensure that the specified user exists
 var _getUserCode = function (req, res, next, code){
   // check if code exists in user table. if it does, add it to the request
   User.find(code)
@@ -14,13 +15,14 @@ var _getUserCode = function (req, res, next, code){
     });
 };
 
-var _invalidMethod = function(req, res) {
+// return a 405 if the API does not support the desired function
+var _invalidMethod = function(req, res, next) {
   res.send(405, "Invalid Method for API endpoint");
 };
 
 
 // Create new entry in proximity table.  Accessed via '/api/proximity' and '/api/proximity/:user_id'
-var _newUserIndex = function(req, res) {
+var _newUserIndex = function(req, res, next) {
   if( !req.body.user_id ) {
     res.send(400, "Bad Request: Did not supply a user_id in url or in request body");
   }
@@ -37,7 +39,8 @@ var _newUserIndex = function(req, res) {
     });
 };
 
-var _updateUserIndex = function(req, res) {
+// Update an existing index in the proximity table
+var _updateUserIndex = function(req, res, next) {
   if( !req.body.user_id ) {
     res.send(400, "Bad Request: Did not supply a user_id in url or in request body");
   }
@@ -47,10 +50,10 @@ var _updateUserIndex = function(req, res) {
     .find({ where: { user_id: req.body.user_id } })
     .success( function( proximity ){
       proximity.updateAttributes({ value: indexValue }, ['value'])
-        .success(function(item) {
+        .success(function( item ) {
           res.send(200, item);
         })
-        .error(function(err){
+        .error(function( err ){
           res.send(500, err);
         });
     })
@@ -59,12 +62,28 @@ var _updateUserIndex = function(req, res) {
     });
 };
 
-var _getAllIndexes = function(req, res) {
-
+// Return all indexes in the table
+var _getAllIndexes = function(req, res, next) {
+  Proximity
+    .findAll()
+    .success( function( table ){
+      res.send(200, table);
+    })
 };
 
-var _deleteUserIndex = function(req, res) {
-
+// delete all of a single user's indexes in the table
+var _deleteUserIndex = function(req, res, next) {
+  if( !req.body.user_id ) {
+    res.send(400, "Bad Request: Did not supply a user_id in url or in request body");
+  }
+  Proximity
+    .destroy( { user_id: req.body.user_id } )
+    .success( function( affectedRows ){
+      res.send(200, affectedRows);
+    })
+    .error( function(err){
+      res.send(500, err);
+    });
 };
 
 module.exports = {
@@ -73,5 +92,5 @@ module.exports = {
   newUserIndex: _newUserIndex,
   updateUserIndex: _updateUserIndex,
   getAllIndexes: _getAllIndexes,
-  _deleteUserIndex: _deleteUserIndex
+  deleteUserIndex: _deleteUserIndex
 };
