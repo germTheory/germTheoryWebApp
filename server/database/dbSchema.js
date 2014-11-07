@@ -14,8 +14,14 @@ var db = {}; // stores all models that we will export
 // Location table schema
 var Location = sequelize.define('location', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  latitude: { type: Sequelize.FLOAT },
-  longitude: { type: Sequelize.FLOAT },
+  latitude: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
+  longitude: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
 }, {
   tableName: 'locations'
 });
@@ -48,7 +54,12 @@ var Proximity = sequelize.define('proximity', {
 DEFINE RELATIONSHIPS
 */
 // Has many relationships
-User.hasMany(Location);
+User.hasMany(Location,{
+  foreignKey: {
+    name: 'user_id',
+    allowNull: false
+  }
+});
 Disease.hasMany(Proximity);
 
 // has one relationships

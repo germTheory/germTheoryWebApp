@@ -42,7 +42,7 @@ module.exports = {
         newUser;
     // TODO: INSERT CODE TO ADD USER, TO BE IMPLEMENTED WITH OAUTH
     // check to see if user already exists
-    
+
       // make a new user if does not exist
       // then...
           // create token to send back for auth
@@ -66,7 +66,6 @@ module.exports = {
 
   getUserCode: function (req, res, next, code){
     var findUser = Q.nbind(User.findUser, User);
-      
       findUser({username: username})
         .then(function (user) {
           if (!user) {
