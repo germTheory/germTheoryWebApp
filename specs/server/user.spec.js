@@ -1,28 +1,26 @@
-var request = require("request");
+var request = require('supertest');
 var expect = require('chai').expect;
-var Sequelize = require("sequelize");
+var db = require('../../server/database/dbSchema.js');
 
 xdescribe('User REST resource',function(){
 
-  var sequelize;
-
-  beforeEach(function() {
-    var DBUser = process.env.DB_USER || 'postgres';
-    var DBName = process.env.DB_NAME || 'germtracker';
-
-    sequelize = new Sequelize(DBUser, DBName, null, {
-      dialect: 'postgres'
-    });
+  before(function(done){
+    db.sequelize.sync({force: true})
+      .success(function(){
+        done();
+      });
   });
 
   it('GET /api/users should return a list of User records', function(done) {
-    request("http://127.0.0.1:4568/api/users",
-      function(err, res, body) {
-        var users = JSON.parse(body);
-        console.log(users);
-        expect(users.length).not.to.be.equal(0);
-        done();
-      });
+    request(app)
+      .get('/users')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .expect(function(res) {
+        expect(res.body).to.be.ok;
+      })
+      .end(done);
   });
 
   it('GET /api/user/:id should return a specified User record', function(done){
@@ -30,45 +28,35 @@ xdescribe('User REST resource',function(){
       .success(function(user) {
         console.log(user);
 
-        request("http://127.0.0.1:4568/api/users/" + user.id,
-          function(err, res, body) {
-            console.log(body);
-            expect(body.length).to.be.equal(1);
-            expect(body.name).to.be.equal('John Smith');
-            done();
-          });
+        request(app)
+          .get('/users/' + user.id)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .expect(function(res) {
+            expect(res.body.name).to.be.equal('John Smith');
+          })
+          .end(done);
       });
   });
 
   it('POST /api/user should insert a new User record', function(done) {
-    request({method: "POST",
-        uri: "http://127.0.0.1:4568/api/users",
-        json: {
-          name: "John",
-          gender: "M"
-        }
-      },
-      function(err, res, body) {
-        var name = body.name;
+    request(app)
+      .post('/users')
+      .send({
+        name: 'John Smith',
+        gender: 'M'
+      })
+      .expect(200)
+      .expect(function(res) {
         sequelize.query("SELECT * FROM users WHERE name = :name", null, null, {name: name})
           .success(function(result) {
             console.log(result);
             expect(result.length).to.be.equal(1);
-            expect(result.name).to.be.equal("John");
+            expect(result.name).to.be.equal("John Smith");
             done();
           });
-      });
-  });
-
-  xit('should add a user to the database', function(done) {
-    describe('GET /users', function(){
-      it('respond with json', function(done){
-        request(app)
-          .get('/user')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200, done);
-      });
-    });
+      })
+      .end(done);
   });
 });
