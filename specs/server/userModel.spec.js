@@ -14,14 +14,6 @@ describe('User Controller',function(){
     expect(userController).to.be.an('object');
   })
 
-  it('should have a method called saveUser', function() {
-    expect(userController.saveUser).to.be.ok;
-  })
-
-  it('should have a method called findUser', function() {
-    expect(userController.findUser).to.be.ok;
-  })
-
    it('should have a method called signin', function() {
     expect(userController.signin).to.be.ok;
   })
@@ -35,8 +27,8 @@ describe('User Controller',function(){
 describe('User',function() {
 
   it('It should add a user to the database', function(done) {
-      userController.saveUser("test", function(user){
-        console.log("saveUser in test: ", user);
+      db.saveUser("test", function(user){
+        // console.log("saveUser in test: ", user);
         expect(user).to.be('test');
         done();
       })
@@ -44,9 +36,9 @@ describe('User',function() {
     })
 
     it('It should find User from the database', function(done){
-      userController.findUser("test", function(user){
-        console.log("findUser in test: ", user);
-        expect(user).to.be('test');
+      db.findUser("test", function(user){
+        // console.log("findUser in test: ", user);
+        expect(user.name).to.be('test');
         done();
       })
     })
