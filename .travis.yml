@@ -36,3 +36,4 @@ after_script:
   - yes | heroku keys:add
   # Push to Heroku!
   - yes | git push heroku master
+
