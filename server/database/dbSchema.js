@@ -63,7 +63,8 @@ var User = sequelize.define('user', {
 
 // Proximity table schema
 var Proximity = sequelize.define('proximity', {
-  value: { type: Sequelize.FLOAT },
+	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+	value: { type: Sequelize.FLOAT },
 }, {
   tableName: 'proximity'
 });
