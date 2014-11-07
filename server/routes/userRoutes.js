@@ -5,11 +5,22 @@ module.exports = function (app) {
   // our app is the userRouter injected from serverConfig.js
 
   // Params
-  app.param('userId', userController.getUserCode);
+  // app.param('userId', userController.getUserCode);
 
   // Basic user routes
-  app.post('/signin', userController.signin);
-  app.post('/signup', userController.signup);
-  app.get('/signedin', userController.checkAuth);
-  app.get('/:userId', userController.getUserInfo);
+  app.route('/')
+  	.get(userController.getAllUsers)
+
+  app.route('/:userId')
+  	.get(userController.getUserInfo);
+
+  app.route('/signin')
+  	.post(userController.signin);
+
+  app.route('/signup')
+  	.post(userController.signup)
+
+  app.route('/signedup')
+  	.get(userController.checkAuth);
+
 };

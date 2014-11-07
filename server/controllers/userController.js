@@ -10,15 +10,17 @@ var userController = {
   Signin to the app if already a user.
   */
   signin: function (req, res, next) {
+    // TODO: remove hack
     var username = req.body.username;
-    db.findUser(_username, function(results){
-      if (results === 0) {
+
+    db.findUser(username, function(results){
+      if (results.length === 0) {
         console.log("User does not exist!");
         res.send(500, true);
       } else {
         // sign-up the user using google Auth
         // save location information
-        res.send(200, true);
+        res.status(200).send(results);
       }
     });
   },
@@ -27,25 +29,27 @@ var userController = {
   Signup if you want to use the app.
   */
   signup: function (req, res, next) {
+    // TODO: remove hack
     var username  = req.body.username,
-        newUser;
+
     // TO BE IMPLEMENTED WITH OAUTH
 
     // check to see if user exists
-    db.findUser(_username, function(err, results){
-      if (results === 0) {
+    db.findUser(username, function(results){
+      console.log("signup: ", results);
+      if (results.length === 0) {
         console.log("User does not exist, adding new user...");
         db.saveUser(_username, function(results){
           if (results) {
             console.log("User successfully added");
-            res.send(200, "Added User");
+            res.status(200).send("Added User");
           }
         });
       } else {
         // sign-up the user using google Auth
         // save location information
         console.log("User already exists. Try signing in!");
-        res.send(503, true);
+        res.status(503).send(results);
       }
     });
     
@@ -72,15 +76,33 @@ var userController = {
   which is: id, name, gender,
   and diseases that the person has???*/
   getUserInfo: function(req, res, next){
-    var username  = req.body.username;
+    var id = req.params.userId;
+    var username  = "test"; // TODO: get username from request
 
-    db.findUser(username, function(result){
+    db.findUserById(id, function(result){
       if (result.length > 0){
-        console.log("Sucess finding user in database for: ", username);
-        res.send(200, result);
+        console.log("Success finding user in database for: ", id);
+        res.status(200).send(result);
       } else {
-        console.log("Could not find user in database for : ", username);
-        res.send(404, "Could not find user in database");
+        console.log("Could not find user in database for : ", id);
+        res.status(404).send("Could not find user in database");
+      }
+    });
+    
+  },
+
+    /* Obtain the user's information from database,
+  which is: id, name, gender,
+  and diseases that the person has???*/
+  getAllUsers: function(req, res, next){
+
+    db.findAllUsers(function(result){
+      if (result.length > 0){
+        console.log("Success finding users in database ");
+        res.status(200).send(result);
+      } else {
+        console.log("Could not find users in database");
+        res.status(404).send("Could not find user in database");
       }
     });
     
