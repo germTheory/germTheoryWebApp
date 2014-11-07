@@ -156,7 +156,6 @@ describe('Proximity',function(){
           .send({ user_id: 1, value: .24 })
           .expect(200)
           .end(function(err, res){
-            console.log(res);
             if(err) {
               done(err);
               return;
@@ -170,30 +169,81 @@ describe('Proximity',function(){
       });
 
       it('should return a 405 error for DELETE requests to /api/proximity', function(done){
-        
+        request(app)
+          .delete("/api/proximity")
+          .expect(405)
+          .end(function(err, res){
+            done();
+          })
       });
     });
 
     describe('Routes: /api/proximity/:userId',function(){
-      
       beforeEach(function(done){
-        db.Proximity.destroy().then(function(items, error){
-            if(error) {
-              done("Error: Unable to remove items from Proximity table");
-            }
-            db.Proximity.bulkCreate(fakeProximity).then(function(items, err){
-              if(err){ 
-                done('Error: Unable to create items in Proximity table');
-              }
-              done();
-            }); 
+        db.Disease.destroy()
+          .then(function(item){
+            db.Proximity.destroy()
+              .then(function(items){
+                db.Disease.create({ id: 1, name: "Ebola" })
+                  .then(function(disease){
+                    db.Proximity.bulkCreate(fakeProximity)
+                      .then(function(complete){
+                          done();
+                          return;
+                      }, function(err4){
+                          done(err4);
+                          return;
+                        }); // end of bulkCreate
+                    }, function(err3){
+                        console.log("Error: Unable to create item in Disease Table");
+                        done(err3);
+                        return;
+                      }); // end of disease create
+                }, function(err2){
+                    done("Error: Unable to Destroy items in Proximity Table");
+                    return;
+                  }); // end of Proximity Destroy
+              }, function(err1){
+                done("Error: Unable to destroy items in disease table");
+                return
+            }); // end of Disease Destroy
+      });
+
+      it('should accept GET requests to /api/proimity/:userId',function(done){
+        request(app)
+          .get('/api/proimity/:userId')
+          .expect(200)
+          .end(function(){
+            done();
           });
       });
 
-      xit('should have proximity endpoint',function(){
+      it('should return a 404 error when asked for the information of a User that does not Exist', function(done){
         request(app)
-          .get('proximity')
-          .expect(200);
+          .get('/api/proimity/50')
+          .expect(404)
+          .end(function(){
+            done();
+          });
+      });
+
+      it('should return a single user\'s indexes for a GET request to /api/proximity/', function(done){
+        request(app)
+          .get('/api/proximity/1')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+              return;
+            }
+            console.log(res.body);
+            expect(res).to.be.ok();
+            expect(res.body).to.be.ok();
+            expect(res.body.value).to.eql(.64);
+            done();
+          });
       });
 
     });
