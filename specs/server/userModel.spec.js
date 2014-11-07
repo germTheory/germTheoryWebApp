@@ -12,16 +12,15 @@ var request = require('supertest');
 describe('User Controller',function(){
   it('User Controller should be an object', function() {
     expect(userController).to.be.an('object');
-  })
+  });
 
    it('should have a method called signin', function() {
     expect(userController.signin).to.be.ok;
-  })
+  });
 
   it('should have a method called signup', function() {
     expect(userController.signup).to.be.ok;
-  })
-
+  });
 });
 
 describe('User',function() {
@@ -31,17 +30,16 @@ describe('User',function() {
         // console.log("saveUser in test: ", user);
         expect(user).to.be('test');
         done();
-      })
-
-    })
+      });
+    });
 
     it('It should find User from the database', function(done){
       db.findUser("test", function(user){
         // console.log("findUser in test: ", user);
         expect(user.name).to.be('test');
         done();
-      })
-    })
+      });
+    });
 
     // describe('GET /users', function() {
 
@@ -51,14 +49,14 @@ describe('User',function() {
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done);
-    })
+    });
 
   xit('Database should have a function called diseases', function() {
     User.findUser.should.be.a('function');
-  })
+  });
 
   xit('Database should have a function called location', function() {
     User.fetchUserLocations.should.be.a('function');
-  })
+  });
+});
 
-})

@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('./database/dbSchema.js');
+require('./database/dbSchema.js');
 
 var app = express();
 
