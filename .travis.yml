@@ -10,7 +10,7 @@ notifications:
     - kevin.a.meurer@gmail.com
     - jomerinog@gmail.com
     on_success: 
-    - change
+    - always
     on_failure: 
     - always
 before_script: 
