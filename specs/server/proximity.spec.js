@@ -164,7 +164,7 @@ describe('Proximity',function(){
               .then(function(item){
                 expect(item.value).to.eql(.24);
                 done();
-              })
+              });
           });
       });
 
@@ -238,12 +238,43 @@ describe('Proximity',function(){
               done(err);
               return;
             }
-            console.log(res.body);
             expect(res).to.be.ok();
             expect(res.body).to.be.ok();
             expect(res.body.value).to.eql(.64);
             done();
           });
+      });
+
+      it('should add a user index to the proximity table for a POST request to /api/proximity', function(done){
+        db.User.destroy( { where: { id: 3} } ).then(function( destroyedCount ){
+          db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M'})
+            .then(function(user){
+              request(app)
+                .post("/api/proximity/3")
+                .send({ value: .8, disease_id: 1 })
+                .expect(201)
+                .end(function(err, res) {
+                  if(err) {
+                    console.log("ERROR POSTING");
+                    done(err);
+                    return;
+                  }
+                  db.Proximity.find( {where: { user_id: 3 } } )
+                    .then(function(item){
+                      expect(item.value).to.eql(.8);
+                      expect(item.user_id).to.eql(3);
+                      done();
+                    }, function(err){
+                      console.log("ERROR FINDING USER");
+                      done(err);
+                    })
+                });
+            }, function(error){
+              console.log("Cannot Create User")
+              done(error);
+              return;
+            });
+        });
       });
 
     });
