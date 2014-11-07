@@ -132,7 +132,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', 'Setup database and run mocha tests', [
     //'setupDB',
-    'mochaTest'
+    'mochaTest',
+    'jshint'
   ]);
 
   grunt.registerTask('build', 'Run npm-install, jshint, mochaTest and jsdoc tasks', [
