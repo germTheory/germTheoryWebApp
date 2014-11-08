@@ -14,13 +14,47 @@ angular.module('starter.services', [])
     { id: 3, name: 'Ash Ketchum' }
   ];
 
+  var _all = function() {
+    return friends;
+  };
+
+  var _get = function(friendId) {
+    return friends[friendId];
+  }
+
   return {
-    all: function() {
-      return friends;
-    },
-    get: function(friendId) {
-      // Simple index lookup
-      return friends[friendId];
-    }
+    all: _all,
+    get: _get
+  }
+})
+.factory('DashboardOptions', function($http){
+
+  var options = [
+    { id: 0, name: 'Track'},
+    { id: 1, name: 'Report'},
+    { id: 2, name: 'Neighborhood'},
+    { id: 3, name: 'Hot Spots'}, 
+    { id: 4, name: 'Virus Types'}
+  ];
+
+  var _getUserLocations = function(){
+    $http({
+      method: 'GET',
+      url: 'api/location'
+    })
+  };
+
+  var _all = function() {
+    return options;
+  };
+
+  var _get = function(optionId) {
+    return options[optionId];
+  }
+
+  return {
+    getUserLocations: _getUserLocations,
+    all: _all,
+    get: _get
   }
 });
