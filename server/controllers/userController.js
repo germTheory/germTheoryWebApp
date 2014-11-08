@@ -10,7 +10,6 @@ var userController = {
   Signin to the app if already a user.
   */
   signin: function (req, res, next) {
-    // TODO: remove hack
     var username = req.body.username;
 
     db.findUser(username, function(results){
@@ -29,17 +28,17 @@ var userController = {
   Signup if you want to use the app.
   */
   signup: function (req, res, next) {
-    // TODO: remove hack
-    var username  = req.body.username;
-
+    var newUser = { name: req.body.name,
+                    gender: req.body.gender};
+    // console.log("signup: ", req.body);
     // TO BE IMPLEMENTED WITH OAUTH
 
     // check to see if user exists
-    db.findUser(username, function(results){
-      console.log("signup: ", results);
+    db.findUser(newUser, function(results, user){
       if (results.length === 0) {
-        console.log("User does not exist, adding new user...");
-        db.saveUser(_username, function(results){
+        console.log("User does not exist, adding new user..." );
+
+        db.saveUser(user, function(results){
           if (results) {
             console.log("User successfully added");
             res.status(200).send("Added User");
@@ -91,14 +90,14 @@ var userController = {
     
   },
 
-    /* Obtain the user's information from database,
+  /* Obtain the user's information from database,
   which is: id, name, gender,
   and diseases that the person has???*/
   getAllUsers: function(req, res, next){
 
     db.findAllUsers(function(result){
       if (result.length > 0){
-        console.log("Success finding users in database ");
+        // console.log("Success finding users in database ");
         res.status(200).send(result);
       } else {
         console.log("Could not find users in database");
