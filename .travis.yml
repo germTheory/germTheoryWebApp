@@ -5,7 +5,7 @@ node_js:
 
 before_script:
   - npm install -g grunt-cli
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database germtracker;' -U postgres
 
 after_script:
   # Install the Heroku package (or the Heroku toolbelt)
