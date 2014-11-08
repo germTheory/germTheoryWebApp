@@ -32,7 +32,7 @@ angular.module('starter.services', [])
   var options = [
     { id: 0, name: 'Track'},
     { id: 1, name: 'Report'},
-    { id: 2, name: 'My Neighborhood'},
+    { id: 2, name: 'Neighborhood'},
     { id: 3, name: 'Hot Spots'}, 
     { id: 4, name: 'Virus Types'}
   ];
