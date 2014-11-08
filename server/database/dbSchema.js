@@ -63,7 +63,8 @@ var User = sequelize.define('user', {
 
 // Proximity table schema
 var Proximity = sequelize.define('proximity', {
-  value: { type: Sequelize.FLOAT },
+	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+	value: { type: Sequelize.FLOAT },
 }, {
   tableName: 'proximity'
 });
@@ -81,7 +82,7 @@ User.hasMany(Location,{
 Disease.hasMany(Proximity);
 
 // has one relationships
-User.hasOne(Proximity);
+User.hasMany(Proximity);
 
 // Build join table between users and diseases
 Disease.hasMany(User, { joinTableName: 'user_diseases' });
