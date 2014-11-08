@@ -83,6 +83,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'AccountCtrl'
         }
       }
+    })
+
+    .state('tab.track', {
+      url: '/track',
+      views: {
+        'tab-track': {
+          templateUrl: 'templates/tab-track.html',
+          controller: 'AccountCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

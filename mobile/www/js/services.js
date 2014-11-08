@@ -57,4 +57,14 @@ angular.module('starter.services', [])
     all: _all,
     get: _get
   }
+})
+.factory('Track', function(){
+
+  var _go = function ( path ) {
+    return;
+  };
+
+  return {
+    go: _go
+  }
 });

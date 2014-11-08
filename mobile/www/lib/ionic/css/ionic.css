@@ -2208,6 +2208,7 @@ body.grade-b, body.grade-c {
 
 .scroll-content {
   position: absolute;
+  background-color: #8AF2E4;
   top: 0;
   right: 0;
   bottom: 0;
@@ -4267,7 +4268,7 @@ a.item {
   padding: 0; }
 
 .item-complex .item-content, .item-radio .item-content {
-  color: #FF00CC;
+  color: #8C8C8C;
   height: 100%;
   text-align: center;
   font-size: 200%;
@@ -4275,7 +4276,21 @@ a.item {
   z-index: 2;
   padding: 16px 16px 16px 16px;
   border: none;
-  background-color: white; }
+  background-color: #8AF2E4; }
+
+.fire {
+  color: #D61515; }
+
+.login {
+  color: #8C8C8C;
+  height: 100%;
+  text-align: center;
+  font-size: 200%;
+  position: relative;
+  z-index: 2;
+  padding: 16px 16px 16px 16px;
+  border: none;
+  background-color: #8AF2E4; }
 
 a.item-content {
   display: block;
