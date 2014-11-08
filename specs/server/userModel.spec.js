@@ -53,15 +53,14 @@ describe('User REST resource', function(done){
     app = require('../../server/server.js');
   });
 
-  it('respond with user name', function(done) {
+  it('GET /api/user/:id should return a specified User record', function(done) {
     db.saveUser("test", function(user){
-        // console.log("saveUser in test: ", user);
       request(app)
         .get('/api/users/2')
         .expect(200)
         .end(function(err,res){
           // console.log("parsed response:", res.body);
-          // expect(res.body.name).to.equal("test");
+          expect(res.body[0].name).to.equal("test");
           done();
         });
       });
