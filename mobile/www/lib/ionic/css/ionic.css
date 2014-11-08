@@ -1,17 +1,4 @@
 /*!
- * Copyright 2014 Drifty Co.
- * http://drifty.com/
- *
- * Ionic, v1.0.0-beta.13
- * A powerful HTML5 mobile app framework.
- * http://ionicframework.com/
- *
- * By @maxlynch, @benjsperry, @adamdbradley <3
- *
- * Licensed under the MIT license. Please see LICENSE for more information.
- *
- */
-/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -4280,9 +4267,12 @@ a.item {
   padding: 0; }
 
 .item-complex .item-content, .item-radio .item-content {
+  color: #FF00CC;
+  text-align: center;
+  font-size: 200%;
   position: relative;
   z-index: 2;
-  padding: 16px 49px 16px 16px;
+  padding: 16px 16px 16px 16px;
   border: none;
   background-color: white; }
 

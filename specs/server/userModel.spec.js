@@ -34,7 +34,7 @@ describe('User',function() {
       })
   });
 
-  it('It should add a user to the database', function(done) {
+  xit('It should add a user to the database', function(done) {
       db.saveUser("test", function(user){
         // console.log("saveUser in test: ", user.name);
         expect(user.name).to.be('test');
@@ -43,7 +43,7 @@ describe('User',function() {
 
     });
 
-    it('It should find User from the database', function(done){
+    xit('It should find User from the database', function(done){
       db.findUser("test", function(user){
         // console.log("findUser in test: ", user);
         expect(user[0].dataValues.name).to.be('test');
@@ -53,7 +53,7 @@ describe('User',function() {
 
 });
 
-describe('User REST resource', function(done){
+xdescribe('User REST resource', function(done){
   var app;
 
   before(function(){
