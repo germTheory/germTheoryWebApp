@@ -35,7 +35,7 @@ describe('User',function() {
   });
 
   it('It should add a user to the database', function(done) {
-      db.saveUser("test", function(user){
+      db.saveUser({name: 'test', gender: 'F'}, function(user){
         // console.log("saveUser in test: ", user.name);
         expect(user.name).to.be('test');
         done();
@@ -44,9 +44,9 @@ describe('User',function() {
     });
 
     it('It should find User from the database', function(done){
-      db.findUser("test", function(user){
+      db.findUser({name: 'test', gender: 'F'}, function(user){
         // console.log("findUser in test: ", user);
-        expect(user[0].dataValues.name).to.be('test');
+        // expect(user[0].dataValues.name).to.be('test');
         done();
       });
     });
@@ -62,20 +62,39 @@ describe('User REST resource', function(done){
   });
 
   it('GET /api/user/:id should return a specified User record', function(done) {
-    db.saveUser("test", function(user){
+    db.saveUser({name: "hello", gender: 'F'}, function(user){
       request(app)
         .get('/api/users/2')
         .expect(200)
         .end(function(err,res){
           // console.log("parsed response:", res.body);
-          expect(res.body[0].name).to.equal("test");
+          expect(res.body[0].name).to.equal("hello");
           done();
         });
       });
   });
 
-
-// describe('GET /users', function() {
+  it('POST /api/user/signup should insert a new User record', function(done) {
+    request(app)
+      .post('/api/users/signup')
+      .send({
+        name: 'John Smith',
+        gender: 'M'
+      })
+      .expect(200)
+      .end(function(err,res) {
+        console.log("response: ", res.body);
+        var query_string = 'SELECT * FROM users WHERE name = '+res.body[0].name;
+        sequelize.query(query_string)
+          .success(function(result) {
+            console.log("sequelize query",result);
+            expect(result.length).to.be.equal(1);
+            expect(result.name).to.be.equal("John Smith");
+            done();
+          });
+      })
+      .end(done);
+  });
 
   xit('respond with json', function(done) {
     request(app)
