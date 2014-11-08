@@ -102,8 +102,9 @@ sequelize
 
 /* Saves the user to the database.
   */
-var saveUser =  function(_username, cb){
-  var newUser = User.build({name: _username, gender:"none"});
+var saveUser =  function(user, cb){
+  // console.log("saveUser: ",user.name, user.gender );
+  var newUser = User.build({name: user.name, gender: user.gender});
   newUser.save().complete(function(err, usr) {
     if (!!err){
     console.log('An error occured while saving User: ', usr);
@@ -117,16 +118,17 @@ var saveUser =  function(_username, cb){
   
 };
 
-var findUser = function(_username, cb){
+var findUser = function(user, cb){
+  // console.log("findUser: user: ", user);
 // Retrieve user from the database:
-	User.findAll({ where: {name: _username} }).complete(function(err, usrs) {
+	User.findAll({ where: {name: user.name, gender: user.gender} }).complete(function(err, usrs) {
 	                // attributes: [name, gender] }).complete(function(err, usrs) {
 	  if (!!err){
-	    console.log('An error occured while finding User: ', _username);
+	    console.log('An error occured while finding User: ', user.name);
 	  } else {
 	    // This function is called back with an array of matches.
-	    // console.log("findUser list of users: ", usrs);
-	    cb(usrs);
+	    // console.log("findUser list of users: ", usrs, user.name, user.gender);
+	    cb(usrs, {name: user.name, gender: user.gender});
 	  }
 	});
 };
