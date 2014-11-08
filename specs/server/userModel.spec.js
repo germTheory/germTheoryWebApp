@@ -28,37 +28,56 @@ describe('User',function() {
 
   it('It should add a user to the database', function(done) {
       db.saveUser("test", function(user){
-        // console.log("saveUser in test: ", user);
-        expect(user).to.be('test');
+        // console.log("saveUser in test: ", user.name);
+        expect(user.name).to.be('test');
         done();
-      })
+      });
 
-    })
+    });
 
     it('It should find User from the database', function(done){
       db.findUser("test", function(user){
         // console.log("findUser in test: ", user);
-        expect(user.name).to.be('test');
+        expect(user[0].dataValues.name).to.be('test');
         done();
-      })
-    })
+      });
+    });
 
-    // describe('GET /users', function() {
+});
 
-    xit('respond with json', function(done) {
+describe('User REST resource', function(done){
+  var app;
+
+  before(function(){
+    // setup a test server
+    app = require('../../server/server.js');
+  });
+
+  it('GET /api/user/:id should return a specified User record', function(done) {
+    db.saveUser("test", function(user){
       request(app)
-        .get('/user')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200, done);
-    })
+        .get('/api/users/2')
+        .expect(200)
+        .end(function(err,res){
+          // console.log("parsed response:", res.body);
+          expect(res.body[0].name).to.equal("test");
+          done();
+        });
+      });
+  });
 
-  xit('Database should have a function called diseases', function() {
-    User.findUser.should.be.a('function');
-  })
 
-  xit('Database should have a function called location', function() {
-    User.fetchUserLocations.should.be.a('function');
-  })
+// describe('GET /users', function() {
 
-})
+  xit('respond with json', function(done) {
+    request(app)
+      .get('/user')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done);
+  });
+});
+
+
+
+
