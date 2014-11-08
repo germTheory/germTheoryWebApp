@@ -25,6 +25,14 @@ describe('User Controller',function(){
 });
 
 describe('User',function() {
+  before(function(done){
+    db.sequelize.sync({force: true})
+      .then(function(){
+        done();
+      }, function(err){
+        done(err);
+      })
+  });
 
   it('It should add a user to the database', function(done) {
       db.saveUser({name: 'test', gender: 'F'}, function(user){
