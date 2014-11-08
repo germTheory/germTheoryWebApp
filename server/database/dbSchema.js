@@ -104,15 +104,15 @@ sequelize
 /* Saves the user to the database.
   */
 var saveUser =  function(user, cb){
-  // console.log("saveUser: ",user.name, user.gender );
+  //console.log("saveUser: ",user.name, user.gender );
   var newUser = User.build({name: user.name, gender: user.gender});
   newUser.save().complete(function(err, usr) {
     if (!!err){
-    console.log('An error occured while saving User: ', usr);
+    console.log('An error occured while saving User: ', err);
     } else {
 
       /* This callback function is called once saving succeeds. */
-      // console.log("User saved: ", usr.dataValues);
+      //console.log("User saved: ", usr.dataValues);
       cb(usr.dataValues);
     }
   });
@@ -138,7 +138,7 @@ var findAllUsers = function(cb){
   User.findAll().complete(function(err, usrs) {
                   // attributes: [name, gender] }).complete(function(err, usrs) {
     if (!!err){
-      console.log('An error occured while finding User: ', _username);
+      console.log('An error occured while finding User');
     } else {
       // This function is called back with an array of matches.
       // console.log("findUser list of users: ", usrs);
