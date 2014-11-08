@@ -30,13 +30,13 @@ var userController = {
   signup: function (req, res, next) {
     var newUser = { name: req.body.name,
                     gender: req.body.gender};
-    // console.log("signup: ", req.body);
+    console.log("signup: ", req.body);
     // TO BE IMPLEMENTED WITH OAUTH
 
     // check to see if user exists
     db.findUser(newUser, function(results, user){
       if (results.length === 0) {
-        console.log("User does not exist, adding new user..." );
+        console.log("User does not exist, adding new user...", user );
 
         db.saveUser(user, function(results){
           if (results) {
