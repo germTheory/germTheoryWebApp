@@ -3,7 +3,7 @@ var request = require('supertest');
 var mocha = require('mocha');
 var expect = require('expect.js')
 
-describe('Proximity',function(){
+xdescribe('Proximity',function(){
   var fakeProximity = [];
   var lastid;
   before(function(done){
