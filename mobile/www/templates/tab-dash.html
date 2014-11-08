@@ -1,5 +1,9 @@
 <ion-view title="Dashboard">
-  <ion-content class="padding">
-    <h1>Dash</h1>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="option in options" type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        {{option.name}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

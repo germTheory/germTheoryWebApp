@@ -11,4 +11,5 @@ var port = process.env.PORT || 4568;
 app.listen(port);
 
 console.log('Server now listening on port ' + port);
-module.exports = app;
+
+module.exports = app; // export app for testing
