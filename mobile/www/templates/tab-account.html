@@ -1,5 +1,29 @@
 <ion-view title="Account">
-  <ion-content class="padding">
-    <h1>Account</h1>
+  <ion-content>
+    <ion-list>
+      <ion-item type="login" href="#/tab/track">
+        <div class="login" style="margin-bottom:10px; margin-top:100px;">Login</div>
+        <br>
+        <br>
+        <form name="myForm" ng-controller="AccountCtrl" class="my-form">
+          Username
+          <br>
+          <br>
+          <input name="username" required>
+          <br>
+          <br>
+          Password
+          <br>
+          <br>
+          <input name="password" required>
+          <br>
+          <br>
+          <button type="submit" class="button button-block button-positive" href="http://google.com">Submit</button>
+         </form>
+      </ion-item>
+
+
+      
+    </ion-list>
   </ion-content>
 </ion-view>

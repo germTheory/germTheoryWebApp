@@ -21,7 +21,7 @@ gulp.task('sass', function(done) {
       keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/lib/ionic/css'))
+    .pipe(gulp.dest('./www/css/ionic'))
     .on('end', done);
 });
 

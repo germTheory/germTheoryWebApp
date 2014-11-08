@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
   $scope.options = DashboardOptions.all();
 })
 
-.controller('DashDetailCtrl', function($scope, $stateParams, DashboardOptions) {
+.controller('DashCtrlDetail', function($scope, $stateParams, DashboardOptions) {
   $scope.option = DashboardOptions.get($stateParams.optionId);
 })
 
@@ -16,5 +16,6 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Track) {
+  // $scope.track = Track.all();
 });
