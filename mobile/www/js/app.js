@@ -39,10 +39,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     // Each tab has its own nav history stack:
 
     .state('tab.dash', {
-      url: '/dash',
+      url: '/menu',
       views: {
         'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
+          templateUrl: 'templates/menu.html',
           controller: 'DashCtrl'
         }
       }
@@ -76,10 +76,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
     .state('tab.account', {
-      url: '/account',
+      url: '/settings',
       views: {
         'tab-account': {
-          templateUrl: 'templates/tab-account.html',
+          templateUrl: 'templates/settings.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    })
+
+    .state('tab.login', {
+      url: '/login',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/login.html',
           controller: 'AccountCtrl'
         }
       }
@@ -96,7 +106,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/settings');
 
 });
 
