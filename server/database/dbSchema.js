@@ -82,7 +82,7 @@ User.hasMany(Location,{
 Disease.hasMany(Proximity);
 
 // has one relationships
-User.hasOne(Proximity);
+User.hasMany(Proximity);
 
 // Build join table between users and diseases
 Disease.hasMany(User, { joinTableName: 'user_diseases' });
