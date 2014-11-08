@@ -1,10 +1,32 @@
 <ion-view title="Dashboard">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="option in options" type="item-text-wrap" href="#/tab/dash/{{option.id}}" ng-class="{option.name}">
-        {{option.name}}
-        <div class="icon ion-eye" style="margin-top:10px;"></div>
+      <ion-item type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        <span class="item-complex">Track</span>
+        <div class="icon ion-ios7-pulse-strong" style="margin-top:10px;"></div>
       </ion-item>
+
+      <ion-item type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        <span class="item-complex">Report</span>
+        <div class="icon ion-clipboard" style="margin-top:10px;"></div>
+      </ion-item>
+
+      <ion-item type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        <span class="item-complex">Hot Spots</span>
+        <div class="icon ion-fireball" style="margin-top:10px;"></div>
+      </ion-item>
+
+      <ion-item type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        <span class="item-complex">Virus Types</span>
+        <div class="icon ion-medkit" style="margin-top:10px;"></div>
+      </ion-item>
+
+      <ion-item type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+        <span class="item-complex">Neighborhood</span>
+        <div class="icon ion-earth" style="margin-top:10px;"></div>
+      </ion-item>
+
+      
     </ion-list>
   </ion-content>
 </ion-view>
