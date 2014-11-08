@@ -4268,6 +4268,7 @@ a.item {
 
 .item-complex .item-content, .item-radio .item-content {
   color: #FF00CC;
+  height: 100%;
   text-align: center;
   font-size: 200%;
   position: relative;
