@@ -1,7 +1,7 @@
 <ion-view title="Dashboard">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="option in options" type="item-text-wrap" href="#/tab/dash/{{option.id}}">
+      <ion-item ng-repeat="option in options" type="item-text-wrap" href="#/tab/dash/{{option.id}}" ng-class="{option.name}">
         {{option.name}}
         <div class="icon ion-eye" style="margin-top:10px;"></div>
       </ion-item>
