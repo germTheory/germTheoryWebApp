@@ -68,7 +68,7 @@ describe('User REST resource', function(done){
         .expect(200)
         .end(function(err,res){
           // console.log("parsed response:", res.body);
-          expect(res.body[0].name).to.equal("test");
+          expect(res.body[0].name).to.equal("hello");
           done();
         });
       });
