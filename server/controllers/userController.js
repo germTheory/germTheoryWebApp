@@ -41,7 +41,7 @@ var userController = {
         db.saveUser(user, function(results){
           if (results) {
             console.log("User successfully added");
-            res.status(200).send("Added User");
+            res.status(200).send(results);
           }
         });
       } else {

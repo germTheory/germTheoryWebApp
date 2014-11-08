@@ -83,17 +83,14 @@ describe('User REST resource', function(done){
       })
       .expect(200)
       .end(function(err,res) {
-        console.log("response: ", res.body);
-        var query_string = 'SELECT * FROM users WHERE name = '+res.body[0].name;
-        sequelize.query(query_string)
-          .success(function(result) {
-            console.log("sequelize query",result);
-            expect(result.length).to.be.equal(1);
-            expect(result.name).to.be.equal("John Smith");
-            done();
-          });
+        db.User.find({where:{name:res.body.name}})
+        .then(function(found){
+          expect(found).not.to.equal(null);
+          done();
+        },function(){
+          done('expected to find posted value in the database');
+        });
       })
-      .end(done);
   });
 
   xit('respond with json', function(done) {
