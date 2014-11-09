@@ -23,6 +23,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
     "ejs": "^1.0.0",
+    "ejs-locals": "^1.0.2",
     "express": "^4.4.5",
     "jwt-simple": "^0.2.0",
     "morgan": "^1.1.1",

@@ -1,5 +1,6 @@
 var morgan      = require('morgan'), // used for logging incoming request
     bodyParser  = require('body-parser'),
+    engine = require('ejs-locals'),
     helpers     = require('./helpers.js');
 
 module.exports = function (app, express) {
@@ -14,9 +15,10 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
 
   app.set('views', __dirname + '/../views');
+  app.engine('ejs', engine);
   app.set('view engine', 'ejs');
 
-  //app.use(express.static(__dirname + './../../client'));
+  app.use(express.static(__dirname + './../pubic'));
   app.use("/mobile", express.static(__dirname + "./../../mobile/www"));
 
   app.use('/api/users', userRouter); // use user router for all user request

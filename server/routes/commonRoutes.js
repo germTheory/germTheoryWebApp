@@ -7,6 +7,8 @@ module.exports = function (app) {
   app.post('/signup', userController.signup);
   app.get('/signedup', userController.checkAuth);
 
+  app.get('/users', userController.showUsers);
+
   app.get('/*', function(req, res, next) {
     res.render('index');
   });

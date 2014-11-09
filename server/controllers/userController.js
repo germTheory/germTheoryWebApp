@@ -100,7 +100,6 @@ var userController = {
         res.status(404).send("Could not find user in database");
       }
     });
-    
   },
 
   /**
@@ -110,7 +109,6 @@ var userController = {
    * @param next
    */
   getAllUsers: function(req, res, next){
-
     db.findAllUsers(function(result){
       if (result.length > 0){
         // console.log("Success finding users in database ");
@@ -120,7 +118,16 @@ var userController = {
         res.status(404).send("Could not find user in database");
       }
     });
-    
+  },
+
+  showUsers: function(req, res, next) {
+    db.findAllUsers(function(err, users) {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.render('users', { users: users });
+      }
+    });
   },
 
   getUserCode: function (req, res, next, code){
