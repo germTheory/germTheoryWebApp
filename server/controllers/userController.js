@@ -1,15 +1,25 @@
-// THIS FILE STORES ALL FUNCTIONS RELATED TO USER BEHAVIOR
 var db = require('../database/dbSchema.js'),
-    User = db.User;
+    User = db.User,
     Q    = require('q'),
     jwt  = require('jwt-simple');
 
 var userController = {
 
-  /*
-  Signin to the app if already a user.
-  */
-  signin: function (req, res, next) {
+  loginForm: function (req, res) {
+    res.render('login');
+  },
+
+  signupForm: function (req, res) {
+    res.render('signup');
+  },
+
+  /**
+   * Signin to the app if already a user.
+   * @param req
+   * @param res
+   * @param next
+   */
+  login: function (req, res, next) {
     var username = req.body.username;
 
     db.findUser(username, function(results){
@@ -24,9 +34,12 @@ var userController = {
     });
   },
 
-  /*
-  Signup if you want to use the app.
-  */
+  /**
+   * Signup if you want to use the app.
+   * @param req
+   * @param res
+   * @param next
+   */
   signup: function (req, res, next) {
     var newUser = { name: req.body.name,
                     gender: req.body.gender};
@@ -90,9 +103,12 @@ var userController = {
     
   },
 
-  /* Obtain the user's information from database,
-  which is: id, name, gender,
-  and diseases that the person has???*/
+  /**
+   * Get all User records
+   * @param req
+   * @param res
+   * @param next
+   */
   getAllUsers: function(req, res, next){
 
     db.findAllUsers(function(result){
@@ -124,7 +140,6 @@ var userController = {
   //       next(error);
   //     });
   }
-
 };
 
 module.exports = userController;

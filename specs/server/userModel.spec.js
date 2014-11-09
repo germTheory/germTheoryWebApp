@@ -9,19 +9,18 @@ var request = require('supertest');
 // var express = require('express');
 
 // Controller tests
-describe('User Controller',function(){
+describe('User Controller', function () {
   it('User Controller should be an object', function() {
     expect(userController).to.be.an('object');
-  })
+  });
 
-   it('should have a method called signin', function() {
-    expect(userController.signin).to.be.ok;
-  })
+  it('should have a method called signin', function() {
+    expect(userController.login).to.be.ok;
+  });
 
   it('should have a method called signup', function() {
     expect(userController.signup).to.be.ok;
-  })
-
+  });
 });
 
 describe('User',function() {
@@ -74,9 +73,9 @@ describe('User REST resource', function(done){
       });
   });
 
-  it('POST /api/user/signup should insert a new User record', function(done) {
+  it('POST /signup should insert a new User record', function(done) {
     request(app)
-      .post('/api/users/signup')
+      .post('/signup')
       .send({
         name: 'John Smith',
         gender: 'M'
