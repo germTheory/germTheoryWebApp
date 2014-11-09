@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   // Basic user routes
   app.route('/')
-  	.get(userController.getAllUsers)
+  	.get(userController.getAllUsers);
 
   app.route('/:userId')
   	.get(userController.getUserInfo);
