@@ -47,45 +47,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
     .state('tab.dash-detail', {
-      url: '/dash/:optionId',
+      url: '/menu/:optionId',
       views: {
         'tab-dash': {
-          templateUrl: 'templates/dash-detail.html',
+          templateUrl: 'templates/menu-detail.html',
           controller: 'DashCtrlDetail'
-        }
-      }
-    })
-    .state('tab.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
         }
       }
     })
 
     .state('tab.account', {
-      url: '/settings',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/settings.html',
-          controller: 'AccountCtrl'
-        }
-      }
-    })
-
-    .state('tab.login', {
       url: '/login',
       views: {
         'tab-account': {
@@ -98,15 +71,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.track', {
       url: '/track',
       views: {
-        'tab-track': {
-          templateUrl: 'templates/tab-track.html',
+        'track': {
+          templateUrl: 'templates/track.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    })
+
+    .state('tab.stop', {
+      url: '/stop',
+      views: {
+        'stop': {
+          templateUrl: 'templates/stop.html',
           controller: 'AccountCtrl'
         }
       }
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/settings');
+  $urlRouterProvider.otherwise('/tab/login');
 
 });
 

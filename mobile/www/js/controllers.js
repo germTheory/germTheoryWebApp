@@ -16,6 +16,6 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope, Track) {
+.controller('AccountCtrl', function($scope) {
   // $scope.track = Track.all();
 });
