@@ -1,0 +1,20 @@
+<% layout('layout') -%>
+<h3>Locations</h3>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Created Date</th>
+    </tr>
+    <% locations.forEach(function(location) { %>
+    <tr>
+      <td><%= location.id %></td>
+      <td><%= location.latitude %></td>
+      <td><%= location.longitude %></td>
+      <td><%= location.created_at %></td>
+    </tr>
+    <% }) %>
+  </table>
+</div>

@@ -3,7 +3,7 @@ var db = require('../database/dbSchema.js'),
     Q    = require('q'),
     jwt  = require('jwt-simple');
 
-var userController = {
+module.exports = {
 
   loginForm: function (req, res) {
     res.render('login');
@@ -13,12 +13,6 @@ var userController = {
     res.render('signup');
   },
 
-  /**
-   * Signin to the app if already a user.
-   * @param req
-   * @param res
-   * @param next
-   */
   login: function (req, res, next) {
     var username = req.body.username;
 
@@ -34,12 +28,6 @@ var userController = {
     });
   },
 
-  /**
-   * Signup if you want to use the app.
-   * @param req
-   * @param res
-   * @param next
-   */
   signup: function (req, res, next) {
     var newUser = { name: req.body.name,
                     gender: req.body.gender};
@@ -84,14 +72,14 @@ var userController = {
     res.send(200, true);
   },
 
-  /* Obtain the user's information from database,
-  which is: id, name, gender,
-  and diseases that the person has???*/
-  getUserInfo: function(req, res, next){
-    var id = req.params.userId;
-    var username  = "test"; // TODO: get username from request
+  getUser: function(req, res, next){
+    var id = req.params.id;
 
-    db.findUserById(id, function(result){
+    User.find(req.params.id).then(function (user) {
+      res.status(200).send(user);
+    });
+
+/*    db.findUserById(id, function(result){
       if (result.length > 0){
         console.log("Success finding user in database for: ", id);
         res.status(200).send(result);
@@ -99,15 +87,9 @@ var userController = {
         console.log("Could not find user in database for : ", id);
         res.status(404).send("Could not find user in database");
       }
-    });
+    });*/
   },
 
-  /**
-   * Get all User records
-   * @param req
-   * @param res
-   * @param next
-   */
   getAllUsers: function(req, res, next){
     db.findAllUsers(function(result){
       if (result.length > 0){
@@ -120,7 +102,7 @@ var userController = {
     });
   },
 
-  showUsers: function(req, res, next) {
+  showAllUsers: function(req, res, next) {
     db.findAllUsers(function(err, users) {
       if (err) {
         res.status(404).send(err);
@@ -128,6 +110,17 @@ var userController = {
         res.render('users', { users: users });
       }
     });
+  },
+
+  showUserInfo: function(req, res, next) {
+    User.find(req.params.id).then(function (user) {
+
+    });
+  },
+
+  logout: function(req, res, next) {
+    // TODO: Add logout logic here
+    res.redirect('/login');
   },
 
   getUserCode: function (req, res, next, code){
@@ -148,5 +141,3 @@ var userController = {
   //     });
   }
 };
-
-module.exports = userController;
