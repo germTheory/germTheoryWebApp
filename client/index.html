@@ -2,21 +2,19 @@
 <html ng-app='shortly'>
   <head>
     <meta charset="utf-8" />
-    <title>Germ-Tracker-With-CI???</title>
+    <title>Germ-Tracker</title>
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body>
-    <h1>Germ-Tracker-Definitely-Has-CI?</h1>
+    <h1>Germ Tracker</h1>
 
-    <!-- the ng-view directive is where our templates will be loaded into when naviagted to -->
-    <div ng-view></div>
+    <div ui-view></div>
 
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-ui-router.js"></script>
 
     <script src="app/auth/auth.js"></script>
-    <script src="app/links/links.js"></script>
-    <script src="app/shorten/shorten.js"></script>
+    <script src="app/users/users.js"></script>
     <script src="app/services/services.js"></script>
     <script src="app/app.js"></script>
   </body>
