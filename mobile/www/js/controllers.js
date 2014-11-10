@@ -17,5 +17,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountCtrl', function($scope) {
-  // $scope.track = Track.all();
+  $scope.trackingEnabled = true;
+  $scope.trackingDisabled = false;
 });
