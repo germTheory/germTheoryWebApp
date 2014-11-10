@@ -15,6 +15,9 @@ module.exports = function (app) {
   app.get('/reports', function(req, res) {
     res.render('reports');
   });
+  app.get('/submitReport', function(req, res) {
+    res.render('submitReport');
+  })
 
   app.get('/*', function(req, res, next) {
     res.render('index');

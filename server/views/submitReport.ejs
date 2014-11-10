@@ -1,0 +1,42 @@
+<% layout('layout') -%>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<div class="col-sm-6 col-sm-offset-3">
+  <h1 style="text-align:center">Create New Report</h1>
+
+  <form action="/reports" method="get">
+    <div class="form-group">
+      <label>Start Time</label>
+      <input type="gender" id="datepickerStart" class="form-control" name="gender">
+    </div>
+    <div class="form-group">
+      <label>End Time</label>
+      <input type="gender" id="datepickerEnd" class="form-control" name="gender">
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name">
+    </div>
+    <br>
+    <br>
+    
+    <div style="text-align:center">
+      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+    </div>
+
+      <script>
+      $(function() {
+        $( "#datepickerStart" ).datepicker();
+      });
+      $(function() {
+        $( "#datepickerEnd" ).datepicker();
+      });
+      </script>
+    
+  </form>
+
+  <hr>
