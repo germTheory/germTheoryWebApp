@@ -2208,7 +2208,7 @@ body.grade-b, body.grade-c {
 
 .scroll-content {
   position: absolute;
-  background-color: #8AF2E4;
+  background-color: #FFF;
   top: 0;
   right: 0;
   bottom: 0;
@@ -4278,7 +4278,7 @@ a.item {
   z-index: 2;
   padding: 16px 16px 16px 16px;
   border: none;
-  background-color: #F0F5F2; }
+  background-color: #FFF; }
 
 .fire {
   color: #D61515; }
@@ -4287,12 +4287,12 @@ a.item {
   color: #8C8C8C;
   height: 100%;
   text-align: center;
-  font-size: 200%;
+  font-size: 400%;
   position: relative;
   z-index: 2;
   padding: 16px 16px 16px 16px;
   border: none;
-  background-color: #F0F5F2; }
+  background-color: #FFF; }
 
 a.item-content {
   display: block;
