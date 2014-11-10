@@ -45,8 +45,10 @@ var Disease = sequelize.define('disease', {
 // User table schema
 var User = sequelize.define('user', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING, allowNull: false},
-  gender: { type: Sequelize.STRING }
+  name: { type: Sequelize.STRING },
+  gender: { type: Sequelize.STRING },
+  token: { type:Sequelize.STRING },
+  email: { type:Sequelize.STRING }
 }, {
   tableName: 'users'
 });
