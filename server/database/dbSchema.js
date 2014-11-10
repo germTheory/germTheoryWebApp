@@ -104,7 +104,6 @@ sequelize
 /* Saves the user to the database.
   */
 var saveUser =  function(user, cb){
-  //console.log("saveUser: ",user.name, user.gender );
   var newUser = User.build({name: user.name, gender: user.gender});
   newUser.save().complete(function(err, usr) {
     if (!!err){
@@ -120,10 +119,7 @@ var saveUser =  function(user, cb){
 };
 
 var findUser = function(user, cb){
-  // console.log("findUser: user: ", user);
-// Retrieve user from the database:
 	User.findAll({ where: {name: user.name, gender: user.gender} }).complete(function(err, usrs) {
-	                // attributes: [name, gender] }).complete(function(err, usrs) {
 	  if (!!err){
 	    console.log('An error occured while finding User: ', user.name);
 	  } else {
@@ -133,23 +129,15 @@ var findUser = function(user, cb){
 	  }
 	});
 };
+
 var findAllUsers = function(cb){
-// Retrieve user from the database:
-  User.findAll().complete(function(err, usrs) {
-                  // attributes: [name, gender] }).complete(function(err, usrs) {
-    if (!!err){
-      console.log('An error occured while finding User');
-    } else {
-      // This function is called back with an array of matches.
-      // console.log("findUser list of users: ", usrs);
-      cb(usrs);
-    }
+  User.findAll().complete(function(err, users) {
+    cb(err, users);
   });
 };
+
 var findUserById = function(id, cb){
-// Retrieve user from the database:
   User.findAll({ where: {id: id} }).complete(function(err, usrs) {
-                  // attributes: [name, gender] }).complete(function(err, usrs) {
     if (!!err){
       console.log('An error occured while finding User: ', id);
     } else {
@@ -159,6 +147,7 @@ var findUserById = function(id, cb){
     }
   });
 };
+
 // Assign keys to be exported
 db.Location = Location;
 db.Disease = Disease;

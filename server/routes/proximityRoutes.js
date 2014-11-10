@@ -17,5 +17,4 @@ module.exports = function (app) {
     .post(proximityController.newUserIndex) // create a new entry in the table
     .put(proximityController.updateUserIndex) // update existing entry with a new index
     .delete(proximityController.deleteUserIndex); // Delete user row in table (if user elects to delete their account)
-
-}
+};

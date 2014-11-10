@@ -1,27 +1,21 @@
-// var request = require('supertest');
+var request = require('supertest');
 var expect = require('expect.js');
-var should = require('should');
-var sequelize = require('sequelize');
 var userController = require('../../server/controllers/userController.js');
 var db = require('../../server/database/dbSchema.js');
-var request = require('supertest');
-// var expect = require('../../node_modules/chai/chai').expect;
-// var express = require('express');
 
 // Controller tests
-describe('User Controller',function(){
+describe('User Controller', function () {
   it('User Controller should be an object', function() {
     expect(userController).to.be.an('object');
-  })
+  });
 
-   it('should have a method called signin', function() {
-    expect(userController.signin).to.be.ok;
-  })
+  it('should have a method called signin', function() {
+    expect(userController.login).to.be.ok;
+  });
 
   it('should have a method called signup', function() {
     expect(userController.signup).to.be.ok;
-  })
-
+  });
 });
 
 describe('User',function() {
@@ -50,7 +44,6 @@ describe('User',function() {
         done();
       });
     });
-
 });
 
 describe('User REST resource', function(done){
@@ -67,16 +60,15 @@ describe('User REST resource', function(done){
         .get('/api/users/2')
         .expect(200)
         .end(function(err,res){
-          // console.log("parsed response:", res.body);
-          expect(res.body[0].name).to.equal("hello");
+          expect(res.body.name).to.equal("hello");
           done();
         });
       });
   });
 
-  it('POST /api/user/signup should insert a new User record', function(done) {
+  it('POST /signup should insert a new User record', function(done) {
     request(app)
-      .post('/api/users/signup')
+      .post('/signup')
       .send({
         name: 'John Smith',
         gender: 'M'
@@ -101,7 +93,3 @@ describe('User REST resource', function(done){
       .expect(200, done);
   });
 });
-
-
-
-

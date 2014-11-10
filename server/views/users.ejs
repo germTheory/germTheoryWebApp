@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+<h3>Users</h3>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Created Date</th>
+      <th>Updated Date</th>
+    </tr>
+    <% users.forEach(function(user) { %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.gender %></td>
+      <td><%= user.created_at %></td>
+      <td><%= user.updated_at %></td>
+    </tr>
+    <% }) %>
+  </table>
+</div>
