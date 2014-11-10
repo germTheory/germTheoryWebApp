@@ -3,18 +3,38 @@
   Each tab's child <ion-nav-view> directive will have its own 
   navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-top">
+<div ng-controller="AccountCtrl">
+  <ion-tabs class="tabs-icon-top">
+
+    <!-- Dashboard Tab -->
+      <ion-tab title="Menu" icon="icon ion-home" href="#/tab/menu">
+        <ion-nav-view name="tab-dash"></ion-nav-view>
+      </ion-tab>
+
+    <!-- Account Tab -->
+      <ion-tab title="Settings" icon="icon ion-gear-b" href="#/tab/settings">
+        <ion-nav-view name="tab-account"></ion-nav-view>
+      </ion-tab>
+
+    <!-- Track Tab -->
+      <ion-tab title="Track" icon="icon ion-gear-b" href="#/tab/track">
+        <ion-nav-view name="track"></ion-nav-view>
+      </ion-tab>
+
+    <!-- Stop Tab -->
+      <ion-tab title="Stop" icon="icon ion-gear-b" href="#/tab/stop">
+        <ion-nav-view name="stop"></ion-nav-view>
+      </ion-tab>
+
+  </ion-tabs>
+</div>
 
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="Menu" icon="icon ion-home" href="#/tab/menu">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
-  </ion-tab>
+<div ng-controller="AccountCtrl">
+    <div class="tabs">
+      <a class="tab-item" href="#/tab/menu">
+        <div class="icon ion-ios7-home"></div>
+      </a>
+    </div>
 
-  <!-- Account Tab -->
-  <ion-tab title="Settings" icon="icon ion-gear-b" href="#/tab/settings">
-    <ion-nav-view name="tab-account"></ion-nav-view>
-  </ion-tab>
-
-
-</ion-tabs>
+</div>

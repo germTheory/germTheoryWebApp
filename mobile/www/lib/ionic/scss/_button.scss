@@ -4,6 +4,14 @@
  * --------------------------------------------------
  */
 
+.cent {
+   position:absolute;
+   top:50%;
+   left:50%;
+   margin-top:-50px; /* this is half the height of your div*/  
+   margin-left:-100px; /*this is half of width of your div*/
+ }
+
 .button {
   // set the color defaults
   @include button-style($button-default-bg, $button-default-border, $button-default-active-bg, $button-default-active-border, $button-default-text);

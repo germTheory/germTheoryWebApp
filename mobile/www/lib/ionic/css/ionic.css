@@ -2734,7 +2734,7 @@ a.subdued {
   border-style: solid;
   border-top: 1px solid transparent;
   border-bottom: 1px solid #ddd;
-  background-color: white;
+  background-color: #09E3B0;
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
   background-size: 0; }
@@ -2744,7 +2744,8 @@ a.subdued {
       background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
       background-position: bottom;
       background-size: 100% 1px;
-      background-repeat: no-repeat; } }
+      background-repeat: no-repeat;
+      background-color: #3434FA; } }
   .bar.bar-clear {
     border: none;
     background: none;
@@ -2771,7 +2772,7 @@ a.subdued {
       background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #3F92D2;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444; }
     .bar.bar-stable .title {
@@ -3177,7 +3178,8 @@ a.subdued {
       border-bottom: none;
       background-position: top;
       background-size: 100% 1px;
-      background-repeat: no-repeat; } }
+      background-repeat: no-repeat;
+      background-color: #3F92D2; } }
 
 /* Allow parent element of tabs to define color, or just the tab itself */
 .tabs-light > .tabs, .tabs.tabs-light {
@@ -4276,7 +4278,7 @@ a.item {
   z-index: 2;
   padding: 16px 16px 16px 16px;
   border: none;
-  background-color: #8AF2E4; }
+  background-color: #F0F5F2; }
 
 .fire {
   color: #D61515; }
@@ -4290,7 +4292,7 @@ a.item {
   z-index: 2;
   padding: 16px 16px 16px 16px;
   border: none;
-  background-color: #8AF2E4; }
+  background-color: #F0F5F2; }
 
 a.item-content {
   display: block;
@@ -4300,6 +4302,9 @@ a.item-content {
 .item-text-wrap .item, .item-text-wrap .item-content, .item-text-wrap, .item-text-wrap h1, .item-text-wrap h2, .item-text-wrap h3, .item-text-wrap h4, .item-text-wrap h5, .item-text-wrap h6, .item-text-wrap p, .item-complex.item-text-wrap .item-content, .item-body h1, .item-body h2, .item-body h3, .item-body h4, .item-body h5, .item-body h6, .item-body p {
   overflow: visible;
   white-space: normal; }
+
+.item-text-wrap-blue {
+  background-color: #3434FA; }
 
 .item-complex.item-text-wrap, .item-complex.item-text-wrap h1, .item-complex.item-text-wrap h2, .item-complex.item-text-wrap h3, .item-complex.item-text-wrap h4, .item-complex.item-text-wrap h5, .item-complex.item-text-wrap h6, .item-complex.item-text-wrap p {
   overflow: visible;
@@ -5711,6 +5716,15 @@ progress {
  * Buttons
  * --------------------------------------------------
  */
+.cent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  /* this is half the height of your div*/
+  margin-left: -100px;
+  /*this is half of width of your div*/ }
+
 .button {
   border-color: #b2b2b2;
   background-color: #f8f8f8;
