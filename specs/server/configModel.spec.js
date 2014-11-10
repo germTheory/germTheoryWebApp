@@ -1,4 +1,0 @@
-xdescribe('Schema',function(){
-
-
-})
