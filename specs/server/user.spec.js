@@ -62,7 +62,9 @@ xdescribe('User REST resource',function(){
       .post('/users')
       .send({
         name: 'John Smith',
-        gender: 'M'
+        gender: 'M',
+        token: 'testToken',
+        email: 'test@test.com'
       })
       .expect(200)
       .expect(function(res) {
