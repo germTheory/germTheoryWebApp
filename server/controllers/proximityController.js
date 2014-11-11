@@ -1,6 +1,7 @@
 var db = require('../database/dbSchema.js'),
   Proximity = db.Proximity,
   User = db.User;
+  Disease = db.Disease;
 
 // process params to ensure that the specified user exists
 var _getUserCode = function (req, res, next, code){
@@ -13,6 +14,16 @@ var _getUserCode = function (req, res, next, code){
       res.status(404).send(err);
     });
 };
+
+var _getDiseaseId = function (req, res, next, code){
+  Disease.find({where: {id: code } })
+    .then(function(){
+      req.body.disease_id = code;
+      next();
+    }, function( err ){
+      res.status(404).send(err);
+    });
+}
 
 // return a 405 if the API does not support the desired function
 var _invalidMethod = function(req, res, next){
@@ -91,13 +102,30 @@ var _deleteUserIndex = function(req, res, next) {
     });
 };
 
+var _getDiseaseIndexes = function(req, res, next) {
+  if( !req.body.disease_id ) {
+    res.status(400).send("Bad Request: Did not supply a disease_id in url");
+  }
+  Proximity
+    .findAll({where: { disease_id: req.body.disease_id }})
+    .then(function ( data ){
+      res.status(200).send( data );
+    }, function(err){
+      res.status(500).send( err );
+    });
+}
+
+
+
 // Export our runctions to be used elsewhere
 module.exports = {
   invalidMethod: _invalidMethod,
   getUserCode: _getUserCode,
+  getDiseaseId: _getDiseaseId,
   getUserIndex: _getUserIndex,
   newUserIndex: _newUserIndex,
   updateUserIndex: _updateUserIndex,
+  getDiseaseIndexes: _getDiseaseIndexes,
   getAllIndexes: _getAllIndexes,
   deleteUserIndex: _deleteUserIndex
 };
