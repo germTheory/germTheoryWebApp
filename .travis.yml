@@ -25,6 +25,8 @@ after_script:
   - yes | heroku keys:add
   # Push to Heroku!
   - yes | git push heroku master
+  # Clears heroku keys again after pushing
+  - yes | heroku keys: clear
 notifications:
   email:
     recipients:
