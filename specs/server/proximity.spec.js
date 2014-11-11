@@ -10,7 +10,10 @@ describe('Proximity',function(){
       db.sequelize.sync({force: true}).then(function(){
         db.Disease.create({name: "Ebola"})
           .then(function(){
-            db.User.bulkCreate([{ id: 1, name: 'Jose Merino', gender:'M'}, { id: 2, name: 'John Smith', gender: 'M'}]).then(function(user){
+            db.User.bulkCreate([
+              { id: 1, name: 'Jose Merino', gender:'M', token: 'testToken1', email: 'test@test1.com'}, 
+              { id: 2, name: 'John Smith', gender: 'M', token: 'testToken2', email: 'test@test2.com'}])
+            .then(function(user){
               lastid = 2;
               var fakeProx1 = {
                     user_id: 1,
@@ -131,7 +134,7 @@ describe('Proximity',function(){
       });
 
       it('should add a user index to the proximity table for a POST request to /api/proximity', function(done){
-        db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M'})
+        db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson4.com'})
           .then(function(user){
             request(app)
               .post("/api/proximity")
@@ -247,7 +250,7 @@ describe('Proximity',function(){
 
       it('should add a user index to the proximity table for a POST request to /api/proximity', function(done){
         db.User.destroy( { where: { id: 3} } ).then(function( destroyedCount ){
-          db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M'})
+          db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson.com'})
             .then(function(user){
               request(app)
                 .post("/api/proximity/3")
