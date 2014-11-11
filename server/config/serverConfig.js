@@ -9,6 +9,7 @@ var helpers = require('./helpers');
 
 module.exports = function (app, express) {
 
+  var authRouter = express.Router();
   var commonRouter = express.Router();
   var userRouter = express.Router();
   var locationRouter = express.Router();
@@ -36,7 +37,9 @@ module.exports = function (app, express) {
   app.use('/api/users', userRouter); // use user router for all user request
   app.use('/api/locations', locationRouter); // location router for all generalizedlocation data
   app.use('/api/proximity', proximityRouter);
+  app.use('/auth', authRouter);
   app.use('/', commonRouter);
+
 
   // authentication middleware used to decode token and made available on the request
   // app.use('/api/locations', helpers.decode);
@@ -44,6 +47,7 @@ module.exports = function (app, express) {
   app.use(helpers.errorHandler);
 
   // inject our routers into their respective route files
+  require('../routes/authRoutes.js')(authRouter);
   require('../routes/commonRoutes.js')(commonRouter);
   require('../routes/userRoutes.js')(userRouter);
   require('../routes/locationRoutes.js')(locationRouter);
