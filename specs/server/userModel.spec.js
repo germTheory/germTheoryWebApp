@@ -29,7 +29,7 @@ describe('User',function() {
   });
 
   it('It should add a user to the database', function(done) {
-      db.saveUser({name: 'test', gender: 'F'}, function(user){
+      db.saveUser({name: 'test', gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user){
         // console.log("saveUser in test: ", user.name);
         expect(user.name).to.be('test');
         done();
@@ -55,7 +55,7 @@ describe('User REST resource', function(done){
   });
 
   it('GET /api/user/:id should return a specified User record', function(done) {
-    db.saveUser({name: "hello", gender: 'F'}, function(user){
+    db.saveUser({name: "hello", gender: 'F', email: 'jameson@jameson.com'}, function(user){
       request(app)
         .get('/api/users/2')
         .expect(200)
