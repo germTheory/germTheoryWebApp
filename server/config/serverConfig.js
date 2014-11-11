@@ -1,7 +1,11 @@
-var morgan      = require('morgan'), // used for logging incoming request
-    bodyParser  = require('body-parser'),
-    engine = require('ejs-locals'),
-    helpers     = require('./helpers.js');
+var morgan = require('morgan'); // used for logging incoming request
+var bodyParser = require('body-parser');
+var engine = require('ejs-locals');
+var passport = require('passport');
+var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var helpers = require('./helpers');
 
 module.exports = function (app, express) {
 
@@ -10,9 +14,17 @@ module.exports = function (app, express) {
   var locationRouter = express.Router();
   var proximityRouter = express.Router();
 
+  require('./passport')(passport); // pass passport for configuration
+
   app.use(morgan('dev'));
+  app.use(cookieParser());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
+
+  app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+  app.use(passport.initialize());
+  app.use(passport.session()); // persistent login sessions
+  app.use(flash());
 
   app.set('views', __dirname + '/../views');
   app.engine('ejs', engine);
