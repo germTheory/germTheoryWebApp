@@ -37,7 +37,7 @@ describe('User',function() {
 
     });
 
-    it('It should find User from the database', function(done){
+    xit('It should find User from the database', function(done){
       db.findUser({name: 'test', gender: 'F'}, function(user){
         // console.log("findUser in test: ", user);
         expect(user[0].dataValues.name).to.be('test');
