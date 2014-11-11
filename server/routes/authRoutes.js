@@ -3,7 +3,7 @@ var helpers = require('../config/helpers.js');
 var passport = require('passport');
 
 module.exports = function (app) {
-  app.get('/login', helpers.isLoggedIn, authController.loginForm);
+  app.get('/login', authController.loginForm);
 
   app.get('/logout', authController.logout);
   
@@ -12,6 +12,6 @@ module.exports = function (app) {
   // the callback after google has authenticated the user
   app.get('/google/callback', passport.authenticate('google', {
     successRedirect : '/users',
-    failureRedirect : '/login'
+    failureRedirect : '/auth/login'
   }));
 };
