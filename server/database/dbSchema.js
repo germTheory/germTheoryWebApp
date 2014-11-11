@@ -47,8 +47,8 @@ var User = sequelize.define('user', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
-  token: { type:Sequelize.STRING },
-  email: { type:Sequelize.STRING }
+  token: { type: Sequelize.STRING },
+  email: { type: Sequelize.STRING, allowNull:false }
 }, {
   tableName: 'users'
 });
@@ -100,7 +100,7 @@ sequelize
 /* Saves the user to the database.
   */
 var saveUser =  function(user, cb){
-  var newUser = User.build({name: user.name, gender: user.gender});
+  var newUser = User.build({name: user.name, gender: user.gender, token: user.token, email: user.email});
   newUser.save().complete(function(err, usr) {
     if (!!err){
     console.log('An error occured while saving User: ', err);
@@ -114,13 +114,13 @@ var saveUser =  function(user, cb){
 };
 
 var findUser = function(user, cb){
-	User.findAll({ where: {name: user.name, gender: user.gender} }).complete(function(err, usrs) {
+	User.findAll({ where: {name: user.name, gender: user.gender, token: user.token, email: user.email} }).complete(function(err, usrs) {
 	  if (!!err){
 	    console.log('An error occured while finding User: ', user.name);
 	  } else {
 	    // This function is called back with an array of matches.
 	    // console.log("findUser list of users: ", usrs, user.name, user.gender);
-	    cb(usrs, {name: user.name, gender: user.gender});
+	    cb(usrs, {name: user.name, gender: user.gender, token: user.token, email: user.email});
 	  }
 	});
 };
