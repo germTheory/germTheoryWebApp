@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,6 +17,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+    if (window.Geolocation){
+      console.log("Yay! GeoLocation found!");
+
+    }
+    if (window.BackgroundGeoLocation) {
+      console.log("Yay! BackgroundGeoLocation found!");
+      // BackgroundGeoLocation.configure(options)
     }
   });
 })
@@ -31,7 +39,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // setup an abstract state for the tabs directive
     .state('tab', {
-      url: "/tab",
+      url: "/tab",  
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
@@ -73,7 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'track': {
           templateUrl: 'templates/track.html',
-          controller: 'AccountCtrl'
+          controller: 'GeoCtrl'
         }
       }
     })
@@ -83,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'stop': {
           templateUrl: 'templates/stop.html',
-          controller: 'AccountCtrl'
+          controller: 'StopGeoLocCtrl'
         }
       }
     });
