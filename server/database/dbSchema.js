@@ -48,7 +48,8 @@ var User = sequelize.define('user', {
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
   token: { type: Sequelize.STRING },
-  email: { type: Sequelize.STRING, allowNull:false }
+  email: { type: Sequelize.STRING, allowNull:false },
+  google_id: { type: Sequelize.STRING }
 }, {
   tableName: 'users'
 });
