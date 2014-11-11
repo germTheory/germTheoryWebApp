@@ -1,12 +1,17 @@
 <ion-view title="Enable Tracking" ng-controller="AccountCtrl">
   <ion-content>
-    <ion-item ng-init="obj={toggle:false}">
-        <p>
-            <button class="button button-block button-calm" ng-if="!obj.toggle" 
-              style="margin-top:140%; border-radius:5px;" ng-click="obj.toggle = true">ENABLE TRACKING</button>
-            <button class="button button-block button-calm" ng-if="obj.toggle"
-              style="margin-top:140%; border-radius:5px;" ng-click="obj.toggle = false">DISABLE TRACKING</button>
-    </ion-item>
+   <ion-item>
+
+   <div ng-init="obj={toggle2:false}">
+      <div style="margin-top:465px;">
+      <button class="button button-block button-calm" ng-if="!obj.toggle2" ng-click="obj.toggle2 = true">ENABLE TRACKING</button>
+      </div>
+      <div style="margin-top:465px;">
+      <button class="button button-block button-calm" ng-if="obj.toggle2" ng-click="obj.toggle2 = false">DISABLE TRACKING</button>
+      </div>
+   </div>
+   </ion-item>
+
     </ion-list>
 
   </ion-content>
