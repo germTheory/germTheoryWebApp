@@ -198,7 +198,7 @@ button.item.item-complex {
   z-index: $z-index-item;
   padding: $item-padding $item-padding $item-padding $item-padding;
   border: none;
-  background-color:#8AF2E4;
+  background-color:#FFF;
 }
 
 .fire {
@@ -209,12 +209,12 @@ button.item.item-complex {
   color:#8C8C8C;
   height:100%;
   text-align:center;
-  font-size:200%;
+  font-size:400%;
   position: relative;
   z-index: $z-index-item;
   padding: $item-padding $item-padding $item-padding $item-padding;
   border: none;
-  background-color: #8AF2E4;
+  background-color: #FFF;
 }
 
 a.item-content {
@@ -244,6 +244,11 @@ a.item-content {
   overflow: visible;
   white-space: normal;
 }
+
+.item-text-wrap-blue {
+  background-color:#3434FA;
+}
+
 .item-complex.item-text-wrap,
 .item-complex.item-text-wrap h1,
 .item-complex.item-text-wrap h2,

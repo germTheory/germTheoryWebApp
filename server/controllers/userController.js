@@ -1,15 +1,19 @@
-// THIS FILE STORES ALL FUNCTIONS RELATED TO USER BEHAVIOR
 var db = require('../database/dbSchema.js'),
-    User = db.User;
+    User = db.User,
     Q    = require('q'),
     jwt  = require('jwt-simple');
 
-var userController = {
+module.exports = {
 
-  /*
-  Signin to the app if already a user.
-  */
-  signin: function (req, res, next) {
+  loginForm: function (req, res) {
+    res.render('login');
+  },
+
+  signupForm: function (req, res) {
+    res.render('signup');
+  },
+
+  login: function (req, res, next) {
     var username = req.body.username;
 
     db.findUser(username, function(results){
@@ -24,9 +28,6 @@ var userController = {
     });
   },
 
-  /*
-  Signup if you want to use the app.
-  */
   signup: function (req, res, next) {
     var newUser = { name: req.body.name,
                     gender: req.body.gender};
@@ -71,14 +72,14 @@ var userController = {
     res.send(200, true);
   },
 
-  /* Obtain the user's information from database,
-  which is: id, name, gender,
-  and diseases that the person has???*/
-  getUserInfo: function(req, res, next){
-    var id = req.params.userId;
-    var username  = "test"; // TODO: get username from request
+  getUser: function(req, res, next){
+    var id = req.params.id;
 
-    db.findUserById(id, function(result){
+    User.find(req.params.id).then(function (user) {
+      res.status(200).send(user);
+    });
+
+/*    db.findUserById(id, function(result){
       if (result.length > 0){
         console.log("Success finding user in database for: ", id);
         res.status(200).send(result);
@@ -86,15 +87,10 @@ var userController = {
         console.log("Could not find user in database for : ", id);
         res.status(404).send("Could not find user in database");
       }
-    });
-    
+    });*/
   },
 
-  /* Obtain the user's information from database,
-  which is: id, name, gender,
-  and diseases that the person has???*/
   getAllUsers: function(req, res, next){
-
     db.findAllUsers(function(result){
       if (result.length > 0){
         // console.log("Success finding users in database ");
@@ -104,7 +100,27 @@ var userController = {
         res.status(404).send("Could not find user in database");
       }
     });
-    
+  },
+
+  showAllUsers: function(req, res, next) {
+    db.findAllUsers(function(err, users) {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.render('users', { users: users });
+      }
+    });
+  },
+
+  showUserInfo: function(req, res, next) {
+    User.find(req.params.id).then(function (user) {
+
+    });
+  },
+
+  logout: function(req, res, next) {
+    // TODO: Add logout logic here
+    res.redirect('/login');
   },
 
   getUserCode: function (req, res, next, code){
@@ -124,7 +140,4 @@ var userController = {
   //       next(error);
   //     });
   }
-
 };
-
-module.exports = userController;

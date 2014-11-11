@@ -1,11 +1,13 @@
-<ion-content>
-  <ion-list>
-    <ion-item type="login" href="#/tab/stop" style="margin:10%px;">
-    <h2>Track Your Location<h2>
-    <button class="button button-block button-calm">
-      TRACK
-    </button>
+<ion-view title="Enable Tracking" ng-controller="AccountCtrl">
+  <ion-content>
+    <ion-item ng-init="obj={toggle:false}">
+        <p>
+            <button class="button button-block button-calm" ng-if="!obj.toggle" 
+              style="margin-top:140%; border-radius:5px;" ng-click="obj.toggle = true">ENABLE TRACKING</button>
+            <button class="button button-block button-calm" ng-if="obj.toggle"
+              style="margin-top:140%; border-radius:5px;" ng-click="obj.toggle = false">DISABLE TRACKING</button>
+    </ion-item>
+    </ion-list>
 
-    
-  </ion-list>
-</ion-content>
+  </ion-content>
+</ion-view>

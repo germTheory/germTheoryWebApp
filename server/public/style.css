@@ -31,7 +31,11 @@ h1 {
   float: left;
 }
 
-.navigation li a {
+.navigation .logout {
+  float: right;
+}
+
+.navigation li a , .logout {
   width: 100px;
   height: 20px;
   line-height: 20px;
@@ -97,7 +101,7 @@ form {
   margin: 10px;
 }
 
-input {
+form input[type=text], form input[type=password] {
   width: 360px;
   display: block;
   font-size: 13px;
@@ -105,23 +109,9 @@ input {
   margin-bottom: 5px;
 }
 
-input[type=url] {
-  display: inline
-}
-
-input[type=url]:focus {
-  outline: none;
-}
-
-
 .error {
-  border: red solid 4px;
-  padding: 10px;
-  margin: 0 10px;
-}
-
-.clean {
-  border: #efe solid 2px;
+  background-color: #fee;
+  color: #a33;
   padding: 10px;
   margin: 0 10px;
 }
@@ -145,4 +135,3 @@ input[type=url]:focus {
 .creator .message {
   clear: both;
 }
-

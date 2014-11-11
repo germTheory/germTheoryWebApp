@@ -1,0 +1,25 @@
+<% layout('layout') -%>
+<div class="container">
+  <div class="col-sm-6">
+    <a href="./submitReport">
+    <button class="btn btn-success btn-md" type="submit">Create New Report</button>
+    </a>
+  </div>
+  <br/><br/>
+  <div class="container">
+    <table class="table">
+      <tr>
+        <th>Report ID</th>
+        <th>Created Date</th>
+      </tr>
+      <tr>
+        <td><a href="#">000001</a></td>
+        <td><%= new Date() %></td>
+      </tr>
+      <tr>
+        <td><a href="#">000002</a></td>
+        <td><%= new Date() %></td>
+      </tr>
+    </table>
+  </div>
+</div>

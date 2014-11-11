@@ -2,11 +2,9 @@ var dbCreds   = require('./dbCreds');
 var Sequelize = require('sequelize');
 var env       = process.env.NODE_ENV || 'development';
 
-
 /*Database connection string created depending of whether
   it is a development or deployment environment.*/
 var is_native = false;
-
 var connection_string = dbCreds.dialect + '://' + dbCreds.username + ':' + dbCreds.password + 
                         '@' + dbCreds.host + ':5432/' + dbCreds.database;
 
@@ -14,8 +12,6 @@ if (process.env.NODE_ENV){
   connection_string =  process.env.DATABASE_URL;
   is_native = true;
 }
-
-// console.log("connection_string: ", connection_string);
 
 var sequelize = new Sequelize(connection_string, {
   define: {
@@ -32,14 +28,8 @@ var db = {}; // stores all models that we will export
 // Location table schema
 var Location = sequelize.define('location', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  latitude: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  longitude: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
+  latitude: { type: Sequelize.FLOAT, allowNull: false },
+  longitude: { type: Sequelize.FLOAT, allowNull: false }
 }, {
   tableName: 'locations'
 });
@@ -47,7 +37,7 @@ var Location = sequelize.define('location', {
 // Diseases table schema
 var Disease = sequelize.define('disease', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING },
+  name: { type: Sequelize.STRING, allowNull: false }
 }, {
   tableName: 'diseases'
 });
@@ -57,6 +47,9 @@ var User = sequelize.define('user', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
+  token: { type: Sequelize.STRING },
+  email: { type: Sequelize.STRING, allowNull:false },
+  google_id: { type: Sequelize.STRING }
 }, {
   tableName: 'users'
 });
@@ -64,7 +57,7 @@ var User = sequelize.define('user', {
 // Proximity table schema
 var Proximity = sequelize.define('proximity', {
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-	value: { type: Sequelize.FLOAT },
+	value: { type: Sequelize.FLOAT, allowNull: false }
 }, {
   tableName: 'proximity'
 });
@@ -72,17 +65,21 @@ var Proximity = sequelize.define('proximity', {
 /*
 DEFINE RELATIONSHIPS
 */
-// Has many relationships
-User.hasMany(Location,{
+
+User.hasMany(Location, {
   foreignKey: {
     name: 'user_id',
     allowNull: false
   }
 });
-Disease.hasMany(Proximity);
+Location.belongsTo(User);
 
-// has one relationships
+// Proximity has one-to-many relationships with User and Disease
 User.hasMany(Proximity);
+Disease.hasMany(Proximity);
+Proximity.belongsTo(User);
+Proximity.belongsTo(Disease);
+
 
 // Build join table between users and diseases
 Disease.hasMany(User, { joinTableName: 'user_diseases' });
@@ -104,8 +101,7 @@ sequelize
 /* Saves the user to the database.
   */
 var saveUser =  function(user, cb){
-  //console.log("saveUser: ",user.name, user.gender );
-  var newUser = User.build({name: user.name, gender: user.gender});
+  var newUser = User.build({name: user.name, gender: user.gender, token: user.token, email: user.email});
   newUser.save().complete(function(err, usr) {
     if (!!err){
     console.log('An error occured while saving User: ', err);
@@ -116,40 +112,28 @@ var saveUser =  function(user, cb){
       cb(usr.dataValues);
     }
   });
-  
 };
 
 var findUser = function(user, cb){
-  // console.log("findUser: user: ", user);
-// Retrieve user from the database:
-	User.findAll({ where: {name: user.name, gender: user.gender} }).complete(function(err, usrs) {
-	                // attributes: [name, gender] }).complete(function(err, usrs) {
+	User.findAll({ where: {name: user.name, gender: user.gender, token: user.token, email: user.email} }).complete(function(err, usrs) {
 	  if (!!err){
 	    console.log('An error occured while finding User: ', user.name);
 	  } else {
 	    // This function is called back with an array of matches.
 	    // console.log("findUser list of users: ", usrs, user.name, user.gender);
-	    cb(usrs, {name: user.name, gender: user.gender});
+	    cb(usrs, {name: user.name, gender: user.gender, token: user.token, email: user.email});
 	  }
 	});
 };
+
 var findAllUsers = function(cb){
-// Retrieve user from the database:
-  User.findAll().complete(function(err, usrs) {
-                  // attributes: [name, gender] }).complete(function(err, usrs) {
-    if (!!err){
-      console.log('An error occured while finding User');
-    } else {
-      // This function is called back with an array of matches.
-      // console.log("findUser list of users: ", usrs);
-      cb(usrs);
-    }
+  User.findAll().complete(function(err, users) {
+    cb(err, users);
   });
 };
+
 var findUserById = function(id, cb){
-// Retrieve user from the database:
   User.findAll({ where: {id: id} }).complete(function(err, usrs) {
-                  // attributes: [name, gender] }).complete(function(err, usrs) {
     if (!!err){
       console.log('An error occured while finding User: ', id);
     } else {
@@ -159,6 +143,7 @@ var findUserById = function(id, cb){
     }
   });
 };
+
 // Assign keys to be exported
 db.Location = Location;
 db.Disease = Disease;

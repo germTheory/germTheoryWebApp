@@ -43,21 +43,21 @@ angular.module('starter.controllers', [])
       var lat  = position.coords.latitude;
       var longitude = position.coords.longitude;
       console.log("First pos: ", lat, longitude);
-      $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1/api/location/create",
-        dataType: "json",
-        data: {latitude: lat, longitude: longitude},
-        success: function(data) {
-          var obj = JSON.parse(data);
-          if (obj && obj.success === true) {
-            console.log("Sent successfully");
-          }
-        },
-        error: function(e) {
-          alert('Error: ' + e.message);
-        }
-      });
+      // $.ajax({
+      //   type: "POST",
+      //   url: "http://127.0.0.1/api/location/create",
+      //   dataType: "json",
+      //   data: {latitude: lat, longitude: longitude},
+      //   success: function(data) {
+      //     var obj = JSON.parse(data);
+      //     if (obj && obj.success === true) {
+      //       console.log("Sent successfully");
+      //     }
+      //   },
+      //   error: function(e) {
+      //     alert('Error: ' + e.message);
+      //   }
+      // });
     }, function(err) {
       console.log("Encountered an error while using cordovaGeolocation");
       // error
@@ -159,9 +159,4 @@ angular.module('starter.controllers', [])
     var bgGeo = window.plugins.backgroundGeoLocation;
     bgGeo.stop();
   });
-})
-
-
-
-
-
+});
