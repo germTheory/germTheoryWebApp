@@ -48,7 +48,8 @@ var User = sequelize.define('user', {
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
   token: { type: Sequelize.STRING },
-  email: { type: Sequelize.STRING, allowNull:false },
+  email: { type: Sequelize.STRING, allowNull: false },
+  password: { type: Sequelize.STRING, allowNull: false},
   google_id: { type: Sequelize.STRING }
 }, {
   tableName: 'users'
@@ -101,7 +102,7 @@ sequelize
 /* Saves the user to the database.
   */
 var saveUser =  function(user, cb){
-  var newUser = User.build({name: user.name, gender: user.gender, token: user.token, email: user.email});
+  var newUser = User.build({name: user.name, gender: user.gender, token: user.token, email: user.email, password: user.password});
   newUser.save().complete(function(err, usr) {
     if (!!err){
     console.log('An error occured while saving User: ', err);
@@ -115,7 +116,7 @@ var saveUser =  function(user, cb){
 };
 
 var findUser = function(user, cb){
-	User.findAll({ where: {name: user.name, gender: user.gender, token: user.token, email: user.email} }).complete(function(err, usrs) {
+	User.findAll({ where: {name: user.email, gender: user.gender, token: user.token, email: user.email} }).complete(function(err, usrs) {
 	  if (!!err){
 	    console.log('An error occured while finding User: ', user.name);
 	  } else {

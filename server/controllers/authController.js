@@ -11,53 +11,78 @@ module.exports = {
     res.render('signup');
   },
 
-  // login: function (req, res, next) {
-  //   var username = req.body.username;
+  usersRender: function (req, res) {
+    res.render('users');
+  },
 
-  //   db.findUser(username, function(results){
-  //     if (results.length === 0) {
-  //       console.log("User does not exist!");
-  //       res.send(500, true);
-  //     } else {
-  //       // sign-up the user using google Auth
-  //       // save location information
-  //       res.status(200).send(results);
-  //     }
-  //   });
-  // },
+  showMobile: function (req, res) {
+    res.render('mobile');
+  },
 
-  // signup: function (req, res, next) {
-  //   var newUser = { name: req.body.name,
-  //                   gender: req.body.gender};
-  //   console.log("signup: ", req.body);
-  //   // TO BE IMPLEMENTED WITH OAUTH
+  login: function (req, res, next) {
 
-  //   // check to see if user exists
-  //   db.findUser(newUser, function(results, user){
-  //     if (results.length === 0) {
-  //       console.log("User does not exist, adding new user...", user );
+    var email = req.body.email;
+    var password = req.body.password;
+    console.log(email, password);
 
-  //       db.saveUser(user, function(results){
-  //         if (results) {
-  //           console.log("User successfully added");
-  //           res.status(200).send(results);
-  //         }
-  //       });
-  //     } else {
-  //       // sign-up the user using google Auth
-  //       // save location information
-  //       console.log("User already exists. Try signing in!");
-  //       res.status(503).send(results);
-  //     }
-  //   });
+    User.find(email).then(function (user) {
+      console.log('found user');
+      res.status(200).send(user);
+    })
+
+    // User.find(email, function(err, user) {
+    //   if (err) {
+    //     console.log('could not find user');
+    //   }
+    //   if (!user) {
+    //     return done(null, false, req.flash('yo'));
+    //   }
+    //   if (!user.validPassword(password)) {
+    //     return done(null, false, req.flash('bo'));
+    //   }
+    //   console.log('found him yo');
+    //   return done(null, user);
+    // });
+
+  },
+
+  signup: function (req, res, next) {
+    console.log('got into signup');
+    var newUser = { name: req.body.name,
+                    password: req.body.password,
+                    email: req.body.email
+                  };
+    console.log("signup: ", req.body);
+    // TO BE IMPLEMENTED WITH OAUTH
+
+    // check to see if user exists
+    db.findUser(newUser, function(results, user){
+      if (results.length === 0) {
+        console.log("User does not exist, adding new user...", user );
+
+        db.saveUser(newUser, function(results){
+          if (results) {
+            console.log("User successfully added");
+            res.status(200).send(results);
+          }
+        });
+      } else {
+        // sign-up the user using google Auth
+        // save location information
+        console.log("User already exists. Try signing in!");
+        res.status(503).send(results);
+      }
+    });
     
-  //   // TODO: create token to send back for auth
+    // TODO: create token to send back for auth
 
-  // },
+  },
 
   logout: function(req, res, next) {
     // TODO: Add logout logic here
-    res.redirect('/auth/login');
+    res.render('logout');
   }
+
+
 };
 
