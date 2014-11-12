@@ -4,9 +4,9 @@ var passport = require('passport');
 
 module.exports = function (app) {
   app.get('/login', authController.loginForm);
-  app.post('/login', authController.login);
-  app.post('/signup', authController.signup);
-  app.get('/signup', authController.signupForm);
+  // app.post('/login', authController.login);
+  // app.post('/signup', authController.signup);
+  // app.get('/signup', authController.signupForm);
 
   app.get('/logout', function(req, res){
   req.logout();
