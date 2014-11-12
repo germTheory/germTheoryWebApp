@@ -1,6 +1,5 @@
 var userController = require('../controllers/userController');
 var helpers = require('../lib/helpers');
-var expect = require('expect.js');
 
 module.exports = function (app) {
 
