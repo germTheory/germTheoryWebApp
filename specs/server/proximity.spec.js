@@ -1,18 +1,20 @@
 var db = require('../../server/database/dbSchema.js');
 var request = require('supertest');
 var mocha = require('mocha');
-var expect = require('expect.js')
+var expect = require('expect.js');
+var app = require('../../server/server.js');
 
-describe('Proximity', function() {
+describe('Proximity Test Suite', function() {
   var fakeProximity = [];
   var lastid;
+
   before(function(done) {
     db.sequelize.sync({ force: true }).then(function() {
       db.Disease.create({ name: "Ebola" })
         .then(function() {
           db.User.bulkCreate([
-            { id: 1, name: 'Jose Merino', gender: 'M', token: 'testToken1', email: 'test@test1.com' },
-            { id: 2, name: 'John Smith', gender: 'M', token: 'testToken2', email: 'test@test2.com' }])
+            { name: 'Jose Merino', gender: 'M', token: 'testToken1', email: 'test@test1.com' },
+            { name: 'John Smith', gender: 'M', token: 'testToken2', email: 'test@test2.com' }])
             .then(function(user) {
               lastid = 2;
               var fakeProx1 = {
@@ -43,6 +45,7 @@ describe('Proximity', function() {
           done(error);
         });
     });
+
     it('should fail if properties are incorrectly specified', function(done) {
       db.Proximity.create({ user_id: lastid, value: "A value that will not work" })
         .then(function(model) {
@@ -54,13 +57,7 @@ describe('Proximity', function() {
     });
   });
 
-  describe('Proximity API Integration', function() {
-    var app;
-
-    before(function() {
-      // setup a test server
-      app = require('../../server/server.js');
-    });
+  describe('Proximity API Tests', function() {
 
     describe('Routes: /api/proximity/', function() {
       beforeEach(function(done) {
@@ -73,23 +70,18 @@ describe('Proximity', function() {
                     db.Proximity.bulkCreate(fakeProximity)
                       .then(function(complete) {
                         done();
-                        return;
                       }, function(err4) {
                         done(err4);
-                        return;
                       }); // end of bulkCreate
                   }, function(err3) {
                     console.log("Error: Unable to create item in Disease Table");
                     done(err3);
-                    return;
                   }); // end of disease create
               }, function(err2) {
                 done("Error: Unable to Destroy items in Proximity Table");
-                return;
               }); // end of Proximity Destroy
           }, function(err1) {
             done("Error: Unable to destroy items in disease table");
-            return
           }); // end of Disease Destroy
       });
 
@@ -135,7 +127,6 @@ describe('Proximity', function() {
 
       it('should add a user index to the proximity table for a POST request to /api/proximity', function(done) {
         db.User.create({
-          id: 3,
           name: 'Jameson Gamble',
           gender: 'M',
           token: 'jamesonToken',
@@ -143,19 +134,17 @@ describe('Proximity', function() {
         })
           .then(function(user) {
             request(app)
-              .post("/api/proximity")
-              .send({ user_id: 3, value: .8, disease_id: 1 })
+              .post('/api/proximity')
+              .send({ user_id: user.dataValues.id, value: .8, disease_id: 1 })
               .expect(201)
               .end(function(err, res) {
                 if (err) {
                   done(err);
-                  return;
                 }
                 done();
               });
           }, function(error) {
             done(error);
-            return;
           });
       });
 
@@ -167,7 +156,6 @@ describe('Proximity', function() {
           .end(function(err, res) {
             if (err) {
               done(err);
-              return;
             }
             db.Proximity.find({ where: { user_id: 1 } })
               .then(function(item) {
@@ -198,23 +186,18 @@ describe('Proximity', function() {
                     db.Proximity.bulkCreate(fakeProximity)
                       .then(function(complete) {
                         done();
-                        return;
                       }, function(err4) {
                         done(err4);
-                        return;
                       }); // end of bulkCreate
                   }, function(err3) {
                     console.log("Error: Unable to create item in Disease Table");
                     done(err3);
-                    return;
                   }); // end of disease create
               }, function(err2) {
                 done("Error: Unable to Destroy items in Proximity Table");
-                return;
               }); // end of Proximity Destroy
           }, function(err1) {
             done("Error: Unable to destroy items in disease table");
-            return
           }); // end of Disease Destroy
       });
 
@@ -245,7 +228,6 @@ describe('Proximity', function() {
           .end(function(err, res) {
             if (err) {
               done(err);
-              return;
             }
             expect(res).to.be.ok();
             expect(res.body).to.be.ok();
@@ -272,7 +254,6 @@ describe('Proximity', function() {
                   if (err) {
                     console.log("ERROR POSTING");
                     done(err);
-                    return;
                   }
                   db.Proximity.find({ where: { user_id: 3 } })
                     .then(function(item) {
@@ -285,9 +266,7 @@ describe('Proximity', function() {
                     })
                 });
             }, function(error) {
-              console.log("Cannot Create User")
-              done(error);
-              return;
+              console.log("Cannot Create User");
             });
         });
       });
@@ -302,7 +281,6 @@ describe('Proximity', function() {
         .end(function(err, res) {
           if (err) {
             done(err);
-            return;
           }
           db.Proximity.find({ where: { user_id: 1 } })
             .then(function(item) {
@@ -318,7 +296,6 @@ describe('Proximity', function() {
         .end(function(err, res) {
           if (err) {
             done(err);
-            return;
           }
           db.Proximity.find({ where: { user_id: 1 } })
             .then(function(item) {
@@ -338,23 +315,18 @@ describe('Proximity', function() {
                     db.Proximity.bulkCreate(fakeProximity)
                       .then(function(complete) {
                         done();
-                        return;
                       }, function(err4) {
                         done(err4);
-                        return;
                       }); // end of bulkCreate
                   }, function(err3) {
                     console.log("Error: Unable to create item in Disease Table");
                     done(err3);
-                    return;
                   }); // end of disease create
               }, function(err2) {
                 done("Error: Unable to Destroy items in Proximity Table");
-                return;
               }); // end of Proximity Destroy
           }, function(err1) {
             done("Error: Unable to destroy items in disease table");
-            return
           }); // end of Disease Destroy
       });
 

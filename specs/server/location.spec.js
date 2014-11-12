@@ -54,16 +54,19 @@ describe('Location Test Suite', function() {
           done();
         });
       });
+
       it('should have locations endpoint', function(done) {
         request(app)
           .get('/api/locations')
           .expect(200, done);
       });
+
       it('should return locations array ', function(done) {
         request(app)
           .get('/api/locations')
           .expect(200)
           .expect(function(res) {
+            expect(res.body.length).to.be.greaterThan(0);
             expect(res.body[0].user_id).to.equal(lastid);
           })
           .end(done);
