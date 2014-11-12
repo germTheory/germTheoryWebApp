@@ -49,7 +49,7 @@ var User = sequelize.define('user', {
   gender: { type: Sequelize.STRING },
   token: { type: Sequelize.STRING },
   email: { type: Sequelize.STRING, allowNull: false },
-  password: { type: Sequelize.STRING, allowNull: false},
+  password: { type: Sequelize.STRING },
   google_id: { type: Sequelize.STRING }
 }, {
   tableName: 'users'

@@ -25,9 +25,9 @@ module.exports = {
     var password = req.body.password;
     console.log(email, password);
 
-    User.find(email).then(function (user) {
+    User.find({where: {email: email, password: password}}).success(function (user) {
       console.log('found user');
-      res.status(200).send(user);
+      
     })
 
     // User.find(email, function(err, user) {
