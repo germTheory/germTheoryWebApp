@@ -1,23 +1,15 @@
-angular.module('starter.controllers', [])
+angular.module('app.controllers', [])
 
-.controller('DashCtrl', function($scope, DashboardOptions) {
-  $scope.options = DashboardOptions.all();
+.controller('AppCtrl', function($scope) {
 })
 
-.controller('DashCtrlDetail', function($scope, $stateParams, DashboardOptions) {
-  $scope.option = DashboardOptions.get($stateParams.optionId);
+.controller('AuthCtrl', function($scope) {
 })
 
-.controller('FriendsCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
+.controller('MenuCtrl', function($scope) {
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  // $scope.track = Track.all();
+.controller('MenuDetailCtrl', function($scope, $stateParams) {
 })
 
 // This controller has a watch on the app to track the geolocation every (2mins ??)
