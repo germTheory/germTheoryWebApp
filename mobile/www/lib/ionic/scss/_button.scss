@@ -12,6 +12,10 @@
    margin-left:-100px; /*this is half of width of your div*/
  }
 
+.center {
+  text-align:center;
+}
+
 .button {
   // set the color defaults
   @include button-style($button-default-bg, $button-default-border, $button-default-active-bg, $button-default-active-border, $button-default-text);

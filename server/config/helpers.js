@@ -34,10 +34,14 @@ module.exports = {
   },
 
   isLoggedIn: function(req, res, next) {
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()) {
+      console.log('logged in');
       return next();
+    } else {
 
     // if they aren't redirect them to the login page
-    res.redirect('/login');
+    console.log('not logged in');
+    res.redirect('/auth/login');
+    }
   }
 };

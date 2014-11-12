@@ -11,8 +11,8 @@ describe('Proximity',function(){
         db.Disease.create({name: "Ebola"})
           .then(function(){
             db.User.bulkCreate([
-              { id: 1, name: 'Jose Merino', gender:'M', token: 'testToken1', email: 'test@test1.com'}, 
-              { id: 2, name: 'John Smith', gender: 'M', token: 'testToken2', email: 'test@test2.com'}])
+              { id: 1, name: 'Jose Merino', gender:'M', token: 'testToken1', email: 'test@test1.com', password: 'testPass'}, 
+              { id: 2, name: 'John Smith', gender: 'M', token: 'testToken2', email: 'test@test2.com', password: 'testPass'}])
             .then(function(user){
               lastid = 2;
               var fakeProx1 = {
@@ -134,7 +134,7 @@ describe('Proximity',function(){
       });
 
       it('should add a user index to the proximity table for a POST request to /api/proximity', function(done){
-        db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson4.com'})
+        db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson4.com', password: 'testPass'})
           .then(function(user){
             request(app)
               .post("/api/proximity")
@@ -250,7 +250,7 @@ describe('Proximity',function(){
 
       it('should add a user index to the proximity table for a POST request to /api/proximity/users/:user_id', function(done){
         db.User.destroy( { where: { id: 3} } ).then(function( destroyedCount ){
-          db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson.com'})
+          db.User.create({ id: 3, name: 'Jameson Gamble', gender:'M', token: 'jamesonToken', email: 'jameson@jameson.com', password: 'testPass'})
             .then(function(user){
               request(app)
                 .post("/api/proximity/users/3")

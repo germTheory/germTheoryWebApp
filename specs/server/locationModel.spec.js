@@ -6,7 +6,7 @@ describe('Location',function(){
   var fakeLocations = [];
   before(function(done){
     db.sequelize.sync({force: true}).success(function(){
-      db.User.create({name: 'jose', gender: 'M', token: 'joseToken', email: 'jose@jose.com'}).success(function(user){
+      db.User.create({name: 'jose', gender: 'M', token: 'joseToken', email: 'jose@jose.com', password: 'testPass'}).success(function(user){
         lastid = user.values.id;
         for(var i = 0; i < 100;i++){
           var fakeLoc = {
