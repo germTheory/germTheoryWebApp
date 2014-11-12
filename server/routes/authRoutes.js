@@ -8,10 +8,7 @@ module.exports = function (app) {
   // app.post('/signup', authController.signup);
   // app.get('/signup', authController.signupForm);
 
-  app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-  });
+  app.get('/logout', authController.logout);
   
   app.get('/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
