@@ -1,81 +1,92 @@
 var request = require('supertest');
-var expect = require('chai').expect;
+var expect = require('expect.js');
+var userController = require('../../server/controllers/userController.js');
 var db = require('../../server/database/dbSchema.js');
+var app = require('../../server/server.js');
 
-xdescribe('User REST resource',function(){
-  var app;
+describe('User Test Suites', function(){
 
-  before(function(done){
-    db.sequelize.sync({force: true})
-      .success(function(){
-        done();
-      });
-    app = require('../../server/server.js');
+  describe('User Controller Tests', function() {
+    it('User Controller should be an object', function() {
+      expect(userController).to.be.an('object');
+    });
+
+    it('should have a method called signin', function() {
+      expect(userController.login).to.be.ok;
+    });
+
+    it('should have a method called signup', function() {
+      expect(userController.signup).to.be.ok;
+    });
   });
 
-  xit('GET /api/users should return a list of User records', function(done) {
-    // request(app)
-    //   .get('/users')
-    //   .set('Accept', 'application/json')
-    //   .expect('Content-Type', /json/)
-    //   .expect(200)
-    //   .expect(function(res) {
-    //     expect(res.body).to.be.ok;
-    //   })
-    //   .end(done);
+  describe('User Model Tests', function() {
+    before(function(done) {
+      db.sequelize.sync({force: true})
+        .then(function() {
+          done();
+        }, function(err) {
+          done(err);
+        })
+    });
 
+    it('It should add a user to the database', function(done) {
+      db.saveUser({name: 'test', gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user) {
+        expect(user.name).to.be('test');
+        done();
+      });
 
-    db.User.create({
-      name: "sup"
-    }).then(function(created){
-      request(app)
-      .get('/api/users/:'+created.id)
-      .expect(200)
-      .end(function(err,res){
-        console.log("Reached END");
-        expect(res.body).to.be.ok;
-        // expect(res.body.name).to.equal("sup");
+    });
+
+    xit('It should find User from the database', function(done) {
+      db.findUser({name: 'test', gender: 'F'}, function(user) {
+        expect(user[0].dataValues.name).to.be('test');
         done();
       });
     });
   });
 
-  xit('GET /api/user/:id should return a specified User record', function(done){
-    sequelize.query("INSERT INTO users VALUES (?, ?)", null, null, ['John Smith', 'M'])
-      .success(function(user) {
-        console.log(user);
+  describe('User REST Tests', function(done) {
 
+    it('GET: /api/user/:id should return a specified User record', function(done) {
+      db.saveUser({name: "hello", gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user) {
         request(app)
-          .get('/users/' + user.id)
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
+          .get('/api/users/2')
           .expect(200)
-          .expect(function(res) {
-            expect(res.body.name).to.be.equal('John Smith');
-          })
-          .end(done);
-      });
-  });
-
-  xit('POST /api/user should insert a new User record', function(done) {
-    request(app)
-      .post('/users')
-      .send({
-        name: 'John Smith',
-        gender: 'M',
-        token: 'testToken',
-        email: 'test@test.com'
-      })
-      .expect(200)
-      .expect(function(res) {
-        sequelize.query("SELECT * FROM users WHERE name = :name", null, null, {name: name})
-          .success(function(result) {
-            console.log(result);
-            expect(result.length).to.be.equal(1);
-            expect(result.name).to.be.equal("John Smith");
+          .end(function(err, res) {
+            expect(res.body.name).to.equal("hello");
             done();
           });
-      })
-      .end(done);
+      });
+    });
+
+    xit('POST: /signup should insert a new User record', function(done) {
+      request(app)
+        .post('/signup')
+        .send({
+          name: 'John Smith',
+          gender: 'M',
+          token: 'testingToken',
+          email: 'test@testttt.com'
+        })
+        .expect(200)
+        .end(function(err, res) {
+          db.User.find({where: {name: res.body.name}})
+            .then(function(found) {
+              expect(found).not.to.equal(null);
+              done();
+            }, function() {
+              done('expected to find posted value in the database');
+            });
+        })
+    });
+
+    xit('respond with json', function(done) {
+      request(app)
+        .get('/user')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
   });
 });
