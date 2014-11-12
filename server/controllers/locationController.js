@@ -15,11 +15,12 @@ module.exports = {
   },
 
   create: function(req, res, next) {
-    var reqLatitude = req.body.latitude,
-        reqLongitude = req.body.longitude,
-        userId = req.body.user_id;
+    var reqLatitude = req.body.latitude;
+    var reqLongitude = req.body.longitude;
+    var userId = req.body.user_id;
+    var date = req.body.date;
 
-    Location.create({ user_id: userId, latitude: reqLatitude, longitude: reqLongitude })
+    Location.create({ user_id: userId, latitude: reqLatitude, longitude: reqLongitude, date: date })
       .then(function(model) {
         res.sendStatus(201);
       }, function(err) {
