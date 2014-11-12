@@ -1,5 +1,5 @@
 var authController = require('../controllers/authController.js');
-var helpers = require('../config/helpers.js');
+var helpers = require('../lib/helpers.js');
 var passport = require('passport');
 
 module.exports = function (app) {

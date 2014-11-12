@@ -2,6 +2,7 @@ var request = require('supertest');
 var expect = require('expect.js');
 var userController = require('../../server/controllers/userController.js');
 var db = require('../../server/database/dbSchema.js');
+var User = db.User;
 var app = require('../../server/server.js');
 
 describe('User Test Suites', function(){
@@ -30,7 +31,11 @@ describe('User Test Suites', function(){
         })
     });
 
-    it('It should add a user to the database', function(done) {
+    afterEach(function() {
+      User.destroy();
+    });
+
+    it('should add a user to the database', function(done) {
       db.saveUser({name: 'test', gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user) {
         expect(user.name).to.be('test');
         done();
@@ -38,8 +43,9 @@ describe('User Test Suites', function(){
 
     });
 
-    xit('It should find User from the database', function(done) {
+    xit('should find User from the database', function(done) {
       db.findUser({name: 'test', gender: 'F'}, function(user) {
+        console.log('user', user);
         expect(user[0].dataValues.name).to.be('test');
         done();
       });
@@ -48,45 +54,56 @@ describe('User Test Suites', function(){
 
   describe('User REST Tests', function(done) {
 
-    it('GET: /api/user/:id should return a specified User record', function(done) {
-      db.saveUser({name: "hello", gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user) {
+    beforeEach(function() {
+      User.bulkCreate([
+        { name: 'John Lennon', gender: 'M', email: 'john@beatles.com' },
+        { name: 'Paul McCartney', gender: 'M', email: 'paul@beatles.com' },
+        { name: 'George Harrison', gender: 'M', email: 'george@beatles.com' },
+        { name: 'Ringo Starr', gender: 'M', email: 'ringo@beatles.com' }
+      ]);
+    });
+
+    afterEach(function() {
+      User.destroy();
+    });
+
+    it('GET: /api/users should return a list of users', function(done) {
+      request(app)
+        .get('/api/users')
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body.length).to.be.equal(4);
+          expect(res.body[0].email).to.be.equal('john@beatles.com');
+          done();
+        });
+    });
+
+    it('GET: /api/users/:id should return a specified User record', function(done) {
+      User.find({ where: {email: 'john@beatles.com'} }).success(function(user) {
         request(app)
-          .get('/api/users/2')
+          .get('/api/users/' + user.dataValues.id)
           .expect(200)
           .end(function(err, res) {
-            expect(res.body.name).to.equal("hello");
+            expect(res.body.name).to.be.equal('John Lennon');
             done();
           });
       });
     });
 
-    xit('POST: /signup should insert a new User record', function(done) {
+    it('POST: /api/users should not be allowed', function(done) {
       request(app)
-        .post('/signup')
+        .post('/api/users')
         .send({
           name: 'John Smith',
           gender: 'M',
           token: 'testingToken',
           email: 'test@testttt.com'
         })
-        .expect(200)
+        .expect(405)
         .end(function(err, res) {
-          db.User.find({where: {name: res.body.name}})
-            .then(function(found) {
-              expect(found).not.to.equal(null);
-              done();
-            }, function() {
-              done('expected to find posted value in the database');
-            });
-        })
-    });
-
-    xit('respond with json', function(done) {
-      request(app)
-        .get('/user')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200, done);
+          expect(res.body.message).to.be.equal("Method not allowed");
+          done();
+        });
     });
   });
 });
