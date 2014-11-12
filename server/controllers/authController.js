@@ -79,10 +79,7 @@ module.exports = {
   },
 
   logout: function(req, res, next) {
-    // TODO: Add logout logic here
-    res.render('logout');
+    req.logout();
+    res.redirect('/');
   }
-
-
 };
-
