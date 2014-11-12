@@ -1,6 +1,6 @@
-var dbCreds   = require('./dbCreds');
+var dbCreds = require('./dbCreds');
 var Sequelize = require('sequelize');
-var env       = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'development';
 
 /*Database connection string created depending of whether
   it is a development or deployment environment.*/
@@ -22,8 +22,6 @@ var sequelize = new Sequelize(connection_string, {
   protocol: 'postgres',
   native: is_native
 });
-
-var db = {}; // stores all models that we will export
 
 // Location table schema
 var Location = sequelize.define('location', {
@@ -81,22 +79,21 @@ Disease.hasMany(Proximity);
 Proximity.belongsTo(User);
 Proximity.belongsTo(Disease);
 
-
 // Build join table between users and diseases
 Disease.hasMany(User, { joinTableName: 'user_diseases' });
 User.hasMany(Disease, { joinTableName: 'user_diseases' });
 
 // Authenticate, connect, and create tables if they are not already defined
 sequelize
-.authenticate()
-.complete(function(err){
-  if(err){
-    console.log('Unable to connect to database: ', err);
-  } else {
-    console.log('Established connection to database.');
-    sequelize.sync();
-  }
-});
+  .authenticate()
+  .complete(function(err) {
+    if (err) {
+      console.error('Unable to connect to database: ', err);
+    } else {
+      console.log('Established connection to database.');
+      sequelize.sync();
+    }
+  });
 
 
 /* Saves the user to the database.
@@ -118,7 +115,7 @@ var saveUser =  function(user, cb){
 var findUser = function(user, cb){
 	User.findAll({ where: {name: user.email, gender: user.gender, token: user.token, email: user.email} }).complete(function(err, usrs) {
 	  if (!!err){
-	    console.log('An error occured while finding User: ', user.name);
+	    console.log('An error occurred while finding User: ', user.name);
 	  } else {
 	    // This function is called back with an array of matches.
 	    // console.log("findUser list of users: ", usrs, user.name, user.gender);
@@ -136,7 +133,7 @@ var findAllUsers = function(cb){
 var findUserById = function(id, cb){
   User.findAll({ where: {id: id} }).complete(function(err, usrs) {
     if (!!err){
-      console.log('An error occured while finding User: ', id);
+      console.log('An error occurred while finding User: ', id);
     } else {
       // This function is called back with an array of matches.
       // console.log("findUser list of users: ", usrs);
@@ -145,14 +142,14 @@ var findUserById = function(id, cb){
   });
 };
 
-// Assign keys to be exported
-db.Location = Location;
-db.Disease = Disease;
-db.User = User;
-db.Proximity = Proximity;
-db.sequelize = sequelize;
-db.saveUser = saveUser;
-db.findUser = findUser;
-db.findUserById = findUserById;
-db.findAllUsers = findAllUsers;
-module.exports = db;
+module.exports = {
+  Location: Location,
+  Disease: Disease,
+  User: User,
+  Proximity: Proximity,
+  sequelize: sequelize,
+  saveUser: saveUser,
+  findUser: findUser,
+  findUserById: findUserById,
+  findAllUsers: findAllUsers
+};

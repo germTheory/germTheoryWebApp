@@ -5,7 +5,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var helpers = require('./helpers');
+var helpers = require('./../lib/helpers');
 
 module.exports = function (app, express) {
 

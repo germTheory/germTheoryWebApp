@@ -8,10 +8,16 @@ module.exports = {
     console.error(error.stack);
     next(error);
   },
+
   errorHandler: function(error, req, res, next) {
     // send error message to client
     // message for gracefull error handling on app
     res.send(500, {error: error.message});
+  },
+
+  // return a 405 if the API does not support the desired function
+  invalidMethodHandler: function(req, res, next) {
+    res.send(405, { message: "Method not allowed" });
   },
 
   decode: function(req, res, next) {

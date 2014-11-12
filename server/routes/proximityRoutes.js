@@ -20,5 +20,4 @@ module.exports = function (app) {
 
   app.route('/disease/:disease_id')
     .get(proximityController.getDiseaseIndexes); // Get all indexes for a specific disease
-
 };
