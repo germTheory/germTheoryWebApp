@@ -5725,6 +5725,9 @@ progress {
   margin-left: -100px;
   /*this is half of width of your div*/ }
 
+.center {
+  text-align: center; }
+
 .button {
   border-color: #b2b2b2;
   background-color: #f8f8f8;

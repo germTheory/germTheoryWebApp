@@ -339,10 +339,8 @@ describe('Proximity Test Suite', function() {
             expect(res.body.length).to.eql(2);
             expect(res.body[0].value).to.eql(.64);
             done();
-          })
+          });
       })
     });
-
   });
 });
-
