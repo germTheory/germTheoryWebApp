@@ -1,5 +1,6 @@
 var db = require('../database/dbSchema.js'),
     User = db.User;
+    Proximity = db.Proximity;
 
 module.exports = {
 
@@ -22,10 +23,10 @@ module.exports = {
   },
 
   showAllUsers: function(req, res, next) {
-    User.findAll({ limit: 50 })
-      .success(function(users) {
+    User.findAll({ include: [ Proximity ], limit: 50 })
+      .success(function(results) {
         res.set('Content-Type', 'text/html');
-        res.render('users', { users: users });
+        res.render('users', { results: results }); 
       });
   },
 
