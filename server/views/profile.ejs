@@ -1,0 +1,36 @@
+<% layout('layout') -%>
+<div style="text-align:center">
+  <h1>Detail View</h1>
+  <h2>User: <%= user.name %></h2>
+<br>
+<br>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Proxmity Index</th>
+      <th>Created Date</th>
+      <th>Updated Date</th>
+    </tr>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.proximities %></td>
+      <td><%= user.created_at %></td>
+      <td><%= user.updated_at %></td>
+    </tr>
+
+  </table>
+
+<iframe width="100%" height="400px" frameborder="0" style="border:solid"
+src="https://www.google.com/maps/embed/v1/directions?origin=San+Francisco,+CA,+United+States&destination=...&key=AIzaSyBiBUA1HVRR5ZrCaGfObMzVf6n7MFP3k0A"></iframe>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+</div>
