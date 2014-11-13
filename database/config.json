@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "germtracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "utobikuqsvepvp",
+    "password": "hbVffrSlYdAeqKpTETXQLdkMdY",
+    "database": "database_production",
+    "host": "ec2-54-243-48-227.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
