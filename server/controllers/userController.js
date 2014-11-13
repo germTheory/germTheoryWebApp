@@ -32,5 +32,13 @@ module.exports = {
 
   showUserInfo: function(req, res, next) {
     // TODO: need to show user and proxmity info
+    var id = req.params.id;
+    console.log(id);
+    
+    User.find({ where: { id: id}, include: [ Proximity ], limit: 50 })
+      .success(function(results) {
+        res.set('Content-Type', 'text/html');
+        res.render('users', { results: results }); 
+      });
   }
 };
