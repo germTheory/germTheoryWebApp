@@ -6,8 +6,7 @@ var passport = require('passport');
 
 module.exports = function (app) {
   // Mobile auth routes
-
-  app.get('/mobile', helpers.isLoggedIn, authController.showMobile)
+  app.get('/mobile', helpers.isLoggedIn, authController.showMobile);
 
   // Web auth routes
   app.get('/users', helpers.isLoggedIn, userController.showAllUsers);
