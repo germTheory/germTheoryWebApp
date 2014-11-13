@@ -16,7 +16,7 @@ describe('Location Test Suite', function() {
             user_id: lastid,
             latitude: 12.252 + i * 0.001,
             longitude: 21.523423 - i * 0.001,
-            date: new Date()
+            date: Date.now()
           };
           fakeLocations.push(fakeLoc);
         }
@@ -27,7 +27,7 @@ describe('Location Test Suite', function() {
 
   describe('Location Model Tests', function() {
     it('should be able to create rows in database', function(done) {
-      db.Location.create({ user_id: lastid, latitude: 12.252, longitude: 21.5234234, date: new Date() })
+      db.Location.create({ user_id: lastid, latitude: 12.252, longitude: 21.5234234, date: Date.now() })
         .then(function(model) {
           done();
         },
@@ -37,7 +37,7 @@ describe('Location Test Suite', function() {
     });
 
     it('should fail if properties wrong', function(done) {
-      db.Location.create({ user_id: lastid, latitude: 'a' + 12.252, longitude: 21.5234234, date: new Date() })
+      db.Location.create({ user_id: lastid, latitude: 'a' + 12.252, longitude: 21.5234234, date: Date.now() })
         .then(function(model) {
           done('Error, expected db operation to fail, but it worked.');
         },
@@ -80,7 +80,7 @@ describe('Location Test Suite', function() {
           user_id: lastid,
           latitude: 12.345,
           longitude: 23.456,
-          date: new Date()
+          date: Date.now()
         }).then(function(created) {
           request(app)
             .get('/api/locations/' + created.id)
@@ -117,7 +117,7 @@ describe('Location Test Suite', function() {
             user_id: lastid,
             latitude: 14.252,
             longitude: 20.523,
-            date: new Date()
+            date: Date.now()
           })
           .expect(201)
           .end(function(err, res) {

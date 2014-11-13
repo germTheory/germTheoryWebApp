@@ -1,5 +1,5 @@
-var db = require('../database/dbSchema.js'),
-    User = db.User;
+var db = require('../database/dbSchema.js');
+var User = db.User;
 
 module.exports = {
 
@@ -20,15 +20,12 @@ module.exports = {
   },
 
   login: function (req, res, next) {
-
     var email = req.body.email;
     var password = req.body.password;
-    console.log(email, password);
 
     User.find({where: {email: email, password: password}}).success(function (user) {
       console.log('found user');
-      
-    })
+    });
 
     // User.find(email, function(err, user) {
     //   if (err) {
@@ -43,7 +40,6 @@ module.exports = {
     //   console.log('found him yo');
     //   return done(null, user);
     // });
-
   },
 
   signup: function (req, res, next) {
@@ -75,7 +71,6 @@ module.exports = {
     });
     
     // TODO: create token to send back for auth
-
   },
 
   logout: function(req, res, next) {

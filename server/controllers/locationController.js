@@ -2,19 +2,19 @@ var Location = require('../database/dbSchema').Location;
 
 module.exports = {
 
-  findAll: function(req, res, next) {
+  findAllLocations: function(req, res, next) {
     Location.findAll({ limit: 100 }).then(function(data) {
       res.status(200).send(data);
     });
   },
 
-  find: function(req, res, next) {
+  findLocation: function(req, res, next) {
     Location.find(req.params.id).then(function(found) {
       res.status(200).send(found);
     });
   },
 
-  create: function(req, res, next) {
+  createLocation: function(req, res, next) {
     var reqLatitude = req.body.latitude;
     var reqLongitude = req.body.longitude;
     var userId = req.body.user_id;
