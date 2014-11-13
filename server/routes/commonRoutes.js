@@ -1,5 +1,5 @@
 var userController = require('../controllers/userController.js');
-var helpers = require('../config/helpers.js');
+var helpers = require('../lib/helpers.js');
 var authController = require('../controllers/authController.js');
 var locationController = require('../controllers/locationController.js');
 var passport = require('passport');

@@ -17,6 +17,7 @@
     "mocha": "^1.20.1",
     "request": "^2.47.0",
     "should": "^4.1.0",
+    "sinon": "^1.11.1",
     "supertest": "^0.14.0"
   },
   "dependencies": {
