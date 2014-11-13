@@ -7,39 +7,20 @@ angular.module('app.geo-controller', [])
 
     // begin a watch
     var options = {
-      maximumAge : 10000,
-      timeout : 300000,
-      enableHighAccuracy: true
+      maximumAge : 50000,
+      timeout : 1000000,
+      // false - gives wifi location data, 
+      // true - gives very accurate location data from the GPS
+      enableHighAccuracy: false 
     };
 
-    $cordovaGeolocation
-      .getCurrentPosition()
-      .then(function (position) {
-        $scope.coords.latitude = position.coords.latitude;
-        $scope.coords.longitude = position.coords.longitude;
-        var data = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          user_id: 1
-        };
-        // console.log("First pos: ", position, JSON.stringify(data));
-
-        // POST location data to server
-        $.ajax({
-          type: "POST",
-          contentType: "application/json; charset=utf-8",
-          url: "http://127.0.0.1:4568/api/locations",
-          data: JSON.stringify(data),
-          success: function(result) {
-            console.log("Sent successfully data: ", result);
-          },
-          error: function(e) {
-            console.warn('Error: ' + e.message);
-          }
-        });
-      }, function(err) {
-        console.log("Encountered an error while using cordovaGeolocation");
-        // error
+    var onDeviceReady = function(){
+      navigator.geolocation.getCurrentPosition(
+      function(position) {
+          alert(position.coords.latitude + ',' + position.coords.longitude);
+      },
+      function() {
+          alert('Error getting location');
       });
 
     var id;
@@ -51,32 +32,32 @@ angular.module('app.geo-controller', [])
         longitude: pos.coords.longitude,
         user_id: 1
       };
-      console.log("watch pos data: ", JSON.stringify(data));
+      alert('watch pos data: '+ pos.coords.latitude + ',' + pos.coords.longitude);
+
       // POST location data to server
       $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "http://127.0.0.1:4568/api/locations",
+        url: "https://germ-tracker.herokuapp.com:4568/api/locations",
         data: JSON.stringify(data),
         success: function(data) {
-          console.log("Sent successfully");
+          alert("Sent successfully");
         },
         error: function(e) {
-          console.warn('Error: ' + e.message);
+          alert('Error: ' + e.message);
         }
       });
     };
 
     function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    };
-
-    target = {
-      latitude : 0,
-      longitude: 0
+      alert('ERROR(' + err.code + '): ' + err.message);
     };
 
     id = navigator.geolocation.watchPosition(success, error, options);
+  }
+  // fireup the event once device is ready and all plugins are loaded
+  document.addEventListener("deviceready", onDeviceReady, false);
+
   })
 
   .controller('BkGeoLocCtrl', function($scope, $cordovaBackgroundGeolocation, $window, GeoLocationOptions) {
