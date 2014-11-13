@@ -38,7 +38,7 @@ angular.module('app.geo-controller', [])
       $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "https://germ-tracker.herokuapp.com:4568/api/locations",
+        url: "https://germ-tracker.herokuapp.com/api/locations",
         data: JSON.stringify(data),
         success: function(data) {
           alert("Sent successfully");
