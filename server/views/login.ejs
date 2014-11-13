@@ -1,28 +1,27 @@
 <% layout('layout') -%>
 <div class="col-sm-6 col-sm-offset-3">
 
-    <h1 style="text-align:center;"> Login</h1>
-    <form action="/auth/login" method="post">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="text" class="form-control" name="email" required>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password" required>
-      </div>
-      <div class="centered">
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
-      </div>
-    </form>
-    <h1 style="text-align:center; margin-top:50px;"><span class="fa fa-lock"></span>  Or Login with Google
+  <!--    <h1 style="text-align:center;"> Login</h1>
+      <form action="/auth/login" method="post">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" name="email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" required>
+        </div>
+        <div class="centered">
+          <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        </div>
+      </form>-->
+    <h1 style="text-align:center; margin-top:50px;"><span class="fa fa-lock"></span>Login with Google
         <br>
         <a href="/auth/google" class="btn btn-danger" style="margin-top:30px;"><span class="fa fa-google-plus"></span> Google</a>
         </h1>
       <div>
       <br>
-      <br>
 
-      <p>Need to register? <a href="/auth/signup">  Signup</a></p>
+      <!-- <p>Need to register? <a href="/auth/signup">  Signup</a></p> -->
     </div>
 </div>
