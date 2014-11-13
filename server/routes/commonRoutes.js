@@ -18,7 +18,6 @@ module.exports = function (app) {
   app.get('/submitReport', helpers.isLoggedIn, function(req, res) {
     res.render('submitReport');
   });
-
   app.get('/*', helpers.isLoggedIn, function(req, res, next) {
     res.render('index');
   });
