@@ -1,5 +1,6 @@
-var db = require('../database/dbSchema.js'),
-    User = db.User;
+var db = require('../database/dbSchema.js');
+var User = db.User;
+var Proximity = db.Proximity;
 
 module.exports = {
 
@@ -22,14 +23,20 @@ module.exports = {
   },
 
   showAllUsers: function(req, res, next) {
-    User.findAll({ limit: 50 })
-      .success(function(users) {
+    User.findAll({ include: [ Proximity ], limit: 50 })
+      .success(function(results) {
         res.set('Content-Type', 'text/html');
-        res.render('users', { users: users });
+        res.render('users', { results: results }); 
       });
   },
 
   showUserInfo: function(req, res, next) {
     // TODO: need to show user and proxmity info
+
+    User.find({ where: { id: req.params.id}, include: [ Proximity ], limit: 50 })
+      .success(function(user) {
+        res.set('Content-Type', 'text/html');
+        res.render('profile', { user: user }); 
+      });
   }
 };
