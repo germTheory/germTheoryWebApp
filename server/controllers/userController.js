@@ -1,6 +1,7 @@
 var db = require('../database/dbSchema.js');
 var User = db.User;
 var Proximity = db.Proximity;
+var Location = db.Location;
 
 module.exports = {
 
@@ -33,8 +34,10 @@ module.exports = {
   showUserInfo: function(req, res, next) {
     // TODO: need to show user and proxmity info
 
-    User.find({ where: { id: req.params.id}, include: [ Proximity ], limit: 50 })
+    User.find({ where: { id: req.params.id}, include: [ Proximity, Location ], limit: 50 })
       .success(function(user) {
+        console.log(user);
+        console.log(user.dataValues.proximities);
         res.set('Content-Type', 'text/html');
         res.render('profile', { user: user }); 
       });

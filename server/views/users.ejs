@@ -13,7 +13,8 @@
     <% results.forEach(function(user) { %>
     <tr>
       <td><%= user.id %></td>
-      <td><%- link_to(user.name, '/users/' + user.id) %></td>
+
+      <td><a href='/users/14'><%= user.name %></a></td>
       <td><%= user.email %></td>
       <td><%= user.proximities %></td>
       <td><%= user.created_at %></td>

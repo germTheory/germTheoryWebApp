@@ -39,7 +39,7 @@ module.exports = function (app, express) {
   app.set('views', __dirname + '/../views');
   app.engine('ejs', engine);
   app.set('view engine', 'ejs');
-  require('express-helpers')(app);
+  // require('express-helpers')(app);
 
   app.use(express.static(__dirname + './../pubic'));
   app.use("/mobile", express.static(__dirname + "./../../mobile/www"));
