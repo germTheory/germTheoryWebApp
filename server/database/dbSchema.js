@@ -28,10 +28,10 @@ var User = sequelize.define('user', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING },
   gender: { type: Sequelize.STRING },
-  token: { type: Sequelize.STRING },
-  email: { type: Sequelize.STRING, allowNull: false },
+  email: { type: Sequelize.STRING },
   password: { type: Sequelize.STRING },
-  google_id: { type: Sequelize.STRING }
+  google_id: { type: Sequelize.STRING },
+  is_admin: { type: Sequelize.BOOLEAN, defaultValue: false }
 }, {
   tableName: 'users'
 });

@@ -36,7 +36,7 @@ describe('User Test Suites', function(){
     });
 
     it('should add a user to the database', function(done) {
-      db.saveUser({name: 'test', gender: 'F', token: 'testToken', email: 'jameson@jameson.com'}, function(user) {
+      db.saveUser({name: 'test', gender: 'F', email: 'jameson@jameson.com'}, function(user) {
         expect(user.name).to.be('test');
         done();
       });
@@ -96,7 +96,6 @@ describe('User Test Suites', function(){
         .send({
           name: 'John Smith',
           gender: 'M',
-          token: 'testingToken',
           email: 'test@testttt.com'
         })
         .expect(405)

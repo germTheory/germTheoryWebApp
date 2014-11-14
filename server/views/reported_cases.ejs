@@ -1,17 +1,15 @@
 <% layout('layout') -%>
-<h3>Users</h3>
+<h3>Reported Cases</h3>
 <div class="container">
   <table class="table">
     <tr>
       <th>ID</th>
-      <th>Name/Device ID</th>
-      <th>Email</th>
+      <th>Date</th>
       <th>Disease Name</th>
-      <th>Risk Index</th>
-      <th>Created Date</th>
-      <th>Updated Date</th>
+      <th>Location</th>
+      <th>Reported Date</th>
     </tr>
-    <% results.forEach(function(user) { %>
+    <% results.forEach(function(cases) { %>
     <tr>
       <td><%= user.id %></td>
 
@@ -19,7 +17,7 @@
       <td><%= user.email %></td>
       <td>TBD</td>
       <td><%= user.proximities %></td>
-       <td><%= user.created_at %></td>
+      <td><%= user.created_at %></td>
       <td><%= user.updated_at %></td>
     </tr>
     <% }) %>
