@@ -5,6 +5,7 @@ module.exports = function (app) {
   
   app.param('user_id', proximityController.getUserCode); // set param value for user_id
   app.param('disease_id', proximityController.getDiseaseId);
+
   // '/api/proximity/'
   app.route('/')
     .get(proximityController.getAllIndexes) // get all user indexes from table

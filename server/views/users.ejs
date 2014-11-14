@@ -5,18 +5,22 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Gender</th>
+      <th>Email</th>
+      <th>Proximity Index</th>
       <th>Created Date</th>
       <th>Updated Date</th>
     </tr>
-    <% users.forEach(function(user) { %>
+    <% results.forEach(function(user) { %>
     <tr>
       <td><%= user.id %></td>
-      <td><%= user.name %></td>
-      <td><%= user.gender %></td>
+
+      <td><a href= <%='/users/' + user.id %>><%= user.name %></a></td>
+      <td><%= user.email %></td>
+      <td><%= user.proximities %></td>
       <td><%= user.created_at %></td>
       <td><%= user.updated_at %></td>
     </tr>
     <% }) %>
+
   </table>
 </div>

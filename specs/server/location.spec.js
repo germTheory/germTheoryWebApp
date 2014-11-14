@@ -2,6 +2,7 @@ var db = require('../../server/database/dbSchema.js');
 var request = require('supertest');
 var expect = require('chai').expect;
 var app = require('../../server/server.js');
+var seed = require('../../server/config/seed.js');
 
 describe('Location Test Suite', function() {
   var lastid;
@@ -16,7 +17,7 @@ describe('Location Test Suite', function() {
             user_id: lastid,
             latitude: 12.252 + i * 0.001,
             longitude: 21.523423 - i * 0.001,
-            date: new Date()
+            date: Date.now()
           };
           fakeLocations.push(fakeLoc);
         }
@@ -27,7 +28,7 @@ describe('Location Test Suite', function() {
 
   describe('Location Model Tests', function() {
     it('should be able to create rows in database', function(done) {
-      db.Location.create({ user_id: lastid, latitude: 12.252, longitude: 21.5234234, date: new Date() })
+      db.Location.create({ user_id: lastid, latitude: 12.252, longitude: 21.5234234, date: Date.now() })
         .then(function(model) {
           done();
         },
@@ -37,7 +38,7 @@ describe('Location Test Suite', function() {
     });
 
     it('should fail if properties wrong', function(done) {
-      db.Location.create({ user_id: lastid, latitude: 'a' + 12.252, longitude: 21.5234234, date: new Date() })
+      db.Location.create({ user_id: lastid, latitude: 'a' + 12.252, longitude: 21.5234234, date: Date.now() })
         .then(function(model) {
           done('Error, expected db operation to fail, but it worked.');
         },
@@ -80,7 +81,7 @@ describe('Location Test Suite', function() {
           user_id: lastid,
           latitude: 12.345,
           longitude: 23.456,
-          date: new Date()
+          date: Date.now()
         }).then(function(created) {
           request(app)
             .get('/api/locations/' + created.id)
@@ -117,7 +118,7 @@ describe('Location Test Suite', function() {
             user_id: lastid,
             latitude: 14.252,
             longitude: 20.523,
-            date: new Date()
+            date: Date.now()
           })
           .expect(201)
           .end(function(err, res) {
@@ -134,6 +135,55 @@ describe('Location Test Suite', function() {
               });
           });
       });
+    });
+  });
+
+  describe('Location Seed ', function(){
+
+    var userIds = [];
+
+    before(function(done){
+      var users=[];
+      for(var i = 0; i < 50; i++){
+        users.push({ name: 'User '+i, gender: 'M', token: 'sometoken', email: 'user'+i+'@user.com' });
+      }
+
+      db.Location.destroy({}).then(function(){
+        db.User.destroy({}).then(function(){
+          db.User.bulkCreate(users).then(function(){
+            db.User.findAll().then(function(users){
+              for(var i = 0; i< users.length; i++){
+                userIds.push(users[i].dataValues.id);
+              }
+              done();
+            });
+          });
+        });
+      });
+
+    });
+    it('should create simulated values without adding to db',function(done){
+      // create the simulation by passing user ids, start, end and lambda
+      seed.simulate(userIds,Date.now()-24*3600*1000,Date.now(),120000);
+      db.Location.findAll().then(function(locations){
+        // Should not add to the database
+        expect(locations.length).to.equal(0);
+        done();
+      })
+    });
+    it('simulation should comply with db schema',function(done){
+      // we can create a simulation using user id array
+      var result = seed.simulate(userIds,Date.now()-24*3600*1000,Date.now(),12000000);
+
+
+      console.log(result.length);
+      db.Location.bulkCreate(result).then(function(){
+        done();
+
+      },function(error){
+        done(error);
+      });
+
     });
   });
 });

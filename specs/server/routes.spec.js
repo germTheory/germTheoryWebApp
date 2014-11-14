@@ -54,38 +54,38 @@ describe('Route Test Suites', function() {
   describe('Location Routes Tests', function() {
 
     it('should invoke locationController.findAll when receiving a GET request to /api/locations', function(done) {
-      sinon.spy(locationController, 'findAll');
+      sinon.spy(locationController, 'getAllLocations');
 
       request(app)
         .get('/api/locations')
         .end(function(err, res) {
-          expect(locationController.findAll.called).to.be.true;
-          locationController.findAll.restore();
+          expect(locationController.getAllLocations.called).to.be.true;
+          locationController.getAllLocations.restore();
           done();
         });
     });
 
     it('should invoke locationController.getUser when receiving a GET request to /api/locations/:user_id', function(done) {
-      sinon.spy(locationController, 'find');
+      sinon.spy(locationController, 'getLocation');
 
       request(app)
         .get('/api/locations/1')
         .end(function(err, res) {
-          expect(locationController.find.called).to.be.true;
-          locationController.find.restore();
+          expect(locationController.getLocation.called).to.be.true;
+          locationController.getLocation.restore();
           done();
         });
     });
 
     it('should invoke helpers.invalidMethodHandler when receiving a POST request to /api/locations', function(done) {
-      sinon.spy(locationController, 'create');
+      sinon.spy(locationController, 'createLocation');
 
       request(app)
         .post('/api/locations')
         .send({ user_id: 1, latitude: 12.252 * 0.001, longitude: 21.523423 * 0.001 })
         .end(function(err, res) {
-          expect(locationController.create.called).to.be.true;
-          locationController.create.restore();
+          expect(locationController.createLocation.called).to.be.true;
+          locationController.createLocation.restore();
           done();
         });
     });
