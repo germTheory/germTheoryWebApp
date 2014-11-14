@@ -19,7 +19,7 @@
   z-index: $z-index-tabs;
 
   width: 100%;
-  height: 55px;
+  height: 65px;
 
   border-style: solid;
   border-top-width: 1px;
@@ -266,12 +266,12 @@
   @include flex(1);
   display: block;
   overflow: hidden;
-  background-color:#262626;
+  background-color:#BDC3C7;
 
   max-width: $tab-item-max-width;
   height: 100%;
 
-  color: #fff;
+  color: #FFF;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -285,6 +285,10 @@
 
   &:hover {
     cursor: pointer;
+    background-color:#00C0F5;
+  }
+  &:selected {
+    background-color:#00BAF7;
   }
   &.tab-hidden{
     display:none;
@@ -307,8 +311,11 @@
 .tab-item .icon {
   display: block;
   margin: 0 auto;
-  height: $tabs-icon-size;
+  height: 100%;
   font-size: 400%;
+  border-style:solid;
+  border-width: 1px;
+  border-color: #FFF;
 }
 
 .tabs-icon-left.tabs .tab-item,
