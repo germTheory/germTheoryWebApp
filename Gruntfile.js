@@ -103,6 +103,21 @@ module.exports = function(grunt) {
           }
         }
       },
+      populateDB: {
+        command: function(DBName) {
+          grunt.config.set('DBName', DBName);
+          return 'node populate.js';
+        },
+        options: {
+          callback: function(err, stdout) {
+            var done = this.async();
+            if (!err) {
+              grunt.log.writeln('Your database has been populated successfully.');
+            }
+            done();
+          }
+        }
+      },
       checkDB: {
         command: function(DBName) {
           return 'psql -U postgres -l | grep ' + DBName + ' | wc -l';
@@ -141,6 +156,10 @@ module.exports = function(grunt) {
   grunt.registerTask('dropDB', 'Drop the existing PostgreSQL database', function(DBName) {
     grunt.task.run('shell:dropDB:' + DBName);
   });
+  grunt.registerTask('populateDB', 'Populate the existingPostgreSQL database', function(DBName) {
+    grunt.task.run('shell:populateDB:' + DBName);
+  });
+
   grunt.registerTask('test', 'Setup database and run mocha tests', [
     //'setupDB',
     'mochaTest'

@@ -17,12 +17,12 @@
   padding: $bar-padding-portrait;
 
   width: 100%;
-  height: $bar-height;
+  height:60px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
   border-bottom: 1px solid $bar-default-border;
-  background-color:#09E3B0;
+  background-color:#2B2B2B;
 
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
@@ -37,7 +37,7 @@
     background-position: bottom;
     background-size: 100% 1px;
     background-repeat: no-repeat;
-    background-color: #3434FA;
+    background-color: #2B2B2B;
   }
 
   &.bar-clear {
@@ -73,7 +73,7 @@
     }
   }
   &.bar-stable {
-    @include bar-style(#3F92D2, $bar-stable-border, $bar-stable-text);
+    @include bar-style(#2B2B2B, $bar-stable-border, $bar-stable-text);
     &.bar-footer{
       background-image: linear-gradient(180deg, $bar-stable-border, $bar-stable-border 50%, transparent 50%);
     }
