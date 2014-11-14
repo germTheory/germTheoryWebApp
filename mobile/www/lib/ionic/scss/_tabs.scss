@@ -19,7 +19,7 @@
   z-index: $z-index-tabs;
 
   width: 100%;
-  height: $tabs-height;
+  height: 55px;
 
   border-style: solid;
   border-top-width: 1px;
@@ -266,11 +266,12 @@
   @include flex(1);
   display: block;
   overflow: hidden;
+  background-color:#262626;
 
   max-width: $tab-item-max-width;
   height: 100%;
 
-  color: inherit;
+  color: #fff;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -307,7 +308,7 @@
   display: block;
   margin: 0 auto;
   height: $tabs-icon-size;
-  font-size: $tabs-icon-size;
+  font-size: 400%;
 }
 
 .tabs-icon-left.tabs .tab-item,
