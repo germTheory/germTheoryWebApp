@@ -2490,11 +2490,12 @@ ion-infinite-scroll {
 
 ion-nav-view {
   position: absolute;
+  font-size: 200%;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000; }
+  background-color: #262626; }
 
 /**
  * Typography
@@ -2767,7 +2768,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
     color: #444; }
     .bar.bar-light .title {
-      color: #444; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-light.bar-footer {
       background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
   .bar.bar-stable {
@@ -2776,7 +2779,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444; }
     .bar.bar-stable .title {
-      color: #444; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-stable.bar-footer {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
@@ -2785,7 +2790,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #145fd7, #145fd7 50%, transparent 50%);
     color: #fff; }
     .bar.bar-positive .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-positive.bar-footer {
       background-image: linear-gradient(180deg, #145fd7, #145fd7 50%, transparent 50%); }
   .bar.bar-calm {
@@ -2794,7 +2801,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #1aacc3, #1aacc3 50%, transparent 50%);
     color: #fff; }
     .bar.bar-calm .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-calm.bar-footer {
       background-image: linear-gradient(180deg, #1aacc3, #1aacc3 50%, transparent 50%); }
   .bar.bar-assertive {
@@ -2803,7 +2812,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #cc2311, #cc2311 50%, transparent 50%);
     color: #fff; }
     .bar.bar-assertive .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-assertive.bar-footer {
       background-image: linear-gradient(180deg, #cc2311, #cc2311 50%, transparent 50%); }
   .bar.bar-balanced {
@@ -2812,7 +2823,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #498f24, #498f24 50%, transparent 50%);
     color: #fff; }
     .bar.bar-balanced .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-balanced.bar-footer {
       background-image: linear-gradient(180deg, #498f24, #145fd7 50%, transparent 50%); }
   .bar.bar-energized {
@@ -2821,7 +2834,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #d39211, #d39211 50%, transparent 50%);
     color: #fff; }
     .bar.bar-energized .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-energized.bar-footer {
       background-image: linear-gradient(180deg, #d39211, #d39211 50%, transparent 50%); }
   .bar.bar-royal {
@@ -2830,7 +2845,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #552bdf, #552bdf 50%, transparent 50%);
     color: #fff; }
     .bar.bar-royal .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-royal.bar-footer {
       background-image: linear-gradient(180deg, #552bdf, #552bdf 50%, transparent 50%); }
   .bar.bar-dark {
@@ -2839,7 +2856,9 @@ a.subdued {
     background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
     color: #fff; }
     .bar.bar-dark .title {
-      color: #fff; }
+      margin-top: 6px;
+      font-size: 180%;
+      color: #ECF0F1; }
     .bar.bar-dark.bar-footer {
       background-image: linear-gradient(180deg, #111, #111 50%, transparent 50%); }
   .bar .title {
@@ -3163,7 +3182,7 @@ a.subdued {
   bottom: 0;
   z-index: 5;
   width: 100%;
-  height: 49px;
+  height: 55px;
   border-style: solid;
   border-top-width: 1px;
   background-size: 0;
@@ -3614,9 +3633,10 @@ a.subdued {
   flex: 1;
   display: block;
   overflow: hidden;
+  background-color: #262626;
   max-width: 150px;
   height: 100%;
-  color: inherit;
+  color: #fff;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -3641,7 +3661,7 @@ a.subdued {
   display: block;
   margin: 0 auto;
   height: 32px;
-  font-size: 32px; }
+  font-size: 400%; }
 
 .tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
   font-size: 12px; }
