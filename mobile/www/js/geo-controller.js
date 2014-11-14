@@ -3,7 +3,6 @@
 // Android device/emulator
 angular.module('app.geo-controller', [])
   .controller('GeoCtrl', function ($scope, $cordovaGeolocation, GeoLocation) {
-    $scope.coords = {};
 
     // begin a watch
     var options = {
@@ -33,7 +32,7 @@ angular.module('app.geo-controller', [])
           date: pos.timestamp,
           user_id: 1
         };
-        
+
         // alert('watch pos data: '+ pos.coords.latitude + ',' + pos.coords.longitude);
 
         // POST location data to server
