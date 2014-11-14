@@ -105,6 +105,8 @@
     @include button-style($button-calm-bg, $button-calm-border, $button-calm-active-bg, $button-calm-active-border, $button-calm-text);
     @include button-clear($button-calm-bg);
     @include button-outline($button-calm-bg);
+    border-radius: 10px;
+    margin-top:450px;
   }
 
   &.button-assertive {
