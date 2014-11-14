@@ -15,27 +15,39 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
-
     $stateProvider
-
-      // setup an abstract state for the tabs directive
       .state('tab', {
         url: "/tab",
         abstract: true,
         templateUrl: "templates/tabs.html"
       })
-
-      // Each tab has its own nav history stack:
-      .state('tab.menu', {
-        url: '/menu',
+      .state('tab.map', {
+        url: '/map',
         views: {
-          'tab-menu': {
-            templateUrl: 'templates/menu.html',
-            controller: 'MenuCtrl'
+          'tab-map': {
+            templateUrl: 'templates/map.html',
+            controller: 'MapCtrl'
           }
         }
       })
-
+      .state('tab.myrisk', {
+        url: '/myrisk',
+        views: {
+          'tab-myrisk': {
+            templateUrl: 'templates/myrisk.html',
+            controller: 'MyRiskCtrl'
+          }
+        }
+      })
+      .state('tab.report', {
+        url: '/report',
+        views: {
+          'tab-report': {
+            templateUrl: 'templates/report.html',
+            controller: 'ReportCtrl'
+          }
+        }
+      })
       .state('tab.menu-detail', {
         url: '/menu/:optionId',
         views: {
@@ -45,7 +57,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
           }
         }
       })
-
       .state('tab.login', {
         url: '/login',
         views: {
@@ -55,7 +66,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
           }
         }
       })
-
       .state('tab.track', {
         url: '/track',
         views: {
@@ -65,7 +75,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
           }
         }
       })
-
       .state('tab.stop', {
         url: '/stop',
         views: {
