@@ -68,14 +68,14 @@ angular.module('app.geo-controller', [])
       // // Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
       // //  in order to prompt the user for Location permission.
       window.navigator.geolocation.getCurrentPosition(function(location) {
-        // alert('Location from cordova: '+location.coords.latitude+','+location.coords.longitude);
+        // alert('Location from cordova: '+ location.coords.latitude + ',' + location.coords.longitude);
       });
 
       var bgGeo = window.plugins.backgroundGeoLocation;
 
-      /**
-       * This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
-       */
+      //
+      // This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
+      //
       var yourAjaxCallback = function(response) {
         ////
         // IMPORTANT:  You must execute the #finish method here to inform the native plugin that you're finished,
@@ -86,10 +86,10 @@ angular.module('app.geo-controller', [])
         bgGeo.finish();
       };
 
-      /**
-       * This callback will be executed every time a geolocation is recorded in the background.
-       * THIS CALLBACK FUNCTION WILL NOT BE CALLED FOR ANDROID
-       */
+      //
+      // This callback will be executed every time a geolocation is recorded in the background.
+      // THIS CALLBACK FUNCTION WILL NOT BE CALLED FOR ANDROID
+      //
       var callbackFn = function(location) {
         // alert('[js] BackgroundGeoLocation callback:  ' + location.latitudue + ',' + location.longitude);
 
@@ -144,26 +144,11 @@ angular.module('app.geo-controller', [])
       // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
       bgGeo.start();
 
+    $scope.stopBackgroundGeolocation = function () {
       // If you wish to turn OFF background-tracking, call the #stop method.
-      // bgGeo.stop()
-
-      // document.addEventListener("deviceready", function () {
-      //  console.log("Inside BkGeoLoc, deviceready");
-      //  // `configure` calls `start` internally
-      //  $cordovaBackgroundGeolocation.configure(options).then(function (location) {
-      //    console.log(location);
-      //  }, function (err) {
-      //    console.error(err);
-      //  });
-
-      // })
+      bgGeo.stop()
+    };
     
-      $scope.stopBackgroundGeolocation = function () {
-        $cordovaBackgroundGeolocation.stop();
-      };
-
-    }
-
     // Before each plugin you must check if your device has fully loaded,
     // and if the plugins are available using a native cordova event called deviceready.
     document.addEventListener("deviceready", onDeviceReady, false);
