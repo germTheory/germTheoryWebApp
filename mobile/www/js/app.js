@@ -61,7 +61,7 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
         views: {
           'tab-track': {
             templateUrl: 'templates/track.html',
-            controller: 'GeoCtrl'
+            controller: 'BkGeoLocCtrl'
           }
         }
       })
