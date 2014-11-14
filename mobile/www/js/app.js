@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-controller','app.services'])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
