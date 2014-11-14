@@ -4,6 +4,7 @@ var request = require('supertest');
 var app = require('../../server/server');
 var userController = require('../../server/controllers/userController');
 var locationController = require('../../server/controllers/locationController');
+var caseController = require('../../server/controllers/caseController');
 var proximityController = require('../../server/controllers/proximityController');
 var authController = require('../../server/controllers/authController');
 var helpers = require('../../server/lib/helpers');
@@ -240,6 +241,71 @@ describe('Route Test Suites', function() {
         .end(function(err, res) {
           expect(proximityController.getDiseaseIndexes.called).to.be.true;
           proximityController.getDiseaseIndexes.restore();
+          done();
+        });
+    });
+  });
+
+  describe('Case Routes Tests', function() {
+
+    it('should invoke caseController.getAllReportedCases when receiving a GET request to /api/cases', function(done) {
+      sinon.spy(caseController, 'getAllReportedCases');
+
+      request(app)
+        .get('/api/cases')
+        .end(function(err, res) {
+          expect(caseController.getAllReportedCases.called).to.be.true;
+          caseController.getAllReportedCases.restore();
+          done();
+        });
+    });
+
+    it('should invoke caseController.getReportedCase when receiving a GET request to /api/cases/:id', function(done) {
+      sinon.spy(caseController, 'getReportedCase');
+
+      request(app)
+        .get('/api/cases/1')
+        .end(function(err, res) {
+          expect(caseController.getReportedCase.called).to.be.true;
+          caseController.getReportedCase.restore();
+          done();
+        });
+    });
+
+    it('should invoke caseController.createNewCase when receiving a GET request to /api/cases/', function(done) {
+      sinon.spy(caseController, 'createNewCase');
+
+      request(app)
+        .post('/api/cases')
+        .send({ disease_id: 1, latitude: 12.252 * 0.001, longitude: 21.523423 * 0.001, date: Date.now() })
+        .end(function(err, res) {
+          expect(caseController.createNewCase.called).to.be.true;
+          caseController.createNewCase.restore();
+          done();
+        });
+    });
+
+    it('should invoke helpers.invalidMethodHandler when receiving a PUT request to /api/cases/:id', function(done) {
+      sinon.spy(helpers, 'invalidMethodHandler');
+
+      request(app)
+        .put('/api/cases/1')
+        .send({ description: 'foo' })
+        .end(function(err, res) {
+          expect(helpers.invalidMethodHandler.called).to.be.true;
+          helpers.invalidMethodHandler.restore();
+          done();
+        });
+    });
+
+    it('should invoke helpers.invalidMethodHandler when receiving a DELETE request to /api/cases/:id', function(done) {
+      sinon.spy(helpers, 'invalidMethodHandler');
+
+      request(app)
+        .del('/api/cases/1')
+        .end(function(err, res) {
+          expect(helpers.invalidMethodHandler.called).to.be.true;
+          helpers.invalidMethodHandler.restore();
           done();
         });
     });

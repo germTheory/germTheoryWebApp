@@ -22,6 +22,7 @@ module.exports = function (app, express) {
   var userRouter = express.Router();
   var locationRouter = express.Router();
   var proximityRouter = express.Router();
+  var caseRouter = express.Router();
 
   require('./passport')(passport); // pass passport for configuration
 
@@ -39,18 +40,19 @@ module.exports = function (app, express) {
   app.set('views', __dirname + '/../views');
   app.engine('ejs', engine);
   app.set('view engine', 'ejs');
-  // require('express-helpers')(app);
 
   app.use(express.static(__dirname + './../pubic'));
   app.use("/mobile", express.static(__dirname + "./../../mobile/www"));
 
   app.use('/api/users', userRouter);
   app.use('/api/locations', locationRouter);
+  app.use('/api/cases', caseRouter);
   app.use('/api/proximity', proximityRouter);
   app.use('/auth', authRouter);
-  app.use('/', commonRouter);;
+  app.use('/', commonRouter);
 
   require('../routes/authRoutes.js')(authRouter);
+  require('../routes/caseRoutes.js')(caseRouter);
   require('../routes/commonRoutes.js')(commonRouter);
   require('../routes/userRoutes.js')(userRouter);
   require('../routes/locationRoutes.js')(locationRouter);

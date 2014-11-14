@@ -59,6 +59,16 @@ var Proximity = sequelize.define('proximity', {
   tableName: 'proximity'
 });
 
+var ReportedCase = sequelize.define('reported_case', {
+  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  description: { type: Sequelize.STRING },
+  date: { type: Sequelize.DATE, allowNull: false },
+  latitude: { type: Sequelize.FLOAT, allowNull: false },
+  longitude: { type: Sequelize.FLOAT, allowNull: false }
+}, {
+  tableName: 'reported_cases'
+});
+
 /*** DEFINE RELATIONSHIPS ***/
 
 User.hasMany(Location, {
@@ -77,6 +87,8 @@ Proximity.belongsTo(Disease);
 Disease.hasMany(User, { joinTableName: 'user_diseases' });
 User.hasMany(Disease, { joinTableName: 'user_diseases' });
 
+Disease.hasMany(ReportedCase);
+ReportedCase.belongsTo(Disease);
 
 /*** Authenticate, connect, and create tables if they are not already defined ***/
 
@@ -141,6 +153,7 @@ module.exports = {
   Disease: Disease,
   User: User,
   Proximity: Proximity,
+  ReportedCase: ReportedCase,
   sequelize: sequelize, // we expose this for testing
   saveUser: saveUser,
   findUser: findUser,
