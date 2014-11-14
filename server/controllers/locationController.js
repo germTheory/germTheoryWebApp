@@ -23,10 +23,9 @@ module.exports = {
     Location.create({ user_id: userId, latitude: reqLatitude, longitude: reqLongitude, date: date })
       .then(function(location) {
         res.setHeader('Content-Type', 'application/json');
-        res.status(201)
-        res.json(location.dataValues);
+        res.status(201).json(location.dataValues);
       }, function(err) {
-        res.status(400).send(err);
+        res.status(400).send({ error: err.name, message: err.message });
       });
   },
 
