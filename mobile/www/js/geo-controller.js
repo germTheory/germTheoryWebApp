@@ -33,6 +33,7 @@ angular.module('app.geo-controller', [])
           date: pos.timestamp,
           user_id: 1
         };
+        
         // alert('watch pos data: '+ pos.coords.latitude + ',' + pos.coords.longitude);
 
         // POST location data to server
