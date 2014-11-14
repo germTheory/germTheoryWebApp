@@ -2,13 +2,13 @@ var Location = require('../database/dbSchema').Location;
 
 module.exports = {
 
-  findAllLocations: function(req, res, next) {
+  getAllLocations: function(req, res, next) {
     Location.findAll({ limit: 100 }).then(function(data) {
       res.status(200).send(data);
     });
   },
 
-  findLocation: function(req, res, next) {
+  getLocation: function(req, res, next) {
     Location.find(req.params.id).then(function(found) {
       res.status(200).send(found);
     });
@@ -21,8 +21,10 @@ module.exports = {
     var date = req.body.date;
 
     Location.create({ user_id: userId, latitude: reqLatitude, longitude: reqLongitude, date: date })
-      .then(function(model) {
-        res.sendStatus(201);
+      .then(function(location) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(201)
+        res.json(location.dataValues);
       }, function(err) {
         res.status(400).send(err);
       });
