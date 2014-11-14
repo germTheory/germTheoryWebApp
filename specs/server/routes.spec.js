@@ -54,25 +54,25 @@ describe('Route Test Suites', function() {
   describe('Location Routes Tests', function() {
 
     it('should invoke locationController.findAll when receiving a GET request to /api/locations', function(done) {
-      sinon.spy(locationController, 'findAllLocations');
+      sinon.spy(locationController, 'getAllLocations');
 
       request(app)
         .get('/api/locations')
         .end(function(err, res) {
-          expect(locationController.findAllLocations.called).to.be.true;
-          locationController.findAllLocations.restore();
+          expect(locationController.getAllLocations.called).to.be.true;
+          locationController.getAllLocations.restore();
           done();
         });
     });
 
     it('should invoke locationController.getUser when receiving a GET request to /api/locations/:user_id', function(done) {
-      sinon.spy(locationController, 'findLocation');
+      sinon.spy(locationController, 'getLocation');
 
       request(app)
         .get('/api/locations/1')
         .end(function(err, res) {
-          expect(locationController.findLocation.called).to.be.true;
-          locationController.findLocation.restore();
+          expect(locationController.getLocation.called).to.be.true;
+          locationController.getLocation.restore();
           done();
         });
     });
