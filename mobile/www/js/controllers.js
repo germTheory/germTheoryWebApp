@@ -4,7 +4,7 @@ angular.module('app.controllers', [])
   .controller('AuthCtrl', function($scope) {
   })
   .controller('MapCtrl', function($scope,Geolocation) {
-    $scope.mapCreated = function(map){
+    $scope.onMapCreated = function(map){
       Geolocation.getCurrentPosition().then(function(pos){
         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
       });
