@@ -35,19 +35,21 @@ angular.module('app.services', [])
       }
     };
   }])
-  .factory('Settings', function(LocalStorage) {
+  .factory('Settings', ['LocalStorage', function(LocalStorage) {
 
-    var enableLocationTracking = function() {
-      LocalStorage.set('tracking', true);
-
+    var getLocationTracking = function() {
+      return LocalStorage.get('locationTracking');
     };
+    var setLocationTracking = function(setting) {
+      LocalStorage.set('locationTracking', setting);
 
-    var diableLocationTracking = function() {
-
+      if (!setting) {
+        //TODO: stop background service
+      }
     };
 
     return {
-      enableLocationTracking: enableLocationTracking,
-      disableLocationTracking: disableLocationTracking
+      getLocationTracking: getLocationTracking,
+      setLocationTracking: enableLocationTracking
     };
-  });
+  }]);

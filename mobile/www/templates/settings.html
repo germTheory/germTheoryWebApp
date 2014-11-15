@@ -1,5 +1,5 @@
 <ion-view title="Settings">
-  <ion-content ng-controller="StorageCtrl">
+  <ion-content ng-controller="SettingsCtrl">
     <ul class="list" style='padding:10px;'>
       <br><br>
       <li class="item item-toggle"><b>Our Mission</li>
@@ -15,7 +15,7 @@
       </li>
       <li class="item item-toggle">Track Location
         <label class="toggle toggle-balanced">
-          <input type="checkbox" ng-checked="toggleTrack" ng-click="pushTrack()">
+          <input type="checkbox" ng-checked="locationTracking" ng-click="toggleLocationTracking()">
           <div class="track">
             <div class="handle"></div>
           </div>
