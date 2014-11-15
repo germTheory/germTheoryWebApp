@@ -1,20 +1,29 @@
-angular.module('app.utils', [])
-.controller('StorageCtrl', ['LocalStorage', function($localstorage) {
-    $localstorage.toggleTrack = 0;
+angular.module('app.utils', ['app.services'])
+.controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
+    $scope.toggleTrack = LocalStorage.get('tracking');
 
-    $localstorage.pushTrack = function() {
-      if ($localstorage.get('tracking') === 'false') {
-        $localstorage.set('tracking', 'true'); 
+    $scope.pushTrack = function() {
+      console.log('got into pushTrack');
+      if (LocalStorage.get('tracking') === 'false') {
+        LocalStorage.set('tracking', 'true'); 
+        console.log(LocalStorage.get('tracking'));
       }
-      if ($localstorage.get('tracking') === 'true') {
-        $localstorage.set('tracking', 'false');
+      else {
+        LocalStorage.set('tracking', 'false');
+        console.log(LocalStorage.get('tracking'));
       }
     };
 
 
-    // $localstorage.set('tracking', 'false');  
+    // $scope.pushTrack = function () {
+    //   console.log('got into new pushTrack');
+    // }
 
-    console.log($localstorage.get('tracking'));
+    // $scope.pushTrack();
+    // $localstorage.set('tracking', 'false');  
+    // var name = window.localStorage['name'] || 'you';
+    // alert('Hello, ' + name);
+    // console.log($localstorage.get('tracking'));
 
 }]);
 
