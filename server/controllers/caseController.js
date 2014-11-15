@@ -1,4 +1,5 @@
 var ReportedCase = require('../database/dbSchema').ReportedCase;
+var Disease = require('../database/dbSchema').Disease;
 
 module.exports = {
 
@@ -32,9 +33,9 @@ module.exports = {
   },
 
   showAllReportedCase: function(req, res, next) {
-    ReportedCase.findAll({ order: 'created_at DESC', limit: 100 }).
+    ReportedCase.findAll({ include: [ Disease ], order: 'created_at DESC' }).
       success(function(reportedCases) {
-        res.render('locations', { locations: reportedCases });
+        res.render('reportedCases', { cases: reportedCases });
       });
   }
 };
