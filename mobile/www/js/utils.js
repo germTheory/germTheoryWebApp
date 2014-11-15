@@ -13,4 +13,4 @@ angular.module('app.utils', ['app.services'])
         console.log(LocalStorage.get('tracking'));
       }
     };
-  }]);
+}]);
