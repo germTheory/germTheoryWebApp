@@ -64,4 +64,9 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
       });
 
     $urlRouterProvider.otherwise('/tab/map');
+  })
+  .factory('Config',function(){
+    return {
+      url: 'https://germ-tracker.herokuapp.com'
+    }
   });
