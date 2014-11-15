@@ -17,8 +17,8 @@ module.exports = function (app) {
   app.get('/reports', helpers.isLoggedIn, function(req, res) {
     res.render('reports');
   });
-  app.get('/submitReport', helpers.isLoggedIn, function(req, res) {
-    res.render('submitReport');
+  app.get('/newReportedCase', helpers.isLoggedIn, function(req, res) {
+    res.render('newReportedCase');
   });
   app.get('/*', helpers.isLoggedIn, function(req, res, next) {
     res.render('index');
