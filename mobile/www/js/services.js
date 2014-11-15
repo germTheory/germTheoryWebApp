@@ -21,9 +21,6 @@ angular.module('app.services', [])
     };
   })
 
-  .factory('GeoLocation', function ($http) {
-  })
-
   .factory('LocalStorage', ['$window', function($window) {
     return {
       set: function(key, value) {
@@ -39,7 +36,8 @@ angular.module('app.services', [])
         return JSON.parse($window.localStorage[key] || '{}');
       }
     }
-  }]);
+  }])
+
   .factory('BackgroundGeoLocation', function(){
 
     var bgGeo = window.plugins.backgroundGeoLocation;
