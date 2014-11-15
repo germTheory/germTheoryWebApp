@@ -1,13 +1,24 @@
 angular.module('app.utils', [])
-.controller('StorageCtrl', ['LocalStorage', function($localstorage) {
+.controller('StorageCtrl', ['LocalStorage', 'BackgroundGeoLocation', function($localstorage) {
     $localstorage.toggleTrack = 0;
 
     $localstorage.pushTrack = function() {
       if ($localstorage.get('tracking') === 'false') {
         $localstorage.set('tracking', 'true'); 
+
+        BackgroundGeoLocation.startBGLocationService()
+        .then(function(data){
+          alert("Started background location service");
+        });
       }
       if ($localstorage.get('tracking') === 'true') {
         $localstorage.set('tracking', 'false');
+
+        BackgroundGeoLocation.stopBGLocationService()
+        .then(function(data){
+          alert("Stopped background location service");
+        });
+
       }
     };
 
