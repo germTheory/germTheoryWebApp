@@ -101,7 +101,16 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
         url: '/settings',
         templateUrl: 'templates/settings.html',
         controller: 'StorageCtrl'
-      });
+      })
+      .state('tab.settings', {
+        url: '/settings',
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/settings.html',
+            controller: 'StorageCtrl'
+          }
+        }
+      })
 
     $urlRouterProvider.otherwise('/tab/login');
   });
