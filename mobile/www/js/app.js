@@ -14,19 +14,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
     });
   })
 
-  // .run(function($localstorage) {
-
-  //   $localstorage.set('name', 'Max');
-  //   console.log($localstorage.get('name'));
-  //   $localstorage.setObject('post', {
-  //     name: 'Thoughts',
-  //     text: 'Today was a good day'
-  //   });
-
-  //   var post = $localstorage.getObject('post');
-  //   console.log(post);
-  // })
-
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('tab', {
@@ -75,24 +62,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
         templateUrl: 'templates/settings.html',
         controller: 'StorageCtrl'
       });
-/*      .state('tab.track', {
-        url: '/track',
-        views: {
-          'tab-track': {
-            templateUrl: 'templates/track.html',
-            controller: 'BkGeoLocCtrl'
-          }
-        }
-      })
-      .state('tab.stop', {
-        url: '/stop',
-        views: {
-          'stop': {
-            templateUrl: 'templates/stop.html',
-            controller: 'StopGeoLocCtrl'
-          }
-        }
-      })*/
 
     $urlRouterProvider.otherwise('/tab/map');
   });
