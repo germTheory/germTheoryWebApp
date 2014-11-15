@@ -73,6 +73,8 @@ module.exports = function (passport) {
             newUser.save().complete(function(err, newUser) {
               if (err)
                 throw err;
+
+              console.log(newUser.id + ' has been created');
               return done(null, newUser);
             });
           }

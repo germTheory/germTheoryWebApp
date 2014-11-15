@@ -72,7 +72,7 @@ angular.module('app.services', [])
     };
   })
 
-  .factory('GeoLocation', function ($http) {
+  .factory('GeoLocation',  function ($http) {
   })
 
   .factory('LocalStorage', ['$window', function($window) {

@@ -4,9 +4,10 @@
   <table class="table">
     <tr>
       <th>ID</th>
-      <th>Name</th>
+      <th>Name/Device ID</th>
       <th>Email</th>
-      <th>Proximity Index</th>
+      <th>Disease Name</th>
+      <th>Risk Index</th>
       <th>Created Date</th>
       <th>Updated Date</th>
     </tr>
@@ -16,11 +17,11 @@
 
       <td><a href= <%='/users/' + user.id %>><%= user.name %></a></td>
       <td><%= user.email %></td>
+      <td>TBD</td>
       <td><%= user.proximities %></td>
-      <td><%= user.created_at %></td>
+       <td><%= user.created_at %></td>
       <td><%= user.updated_at %></td>
     </tr>
     <% }) %>
-
   </table>
 </div>
