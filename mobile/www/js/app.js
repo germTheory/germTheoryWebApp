@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services', 'app.utils'])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -61,15 +61,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
           }
         }
       })
-      .state('tab.menu-detail', {
-        url: '/menu/:optionId',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/menu-detail.html',
-            controller: 'MenuDetailCtrl'
-          }
-        }
-      })
       .state('tab.login', {
         url: '/login',
         views: {
@@ -79,7 +70,12 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
           }
         }
       })
-      .state('tab.track', {
+      .state('settings', {
+        url: '/settings',
+        templateUrl: 'templates/settings.html',
+        controller: 'StorageCtrl'
+      });
+/*      .state('tab.track', {
         url: '/track',
         views: {
           'tab-track': {
@@ -96,12 +92,7 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
             controller: 'StopGeoLocCtrl'
           }
         }
-      })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'templates/settings.html',
-        controller: 'StorageCtrl'
-      });
+      })*/
 
     $urlRouterProvider.otherwise('/tab/map');
   });

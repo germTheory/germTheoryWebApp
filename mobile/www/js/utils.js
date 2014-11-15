@@ -1,3 +1,4 @@
+/*
 angular.module('app.utils', ['app.services'])
 .controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
     $scope.toggleTrack = LocalStorage.get('tracking');
@@ -38,4 +39,4 @@ angular.module('app.utils', ['app.services'])
     // // $localstorage.set('tracking', 'false');  
 
     // console.log($localstorage.get('tracking'));
-    // console.log($localstorage.get('pushing'));
+    // console.log($localstorage.get('pushing'));*/
