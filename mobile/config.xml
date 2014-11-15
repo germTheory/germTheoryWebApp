@@ -3,7 +3,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!-- This line ensures that saving data to localStorage does not go to iCloud, but is saved locally-->
-<preference name="BackupWebStorage" value="none" />
+<!-- <preference name="BackupWebStorage" value="none" /> -->
 
 <widget id="com.ionicframework.mobile737625" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>mobile</name>

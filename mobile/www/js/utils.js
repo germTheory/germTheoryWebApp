@@ -1,43 +1,16 @@
-angular.module('app.utils', [])
-.controller('StorageCtrl', ['LocalStorage', 'BackgroundGeoLocation', function($localstorage) {
-    $localstorage.toggleTrack = 0;
+angular.module('app.utils', ['app.services'])
+.controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
+    $scope.toggleTrack = LocalStorage.get('tracking');
 
-    $localstorage.pushTrack = function() {
-      if ($localstorage.get('tracking') === 'false') {
-        $localstorage.set('tracking', 'true'); 
-
-        BackgroundGeoLocation.startBGLocationService()
-        .then(function(data){
-          alert("Started background location service");
-        });
+    $scope.pushTrack = function() {
+      console.log('got into pushTrack');
+      if (LocalStorage.get('tracking') === 'false') {
+        LocalStorage.set('tracking', 'true'); 
+        console.log(LocalStorage.get('tracking'));
       }
-      if ($localstorage.get('tracking') === 'true') {
-        $localstorage.set('tracking', 'false');
-
-        BackgroundGeoLocation.stopBGLocationService()
-        .then(function(data){
-          alert("Stopped background location service");
-        });
-
+      else {
+        LocalStorage.set('tracking', 'false');
+        console.log(LocalStorage.get('tracking'));
       }
     };
-
-
-    // $localstorage.set('tracking', 'false');  
-
-    console.log($localstorage.get('tracking'));
-
 }]);
-
-
-
-    // $localstorage.toggleTrack = $localstorage.get('tracking');
-    // $localstorage.togglePush = $localstorage.get('pushing');
-    // $localstorage.toggleFb = $localstorage.get('fb');
-
-
-
-    // // $localstorage.set('tracking', 'false');  
-
-    // console.log($localstorage.get('tracking'));
-    // console.log($localstorage.get('pushing'));

@@ -1,0 +1,30 @@
+<% layout('layout') -%>
+<h3>Reported Cases</h3>
+<div class="col-sm-6">
+  <a href="./submitNewCase">
+    <button class="btn btn-success btn-md" type="submit">Create New Reported Case</button>
+  </a>
+</div>
+<br/><br/>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Disease Name</th>
+      <th>Date</th>
+       <th>Location</th>
+      <th>Description</th>
+    </tr>
+    <% cases.forEach(function(reported_case) { %>
+    <tr>
+      <td><%= reported_case.id %></td>
+      <td><%= reported_case.disease.name %></td>
+      <td>(<%= reported_case.latitude %>, <%= reported_case.longitude %>)</td>
+      <td><%= reported_case.date %></td>
+      <% if (reported_case.description !== null) { %>
+        <td><%= reported_case.description %></td>
+      <% } %>
+    </tr>
+    <% }) %>
+  </table>
+</div>
