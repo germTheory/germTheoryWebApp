@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services', 'app.utils'])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -13,19 +13,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
       }
     });
   })
-
-  // .run(function($localstorage) {
-
-  //   $localstorage.set('name', 'Max');
-  //   console.log($localstorage.get('name'));
-  //   $localstorage.setObject('post', {
-  //     name: 'Thoughts',
-  //     text: 'Today was a good day'
-  //   });
-
-  //   var post = $localstorage.getObject('post');
-  //   console.log(post);
-  // })
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -61,15 +48,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
           }
         }
       })
-      .state('tab.menu-detail', {
-        url: '/menu/:optionId',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/menu-detail.html',
-            controller: 'MenuDetailCtrl'
-          }
-        }
-      })
       .state('tab.login', {
         url: '/login',
         views: {
@@ -79,31 +57,13 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
           }
         }
       })
-      .state('tab.track', {
-        url: '/track',
-        views: {
-          'tab-track': {
-            templateUrl: 'templates/track.html',
-            controller: 'BkGeoLocCtrl'
-          }
-        }
-      })
-      .state('tab.stop', {
-        url: '/stop',
-        views: {
-          'stop': {
-            templateUrl: 'templates/stop.html',
-            controller: 'StopGeoLocCtrl'
-          }
-        }
-      })
       .state('settings', {
         url: '/settings',
         templateUrl: 'templates/settings.html',
         controller: 'StorageCtrl'
       });
 
-    $urlRouterProvider.otherwise('/tab/login');
+    $urlRouterProvider.otherwise('/tab/map');
   })
   .factory('Config',function(){
     return {

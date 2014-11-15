@@ -72,10 +72,6 @@ angular.module('app.services', [])
 
     };
   })
-
-  .factory('GeoLocation',  function ($http) {
-  })
-
   .factory('LocalStorage', ['$window', function($window) {
     return {
       set: function(key, value) {
@@ -90,5 +86,22 @@ angular.module('app.services', [])
       getObject: function(key) {
         return JSON.parse($window.localStorage[key] || '{}');
       }
-    }
+    };
+  }])
+  .factory('Settings', ['LocalStorage', function(LocalStorage) {
+    var getLocationTracking = function() {
+      return LocalStorage.get('locationTracking');
+    };
+    var setLocationTracking = function(setting) {
+      LocalStorage.set('locationTracking', setting);
+
+      if (!setting) {
+        //TODO: stop background service
+      }
+    };
+
+    return {
+      getLocationTracking: getLocationTracking,
+      setLocationTracking: enableLocationTracking
+    };
   }]);

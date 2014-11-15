@@ -16,12 +16,12 @@ angular.module('app.geo-controller', [])
 
     var onDeviceReady = function(){
       navigator.geolocation.getCurrentPosition(
-      function(position) {
-          alert(position.coords.latitude + ',' + position.coords.longitude);
-      },
-      function() {
-          alert('Error getting location');
-      });
+        function(position) {
+            alert(position.coords.latitude + ',' + position.coords.longitude);
+        },
+        function() {
+            alert('Error getting location');
+        });
 
       var id;
 
@@ -49,17 +49,16 @@ angular.module('app.geo-controller', [])
             alert('Error: ' + e.message);
           }
         });
-      };
+      }
 
       function error(err) {
         alert('ERROR(' + err.code + '): ' + err.message);
-      };
+      }
 
       id = navigator.geolocation.watchPosition(success, error, options);
     };
     // fireup the event once device is ready and all plugins are loaded
     document.addEventListener("deviceready", onDeviceReady, false);
-
   })
 
   .controller('BkGeoLocCtrl', function($scope, $cordovaBackgroundGeolocation, GeoLocation) {
@@ -168,5 +167,4 @@ angular.module('app.geo-controller', [])
     // Before each plugin you must check if your device has fully loaded,
     // and if the plugins are available using a native cordova event called deviceready.
     document.addEventListener("deviceready", onDeviceReady, false);
-
   });
