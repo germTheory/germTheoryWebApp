@@ -1,11 +1,7 @@
 <% layout('layout') -%>
 <div style="text-align:center;">
-  <h1>Detail View</h1>
-  <h2>User: <%= user.name %></h2>
+  <h1><%= user.name %></h1>
 </div>
-
-
-
     <style>
       #map_canvas {
         width: 100%;
@@ -24,7 +20,7 @@
           zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+        var map = new google.maps.Map(mapCanvas, mapOptions);
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -38,67 +34,26 @@
       <th>Name</th>
       <th>Email</th>
       <th>Proximity Index</th>
-
     </tr>
     <tr>
       <td><%= user.id %></td>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= user.dataValues.proximities %></td>
+      <td><%= user.dataValues.proximities[0].value %></td>
     </tr>
-
   </table>
 </div>
-<div class="col-sm-6" style="height:200px; overflow-y:scroll;">
+<div class="col-sm-6" style="height:800px; overflow-y:scroll;">
   <table class="table">
     <tr>
-      <th>Locations</th>
-
+      <th>Location (Latitude, Longitude)</th>
+      <th>Date</th>
     </tr>
+    <% user.dataValues.locations.forEach(function(location) { %>
     <tr>
-      <td><%= user.dataValues.locations %></td>
+      <td>(<%= location.latitude %>, <%= location.longitude %>)</td>
+      <td><%= location.date.toGMTString() %></td>
     </tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-    <tr><td>Hello</td></tr>
-
+    <% }) %>
   </table>
 </div>
-
-
-

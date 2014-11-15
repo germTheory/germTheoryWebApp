@@ -9,9 +9,9 @@ angular.module('app.geo-controller', [])
     var options = {
       maximumAge : 50000,
       timeout : 1000000,
-      // false - gives wifi location data, 
+      // false - gives wifi location data,
       // true - gives very accurate location data from the GPS
-      enableHighAccuracy: false 
+      enableHighAccuracy: false
     };
 
     var onDeviceReady = function(){
@@ -33,7 +33,7 @@ angular.module('app.geo-controller', [])
           date: pos.timestamp,
           user_id: 1
         };
-        
+
         // alert('watch pos data: '+ pos.coords.latitude + ',' + pos.coords.longitude);
 
         // POST location data to server
@@ -57,7 +57,6 @@ angular.module('app.geo-controller', [])
 
       id = navigator.geolocation.watchPosition(success, error, options);
     };
-
     // fireup the event once device is ready and all plugins are loaded
     document.addEventListener("deviceready", onDeviceReady, false);
   })
@@ -98,8 +97,8 @@ angular.module('app.geo-controller', [])
           latitude: location.latitudue,
           longitude: location.longitude,
           user_id: 1
-        };     
-         
+        };
+
         // Do your HTTP request here to POST location to your server.
         // POST location data to server
         $.ajax({
@@ -124,7 +123,7 @@ angular.module('app.geo-controller', [])
       // BackgroundGeoLocation is highly configurable.
       bgGeo.configure(callbackFn, failureFn, {
         url: 'http://germ-tracker.herokuapp.com/api/locations', // <-- only required for Android; ios allows javascript callbacks for your http
-        params: {     
+        params: {
           // will be sent in with 'location' in POST data (root level params)
           // these will be added automatically in setup()                                          // HTTP POST params sent to your server when persisting locations.
           // auth_token: 'user_secret_auth_token', // TODO: fix this
@@ -158,7 +157,7 @@ angular.module('app.geo-controller', [])
       //  });
 
       // })
-    
+
       $scope.stopBackgroundGeolocation = function () {
         $cordovaBackgroundGeolocation.stop();
       };

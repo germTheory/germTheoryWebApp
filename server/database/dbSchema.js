@@ -30,8 +30,8 @@ var User = sequelize.define('user', {
   gender: { type: Sequelize.STRING },
   email: { type: Sequelize.STRING },
   password: { type: Sequelize.STRING },
-  google_id: { type: Sequelize.STRING },
-  is_admin: { type: Sequelize.BOOLEAN, defaultValue: false }
+  google_id: { type: Sequelize.STRING }
+/*  is_admin: { type: Sequelize.BOOLEAN, defaultValue: false }*/
 }, {
   tableName: 'users'
 });
