@@ -15,18 +15,18 @@
          Frequently Asked Questions
       </li>
         <li class="item item-toggle">
-         Push Notifications
+         Track Location
          <label class="toggle toggle-balanced">
-           <input type="checkbox">
+           <input type="checkbox" ng-model="toggleTrack" ng-click="pushTrack()">
            <div class="track">
              <div class="handle"></div>
            </div>
          </label>
       </li>
         <li class="item item-toggle">
-         Track Location
-         <label class="toggle toggle-balanced">
-           <input type="checkbox">
+         Push Notifications
+         <label class="toggle toggle-balanced" >
+           <input type="checkbox" ng-model="togglePush">
            <div class="track">
              <div class="handle"></div>
            </div>
@@ -35,13 +35,22 @@
         <li class="item item-toggle">
          Facebook Connect</b>
          <label class="toggle toggle-balanced">
-           <input type="checkbox">
+           <input type="checkbox" ng-model="toggleFb">
            <div class="track">
              <div class="handle"></div>
            </div>
          </label>
       </li>
     </ul>
+
+            
+             {{toggleTrack}}
+             {{togglePush}}
+             {{toggleFb}}
+
+             
+
+
   </ion-content>
 </ion-view>
 
