@@ -70,7 +70,7 @@ angular.module('app.services', [])
         alert('Location from cordova: '+ location.coords.latitude + ',' + location.coords.longitude);
       });
 
-      bgGeo.configure(callbackFn, failureFn, {
+      bgGeo.configure(successFn, failureFn, {
         // url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
         url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
         params: {     
@@ -103,23 +103,28 @@ angular.module('app.services', [])
     return {
       startBGLocationService: startBGLocationService,
       stopBGLocationService: stopBGLocationService
-    };
-    
-  });
-  .factory('Settings', ['LocalStorage', function(LocalStorage) {
+    }; 
+  })
+
+  .factory('Settings', ['LocalStorage', 'BackgroundGeoLocation', function(LocalStorage, BackgroundGeoLocation) {
     var getLocationTracking = function() {
       return LocalStorage.get('locationTracking');
     };
     var setLocationTracking = function(setting) {
       LocalStorage.set('locationTracking', setting);
 
-      if (!setting) {
+      if (setting) {
+        alert("Starting Background geolocation");
+        BackgroundGeoLocation.startBGLocationService();
+      } else {
         //TODO: stop background service
+        alert("Stopping Background geolocation");
+        BackgroundGeoLocation.stopBGLocationService();
       }
     };
 
     return {
       getLocationTracking: getLocationTracking,
-      setLocationTracking: enableLocationTracking
+      setLocationTracking: setLocationTracking
     };
   }]);

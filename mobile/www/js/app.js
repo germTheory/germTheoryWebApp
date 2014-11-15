@@ -57,10 +57,14 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
           }
         }
       })
-      .state('settings', {
+      .state('tab.settings', {
         url: '/settings',
-        templateUrl: 'templates/settings.html',
-        controller: 'StorageCtrl'
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/settings.html',
+            controller: 'SettingsCtrl'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/tab/map');
