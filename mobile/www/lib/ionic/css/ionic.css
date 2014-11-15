@@ -1894,9 +1894,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font: inherit;
   font-size: 100%; }
 
-ol, ul {
-  list-style: none; }
-
 blockquote, q {
   quotes: none; }
 
@@ -4187,6 +4184,10 @@ a.subdued {
   .item p {
     color: #666;
     font-size: 14px; }
+  .item .bigWhite {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #fff; }
   .item h1:last-child, .item h2:last-child, .item h3:last-child, .item h4:last-child, .item h5:last-child, .item h6:last-child, .item p:last-child {
     margin-bottom: 0; }
   .item .badge {
