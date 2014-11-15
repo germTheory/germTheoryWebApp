@@ -27,7 +27,8 @@ module.exports = {
   },
 
   showAllUsers: function(req, res, next) {
-    User.findAll({ include: [ Proximity ], where: { is_admin: false }, limit: 50, order: 'name' })
+    //User.findAll({ include: [ Proximity ], where: { is_admin: false }, limit: 50, order: 'name' })
+    User.findAll({ include: [ Proximity ], limit: 50, order: 'name' })
       .success(function(results) {
         res.set('Content-Type', 'text/html');
         res.render('users', { results: results }); 
