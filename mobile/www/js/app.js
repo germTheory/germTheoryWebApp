@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-controller','app.services'])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services', 'app.utils'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -13,6 +13,19 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
       }
     });
   })
+
+  // .run(function($localstorage) {
+
+  //   $localstorage.set('name', 'Max');
+  //   console.log($localstorage.get('name'));
+  //   $localstorage.setObject('post', {
+  //     name: 'Thoughts',
+  //     text: 'Today was a good day'
+  //   });
+
+  //   var post = $localstorage.getObject('post');
+  //   console.log(post);
+  // })
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -83,6 +96,11 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.geo-control
             controller: 'StopGeoLocCtrl'
           }
         }
+      })
+      .state('settings', {
+        url: '/settings',
+        templateUrl: 'templates/settings.html',
+        controller: 'StorageCtrl'
       });
 
     $urlRouterProvider.otherwise('/tab/login');

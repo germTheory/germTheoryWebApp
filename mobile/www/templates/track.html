@@ -3,10 +3,12 @@
    <ion-item>
 
    <div ng-init="obj={toggle2:false}">
-      <div style="margin-top:420px;">
+    <div style="margin-top:30px;">Latitude: {{coords.latitude}}</div>
+    <div>Longitude: {{coords.longitude}}</div>
+      <div style="margin-top:200px;">
       <button class="button button-block button-calm" ng-if="!obj.toggle2" ng-click="obj.toggle2 = true">ENABLE TRACKING</button>
       </div>
-      <div style="margin-top:420px;">
+      <div style="margin-top:200px;">
       <button class="button button-block button-calm" ng-if="obj.toggle2" ng-click="obj.toggle2 = false">DISABLE TRACKING</button>
       </div>
    </div>
