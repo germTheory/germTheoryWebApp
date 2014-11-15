@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app.services'])
   .controller('AppCtrl', function($scope) {
   })
   .controller('AuthCtrl', function($scope) {
@@ -10,32 +10,30 @@ angular.module('app.controllers', [])
       });
     }
   })
-  .controller('MenuCtrl', function($scope) {
-  })
   .controller('MyRiskCtrl', function($scope) {
   })
   .controller('ReportCtrl', function($scope) {
   })
-  .controller('MenuDetailCtrl', function ($scope, $stateParams) {
+  .controller('SettingsCtrl', function($scope, Settings) {
+    $scope.locationTracking = Settings.getLocationTracking();
+
+    $scope.toggleLocationTracking = function() {
+      $scope.locationTracking = !$scope.locationTracking;
+      Settings.setLocationTracking($scope.locationTracking);
+    }
   })
-  .controller('BkGeoLocCtrl', function($scope, BackgroundGeoLocation) {
+  .controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
+    $scope.toggleTrack = LocalStorage.get('tracking');
 
-    $scope.data = {};
-    $scope.startBGLocationService = function(){
-
-      BackgroundGeoLocation.startBGLocationService()
-        .then(function(data){
-          alert("Started background location service");
-        });
+    $scope.pushTrack = function() {
+      console.log('got into pushTrack');
+      if (LocalStorage.get('tracking') === 'false') {
+        LocalStorage.set('tracking', 'true');
+        console.log(LocalStorage.get('tracking'));
+      }
+      else {
+        LocalStorage.set('tracking', 'false');
+        console.log(LocalStorage.get('tracking'));
+      }
     };
-
-    $scope.stopBGLocationService = function(){
-      BackgroundGeoLocation.stopBGLocationService()
-        .then(function(data){
-          alert("Stopped background location service");
-        });
-    };
-
-    $scope.startBGLocationService();
-
-  });
+  }]);

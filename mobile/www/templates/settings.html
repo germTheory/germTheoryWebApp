@@ -1,63 +1,34 @@
 <ion-view title="Settings">
-
-
-  <ion-content ng-controller="StorageCtrl">
+  <ion-content ng-controller="SettingsCtrl">
     <ul class="list" style='padding:10px;'>
-      <br>
-      <br>
-      <li class="item item-toggle">
-         <b>Our Mission
+      <br><br>
+      <li class="item item-toggle"><b>Our Mission</li>
+      <li class="item item-toggle">Contact</li>
+      <li class="item item-toggle">Frequently Asked Questions</li>
+      <li class="item item-toggle">Push Notifications
+        <label class="toggle toggle-balanced">
+          <input type="checkbox" ng-model="togglePush">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
       </li>
-      <li class="item item-toggle">
-         Contact
+      <li class="item item-toggle">Track Location
+        <label class="toggle toggle-balanced">
+          <input type="checkbox" ng-checked="locationTracking" ng-click="toggleLocationTracking()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
       </li>
-      <li class="item item-toggle">
-         Frequently Asked Questions
-        <li class="item item-toggle">
-         Push Notifications
-         <label class="toggle toggle-balanced" >
-           <input type="checkbox" ng-model="togglePush">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
-      </li>
-      </li>
-        <li class="item item-toggle">
-         Track Location
-         <label class="toggle toggle-balanced">
-           <input type="checkbox" ng-checked="toggleTrack" ng-click="pushTrack()">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
-      </li>
-        <li class="item item-toggle">
-         Facebook Connect</b>
-         <label class="toggle toggle-balanced">
-           <input type="checkbox" ng-model="toggleFb">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
+      <li class="item item-toggle">Facebook Connect</b>
+        <label class="toggle toggle-balanced">
+          <input type="checkbox" ng-model="toggleFb">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
       </li>
     </ul>
-             
-
-
   </ion-content>
 </ion-view>
-
-
-
-
-
-
-
-
-
-<!--     <ion-list>
-      <ion-item type="login" href="#/tab/track">
-
-      
-    </ion-list> -->

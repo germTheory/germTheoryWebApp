@@ -1,9 +1,6 @@
 angular.module('app.services', [])
-
   .factory('gtGoogleMaps',function(){
-
   })
-
   .factory('Geolocation', function ($q) {
     return {
       getCurrentPosition: function() {
@@ -20,7 +17,6 @@ angular.module('app.services', [])
 
     };
   })
-
   .factory('LocalStorage', ['$window', function($window) {
     return {
       set: function(key, value) {
@@ -110,3 +106,20 @@ angular.module('app.services', [])
     };
     
   });
+  .factory('Settings', ['LocalStorage', function(LocalStorage) {
+    var getLocationTracking = function() {
+      return LocalStorage.get('locationTracking');
+    };
+    var setLocationTracking = function(setting) {
+      LocalStorage.set('locationTracking', setting);
+
+      if (!setting) {
+        //TODO: stop background service
+      }
+    };
+
+    return {
+      getLocationTracking: getLocationTracking,
+      setLocationTracking: enableLocationTracking
+    };
+  }]);
