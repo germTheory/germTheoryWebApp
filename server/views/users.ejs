@@ -9,7 +9,6 @@
       <th>Disease Name</th>
       <th>Risk Index</th>
       <th>Created Date</th>
-      <th>Updated Date</th>
     </tr>
     <% results.forEach(function(user) { %>
     <tr>
@@ -17,10 +16,13 @@
 
       <td><a href= <%='/users/' + user.id %>><%= user.name %></a></td>
       <td><%= user.email %></td>
-      <td>TBD</td>
-      <td><%= user.proximities %></td>
-       <td><%= user.created_at %></td>
-      <td><%= user.updated_at %></td>
+      <td>Ebola</td>
+      <% if (user.proximities[0] !== undefined) { %>
+      <td><%= user.proximities[0].value %></td>
+      <% } else { %>
+      <td>N/A</td>
+      <% } %>
+      <td><%= user.created_at %></td>
     </tr>
     <% }) %>
   </table>
