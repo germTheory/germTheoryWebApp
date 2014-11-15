@@ -103,5 +103,5 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
         controller: 'StorageCtrl'
       });
 
-    $urlRouterProvider.otherwise('/tab/login');
+    $urlRouterProvider.otherwise('/tab/map');
   });
