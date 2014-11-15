@@ -1,23 +1,11 @@
-<div ng-controller="AppCtrl">
-<div class="bar bar-header">
-
-  <h1 class="title" style="font-size:1em; color:#fff; margin-top:5px;">Germ-Tracker</h1>
-  <a href="/mobile/#/settings">
-    <button class="button icon ion-gear-a" style="font-size:2em;"></button>
-  </a>
-</div>
-  <ion-tabs class="tabs-icon-top">
-    <ion-tab title="Map" href="#/tab/map">
-      <ion-nav-view name="tab-map"></ion-nav-view>
-    </ion-tab>
-    <ion-tab title="Report" href="#/tab/report">
-      <ion-nav-view name="tab-report"></ion-nav-view>
-    </ion-tab>
-    <ion-tab title="My Risk" href="#/tab/myrisk">
-      <ion-nav-view name="tab-myrisk"></ion-nav-view>
-    </ion-tab>
-    <ion-tab title="Settings" href="#/tab/settings">
-      <ion-nav-view name="tab-settings"></ion-nav-view>
-    </ion-tab>
-  </ion-tabs>
-</div>
+<ion-tabs class="tabs-icon-top">
+  <ion-tab title="Map" href="#/tab/map">
+    <ion-nav-view name="tab-map"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="Report" href="#/tab/report">
+    <ion-nav-view name="tab-report"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="My Risk" href="#/tab/myrisk">
+    <ion-nav-view name="tab-myrisk"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>
