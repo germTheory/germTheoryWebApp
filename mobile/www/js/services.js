@@ -1,9 +1,5 @@
 angular.module('app.services', [])
 
-  .factory('gtGoogleMaps',function(){
-
-  })
-
   .factory('Geolocation', function ($q) {
     var log = [];
     var waitForDevice = $q.defer();
@@ -21,11 +17,6 @@ angular.module('app.services', [])
       enableHighAccuracy: false
     };
 
-    //
-    //document.addEventListener("deviceready", function(){
-    //  var bgGeo = window.plugins.backgroundGeoLocation;
-    //  waitForDevice.resolve(bgGeo);
-    //}, false);
 
     var bgSuccess = function(){
       for(var i = 0; i < subscribers.length; i++){
