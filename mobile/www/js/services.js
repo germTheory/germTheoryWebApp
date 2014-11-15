@@ -67,7 +67,7 @@ angular.module('app.services', [])
       // app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
       // in order to prompt the user for Location permission.
       window.navigator.geolocation.getCurrentPosition(function(location) {
-        alert('Location from cordova: '+ location.coords.latitude + ',' + location.coords.longitude);
+        alert('Location from germ-tracker: '+ location.coords.latitude + ',' + location.coords.longitude);
       });
 
       bgGeo.configure(successFn, failureFn, {
