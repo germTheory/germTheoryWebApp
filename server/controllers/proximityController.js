@@ -32,7 +32,7 @@ var _invalidMethod = function(req, res, next) {
 // Return the index value for the requested user
 var _getUserIndex = function(req, res, next) {
   Proximity
-    .find({ where: { user_id: req.body.user_id } })
+    .findAll({ where: { user_id: req.body.user_id } })
     .then(function(userEntry) {
       res.status(200).send(userEntry);
     }, function(err) {
