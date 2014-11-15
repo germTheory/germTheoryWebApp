@@ -36,7 +36,6 @@ angular.module('app.services', [])
     };
   }])
   .factory('Settings', ['LocalStorage', function(LocalStorage) {
-
     var getLocationTracking = function() {
       return LocalStorage.get('locationTracking');
     };
