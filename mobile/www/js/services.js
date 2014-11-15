@@ -6,13 +6,13 @@ angular.module('app.services', [])
 
   .factory('Geolocation', function ($q) {
     var log = [];
+    var waitForDevice = $q.defer();
     var subscribers = [{
       success:function(location){
         log.push(location);
       }
     }];
 
-    var bgGeo = navigator.plugins.BackgroundGeoLocation;
     var options = {
       maximumAge : 50000,
       timeout : 1000000,
@@ -20,6 +20,12 @@ angular.module('app.services', [])
       // true - gives very accurate location data from the GPS
       enableHighAccuracy: false
     };
+
+    //
+    //document.addEventListener("deviceready", function(){
+    //  var bgGeo = window.plugins.backgroundGeoLocation;
+    //  waitForDevice.resolve(bgGeo);
+    //}, false);
 
     var bgSuccess = function(){
       for(var i = 0; i < subscribers.length; i++){
@@ -60,10 +66,14 @@ angular.module('app.services', [])
         return q.promise;
       },
       start: function(){
-        bgGeo.start();
+        waitForDevice.promise.then(function(bgGeo){
+          //bgGeo.stop();
+        })
       },
       stop: function(){
-        bgGeo.stop();
+        waitForDevice.promise.then(function(bgGeo){
+          //bgGeo.stop();
+        })
       },
       getLog: function(){
         return logs.slice();

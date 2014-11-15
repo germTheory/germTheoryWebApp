@@ -10,10 +10,7 @@ angular.module('app.controllers', [])
         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
       });
     };
-    Geolocation.start();
-    Geolocation.observe({success: function(loc){
-      $scope.locations.push(loc);
-    }})
+
   })
   .controller('MenuCtrl', function($scope) {
   })
