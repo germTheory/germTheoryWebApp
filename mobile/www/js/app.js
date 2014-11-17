@@ -2,11 +2,11 @@ angular.module('app', [
   'ionic',
   'ngCordova',
   'app.controllers',
-  'app.directives',
   'app.geo-controller',
-  'app.services',
+  'app.services.common',
   'app.services.settings',
-  'app.services.geo-location'])
+  'app.services.geo-location',
+  'app.directives.map'])
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

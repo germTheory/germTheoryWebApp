@@ -1,4 +1,4 @@
-angular.module('app.services', [])
+angular.module('app.services.common', [])
   .factory('Config',function(){
     return {
       url: 'https://germ-tracker.herokuapp.com'

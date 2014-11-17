@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['app.services'])
+angular.module('app.controllers', ['app.services.common'])
   .controller('AuthCtrl', function($scope) {
   })
   .controller('MapCtrl', function($scope,Geolocation) {

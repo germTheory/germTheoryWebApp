@@ -32,14 +32,18 @@ angular.module('app.services.geo-location', [])
       // app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
       // in order to prompt the user for Location permission.
       window.navigator.geolocation.getCurrentPosition(function(location) {
-        alert('Location from cordova: '+ location.coords.latitude + ',' + location.coords.longitude);
+        alert('Location from germ-tracker: '+ location.coords.latitude + ',' + location.coords.longitude);
       });
 
       bgGeo.configure(successFn, failureFn, {
         // url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
         url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
         params: {
-          user_id: 1
+          user_id: 1,
+          email: "dummy@xyz.com",
+          gender: "N",
+          token: "not-yet",
+          password: "none"
         },
         headers: {
         },
