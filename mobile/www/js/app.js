@@ -1,5 +1,12 @@
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives', 'app.geo-controller','app.services'])
-
+angular.module('app', [
+  'ionic',
+  'ngCordova',
+  'app.controllers',
+  'app.directives',
+  'app.geo-controller',
+  'app.services',
+  'app.services.settings',
+  'app.services.geo-location'])
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -13,7 +20,6 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
       }
     });
   })
-
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('tab', {
@@ -68,9 +74,4 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.directives'
       });
 
     $urlRouterProvider.otherwise('/tab/map');
-  })
-  .factory('Config',function(){
-    return {
-      url: 'https://germ-tracker.herokuapp.com'
-    }
   });
