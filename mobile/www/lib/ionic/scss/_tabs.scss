@@ -271,7 +271,7 @@
   max-width: $tab-item-max-width;
   height: 100%;
 
-  color: #FFF;
+  color: #fff;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -304,9 +304,8 @@
 .tabs-icon-top.tabs .tab-item,
 .tabs-icon-bottom > .tabs .tab-item,
 .tabs-icon-bottom.tabs .tab-item {
-  padding:15px;
-  padding-top:23px;
-  font-size: 80%;
+  margin-top:15px;
+  font-size: 39%;
   line-height: $tabs-text-font-size;
 }
 
