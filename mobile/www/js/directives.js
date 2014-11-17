@@ -1,6 +1,15 @@
 angular.module('app.directives', [])
   .directive('spotsMap', function(Config, $http) {
-
+    /**
+     * Add a new report to the map
+     */
+    var addReportToMap = function(report,map){
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(report.latitude, report.longitude),
+        map: map,
+        title:report.description
+      });
+    };
     return {
       restrict: 'E',
       scope: {
@@ -15,16 +24,12 @@ angular.module('app.directives', [])
           var map = new google.maps.Map($element[0], mapOptions);
 
 
-         $http.get(Config.url+'/api/cases').then(function(resp){
-           data = resp.data;
-           for(var i = 0; i < data.length; i++){
-             var report = data[i];
-             var marker = new google.maps.Marker({
-               position: new google.maps.LatLng(report.latitude, report.longitude),
-               map: map,
-               title:report.description
-             });
-           }
+          $http.get(Config.url+'/api/cases').then(function(resp){
+            data = resp.data;
+            for(var i = 0; i < data.length; i++){
+              var report = data[i];
+              addReportToMap(report,map);
+            }
 
          });
 
