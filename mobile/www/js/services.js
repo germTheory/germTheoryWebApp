@@ -146,7 +146,7 @@ angular.module('app.services', [])
         notificationText: 'ENABLED',                // Android only, customize the text of the notification
         // activityType: "AutomotiveNavigation",    // iOS-only
         locationTimeout: 30,                        // The minimum time interval between location updates, in seconds.
-        debug: true,                                // enable this hear sounds for background-geolocation life-cycle.
+        debug: false,                               // enable this hear sounds for background-geolocation life-cycle.
         stopOnTerminate: false                      // set to false if it should continue after the app terminates
       });
 
