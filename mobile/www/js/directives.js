@@ -1,5 +1,6 @@
 angular.module('app.directives', [])
   .directive('spotsMap', function(Config, $http) {
+
     return {
       restrict: 'E',
       scope: {
@@ -15,23 +16,6 @@ angular.module('app.directives', [])
 
 
          $http.get(Config.url+'/api/cases').then(function(resp){
-           // Uncomment for fake data
-           //var fake = [
-           //  {
-           //    disease_id: 1,
-           //    latitude: 37.781101 , longitude: -122.412543,
-           //    date: Date.now(),
-           //    description: "Ebola is bad"
-           //  },
-           //  {
-           //    disease_id:1,
-           //    latitude: 37.783068,
-           //    longitude: -122.405505,
-           //    date: Date.now(),
-           //    description: "Ebola is really bad"
-           //  }
-           //];
-           //data = fake;
            data = resp.data;
            for(var i = 0; i < data.length; i++){
              var report = data[i];
