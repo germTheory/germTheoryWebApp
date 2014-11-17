@@ -1,32 +1,51 @@
 <% layout('layout') -%>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
+<div class="col-sm-10 col-sm-offset-1">
+  <div>
+    <h1>Generate a Report</h1>
+    <p>Generate a report for a single user or generate new proximity values for all users.</p>
+  </div>
 
-<div class="col-sm-6 col-sm-offset-3">
-  <h1 style="text-align:center">Create New Report</h1>
-
-  <form action="/reports" method="get">
+  <form action="/reports" method="POST">
+    <div class="form-group">
+      <label>Report Name</label>
+      <input type="text" id="reportName" class="form-control" name="reportName">
+    </div>
     <div class="form-group">
       <label>Start Time</label>
-      <input type="gender" id="datepickerStart" class="form-control" name="gender">
+      <input type="text" id="datepickerStart" class="form-control" name="datepickerStart">
     </div>
     <div class="form-group">
       <label>End Time</label>
-      <input type="gender" id="datepickerEnd" class="form-control" name="gender">
+      <input type="text" id="datepickerEnd" class="form-control" name="datapickerEnd">
     </div>
     <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" name="name">
+      <label>Name (Leave Blank to Create a Report for All Users)</label>
+      <input type="text" class="form-control" name="userName">
     </div>
-    <br>
-    <br>
-
+    <div class="form-group">
+      <label>Disease</label>
+      <select name="diseaseName">
+        <option value="Ebola" selected>Ebola</option> 
+        <option value="Seasonal Influenza">Seasonal Influenza</option>
+        <option value="Measles">Measles</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Disease Contagiousness: <span id="contval" name="contagiousness" value="5">5</span></label>
+      <br>
+      <!-- <input type="range" name="contagiousness" id="slider" value="5" min="1" max="10"> -->
+      <div id="contagiousness"></div>
+    </div>
+    <div class="form-group">
+      <label>Distance Threshold: <span id="threshval" name="threshold" value="100">100</span></label>
+      <p>This value indicates the proximity required for a user to be considered at risk of infection. A higher threshold will list more users as "at risk."</p>
+      <div id="threshold"></div>
+    </div>
     <div style="text-align:center">
-      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
+
 
       <script>
       $(function() {
@@ -35,7 +54,49 @@
       $(function() {
         $( "#datepickerEnd" ).datepicker();
       });
+      $(function() {
+          $( "#contagiousness" ).slider({
+            orientation: "horizontal",
+            range: "min",
+            max: 10,
+            value: 5,
+            min: 1,
+            name: 'contagiousness',
+            slide: function(e,ui) {
+              $('#contval').html(ui.value);
+              $('#contval').attr('value', ui.value);
+            }
+          });
+          $( "#threshold" ).slider({
+            orientation: "horizontal",
+            range: "min",
+            max: 1000,
+            value: 100,
+            min: 10,
+            name: 'threshold',
+            slide: function(e,ui) {
+              $('#threshval').html(ui.value);
+              $('#threshval').attr('value', ui.value);
+            }
+          });
+        });
       </script>
+      <style>
+        #threshold .ui-slider-range {
+          background: #255FA4;
+        }
+        #contagiousness .ui-slider-range { 
+          background-color:#00f556;
+          background-attachment: fixed;
+          width: 200px;
+          filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#00f556, endColorstr=#f7f70c);
+          background-image:-moz-linear-gradient(left, #00f556 0%, #f7f70c 46%,#f23711 80%);
+          background-image:linear-gradient(left, #00f556 0%, #f7f70c 46%,#f23711 80%);
+          background-image:-webkit-linear-gradient(left, #00f556 0%, #f7f70c 46%,#f23711 80%);
+          background-image:-o-linear-gradient(left, #00f556 0%, #f7f70c 46%,#f23711 80%);
+          background-image:-ms-linear-gradient(left, #00f556 0%, #f7f70c 46%,#f23711 80%);
+          background-image:-webkit-gradient(linear, left bottom, right bottom, color-stop(0%,#00f556), color-stop(46%,#f7f70c),color-stop(80%,#f23711));}
+      </style>
 
   </form>
 

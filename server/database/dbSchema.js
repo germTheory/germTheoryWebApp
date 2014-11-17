@@ -47,17 +47,27 @@ var Location = sequelize.define('location', {
 
 var Disease = sequelize.define('disease', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING, allowNull: false }
+  name: { type: Sequelize.STRING, allowNull: false },
+  contagiousness: { type: Sequelize.INTEGER },
+  incubation_period: { type: Sequelize.INTEGER },
+  description: { type: Sequelize.STRING, allowNull: true }
 }, {
   tableName: 'diseases'
 });
 
 var Proximity = sequelize.define('proximity', {
 	id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-	value: { type: Sequelize.FLOAT, allowNull: false }
+	value: { type: Sequelize.FLOAT, allowNull: false },
+  report_id: { type: Sequelize.STRING, allowNull: true }
 }, {
   tableName: 'proximity'
 });
+
+var ProximityReports = sequelize.define('proximity_reports', {
+  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: Sequelize.STRING, allowNull: true },
+  threshold: { type: Sequelize.FLOAT, allowNull: false },
+})
 
 var ReportedCase = sequelize.define('reported_case', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
@@ -67,6 +77,13 @@ var ReportedCase = sequelize.define('reported_case', {
   longitude: { type: Sequelize.FLOAT, allowNull: false }
 }, {
   tableName: 'reported_cases'
+});
+
+UserDisease = sequelize.define('UserDisease', {
+    est_date_of_infection: { type: Sequelize.DATE, allowNull: false },
+    day_of_first_symptoms: { type: Sequelize.DATE, allowNull: false },
+}, {
+  tableName: 'user_diseases'
 });
 
 /*** DEFINE RELATIONSHIPS ***/
@@ -84,8 +101,8 @@ Disease.hasMany(Proximity);
 Proximity.belongsTo(User);
 Proximity.belongsTo(Disease);
 
-Disease.hasMany(User, { joinTableName: 'user_diseases' });
-User.hasMany(Disease, { joinTableName: 'user_diseases' });
+Disease.hasMany(User, { through: UserDisease });
+User.hasMany(Disease, { through: UserDisease });
 
 Disease.hasMany(ReportedCase);
 ReportedCase.belongsTo(Disease);
@@ -151,6 +168,7 @@ var findUserById = function(id, cb){
 module.exports = {
   Location: Location,
   Disease: Disease,
+  UserDisease: UserDisease,
   User: User,
   Proximity: Proximity,
   ReportedCase: ReportedCase,
