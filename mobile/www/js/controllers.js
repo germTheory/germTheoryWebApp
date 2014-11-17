@@ -1,6 +1,4 @@
 angular.module('app.controllers', ['app.services'])
-  .controller('AppCtrl', function($scope) {
-  })
   .controller('AuthCtrl', function($scope) {
   })
   .controller('MapCtrl', function($scope,Geolocation) {
