@@ -1,5 +1,38 @@
 angular.module('app.directives', [])
   .directive('spotsMap', function(Config, $http) {
+    var markers = [];
+    var clusterStyles = [
+      {
+        textColor: 'white',
+        url: 'img/marker.png',
+        height: 35,
+        width: 34
+      },
+      {
+        textColor: 'white',
+        url: 'img/clusters2.png',
+        height: 38,
+        width: 38
+      },
+      {
+        textColor: 'white',
+        url: 'img/clustersbig.png',
+        height: 56,
+        width: 56
+      }
+    ];
+    /**
+     * Add a new report to the map
+     */
+    var addReportToMap = function(report,map){
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(report.latitude, report.longitude),
+        map: map,
+        title:report.description,
+        icon : 'img/marker.png'
+      });
+      markers.push(marker);
+    };
     return {
       restrict: 'E',
       scope: {
@@ -14,34 +47,14 @@ angular.module('app.directives', [])
           var map = new google.maps.Map($element[0], mapOptions);
 
 
-         $http.get(Config.url+'/api/cases').then(function(resp){
-           // Uncomment for fake data
-           //var fake = [
-           //  {
-           //    disease_id: 1,
-           //    latitude: 37.781101 , longitude: -122.412543,
-           //    date: Date.now(),
-           //    description: "Ebola is bad"
-           //  },
-           //  {
-           //    disease_id:1,
-           //    latitude: 37.783068,
-           //    longitude: -122.405505,
-           //    date: Date.now(),
-           //    description: "Ebola is really bad"
-           //  }
-           //];
-           //data = fake;
-           data = resp.data;
-           for(var i = 0; i < data.length; i++){
-             var report = data[i];
-             var marker = new google.maps.Marker({
-               position: new google.maps.LatLng(report.latitude, report.longitude),
-               map: map,
-               title:report.description
-             });
-           }
-
+          $http.get(Config.url+'/api/cases').then(function(resp){
+            data = resp.data;
+            for(var i = 0; i < data.length; i++){
+              var report = data[i];
+              addReportToMap(report,map);
+            }
+            var mcOptions = {gridSize: 50, maxZoom: 15, styles: clusterStyles};
+            var mc = new MarkerClusterer(map, markers, mcOptions);
          });
 
           // Stop the side bar from dragging when mousedown/tapdown on the map
