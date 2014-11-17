@@ -1,5 +1,26 @@
 angular.module('app.directives', [])
   .directive('spotsMap', function(Config, $http) {
+    var markers = [];
+    var clusterStyles = [
+      {
+        textColor: 'white',
+        url: 'img/marker.png',
+        height: 35,
+        width: 34
+      },
+      {
+        textColor: 'white',
+        url: 'img/clusters2.png',
+        height: 38,
+        width: 38
+      },
+      {
+        textColor: 'white',
+        url: 'img/clustersbig.png',
+        height: 56,
+        width: 56
+      }
+    ];
     /**
      * Add a new report to the map
      */
@@ -7,8 +28,10 @@ angular.module('app.directives', [])
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(report.latitude, report.longitude),
         map: map,
-        title:report.description
+        title:report.description,
+        icon : 'img/marker.png'
       });
+      markers.push(marker);
     };
     return {
       restrict: 'E',
@@ -30,7 +53,8 @@ angular.module('app.directives', [])
               var report = data[i];
               addReportToMap(report,map);
             }
-
+            var mcOptions = {gridSize: 50, maxZoom: 15, styles: clusterStyles};
+            var mc = new MarkerClusterer(map, markers, mcOptions);
          });
 
           // Stop the side bar from dragging when mousedown/tapdown on the map
