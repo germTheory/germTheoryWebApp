@@ -1,12 +1,14 @@
 angular.module('app', [
   'ionic',
   'ngCordova',
-  'app.controllers',
-  'app.geo-controller',
+  'app.controllers.common',
+  'app.controllers.geo-location',
+  'app.controllers.settings',
   'app.services.common',
   'app.services.settings',
   'app.services.geo-location',
   'app.directives.map'])
+
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,6 +22,7 @@ angular.module('app', [
       }
     });
   })
+
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('tab', {
