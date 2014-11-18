@@ -39,8 +39,8 @@ angular.module('app.services.geo-location', ['ngCordova'])
       });
 
       bgGeo.configure(successFn, failureFn, {
-        // url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
-        url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
+        url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
+        // url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
         params: {     
           user_id: 1,
           email: "dummy@xyz.com",
