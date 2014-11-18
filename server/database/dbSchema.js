@@ -63,11 +63,10 @@ var Proximity = sequelize.define('proximity', {
   tableName: 'proximity'
 });
 
-var ProximityReports = sequelize.define('proximity_reports', {
+var ProximityReport = sequelize.define('proximity_reports', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING, allowNull: true },
   threshold: { type: Sequelize.FLOAT, allowNull: false },
-
 }, {
   tableName: 'proximity_reports'
 })
@@ -110,6 +109,8 @@ User.hasMany(Disease, { through: UserDisease });
 Disease.hasMany(ReportedCase);
 ReportedCase.belongsTo(Disease);
 
+Disease.hasMany(ProximityReport);
+ProximityReport.belongsTo(Disease);
 /*** Authenticate, connect, and create tables if they are not already defined ***/
 
 sequelize
@@ -174,6 +175,7 @@ module.exports = {
   UserDisease: UserDisease,
   User: User,
   Proximity: Proximity,
+  ProximityReport: ProximityReport,
   ReportedCase: ReportedCase,
   sequelize: sequelize, // we expose this for testing
   saveUser: saveUser,

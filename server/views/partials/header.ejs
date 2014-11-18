@@ -1,14 +1,26 @@
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="container">
-        <div class="navbar-brand">Germ Tracker</div>
+        <a href='/users'><div class="navbar-brand"></div></a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/users">Users</a></li>
                 <li><a href="/cases">Reported Cases</a></li>
-                <li><a href="/reports">Reports</a></li>
+                <li><a href="/reports">User Risk Reports</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/auth/logout">Logout</a></li>
             </ul>
         </div>
+    <style>
+        .navbar-brand {
+            width: 170px;
+            background: url("/images/germTheoryLogo.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            max-height: 40px;
+            overflow: visible;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+    </style>
 </nav>
