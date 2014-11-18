@@ -8,10 +8,10 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
       LocalStorage.set('locationTracking', setting);
 
       if (setting) {
-        console.log("Starting geolocation background service");
+        alert("Starting geolocation background service");
         BackgroundGeoLocation.startBGLocationService();
       } else {
-        console.log("Stopping geolocation background service");
+        alert("Stopping geolocation background service");
         BackgroundGeoLocation.stopBGLocationService();
       }
     };

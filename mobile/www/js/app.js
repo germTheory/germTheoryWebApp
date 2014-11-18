@@ -2,7 +2,6 @@ angular.module('app', [
   'ionic',
   'ngCordova',
   'app.controllers.common',
-  'app.controllers.geo-location',
   'app.controllers.settings',
   'app.services.common',
   'app.services.geo-location',
