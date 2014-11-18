@@ -65,16 +65,14 @@ angular.module('app', [
           }
         }
       })
-      .state('settings', {
+      .state('tab.settings', {
         url: '/settings',
-        templateUrl: 'templates/settings.html',
-        controller: 'SettingsCtrl'
-/*        views: {
+        views: {
           'tab-settings': {
             templateUrl: 'templates/settings.html',
             controller: 'SettingsCtrl'
           }
-        }*/
+        }
       });
 
     $urlRouterProvider.otherwise('/tab/map');
