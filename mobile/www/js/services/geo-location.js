@@ -36,9 +36,9 @@ angular.module('app.services.geo-location', ['ngCordova'])
       });
 
       bgGeo.configure(successFn, failureFn, {
-        // url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
-        url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
-        params: {
+        url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
+        // url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
+        params: {     
           user_id: 1,
           email: "dummy@xyz.com",
           gender: "N",
@@ -47,15 +47,17 @@ angular.module('app.services.geo-location', ['ngCordova'])
         },
         headers: {
         },
-        desiredAccuracy: 10,
-        stationaryRadius: 10,
-        distanceFilter: 30,
+        desiredAccuracy: 100,                       // set [0, 10, 100, 1000],  
+                                                    // 0:  most aggressive, most accurate, worst battery drain,
+                                                    // 1000:  least aggressive, least accurate, best for battery.
+        stationaryRadius: 5,                        // radius around user location in meters
+        distanceFilter: 30,                         // if it changed by 5 m/s, we'll reconfigure our pace.
         notificationTitle: 'Background tracking',   // Android only, customize the title of the notification
         notificationText: 'ENABLED',                // Android only, customize the text of the notification
         // activityType: "AutomotiveNavigation",    // iOS-only
-        locationTimeout: 60,                        // The minimum time interval between location updates, in seconds.
-        debug: true,                                // enable this hear sounds for background-geolocation life-cycle.
-        stopOnTerminate: true                       // set to false if it should continue after the app terminates
+        locationTimeout: 30,                        // The minimum time interval between location updates, in seconds.
+        debug: false,                               // enable this hear sounds for background-geolocation life-cycle.
+        stopOnTerminate: false                      // set to false if it should continue after the app terminates
       });
 
       // Turn ON the background-geolocation system.
