@@ -18,19 +18,19 @@ var _createReport = function(req, res, next){
 	data.endTime = new Date(endArr[2], endArr[0] - 1, endArr[1]);
 	// Find DiseaseId
 	db.Disease.find({where: {name: data.diseaseName} }).then(function(disease){
-		db.ProximityReport.create({ disease_id: disease[0], threshold: data.threshold, name: data.reportName })
+		db.ProximityReport.create({ disease_id: disease.dataValues.id, threshold: data.threshold, name: data.reportName })
 	});
 	var spawn = require('child_process').spawn;
-	python = spawn('python', ['./../processing/locations.py', JSON.stringify(data)]);
+	
+	python = spawn('python3.4', ['./server/processing/locations.py', JSON.stringify(data)]);
 	python.stdout.on('data', function (data) {
-	  console.log('stdout: ' + data);
+	  console.log('stdout DATA IS: ' + data);
 	});
+
 	python.stderr.on('data', function (data) {
 	  console.log('stderr: ' + data);
 	});
-
-
-	res.render('reports');
+	res.redirect('/reports');
 };
 
 module.exports = {

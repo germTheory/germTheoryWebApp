@@ -1,6 +1,6 @@
 <% layout('layout') -%>
 <div class="container">
-  <h1>Proximity Reports</h1>
+  <h1>User Risk Reports</h1>
   <div class="col-sm-6">
     <a href="/newReportedCase">
     <button class="btn btn-success btn-md" type="submit">Create New Report</button>
@@ -10,17 +10,19 @@
   <div class="container">
     <table class="table">
       <tr>
-        <th>Report ID</th>
+        <th>Report Id</th>
+        <th>Report Name</th>
+        <th>Disease Name</th>
         <th>Created Date</th>
       </tr>
+      <% results.forEach(function(report) { %>
       <tr>
-        <td><a href="#">000001</a></td>
-        <td><%= new Date() %></td>
+        <td><a href="#"><%= report.id %></a></td>
+        <td><%= report.name %></td>
+        <td><%= report.disease_id %></td>
+        <td><%= report.created_at %></td>
       </tr>
-      <tr>
-        <td><a href="#">000002</a></td>
-        <td><%= new Date() %></td>
-      </tr>
+      <% }) %>
     </table>
   </div>
 </div>

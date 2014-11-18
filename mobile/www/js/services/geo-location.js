@@ -1,4 +1,7 @@
 angular.module('app.services.geo-location', ['ngCordova'])
+
+  // This background geo location is for the background location- 
+  // tracking service
   .factory('BackgroundGeoLocation', function($cordovaGeolocation){
 
     var bgGeo = window.plugins.backgroundGeoLocation;
@@ -47,11 +50,11 @@ angular.module('app.services.geo-location', ['ngCordova'])
         },
         headers: {
         },
-        desiredAccuracy: 100,                       // set [0, 10, 100, 1000],  
+        desiredAccuracy: 10,                        // set [0, 10, 100, 1000],  
                                                     // 0:  most aggressive, most accurate, worst battery drain,
                                                     // 1000:  least aggressive, least accurate, best for battery.
-        stationaryRadius: 5,                        // radius around user location in meters
-        distanceFilter: 30,                         // if it changed by 5 m/s, we'll reconfigure our pace.
+        stationaryRadius: 1,                        // radius around user location in meters
+        distanceFilter: 5,                          // if it changed by 5 m/s, we'll reconfigure our pace.
         notificationTitle: 'Background tracking',   // Android only, customize the title of the notification
         notificationText: 'ENABLED',                // Android only, customize the text of the notification
         // activityType: "AutomotiveNavigation",    // iOS-only
@@ -75,6 +78,10 @@ angular.module('app.services.geo-location', ['ngCordova'])
       stopBGLocationService: stopBGLocationService
     };
   })
+  
+  // This Geolocation is for the Mapping of
+  // high risk areas centered around the user's 
+  // current location
   .factory('Geolocation', function ($q) {
     var log = [];
     var waitForDevice = $q.defer();
