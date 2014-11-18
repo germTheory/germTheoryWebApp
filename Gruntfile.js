@@ -58,7 +58,7 @@ module.exports = function(grunt) {
       setupDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
-          return 'psql -U postgres -l | grep ' + DBName + ' | wc -l';
+          return 'psql -l | grep ' + DBName + ' | wc -l';
         },
         options: {
           callback: function(err, stdout) {
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
       createDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
-          return 'psql -U postgres -c "CREATE DATABASE ' + DBName + '"';
+          return 'psql -c "CREATE DATABASE ' + DBName + '"';
         },
         options: {
           callback: function(err, stdout) {
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
       dropDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
-          return 'psql -U postgres -c "DROP DATABASE ' +  DBName + '"';
+          return 'psql -c "DROP DATABASE ' +  DBName + '"';
         },
         options: {
           callback: function(err, stdout) {
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
       },
       checkDB: {
         command: function(DBName) {
-          return 'psql -U postgres -l | grep ' + DBName + ' | wc -l';
+          return 'psql -l | grep ' + DBName + ' | wc -l';
         }
       }
     }
