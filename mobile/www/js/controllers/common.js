@@ -1,7 +1,7 @@
 angular.module('app.controllers.common', ['app.services.common'])
   .controller('AuthCtrl', function($scope) {
   })
-  .controller('MapCtrl', function($scope,Geolocation) {
+  .controller('MapCtrl', function($scope, Geolocation) {
     $scope.locations = [];
     $scope.onMapCreated = function(map){
       Geolocation.getCurrentPosition().then(function(pos){

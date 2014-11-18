@@ -1,4 +1,4 @@
-angular.module('app.services.geo-location', [])
+angular.module('app.services.geo-location', ['ngCordova'])
   .factory('BackgroundGeoLocation', function($cordovaGeolocation){
 
     var bgGeo = window.plugins.backgroundGeoLocation;

@@ -5,8 +5,8 @@ angular.module('app', [
   'app.controllers.geo-location',
   'app.controllers.settings',
   'app.services.common',
-  'app.services.settings',
   'app.services.geo-location',
+  'app.services.settings',
   'app.directives.map'])
 
   .run(function ($ionicPlatform) {
