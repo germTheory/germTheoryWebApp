@@ -1,13 +1,13 @@
 <ion-view title="Settings">
-  <ion-content ng-controller="SettingsCtrl">
+  <ion-content>
     <ul class="list" style='padding:10px;'>
       <br><br>
-      <li class="item item-toggle"><b>Our Mission</li>
+      <li class="item item-toggle">Our Mission</li>
       <li class="item item-toggle">Contact</li>
       <li class="item item-toggle">Frequently Asked Questions</li>
       <li class="item item-toggle">Push Notifications
-        <label class="toggle toggle-balanced">
-          <input type="checkbox" ng-model="togglePush">
+        <label class="toggle toggle-calm">
+          <input type="checkbox">
           <div class="track">
             <div class="handle"></div>
           </div>
@@ -15,15 +15,15 @@
       </li>
       <li class="item item-toggle">Location Tracking
         <label class="toggle toggle-balanced">
-          <input type="checkbox" ng-checked="locationTracking" ng-click="toggleLocationTracking()">
+          <input type="checkbox" ng-checked="{{ locationTracking }}" ng-click="toggleLocationTracking($event)">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
       </li>
-      <li class="item item-toggle">Facebook Connect</b>
-        <label class="toggle toggle-balanced">
-          <input type="checkbox" ng-model="toggleFb">
+      <li class="item item-toggle">Facebook Connect
+        <label class="toggle toggle-energized">
+          <input type="checkbox">
           <div class="track">
             <div class="handle"></div>
           </div>

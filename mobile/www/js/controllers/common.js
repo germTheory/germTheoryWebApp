@@ -1,7 +1,7 @@
-angular.module('app.controllers', ['app.services'])
+angular.module('app.controllers.common', ['app.services.common'])
   .controller('AuthCtrl', function($scope) {
   })
-  .controller('MapCtrl', function($scope,Geolocation) {
+  .controller('MapCtrl', function($scope, Geolocation) {
     $scope.locations = [];
     $scope.onMapCreated = function(map){
       Geolocation.getCurrentPosition().then(function(pos){
@@ -13,14 +13,6 @@ angular.module('app.controllers', ['app.services'])
   .controller('MyRiskCtrl', function($scope) {
   })
   .controller('ReportCtrl', function($scope) {
-  })
-  .controller('SettingsCtrl', function($scope, Settings) {
-    $scope.locationTracking = Settings.getLocationTracking();
-
-    $scope.toggleLocationTracking = function() {
-      $scope.locationTracking = !$scope.locationTracking;
-      Settings.setLocationTracking($scope.locationTracking);
-    }
   })
   .controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
     $scope.toggleTrack = LocalStorage.get('tracking');
