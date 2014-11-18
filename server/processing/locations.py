@@ -92,7 +92,6 @@ def mapcount(count, contagiousness, threshold):
     # y = 1 - exp(-bx), where b = con/(thresh*300) and x = count
     return 1 - math.exp((-1)*(contagiousness/(threshold * (modifier/timeInterval) * dayDifference )) * count)
 
-
 # used for convenience in case the schema is changed later, saves indexes of location values
 locId = 0
 locUserId = 6

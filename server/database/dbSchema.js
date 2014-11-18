@@ -67,6 +67,9 @@ var ProximityReports = sequelize.define('proximity_reports', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: Sequelize.STRING, allowNull: true },
   threshold: { type: Sequelize.FLOAT, allowNull: false },
+
+}, {
+  tableName: 'proximity_reports'
 })
 
 var ReportedCase = sequelize.define('reported_case', {

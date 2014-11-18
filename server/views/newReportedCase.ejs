@@ -9,15 +9,15 @@
   <form action="/reports" method="POST">
     <div class="form-group">
       <label>Report Name</label>
-      <input type="text" id="reportName" class="form-control" name="reportName">
+      <input type="text" id="reportName" class="form-control" name="reportName" required>
     </div>
     <div class="form-group">
       <label>Start Time</label>
-      <input type="text" id="datepickerStart" class="form-control" name="datepickerStart">
+      <input type="text" id="datepickerStart" class="form-control" name="datepickerStart" required>
     </div>
     <div class="form-group">
       <label>End Time</label>
-      <input type="text" id="datepickerEnd" class="form-control" name="datapickerEnd">
+      <input type="text" id="datepickerEnd" class="form-control" name="datapickerEnd" required>
     </div>
     <div class="form-group">
       <label>Name (Leave Blank to Create a Report for All Users)</label>
@@ -32,13 +32,13 @@
       </select>
     </div>
     <div class="form-group">
-      <label>Disease Contagiousness: <span id="contval" name="contagiousness" value="5">5</span></label>
+      <label>Disease Contagiousness: <input type="hidden" name="contagiousness" id="hiddencontval" value="5"></input><span id="contval">5</span></label>
       <br>
       <!-- <input type="range" name="contagiousness" id="slider" value="5" min="1" max="10"> -->
       <div id="contagiousness"></div>
     </div>
     <div class="form-group">
-      <label>Distance Threshold: <span id="threshval" name="threshold" value="100">100</span></label>
+      <label>Distance Threshold (in feet): <input type="hidden" id="hiddenthreshval" name="threshold" value="100"></input> <span id="threshval" name="threshold" value="100">100</span></label>
       <p>This value indicates the proximity required for a user to be considered at risk of infection. A higher threshold will list more users as "at risk."</p>
       <div id="threshold"></div>
     </div>
@@ -64,7 +64,7 @@
             name: 'contagiousness',
             slide: function(e,ui) {
               $('#contval').html(ui.value);
-              $('#contval').attr('value', ui.value);
+              $('#hiddencontval').attr('value', ui.value);
             }
           });
           $( "#threshold" ).slider({
@@ -76,7 +76,7 @@
             name: 'threshold',
             slide: function(e,ui) {
               $('#threshval').html(ui.value);
-              $('#threshval').attr('value', ui.value);
+              $('#hiddenthreshval').attr('value', ui.value);
             }
           });
         });
