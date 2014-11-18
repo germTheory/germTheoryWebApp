@@ -8,7 +8,7 @@ var seed = require('./server/config/seed.js')
 var users=[];
 var userIds = [];
 for(var i = 1; i < 101; i++){
-	users.push({ id: i, name: 'User '+i, gender: 'M', token: 'sometoken', email: 'user'+i+'@user.com' });
+	users.push({ name: 'User '+i, gender: 'M', token: 'sometoken', email: 'user'+i+'@user.com' });
 	userIds.push(i);
 }
 
