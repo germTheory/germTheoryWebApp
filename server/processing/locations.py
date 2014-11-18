@@ -92,7 +92,6 @@ def mapcount(count, contagiousness, threshold):
     # y = 1 - exp(-bx), where b = con/(thresh*300) and x = count
     return 1 - math.exp((-1)*(contagiousness/(threshold * (modifier/timeInterval) * dayDifference )) * count)
 
-
 # used for convenience in case the schema is changed later, saves indexes of location values
 locId = 0
 locUserId = 6
@@ -111,10 +110,10 @@ cur = conn.cursor()
 cur.execute('SELECT * FROM diseases WHERE name = %s;', (diseaseName,))
 diseaseData = cur.fetchall()[0] # get the first item in the returned function
 diseaseId = diseaseData[0]
-
-cur.execute('SELECT * FROM users WHERE name = %s', (userName,))
-userData = cur.fetchall()[0]
-userId = userData[0]
+if userName != None:
+    cur.execute('SELECT * FROM users WHERE name = %s', (userName,))
+    userData = cur.fetchall()[0]
+    userId = userData[0]
 
 # find users that have been confirmed infected with the disease
 cur.execute('SELECT * FROM user_diseases WHERE disease_id = %s;', (diseaseId,))

@@ -41,7 +41,7 @@ module.exports = function (app, express) {
   app.engine('ejs', engine);
   app.set('view engine', 'ejs');
 
-  app.use(express.static(__dirname + './../pubic'));
+  app.use(express.static(__dirname + './../public'));
   app.use("/mobile", express.static(__dirname + "./../../mobile/www"));
 
   app.use('/api/users', userRouter);
