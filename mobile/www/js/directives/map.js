@@ -1,4 +1,4 @@
-angular.module('app.directives', [])
+angular.module('app.directives.map', [])
   .directive('spotsMap', function(Config, $http) {
     var markers = [];
     var clusterStyles = [
