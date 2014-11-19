@@ -18,8 +18,12 @@ module.exports = {
   },
 
   createNewCase: function(req, res, next) {
-    var splitDate = req.body.date.split('/');
-    var newDate = new Date(splitDate[2], splitDate[0] - 1, splitDate[1]);
+    if( req.body.date ){
+      var splitDate = req.body.date.split('/');
+      var newDate = new Date(splitDate[2], splitDate[0] - 1, splitDate[1]);
+    } else {
+      var newDate = new Date();
+    }
 
     ReportedCase.create({
       disease_id: parseInt(req.body.disease_id),
@@ -29,12 +33,11 @@ module.exports = {
       description: req.body.description })
       .success(function(reportedCase) {
         res.setHeader('Content-Type', 'application/json');
-        res.status(201).send(reportedCase.dataValues);
+        res.status(201).redirect('/cases');
       })
       .error(function(err) {
         res.status(400).send({ error: err.name, message: err.message });
       });
-    res.redirect('/cases');
   },
 
   showAllReportedCase: function(req, res, next) {
