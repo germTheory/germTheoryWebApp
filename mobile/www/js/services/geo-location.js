@@ -123,9 +123,14 @@ angular.module('app.services.geo-location', ['ngCordova'])
           throw "missing success callback in observer";
         }
       },
+      /**
+       * Returns a promise of the users position.
+       * @returns a promise
+       */
       getCurrentPosition: function() {
         var q = $q.defer();
-        navigator.geolocation.getCurrentPosition(
+
+        window.navigator.geolocation.getCurrentPosition(
           function(result) {
             q.resolve(result);
           },
