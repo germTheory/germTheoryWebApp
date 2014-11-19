@@ -25,9 +25,9 @@
     </div>
     <div class="form-group">
       <label>Disease</label>
-      <select name="disease_id">
+      <select name="diseaseName">
         <% diseases.forEach(function(disease) { %>
-          <option value="<%= disease.id %>" selected><%= disease.name %></option> 
+          <option value="<%= disease.name %>" selected><%= disease.name %></option> 
         <% }); %>
       </select>
     </div>
