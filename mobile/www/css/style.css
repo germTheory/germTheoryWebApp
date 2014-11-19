@@ -13,7 +13,7 @@ spots-map {
 .userStats {
   position: relative; 
   text-align:center; 
-  margin:70px 15px 15px 15px; 
+  margin:26px 15px 15px 15px; 
   width:92%; 
   height:185px; 
   border:solid; 
@@ -39,7 +39,7 @@ spots-map {
 .name {
   color: #6B6B6B;
   position:relative;
-  width:50%;
+  width:80%;
   text-align:left;
   border:none; 
 

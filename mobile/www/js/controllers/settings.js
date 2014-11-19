@@ -1,8 +1,16 @@
 angular.module('app.controllers.settings', [])
   .controller('SettingsCtrl', function($scope, Settings) {
-
-    $scope.name = Settings.getUsersName();
+    $scope.asdf = "aaaa";
     $scope.locationTracking = Settings.getLocationTracking();
+
+    $scope.getUsername = function() {
+      // User id hardcoded until we have a way to get id of current user from OAuth or local login
+      Settings.getUsername('1')
+        .then(function(user) {
+          $scope.userName = user.name;
+          $scope.userEmail = user.email;
+        });
+    };
 
     /*
      * Note: There is a bug in Ionic where ng-click fires twice on clicking a button
@@ -15,4 +23,6 @@ angular.module('app.controllers.settings', [])
       $scope.locationTracking = ($scope.locationTracking === true) ? false: true;
       Settings.setLocationTracking($scope.locationTracking);
      }
+
+     $scope.getUsername();
   });

@@ -1,6 +1,6 @@
 angular.module('app.services.geo-location', ['ngCordova'])
 
-  // This background geo location is for the background location- 
+// This background geo location is for the background location- 
   // tracking service
   .factory('BackgroundGeoLocation', function($cordovaGeolocation){
     
@@ -79,6 +79,7 @@ angular.module('app.services.geo-location', ['ngCordova'])
     };
 
   })
+
   
   // This Geolocation is for the Mapping of
   // high risk areas centered around the user's 
