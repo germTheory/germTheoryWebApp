@@ -1,5 +1,7 @@
 angular.module('app.controllers.settings', [])
   .controller('SettingsCtrl', function($scope, Settings) {
+
+    $scope.name = Settings.getUsersName();
     $scope.locationTracking = Settings.getLocationTracking();
 
     /*
