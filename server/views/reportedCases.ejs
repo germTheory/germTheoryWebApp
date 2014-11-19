@@ -1,8 +1,8 @@
 <% layout('layout') -%>
-<h3>Reported Cases</h3>
+<h1>Outbreak Location Reports</h1>
 <div class="col-sm-6">
   <a href="./newReportedCase">
-    <button class="btn btn-success btn-md" type="submit">Create New Reported Case</button>
+    <button class="btn btn-success btn-md" type="submit">Report a new Outbreak Location</button>
   </a>
 </div>
 <br/><br/>
@@ -11,12 +11,12 @@
     <tr>
       <th>ID</th>
       <th>Disease Name</th>
+      <th>Location</th>
       <th>Date</th>
-       <th>Location</th>
       <th>Description</th>
     </tr>
     <% cases.forEach(function(reported_case) { %>
-    <tr>
+    <tr class="row-item">
       <td><%= reported_case.id %></td>
       <td><%= reported_case.disease.name %></td>
       <td>(<%= reported_case.latitude %>, <%= reported_case.longitude %>)</td>

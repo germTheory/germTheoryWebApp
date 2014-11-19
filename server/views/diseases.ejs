@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<div class="col-md-8">
+  <h1>Disease Information</h1>
+  <div class="container">
+    <table class="table">
+      <tr>
+        <th>Disease Id</th>
+        <th>Disease Name</th>
+        <th>Contagiousness</th>
+        <th>Incubation Period</th>
+        <th>Description</th>
+      </tr>
+      <% diseases.forEach(function(disease) { %>
+	      <tr class='item'>
+	        <td><%= disease.id %></td>
+	        <td><a href= <%='/diseases/' + disease.id %>><%= disease.name %></a></td>
+	        <td><%= disease.contagiousness %></td>
+	        <td><%= disease.incubation_period %> days</td>
+	        <td><%= disease.description %></td>
+	      </tr>
+      <% }) %>
+    </table>
+  </div>
+</div>
