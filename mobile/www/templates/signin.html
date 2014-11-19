@@ -11,6 +11,7 @@
           <input type="password" ng-model='user.password' required>
         </label>
         <button class="button button-full button-positive" ng-disabled="signinForm.$invalid">Login</button>
+        <button ng-click="logout()">Logout</button>
       </div>
     </form>
   </ion-content>

@@ -1,5 +1,5 @@
 angular.module('app.services.auth', [])
-  .factory('AuthService', function ($http, $location, $window) {
+  .factory('AuthService', function AuthService($http, $location, AuthTokenService) {
 
     var signin = function (user) {
       return $http({
@@ -8,7 +8,8 @@ angular.module('app.services.auth', [])
         data: user
       })
         .then(function (resp) {
-          return resp.data.token;
+          AuthTokenService.setToken(resp.data.token);
+          return resp;
         });
     };
 
@@ -19,17 +20,18 @@ angular.module('app.services.auth', [])
         data: user
       })
         .then(function (resp) {
-          return resp.data.token;
+          AuthTokenService.setToken(resp.data.token);
+          return resp;
         });
     };
 
     var isAuth = function () {
-      return !!$window.localStorage.getItem('auth-token');
+      return !!AuthTokenService.getToken();
     };
 
     var signout = function () {
-      $window.localStorage.removeItem('auth-token');
-      $location.path('/login');
+      AuthTokenService.setToken();
+      $location.path('/signin');
     };
 
     return {
@@ -39,14 +41,35 @@ angular.module('app.services.auth', [])
       signout: signout
     };
   })
-  .factory('AttachTokens', function ($window) {
+  .factory('AuthTokenService', function AuthTokenFactory($window) {
+    var store = $window.localStorage;
+    var key = 'auth-token';
+
+    var getToken = function() {
+      return store.getItem(key);
+    };
+
+    var setToken = function(token) {
+      if (token) {
+        store.setItem(key, token);
+      } else {
+        store.removeItem(key);
+      }
+    };
+
+    return {
+      getToken: getToken,
+      setToken: setToken
+    };
+  })
+  .factory('AuthInterceptor', function AttachTokens(AuthTokenService) {
     // this is an $httpInterceptor
     // its job is to stop all out going request
     // then look in local storage and find the user's token
     // then add it to the header so the server can validate the request
     var attach = {
       request: function (object) {
-        var jwt = $window.localStorage.getItem('auth-token');
+        var jwt = AuthTokenService.getToken();
         if (jwt) {
           object.headers['x-access-token'] = jwt;
         }
@@ -54,5 +77,6 @@ angular.module('app.services.auth', [])
         return object;
       }
     };
+
     return attach;
   });

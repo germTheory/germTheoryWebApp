@@ -53,9 +53,9 @@ angular.module('app', [
           }
         }
       })
-      .state('login', {
-        url: '/login',
-        templateUrl: 'templates/login.html',
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'templates/signin.html',
         controller: 'AuthCtrl'
       })
       .state('signup', {
@@ -64,10 +64,10 @@ angular.module('app', [
         controller: 'AuthCtrl'
       });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/signin');
 
     // Add our $httpInterceptor into the array of interceptors here
-    $httpProvider.interceptors.push('AttachTokens');
+    $httpProvider.interceptors.push('AuthInterceptor');
   })
 
   .run(function ($ionicPlatform, $rootScope, $location, AuthService) {
