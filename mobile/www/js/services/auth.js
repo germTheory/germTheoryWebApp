@@ -25,7 +25,7 @@ angular.module('app.services.auth', [])
         });
     };
 
-    var isAuth = function () {
+    var isAuthenticated = function () {
       return !!AuthTokenService.getToken();
     };
 
@@ -37,7 +37,7 @@ angular.module('app.services.auth', [])
     return {
       signin: signin,
       signup: signup,
-      isAuth: isAuth,
+      isAuthenticated: isAuthenticated,
       signout: signout
     };
   })
@@ -62,21 +62,22 @@ angular.module('app.services.auth', [])
       setToken: setToken
     };
   })
-  .factory('AuthInterceptor', function AttachTokens(AuthTokenService) {
+  .factory('AuthInterceptor', function AuthInterceptor(AuthTokenService) {
     // this is an $httpInterceptor
     // its job is to stop all out going request
     // then look in local storage and find the user's token
     // then add it to the header so the server can validate the request
-    var attach = {
-      request: function (object) {
+    var addToken = {
+      request: function (config) {
         var jwt = AuthTokenService.getToken();
         if (jwt) {
-          object.headers['x-access-token'] = jwt;
+          config.headers = config.headers || {};
+          config.headers['x-access-token'] = jwt;
         }
-        object.headers['Allow-Control-Allow-Origin'] = '*';
-        return object;
+        config.headers['Allow-Control-Allow-Origin'] = '*';
+        return config;
       }
     };
 
-    return attach;
+    return addToken;
   });
