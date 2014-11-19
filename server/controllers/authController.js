@@ -29,7 +29,10 @@ module.exports = {
     var username = req.body.username;
     var password = req.body.password;
 
-    User.find({ where: { email: username }})
+    User.find({
+      where: { email: username },
+      attributes: ['id', 'name', 'gender', 'email', 'created_at', 'updated_at']
+      })
       .then(function (user) {
         if (!user) {
           next(new Error('User does not exist'));
@@ -45,7 +48,7 @@ module.exports = {
               }
             });*/
           var token = jwt.encode(user, jwtSecret);
-          res.json({token: token});
+          res.json({token: token, user: user});
         }
       })
       .fail(function (error) {
@@ -72,7 +75,15 @@ module.exports = {
       .then(function(user) {
         // create token to send back for auth
         var token = jwt.encode(user, jwtSecret);
-        res.json({token: token});
+        var newUser = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          created_at: user.created_at,
+          updated_at: user.updated_at,
+          gender: user.gender
+        };
+        res.json({token: token, user: newUser});
       })
       .fail(function (error) {
         next(error);

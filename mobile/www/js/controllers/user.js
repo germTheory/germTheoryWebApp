@@ -6,7 +6,7 @@ angular.module('app.controllers.user', [])
     $scope.signin = function() {
       AuthService.signin($scope.user)
         .then(function (resp) {
-          //$scope.user = resp.data.user;
+          $scope.user = resp.data.user;
           $location.path('/tab/map');
         })
         .catch(function (error) {
@@ -17,7 +17,7 @@ angular.module('app.controllers.user', [])
     $scope.signup = function() {
       AuthService.signup($scope.user)
         .then(function (resp) {
-          //$scope.user = resp.data.user;
+          $scope.user = resp.data.user;
           $location.path('/tab/map');
         })
         .catch(function (error) {
