@@ -1,18 +1,5 @@
 body {
-  margin: 0;
-  margin-top: 10px;
-  font-family: arial, sans-serif;
-}
-
-a {
-  color: #333;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-h1 {
-  font-style: italic;
-  margin-bottom: 10px;
+  margin-top: 55px;
 }
 
 .navigation {
@@ -101,7 +88,7 @@ form {
   margin: 10px;
 }
 
-form input[type=text], form input[type=password] {
+form input[type=password] {
   width: 360px;
   display: block;
   font-size: 13px;
@@ -134,4 +121,8 @@ form input[type=text], form input[type=password] {
 
 .creator .message {
   clear: both;
+}
+
+tr.row-item:hover {
+  background-color: #F1F1F1;
 }

@@ -78,11 +78,11 @@ describe('Reported Cases Test Suite', function() {
     });
   });
 
-  describe('POST: /api/cases', function() {
+  xdescribe('POST: /api/cases', function() {
     it('should return an error message upon invalid request', function(done) {
       request(app)
         .post('/api/cases')
-        .send( {disease_id: disease_id })
+        .send( {disease_id: 500 })
         .expect(400)
         .end(function(req, res) {
           expect(res.body.message).to.be.equal('Validation error');
@@ -97,7 +97,7 @@ describe('Reported Cases Test Suite', function() {
           disease_id: disease_id,
           latitude: 14.252,
           longitude: 20.523,
-          date: Date.now(),
+          date: '11/12/2014',
           description: "Ebola is really bad"
         })
         .expect(201)

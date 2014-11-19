@@ -1,9 +1,5 @@
 import datetime
 
-# FOR TESTING
-# user1Data = [{'time': datetime.datetime(2014, 11, 9, 22, 15, 9), 'coords': (50.123344551112, 80.128888381812)}, {'time': datetime.datetime(2014, 11, 9, 22, 20, 9), 'coords': (50.1233445514612, 80.128888381922)}]
-
-
 # Function takes a variety of different timed data and returns data points 
 # userData: a set of position data for a specific user(sorted by time)
 # times: Times for which users should be compared
@@ -67,6 +63,45 @@ def approxBinarySearch(tupleArray, targetTime, lo, hi = None):
             return [mid]
     return []
 
-# updatedUser1Data = normalize(user1Data, [datetime.datetime(2014, 11, 9, 22, 17, 9)])
-# print("UPDATED USER1 INFO")
-# print(updatedUser1Data)
+
+def parseData(allData, infectedUserList, nearUserList, interval, startDateTime, endDateTime):
+    # iterate through data, assigning it to dictionaries, one for infected people and another for regular users
+    # each item in data looks like: (id, latitude, longitude, created_at, updated_at, user_id)
+    proximalUserLocs = {}
+    infectedLocs = {}
+    extras = {}
+    for userEntry in allData:
+        currentTime = userEntry[3]
+        lat = userEntry[1]
+        long = userEntry[2]
+        userId = userEntry[0]
+        # if already in our data structure, we can assign new location coordinates
+        if userId in proximalUserLocs:
+            proximalUserLocs[userId].append( { 'coords': (lat, long), 'time': currentTime } )
+        elif userId in infectedLocs:
+            infectedLocs[userId].append( { 'coords': (lat, long), 'time': currentTime } )
+        elif userId in extras:
+            continue
+        else:
+            if userId in infectedUserList:
+                infectedLocs[userId] = [ { 'coords': (lat, long), 'time': currentTime } ]
+            elif userId in nearUserList:
+                proximalUserLocs[userId] = [ { 'coords': (lat, long), 'time': currentTime } ]
+            else:
+              extras[userId] = 0; #people who have not been in contact get a zero
+    times = []
+    current = startDateTime
+    interval = datetime.timedelta(0, interval)
+    while current <= endDateTime:
+        times.append(current)
+        current += interval
+    for userEntry in proximalUserLocs:
+        # sort user data and then normalize it for 2 minute intervals
+        proximalUserLocs[userEntry] = normalize(sorted(proximalUserLocs[userEntry], key=lambda k: k['time']), times)
+        print("Processed User %s" % (userEntry))
+    print('ALL USERS PROCESSED')
+    for infectedEntry in infectedLocs:
+        infectedLocs[infectedEntry] = normalize(sorted(infectedLocs[infectedEntry], key=lambda k: k['time']), times)
+        print("Processed Infected %s" % (infectedEntry))
+    print('ALL INFECTED PRE-PROCESSED...now for the hard part.')
+    return (proximalUserLocs, infectedLocs, extras, len(times))

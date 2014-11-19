@@ -1,5 +1,5 @@
 <% layout('layout') -%>
-<h3>Users</h3>
+<h1>Current Users</h1>
 <div class="container">
   <table class="table">
     <tr>
@@ -11,7 +11,7 @@
       <th>Created Date</th>
     </tr>
     <% results.forEach(function(user) { %>
-    <tr>
+    <tr class="row-item">
       <td><%= user.id %></td>
 
       <td><a href= <%='/users/' + user.id %>><%= user.name %></a></td>
