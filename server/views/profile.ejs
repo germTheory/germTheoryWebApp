@@ -39,7 +39,11 @@
       <td><%= user.id %></td>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= user.dataValues.proximities[0].value %></td>
+      <% if (user.proximities.length > 0 && user.proximities[0] !== undefined) { %>
+      <td><%= user.proximities[0].value %></td>
+      <% } else { %>
+      <td><%= "N/A" %></td>
+      <% } %>
     </tr>
   </table>
 </div>
