@@ -21,21 +21,20 @@ angular.module('app.services.common', [])
     }
   }])
   .factory('RiskIndexService', function($http) {
-    var getMyRiskIndex = function() {
-      var userId = '1';
+    var getRiskIndex = function(userId) {
       return $http({
         method: 'GET',
-        url: 'http://localhost:4568/api/proximity/users/' + userId
+        url: '/api/proximity/users/' + userId
       })
         .then(function(resp) {
           return resp.data;
         })
         .catch(function(error) {
-          console.error(error);
+          throw error;
         });
     };
 
     return {
-      getMyRiskIndex: getMyRiskIndex
+      getRiskIndex: getRiskIndex
     };
   });

@@ -13,9 +13,13 @@ angular.module('app.controllers.common', [])
   .controller('MyRiskCtrl', function($scope, RiskIndexService) {
     $scope.data = {};
     $scope.getMyRiskIndex = function() {
-      RiskIndexService.getMyRiskIndex()
+
+      // TODO: hardcode userId for now until we fully implement authentication
+      var userId = '1';
+
+      RiskIndexService.getRiskIndex(userId)
         .then(function(resp) {
-          var indexValue = resp[0] || 0;
+          var indexValue = resp || 0;
 
           // Note: Hardcode index threshold values for now
           if (indexValue >= 0.75) {
@@ -27,7 +31,7 @@ angular.module('app.controllers.common', [])
           }
         })
         .catch(function (error) {
-          console.error(error);
+          throw error;
         });
     };
 
