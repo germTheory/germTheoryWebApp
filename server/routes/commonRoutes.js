@@ -4,7 +4,8 @@ var authController = require('../controllers/authController.js');
 var locationController = require('../controllers/locationController.js');
 var caseController = require('../controllers/caseController.js');
 var processingController = require('../controllers/processingController.js');
-var reportController = require('../controllers/reportController.js')
+var reportController = require('../controllers/reportController.js');
+var diseaseController = require('../controllers/diseaseController.js');
 var passport = require('passport');
 
 module.exports = function (app) {
@@ -24,9 +25,10 @@ module.exports = function (app) {
   app.get('/reports', helpers.isLoggedIn, reportController.showAllProximityReports);
   app.post('/reports', helpers.isLoggedIn, processingController.createReport);
   
-  app.get('/newReportedCase', helpers.isLoggedIn, function(req, res) {
-    res.render('newReportedCase');
-  });
+  // DISEASE INFORMATION
+  app.get('/diseases', helpers.isLoggedIn, diseaseController.getDiseasesPage)
+  app.get('/newReportedCase', helpers.isLoggedIn, caseController.newReportedCase )
+  app.get('/newRiskReport', helpers.isLoggedIn, reportController.newRiskReport );
   app.get('/*', helpers.isLoggedIn, function(req, res, next) {
     res.render('index');
   });

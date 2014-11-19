@@ -7,7 +7,6 @@ var _createReport = function(req, res, next){
 	if(req.body.userName !== ''){
 		data.userName = req.body.userName;
 	}
-	console.log(req.body);
 	data.threshold = parseInt(req.body.threshold);
 	data.reportName = req.body.reportName;
 	data.diseaseName = req.body.diseaseName;
@@ -22,7 +21,7 @@ var _createReport = function(req, res, next){
 	});
 	var spawn = require('child_process').spawn;
 	
-	python = spawn('python3.4', ['./server/processing/locations.py', JSON.stringify(data)]);
+	python = spawn('python', ['./server/processing/locations.py', JSON.stringify(data)]);
 	python.stdout.on('data', function (data) {
 	  console.log('stdout DATA IS: ' + data);
 	});

@@ -1,0 +1,6 @@
+numpy==1.9.1
+psycopg2==2.5.4
+geopy==1.4.0
+pytz==2014.9
+scipy==0.14.0
+simplejson==3.6.5

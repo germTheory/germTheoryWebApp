@@ -2,7 +2,7 @@
 <div class="container">
   <h1>User Risk Reports</h1>
   <div class="col-sm-6">
-    <a href="/newReportedCase">
+    <a href="/newRiskReport">
     <button class="btn btn-success btn-md" type="submit">Create New Report</button>
     </a>
   </div>
@@ -16,9 +16,9 @@
         <th>Created Date</th>
       </tr>
       <% results.forEach(function(report) { %>
-      <tr>
-        <td><a href="#"><%= report.id %></a></td>
-        <td><%= report.name %></td>
+      <tr class='row-item'>
+        <td><%= report.id %></td>
+        <td><a href="#"><%= report.name %></a></td>
         <td><%= report.disease_id %></td>
         <td><%= report.created_at %></td>
       </tr>
