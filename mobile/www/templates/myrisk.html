@@ -1,31 +1,26 @@
 <ion-view title="MyRisk">
   <ion-content has-header="true" padding="true" style="text-align:center;">
+    <div class="card">
+      <div class="item item-text-wrap">
+        <p><h2>Your Risk Level is:</h2></p>
+        <p><h1>{{ data.myRiskIndex }}</h1></p>
+      </div>
+    </div>
 
-  <button class="button button-large button-balanced" style="width:95%; margin-top:50px; border-radius:8px" >
-    Your Risk Level is:
-    <br>
-    <b style="font-size:1.8em;">Low</b>
-  </button>
+    <h5 style="color:#808080;">
+      <p>"Germ-Theory" uses a unique algorithm to calculate your individual risk for infection.</p>
+      <p>Your risk level is continually updated. We will alert you if your risk level changes.</p>
+    </h5>
 
-  <h5 style="padding: 15px; padding-top:35px; padding-bottom:0px; color:#808080;">
-    "Germ-Theory" uses a unique algorithm to calculate your individual risk for infection.
-    <br>
-    Your risk level is continually updated.
-    We will alert you if your risk level changes. 
-  </h5>
-
-  <hr style="width:75%; border: solid; border-width:1px; color:#A1A1A1;">
-
-  <h3 style="font-weight:bold; text-align:left; margin:30px; margin-bottom:10px; color:#A1A1A1">Symptoms to watch for:
-  </h3>
-  <h4 style="text-align:left; margin-left:70px; margin-top:0px; color:#A1A1A1">
-    <ul>
-      <li>Sore Throat</li>
-      <li>Headache</li>
-      <li>Nausea</li>
-      <li>Dizziness</li>
-      <li>Stomach Pain</li>
-    </ul>
-  </h4>
+    <h3 style="font-weight:bold; color:#A1A1A1">
+      <p>Symptoms to watch for:</p>
+    </h3>
+    <h4 style="color:#A1A1A1">
+        <p>Sore Throat<p>
+        <p>Headache</p>
+        <p>Nausea</p>
+        <p>Dizziness</p>
+        <p>Stomach Pain</p>
+    </h4>
   </ion-content>
 </ion-view>

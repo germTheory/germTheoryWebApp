@@ -1,4 +1,4 @@
-angular.module('app.controllers.common', ['app.services.common'])
+angular.module('app.controllers.common', [])
   .controller('AuthCtrl', function($scope) {
   })
   .controller('MapCtrl', function($scope, Geolocation) {
@@ -10,7 +10,32 @@ angular.module('app.controllers.common', ['app.services.common'])
     };
 
   })
-  .controller('MyRiskCtrl', function($scope) {
+  .controller('MyRiskCtrl', function($scope, RiskIndexService) {
+    $scope.data = {};
+    $scope.getMyRiskIndex = function() {
+
+      // TODO: hardcode userId for now until we fully implement authentication
+      var userId = '1';
+
+      RiskIndexService.getRiskIndex(userId)
+        .then(function(resp) {
+          var indexValue = resp || 0;
+
+          // Note: Hardcode index threshold values for now
+          if (indexValue >= 0.75) {
+            $scope.data["myRiskIndex"] = "High"
+          } else if (indexValue >= 0.3 && indexValue < 0.75) {
+            $scope.data["myRiskIndex"] = "Medium"
+          } else  {
+            $scope.data["myRiskIndex"] = "Low"
+          }
+        })
+        .catch(function (error) {
+          throw error;
+        });
+    };
+
+    $scope.getMyRiskIndex();
   })
   .controller('ReportCtrl', function($scope) {
   })
