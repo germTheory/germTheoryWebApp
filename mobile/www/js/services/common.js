@@ -19,4 +19,23 @@ angular.module('app.services.common', [])
         return JSON.parse($window.localStorage[key] || '{}');
       }
     }
-  }]);
+  }])
+  .factory('RiskIndexService', function($http) {
+    var getMyRiskIndex = function() {
+      var userId = '1';
+      return $http({
+        method: 'GET',
+        url: 'http://localhost:4568/api/proximity/users/' + userId
+      })
+        .then(function(resp) {
+          return resp.data;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    };
+
+    return {
+      getMyRiskIndex: getMyRiskIndex
+    };
+  });
