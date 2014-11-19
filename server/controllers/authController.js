@@ -1,5 +1,6 @@
-var db = require('../database/dbSchema.js');
-var User = db.User;
+var User = require('../database/dbSchema.js').User;
+var jwt = require('jwt-simple');
+var jwtSecret = 'fjkdlsajfoew239053/3uk';
 
 module.exports = {
 
@@ -19,64 +20,86 @@ module.exports = {
     res.render('mobile');
   },
 
+  logout: function(req, res, next) {
+    req.logout();
+    res.redirect('/');
+  },
+
   signin: function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
 
-    User.findOne({where: {username: username}})
-      .success(function (user) {
+    User.find({ where: { email: username }})
+      .then(function (user) {
         if (!user) {
           next(new Error('User does not exist'));
         } else {
-          return user.comparePasswords(password)
+          // TODO: Currently, we do not hash password until we implement pre-save hook to generate a hashed password
+/*          return user.comparePassword(password)
             .then(function(foundUser) {
               if (foundUser) {
-                var token = jwt.encode(user, 'secret');
+                var token = jwt.encode(user, jwtSecret);
                 res.json({token: token});
               } else {
                 return next(new Error('No user'));
               }
-            });
+            });*/
+          var token = jwt.encode(user, jwtSecret);
+          res.json({token: token});
         }
       })
-      .error(function (error) {
+      .fail(function (error) {
         next(error);
       });
   },
 
   signup: function (req, res, next) {
-    console.log('got into signup');
-    var newUser = { name: req.body.name,
-                    password: req.body.password,
-                    email: req.body.email
-                  };
-    console.log("signup: ", req.body);
-    // TO BE IMPLEMENTED WITH OAUTH
+    var username = req.body.username;
+    var password = req.body.password;
 
-    // check to see if user exists
-    db.findUser(newUser, function(results, user){
-      if (results.length === 0) {
-        console.log("User does not exist, adding new user...", user );
-
-        db.saveUser(newUser, function(results){
-          if (results) {
-            console.log("User successfully added");
-            res.status(200).send(results);
-          }
-        });
-      } else {
-        // sign-up the user using google Auth
-        // save location information
-        console.log("User already exists. Try signing in!");
-        res.status(503).send(results);
-      }
-    });
-    
-    // TODO: create token to send back for auth
+    User.find({ where: { email: username }})
+      .then(function(user) {
+        if (user) {
+          next(new Error('User already exist!'));
+        } else {
+          // make a new user if not exist
+          return User.create({
+            email: username,
+            password: password
+          });
+        }
+      })
+      .then(function(user) {
+        // create token to send back for auth
+        var token = jwt.encode(user, jwtSecret);
+        res.json({token: token});
+      })
+      .fail(function (error) {
+        next(error);
+      });
   },
 
-  logout: function(req, res, next) {
-    req.logout();
-    res.redirect('/');
+  checkAuth: function (req, res, next) {
+    // checking to see if the user is authenticated
+    // grab the token in the header is any
+    // then decode the token, which we end up being the user object
+    // check to see if that user exists in the database
+    var token = req.headers['x-access-token'];
+    if (!token) {
+      next(new Error('No token'));
+    } else {
+      var user = jwt.decode(token, jwtSecret);
+      User.find({ where: { username: user.username }})
+        .then(function (foundUser) {
+          if (foundUser) {
+            res.send(200);
+          } else {
+            res.send(401);
+          }
+        })
+        .fail(function (error) {
+          next(error);
+        });
+    }
   }
 };

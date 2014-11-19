@@ -1,4 +1,5 @@
 var userController = require('../controllers/userController');
+var authController = require('../controllers/authController.js');
 var helpers = require('../lib/helpers');
 
 module.exports = function (app) {
@@ -8,6 +9,6 @@ module.exports = function (app) {
   app.put('/:id', helpers.invalidMethodHandler);
   app.delete('/:id', helpers.invalidMethodHandler);
 
-  app.post('/login', userController.signin);
-  app.post('/signup', userController.signup);
+  app.post('/login', authController.signin);
+  app.post('/signup', authController.signup);
 };
