@@ -3639,7 +3639,7 @@ a.subdued {
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 400;
+  font-weight: 200%;
   font-size: 14px;
   font-family: "Helvetica Neue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   opacity: 0.7; }
