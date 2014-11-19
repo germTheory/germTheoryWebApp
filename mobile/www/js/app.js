@@ -3,7 +3,7 @@ angular.module('app', [
   'ngCordova',
   'app.controllers.common',
   'app.controllers.settings',
-  'app.controllers.auth',
+  'app.controllers.user',
   'app.services.common',
   'app.services.geo-location',
   'app.services.settings',
@@ -56,12 +56,12 @@ angular.module('app', [
       .state('signin', {
         url: '/signin',
         templateUrl: 'templates/signin.html',
-        controller: 'AuthCtrl'
+        controller: 'UserCtrl'
       })
       .state('signup', {
         url: '/signup',
         templateUrl: 'templates/signup.html',
-        controller: 'AuthCtrl'
+        controller: 'UserCtrl'
       });
 
     $urlRouterProvider.otherwise('/signin');

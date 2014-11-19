@@ -1,6 +1,6 @@
-angular.module('app.controllers.auth', [])
+angular.module('app.controllers.user', [])
 
-  .controller('AuthCtrl', function ($scope, $location, AuthService) {
+  .controller('UserCtrl', function ($scope, $location, AuthService) {
     $scope.user = {};
 
     $scope.signin = function() {
