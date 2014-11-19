@@ -4,7 +4,7 @@ angular.module('app.services.geo-location', ['ngCordova'])
   // tracking service
   .factory('BackgroundGeoLocation', function($cordovaGeolocation){
 
-    var bgGeo = window.plugins.backgroundGeoLocation;
+    // var bgGeo = window.plugins.backgroundGeoLocation;
 
     // This would be your own callback for Ajax-requests after POSTing
     // background geolocation to your server.

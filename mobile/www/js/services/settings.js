@@ -1,27 +1,27 @@
-angular.module('app.services.settings', ['app.services.common', 'app.services.geo-location'])
-  .factory('Settings', ['LocalStorage', 'BackgroundGeoLocation', function(LocalStorage, BackgroundGeoLocation) {
+angular.module('app.services.settings', ['app.services.common'])
+  .factory('Settings', ['LocalStorage', '$http', function(LocalStorage, $http) {
     var getLocationTracking = function() {
       return LocalStorage.get('locationTracking');
     };
 
-    var setLocationTracking = function(setting) {
-      LocalStorage.set('locationTracking', setting);
+    // var setLocationTracking = function(setting) {
+    //   LocalStorage.set('locationTracking', setting);
 
-      if (setting) {
-        alert("Starting geolocation background service");
-        BackgroundGeoLocation.startBGLocationService();
-      } else {
-        alert("Stopping geolocation background service");
-        BackgroundGeoLocation.stopBGLocationService();
-      }
-    };
+    //   if (setting) {
+    //     alert("Starting geolocation background service");
+    //     BackgroundGeoLocation.startBGLocationService();
+    //   } else {
+    //     alert("Stopping geolocation background service");
+    //     BackgroundGeoLocation.stopBGLocationService();
+    //   }
+    // };
 
     var getUsername = function(user_id) {
-      $http.get('/api/users/1')
-      .success(function(user) {
-        console.log('Successful user name search: ', user);
+      return $http.get('/api/users/' + user_id)
+      .then(function(user) {
+        return user.data;
       })
-      .error(function(err) {
+      .catch(function(err) {
         console.log('Could not get user name');
         console.log(err);
       });
@@ -29,7 +29,7 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
 
     return {
       getLocationTracking: getLocationTracking,
-      setLocationTracking: setLocationTracking,
+      // setLocationTracking: setLocationTracking,
       getUsername: getUsername
     };
   }]);
