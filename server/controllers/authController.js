@@ -19,27 +19,29 @@ module.exports = {
     res.render('mobile');
   },
 
-  login: function (req, res, next) {
-    var email = req.body.email;
+  signin: function (req, res, next) {
+    var username = req.body.username;
     var password = req.body.password;
 
-    User.find({where: {email: email, password: password}}).success(function (user) {
-      console.log('found user');
-    });
-
-    // User.find(email, function(err, user) {
-    //   if (err) {
-    //     console.log('could not find user');
-    //   }
-    //   if (!user) {
-    //     return done(null, false, req.flash('yo'));
-    //   }
-    //   if (!user.validPassword(password)) {
-    //     return done(null, false, req.flash('bo'));
-    //   }
-    //   console.log('found him yo');
-    //   return done(null, user);
-    // });
+    User.findOne({where: {username: username}})
+      .success(function (user) {
+        if (!user) {
+          next(new Error('User does not exist'));
+        } else {
+          return user.comparePasswords(password)
+            .then(function(foundUser) {
+              if (foundUser) {
+                var token = jwt.encode(user, 'secret');
+                res.json({token: token});
+              } else {
+                return next(new Error('No user'));
+              }
+            });
+        }
+      })
+      .error(function (error) {
+        next(error);
+      });
   },
 
   signup: function (req, res, next) {

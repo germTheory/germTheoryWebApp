@@ -64,7 +64,7 @@ angular.module('app', [
         controller: 'AuthCtrl'
       });
 
-    $urlRouterProvider.otherwise('/tab/map');
+    $urlRouterProvider.otherwise('/login');
 
     // Add our $httpInterceptor into the array of interceptors here
     $httpProvider.interceptors.push('AttachTokens');

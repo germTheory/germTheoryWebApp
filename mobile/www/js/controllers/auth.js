@@ -6,7 +6,7 @@ angular.module('app.controllers.auth', [])
     $scope.signin = function() {
       AuthService.signin($scope.user)
         .then(function (token) {
-          $window.localStorage.setItem('com.germ-tracker', token);
+          $window.localStorage.setItem('auth-token', token);
           $location.path('/tab/map');
         })
         .catch(function (error) {
@@ -17,7 +17,7 @@ angular.module('app.controllers.auth', [])
     $scope.signup = function() {
       AuthService.signup($scope.user)
         .then(function (token) {
-          $window.localStorage.setItem('com.germ-tracker', token);
+          $window.localStorage.setItem('auth-token', token);
           $location.path('/tab/map');
         })
         .catch(function (error) {

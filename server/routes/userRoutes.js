@@ -7,4 +7,7 @@ module.exports = function (app) {
   app.post('/', helpers.invalidMethodHandler);
   app.put('/:id', helpers.invalidMethodHandler);
   app.delete('/:id', helpers.invalidMethodHandler);
+
+  app.post('/login', userController.signin);
+  app.post('/signup', userController.signup);
 };

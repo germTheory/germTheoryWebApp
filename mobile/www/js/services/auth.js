@@ -4,7 +4,7 @@ angular.module('app.services.auth', [])
     var signin = function (user) {
       return $http({
         method: 'POST',
-        url: '/api/users/signin',
+        url: '/api/users/login',
         data: user
       })
         .then(function (resp) {
@@ -24,12 +24,12 @@ angular.module('app.services.auth', [])
     };
 
     var isAuth = function () {
-      return !!$window.localStorage.getItem('com.shortly');
+      return !!$window.localStorage.getItem('auth-token');
     };
 
     var signout = function () {
-      $window.localStorage.removeItem('com.shortly');
-      $location.path('/signin');
+      $window.localStorage.removeItem('auth-token');
+      $location.path('/login');
     };
 
     return {
@@ -46,7 +46,7 @@ angular.module('app.services.auth', [])
     // then add it to the header so the server can validate the request
     var attach = {
       request: function (object) {
-        var jwt = $window.localStorage.getItem('com.shortly');
+        var jwt = $window.localStorage.getItem('auth-token');
         if (jwt) {
           object.headers['x-access-token'] = jwt;
         }
