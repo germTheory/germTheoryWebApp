@@ -1,9 +1,9 @@
 angular.module('app.controllers.auth', [])
 
-  .controller('AuthController', function ($scope, $window, $location, AuthService) {
+  .controller('AuthCtrl', function ($scope, $window, $location, AuthService) {
     $scope.user = {};
 
-    $scope.signin = function () {
+    $scope.signin = function() {
       AuthService.signin($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.germ-tracker', token);
@@ -14,7 +14,7 @@ angular.module('app.controllers.auth', [])
         });
     };
 
-    $scope.signup = function () {
+    $scope.signup = function() {
       AuthService.signup($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.germ-tracker', token);
