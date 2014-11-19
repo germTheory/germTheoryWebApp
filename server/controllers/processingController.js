@@ -16,14 +16,11 @@ var _createReport = function(req, res, next){
 	data.startTime = new Date(startArr[2], startArr[0] - 1, startArr[1]);
 	data.endTime = new Date(endArr[2], endArr[0] - 1, endArr[1]);
 	// Find DiseaseId
-	db.Disease.find({where: {name: data.diseaseName} }).then(function(disease){
-		db.ProximityReport.create({ disease_id: disease.dataValues.id, threshold: data.threshold, name: data.reportName })
-	});
+	console.log(JSON.stringify(data));
 	var spawn = require('child_process').spawn;
-	
 	python = spawn('python', ['./server/processing/locations.py', JSON.stringify(data)]);
 	python.stdout.on('data', function (data) {
-	  console.log('stdout DATA IS: ' + data);
+	  console.log('stdout: ' + data);
 	});
 
 	python.stderr.on('data', function (data) {
