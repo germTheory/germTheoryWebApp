@@ -3,6 +3,12 @@ angular.module('app.controllers.common', [])
   })
   .controller('MapCtrl', function($scope, Geolocation) {
     $scope.locations = [];
+    $scope.onMapCreated = function(map){
+           Geolocation.getCurrentPosition().then(function(pos){
+                map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+              });
+          };
+
   })
   .controller('MyRiskCtrl', function($scope, RiskIndexService) {
     $scope.data = {};
