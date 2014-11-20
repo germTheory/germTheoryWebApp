@@ -1,6 +1,4 @@
 angular.module('app.controllers.common', [])
-  .controller('AuthCtrl', function($scope) {
-  })
   .controller('MapCtrl', function($scope, Geolocation) {
     $scope.locations = [];
     $scope.onMapCreated = function(map){
@@ -8,14 +6,16 @@ angular.module('app.controllers.common', [])
         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
       });
     };
-
   })
-  .controller('MyRiskCtrl', function($scope, RiskIndexService) {
+  .controller('MyRiskCtrl', function($scope, RiskIndexService, LocalStorageService) {
     $scope.data = {};
     $scope.getMyRiskIndex = function() {
 
-      // TODO: hardcode userId for now until we fully implement authentication
-      var userId = '1';
+      var userId = LocalStorageService.getItem('id');
+      if (!userId) {
+        // redirect to /login page if userId is not present
+        $location.path('/signin');
+      }
 
       RiskIndexService.getRiskIndex(userId)
         .then(function(resp) {
@@ -37,19 +37,17 @@ angular.module('app.controllers.common', [])
 
     $scope.getMyRiskIndex();
   })
-  .controller('ReportCtrl', function($scope) {
-  })
-  .controller('StorageCtrl', ['$scope', 'LocalStorage', function($scope, LocalStorage) {
+  .controller('StorageCtrl', ['$scope', 'LocalStorageService', function($scope, LocalStorageService) {
     $scope.toggleTrack = LocalStorage.get('tracking');
 
     $scope.pushTrack = function() {
       console.log('got into pushTrack');
       if (LocalStorage.get('tracking') === 'false') {
-        LocalStorage.set('tracking', 'true');
+        LocalStorage.setItem('tracking', 'true');
         console.log(LocalStorage.get('tracking'));
       }
       else {
-        LocalStorage.set('tracking', 'false');
+        LocalStorage.setItem('tracking', 'false');
         console.log(LocalStorage.get('tracking'));
       }
     };

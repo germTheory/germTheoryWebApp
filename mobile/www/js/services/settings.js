@@ -1,11 +1,11 @@
 angular.module('app.services.settings', ['app.services.common', 'app.services.geo-location'])
-  .factory('Settings', ['LocalStorage', 'BackgroundGeoLocation', function(LocalStorage, BackgroundGeoLocation) {
+  .factory('Settings', ['LocalStorageService', 'BackgroundGeoLocation', function(LocalStorageService, BackgroundGeoLocation) {
     var getLocationTracking = function() {
-      return LocalStorage.get('locationTracking');
+      return LocalStorageService.getItem('locationTracking');
     };
 
     var setLocationTracking = function(setting) {
-      LocalStorage.set('locationTracking', setting);
+      LocalStorageService.setItem('locationTracking', setting);
 
       if (setting) {
         alert("Starting geolocation background service");
