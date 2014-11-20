@@ -1,20 +1,37 @@
 angular.module('app.directives.map', [])
-  .directive('spotsMap', function(Config, Geolocation, $http) {
+  .directive('spotsMap', function(Config, $http) {
     var markers = [];
-
-    var infowindow = new google.maps.InfoWindow();
+    var clusterStyles = [
+      {
+        textColor: 'white',
+        url: 'img/marker.png',
+        height: 35,
+        width: 34
+      },
+      {
+        textColor: 'white',
+        url: 'img/clusters2.png',
+        height: 38,
+        width: 38
+      },
+      {
+        textColor: 'white',
+        url: 'img/clustersbig.png',
+        height: 56,
+        width: 56
+      }
+    ];
     /**
      * Add a new report to the map
      */
     var addReportToMap = function(report,map){
-
-      map.addMarker({
-        'position': new plugin.google.maps.LatLng(report.latitude,report.longitude),
-        'title': report.description,
-        'icon':'www/img/marker.png'
-      }, function(marker) {
-        markers.push(marker);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(report.latitude, report.longitude),
+        map: map,
+        title:report.description,
+        icon : 'img/marker.png'
       });
+      markers.push(marker);
     };
     return {
       restrict: 'E',
@@ -22,32 +39,36 @@ angular.module('app.directives.map', [])
       },
       link: function ($scope, $element, $attr) {
         function initialize() {
+          var mapOptions = {
+            center: new google.maps.LatLng(37.7836830,-122.4092210),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map($element[0], mapOptions);
 
-          var map = plugin.google.maps.Map.getMap($element[0],{
-            'camera':{
-              'latLng': new plugin.google.maps.LatLng(37.7836830,-122.4092210),
-              'zoom': 12
+
+          $http.get(Config.url+'/api/cases').then(function(resp){
+            data = resp.data;
+            for(var i = 0; i < data.length; i++){
+              var report = data[i];
+              addReportToMap(report,map);
             }
+            var mcOptions = {gridSize: 50, maxZoom: 15, styles: clusterStyles};
+            var mc = new MarkerClusterer(map, markers, mcOptions);
           });
 
-          var positionPromise = Geolocation.getCurrentPosition();
-          //var map = new google.maps.Map($element[0], mapOptions);
-          map.on(plugin.google.maps.event.MAP_READY, function(){
-            positionPromise.then(function(result){
-              map.setCenter(new plugin.google.maps.LatLng(result.coords.latitude,result.coords.longitude));
-              map.setZoom(14);
-            });
-            $http.get(Config.url+'/api/cases').then(function(resp){
-              data = resp.data;
-
-              for(var i = 0; i < data.length; i++){
-                var report = data[i];
-                addReportToMap(report,map);
-              }
-            });
+          // Stop the side bar from dragging when mousedown/tapdown on the map
+          google.maps.event.addDomListener($element[0], 'mousedown', function (e) {
+            e.preventDefault();
+            return false;
           });
         }
-        document.addEventListener("deviceready", initialize);
+
+        if (document.readyState === "complete") {
+          initialize();
+        } else {
+          google.maps.event.addDomListener(window, 'load', initialize);
+        }
       }
     }
   });
