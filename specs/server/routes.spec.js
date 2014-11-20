@@ -83,7 +83,12 @@ describe('Route Test Suites', function() {
 
       request(app)
         .post('/api/locations')
-        .send({ user_id: 1, latitude: 12.252 * 0.001, longitude: 21.523423 * 0.001 })
+        .send({ user_id: 1, 
+          location: {
+            latitude: 12.252 * 0.001, 
+            longitude: 21.523423 * 0.001 
+          }
+        })
         .end(function(err, res) {
           expect(locationController.createLocation.called).to.be.true;
           locationController.createLocation.restore();

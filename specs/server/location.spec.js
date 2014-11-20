@@ -11,7 +11,7 @@ describe('Location Test Suite', function() {
   before(function(done) {
     db.sequelize.sync({ force: true }).success(function() {
       db.User.create({ name: 'jose', gender: 'M', token: 'joseToken', email: 'jose@jose.com' }).success(function(user) {
-        lastid = user.values.id;
+        lastid = user.dataValues.id;
         for (var i = 0; i < 100; i++) {
           var fakeLoc = {
             user_id: lastid,
@@ -108,7 +108,7 @@ describe('Location Test Suite', function() {
       it('should reject empty locations added', function(done) {
         request(app)
           .post('/api/locations')
-          .expect(400, done);
+          .expect(500, done);
       });
 
       it('should add properly created locations', function(done) {
@@ -116,9 +116,11 @@ describe('Location Test Suite', function() {
           .post('/api/locations')
           .send({
             user_id: lastid,
-            latitude: 14.252,
-            longitude: 20.523,
-            date: Date.now()
+            location: {
+              latitude: 14.252,
+              longitude: 20.523,
+              recorded_at: Date.now()
+            }
           })
           .expect(201)
           .end(function(err, res) {
