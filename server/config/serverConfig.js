@@ -5,6 +5,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var helpers = require('../lib/helpers');
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -50,6 +51,10 @@ module.exports = function (app, express) {
   app.use('/api/proximity', proximityRouter);
   app.use('/auth', authRouter);
   app.use('/', commonRouter);
+
+  // Error handling middleware
+  app.use(helpers.errorLogger);
+  app.use(helpers.errorHandler);
 
   require('../routes/authRoutes.js')(authRouter);
   require('../routes/caseRoutes.js')(caseRouter);
