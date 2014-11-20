@@ -70,7 +70,7 @@ angular.module('app', [
     $httpProvider.interceptors.push('AuthInterceptor');
   })
 
-  .run(function ($ionicPlatform, $rootScope, $location, AuthService) {
+  .run(function ($ionicPlatform, $rootScope, $location, AuthService, BackgroundGeoLocation) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -81,6 +81,7 @@ angular.module('app', [
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+      BackgroundGeoLocation.onDeviceReady();
     });
 
     // Check if a user is authenticated here before moving to a new state
