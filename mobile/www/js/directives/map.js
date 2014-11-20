@@ -34,8 +34,16 @@ angular.module('app.directives.map', [])
           //var map = new google.maps.Map($element[0], mapOptions);
           map.on(plugin.google.maps.event.MAP_READY, function(){
             positionPromise.then(function(result){
-              map.setCenter(new plugin.google.maps.LatLng(result.coords.latitude,result.coords.longitude));
+              var position = new plugin.google.maps.LatLng(result.coords.latitude,result.coords.longitude);
+              map.setCenter(position);
               map.setZoom(14);
+
+              map.addMarker({
+                'position': position,
+                'icon':'www/img/dot.png'
+              }, function(marker) {
+                markers.push(marker);
+              });
             });
             $http.get(Config.url+'/api/cases').then(function(resp){
               data = resp.data;
