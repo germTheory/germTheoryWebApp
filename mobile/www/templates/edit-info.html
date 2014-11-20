@@ -11,17 +11,17 @@
           <div class="list">
             <label class="item item-input item-stacked-label" style="background-color">
               <span class="input-label">Name: {{userName}}</span>
-              <input type="text" class="name" placeholder="Enter new name">
+              <input type="text" ng-model="user.name" class="name" placeholder="Enter new name">
             </label>
 
             <label class="item item-input item-stacked-label">
               <span class="input-label">{{userEmail}}</span>
-              <input type="text" class="email" placeholder="Enter new email">
+              <input type="text" ng-model="user.email" class="email" placeholder="Enter new email">
             </label>
 
             <label class="item item-input item-stacked-label">
               <span class="input-label">Birthdate</span>
-              <input type="text" class="birthdate" placeholder="Enter new birthdate">
+              <input type="text" ng-model="user.birthdate" class="submitBirthdate" placeholder="Enter new birthdate">
             </label>
 
             <label class="item item-input item-stacked-label">

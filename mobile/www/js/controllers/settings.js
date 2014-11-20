@@ -2,6 +2,10 @@ angular.module('app.controllers.settings', [])
   .controller('SettingsCtrl', function($scope, Settings) {
     $scope.asdf = "aaaa";
     $scope.locationTracking = Settings.getLocationTracking();
+    $scope.submitName;
+    $scope.submitEmail;
+    $scope.submitBirthdate;
+    $scope.user = {};
 
     $scope.getUsername = function() {
       // User id hardcoded until we have a way to get id of current user from OAuth or local login
@@ -13,11 +17,11 @@ angular.module('app.controllers.settings', [])
     };
 
     $scope.editSubmit = function() {
-      Settings.editSubmit('1', 'Prince Albert', 'prince@albert.com', '11/21/1987')
+      console.log($scope.user.name, $scope.user.email);
+      Settings.editSubmit('1', $scope.user.name, $scope.user.email)
         .then(function(user) {
-          alert('Updated user info'
-          + '\n Name: ' + user.name
-          + '\n Email: ' + user.email );
+          alert('Updated user info!');
+          location.reload();
         });
     }
 
