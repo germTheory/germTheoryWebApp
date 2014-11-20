@@ -7,48 +7,50 @@
         </h1> -->
         <h4 style="margin-top:10px; padding: 15px; color:#808080;">
 
-        <div class="list">
-          <label class="item item-input item-stacked-label" style="background-color">
-            <span class="input-label">Name: {{userName}}</span>
-            <input type="text" placeholder="Enter new name">
-          </label>
+        <form ng-submit="editSubmit()">
+          <div class="list">
+            <label class="item item-input item-stacked-label" style="background-color">
+              <span class="input-label">Name: {{userName}}</span>
+              <input type="text" class="name" placeholder="Enter new name">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">{{userEmail}}</span>
-            <input type="text" placeholder="Enter new email">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">{{userEmail}}</span>
+              <input type="text" class="email" placeholder="Enter new email">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Birthdate</span>
-            <input type="text" placeholder="Enter new birthdate">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Birthdate</span>
+              <input type="text" class="birthdate" placeholder="Enter new birthdate">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Gender</span>
-            <input type="text" placeholder="Male/Female">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Gender</span>
+              <input type="text" class="gender" placeholder="Male/Female">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Current Password</span>
-            <input type="text" placeholder="Enter current password">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Current Password</span>
+              <input type="text" class="currPass" placeholder="Enter current password">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">New Password</span>
-            <input type="text" placeholder="New password">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">New Password</span>
+              <input type="text" class="newPass1" placeholder="New password">
+            </label>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Re-enter New Password</span>
-            <input type="text" placeholder="Re-enter new password">
-          </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Re-enter New Password</span>
+              <input type="text" class="newpass2"placeholder="Re-enter new password">
+            </label>
 
-        </div>
-        <div style="text-align:center;">
-          <button type="submit" href="/#/api/users/1" class="button button-large button-calm" style="width:88%; margin-top:10px; border-radius:8px" >
-            Save Settings
-          </button>
-        </div>
+          </div>
+          <div style="text-align:center;">
+            <button type="submit" href="/#/api/users/1" class="button button-large button-calm" style="width:88%; margin-top:10px; border-radius:8px" >
+              Save Settings
+            </button>
+          </div>
+        </form>
 
     </ion-content>
   </ion-view>

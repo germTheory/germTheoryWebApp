@@ -12,6 +12,15 @@ angular.module('app.controllers.settings', [])
         });
     };
 
+    $scope.editSubmit = function() {
+      Settings.editSubmit('1', 'Prince Albert', 'prince@albert.com', '11/21/1987')
+        .then(function(user) {
+          alert('Updated user info'
+          + '\n Name: ' + user.name
+          + '\n Email: ' + user.email );
+        });
+    }
+
     /*
      * Note: There is a bug in Ionic where ng-click fires twice on clicking a button
      * It appears that this issue only occurs in development environment but we need to confirm this in using an actual device once we're ready

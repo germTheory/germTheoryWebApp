@@ -27,9 +27,27 @@ angular.module('app.services.settings', ['app.services.common'])
       });
     };
 
+    var editSubmit = function(user_id, name, email, birthdate, gender, currPassword, newPass, newPassConfirm) {
+      var data = {
+        name: name,
+        email: email,
+        birthdate: birthdate
+      };
+      console.log(data);
+      return $http.put('/api/users/' + user_id, data)
+      .then(function(user) {
+        return user.data;
+      })
+      .catch(function(err) {
+        console.log('Could not get user name');
+        console.log(err);
+      });
+    };
+
     return {
       getLocationTracking: getLocationTracking,
       // setLocationTracking: setLocationTracking,
-      getUsername: getUsername
+      getUsername: getUsername,
+      editSubmit: editSubmit
     };
   }]);
