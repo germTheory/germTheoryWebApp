@@ -44,6 +44,15 @@ angular.module('app', [
           }
         }
       })
+      .state('tab.settings-edit', {
+        url: '/settings-edit',
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/edit-info.html',
+            controller: 'SettingsCtrl'
+          }
+        }
+      })
       .state('tab.settings', {
         url: '/settings',
         views: {

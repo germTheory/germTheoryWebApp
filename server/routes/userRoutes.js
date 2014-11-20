@@ -6,7 +6,7 @@ module.exports = function (app) {
   app.get('/', userController.getAllUsers);
   app.get('/:id', userController.getUser);
   app.post('/', helpers.invalidMethodHandler);
-  app.put('/:id', helpers.invalidMethodHandler);
+  app.put('/:id', userController.editUser);
   app.delete('/:id', helpers.invalidMethodHandler);
 
   app.post('/login', authController.signin);
