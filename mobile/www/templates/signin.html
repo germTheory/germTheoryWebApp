@@ -1,0 +1,18 @@
+<ion-view title="Login">
+  <ion-content>
+    <form name="signinForm" ng-submit='signin()'>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="email" ng-model='user.username' required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model='user.password' required>
+        </label>
+        <button class="button button-full button-positive" ng-disabled="signinForm.$invalid">Login</button>
+        <button ng-click="logout()">Logout</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

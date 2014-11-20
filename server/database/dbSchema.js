@@ -4,6 +4,9 @@ var password = process.env.DB_PASSWORD || 'postgres';
 var database = process.env.DB_NAME || 'germtracker';
 var host = process.env.DB_HOST || 'localhost';
 var is_native = false;
+var Q = require('q');
+var bcrypt = require('bcrypt-nodejs');
+var SALT_WORK_FACTOR  = 10;
 
 var connection_string = 'postgres://' + username + ':' + password + '@' + host + ':5432/' + database;
 
@@ -33,8 +36,22 @@ var User = sequelize.define('user', {
   google_id: { type: Sequelize.STRING }
 /*  is_admin: { type: Sequelize.BOOLEAN, defaultValue: false }*/
 }, {
-  tableName: 'users'
-});
+  tableName: 'users',
+  instanceMethods: {
+    comparePassword: function(attemptedPassword) {
+      var defer = Q.defer();
+      var savedPassword = this.password;
+
+      bcrypt.compare(attemptedPassword, savedPassword, function(err, isMatch) {
+        if (err) {
+          defer.reject(err);
+        } else {
+          defer.resolve(isMatch);
+        }
+      });
+      return defer.promise;
+    }
+  }});
 
 var Location = sequelize.define('location', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
@@ -69,7 +86,7 @@ var ProximityReport = sequelize.define('proximity_reports', {
   threshold: { type: Sequelize.FLOAT, allowNull: false },
 }, {
   tableName: 'proximity_reports'
-})
+});
 
 var ReportedCase = sequelize.define('reported_case', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },

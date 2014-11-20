@@ -3,26 +3,14 @@ angular.module('app', [
   'ngCordova',
   'app.controllers.common',
   'app.controllers.settings',
+  'app.controllers.user',
   'app.services.common',
   'app.services.geo-location',
   'app.services.settings',
+  'app.services.auth',
   'app.directives.map'])
 
-  .run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
-    });
-  })
-
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
       .state('tab', {
         url: "/tab",
@@ -56,15 +44,6 @@ angular.module('app', [
           }
         }
       })
-      .state('tab.login', {
-        url: '/login',
-        views: {
-          'tab-login': {
-            templateUrl: 'templates/login.html',
-            controller: 'AuthCtrl'
-          }
-        }
-      })
       .state('tab.settings', {
         url: '/settings',
         views: {
@@ -73,7 +52,42 @@ angular.module('app', [
             controller: 'SettingsCtrl'
           }
         }
+      })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'templates/signin.html',
+        controller: 'UserCtrl'
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'templates/signup.html',
+        controller: 'UserCtrl'
       });
 
-    $urlRouterProvider.otherwise('/tab/map');
+    $urlRouterProvider.otherwise('/signin');
+
+    // Add our $httpInterceptor into the array of interceptors here
+    $httpProvider.interceptors.push('AuthInterceptor');
+  })
+
+  .run(function ($ionicPlatform, $rootScope, $location, AuthService) {
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
+
+    // Check if a user is authenticated here before moving to a new state
+    // If auth-token is not present, redirect to 'signin' state unless next state is either 'signin' or 'signout'
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
+      if (!(toState.name === 'signin' || toState.name === 'signup') && !AuthService.isAuthenticated()) {
+        $location.path('/signin');
+      }
+    });
   });
