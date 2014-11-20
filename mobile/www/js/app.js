@@ -90,7 +90,10 @@ angular.module('app', [
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-      BackgroundGeoLocation.onDeviceReady();
+      if (window.plugins && window.plugins.backgroundGeoLocation) {
+        BackgroundGeoLocation.onDeviceReady();
+      }
+
     });
 
     // Check if a user is authenticated here before moving to a new state
