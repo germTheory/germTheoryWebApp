@@ -4,17 +4,17 @@ angular.module('app.services.settings', ['app.services.common'])
       return LocalStorage.get('locationTracking');
     };
 
-    // var setLocationTracking = function(setting) {
-    //   LocalStorage.set('locationTracking', setting);
+    var setLocationTracking = function(setting) {
+      LocalStorage.set('locationTracking', setting);
 
-    //   if (setting) {
-    //     alert("Starting geolocation background service");
-    //     BackgroundGeoLocation.startBGLocationService();
-    //   } else {
-    //     alert("Stopping geolocation background service");
-    //     BackgroundGeoLocation.stopBGLocationService();
-    //   }
-    // };
+      if (setting) {
+        alert("Starting geolocation background service");
+        BackgroundGeoLocation.startBGLocationService();
+      } else {
+        alert("Stopping geolocation background service");
+        BackgroundGeoLocation.stopBGLocationService();
+      }
+    };
 
     var getUsername = function(user_id) {
       return $http.get('/api/users/' + user_id)
@@ -46,7 +46,7 @@ angular.module('app.services.settings', ['app.services.common'])
 
     return {
       getLocationTracking: getLocationTracking,
-      // setLocationTracking: setLocationTracking,
+      setLocationTracking: setLocationTracking,
       getUsername: getUsername,
       editSubmit: editSubmit
     };
