@@ -28,5 +28,7 @@ angular.module('app.controllers.user', [])
     $scope.signout = function() {
       AuthService.signout();
       $scope.user = null;
-    }
+    };
   });
+
+  
