@@ -1,5 +1,5 @@
 a.greenTrack {
-  background-color:#BE90D4;
+  background-color:#00EB66;
 }
 spots-map {
     display: block;
@@ -10,13 +10,45 @@ spots-map {
     height: 100%;
 }
 
-/*body {
-  background: #BE90D4;
-  color: #fff;
-  text-align: center;
-  font-family: Arial, Helvetica;
+.userStats {
+  position: relative; 
+  text-align:center; 
+  margin:26px 15px 15px 15px; 
+  width:92%; 
+  height:185px; 
+  border:solid; 
+  border-width:3px; 
+  border-color:#A1A1A1; 
+  border-radius: 10px;
+  clear:both;
 }
-*/
+
+.myHealthInfo {
+  color: #6B6B6B;
+  position:absolute;
+  width:40%;
+  text-align:center;
+  border:none; 
+  border-width:5px; 
+  font-size:.3em;
+  margin-left: 20px;
+  margin-top:-10px;
+  background-color:#fff;
+}
+
+.name {
+  color: #6B6B6B;
+  position:relative;
+  width:80%;
+  text-align:left;
+  border:none; 
+
+  font-size:.3em;
+  margin-left: 25px;
+  margin-top:30px;
+  background-color:#fff;
+}
+
 .big {
   font-size: 1.2em;
 }

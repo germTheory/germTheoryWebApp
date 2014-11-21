@@ -15,6 +15,21 @@ module.exports = {
       });
   },
 
+  editUser: function(req, res, next){
+    User.find({
+      where: { id: req.params.id } })
+        .then(function(user) {
+          user.updateAttributes({name: req.body.name, email: req.body.email}, ['name', 'email'])
+          .then(function(item) {
+            res.status(200).send(item.name + item.email);
+          }, function(err) {
+            res.status(523).send(err);
+          });
+        }, function(err) {
+          res.status(524).send(err)
+    });
+  },
+
   getAllUsers: function(req, res, next){
     User.findAll({ attributes: ['id', 'name', 'gender', 'email', 'created_at', 'updated_at'] })
       .success(function(data) {

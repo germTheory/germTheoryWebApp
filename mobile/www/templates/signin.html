@@ -1,18 +1,39 @@
 <ion-view title="Login">
   <ion-content>
-    <form name="signinForm" ng-submit='signin()'>
-      <div class="list">
+    <form name="signinForm" ng-submit='signin()' style='margin-top:60px;'>
+      <div class="list" style="margin:25px;">
         <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="email" ng-model='user.username' required>
+          <span class="input-label">Email</span>
+          <input type="email" ng-model='user.username' placeholder='Enter your email address' required>
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" ng-model='user.password' required>
+          <input type="password" ng-model='user.password' placeholder='Enter your password' required>
         </label>
-        <button class="button button-full button-positive" ng-disabled="signinForm.$invalid">Login</button>
-        <button ng-click="logout()">Logout</button>
+        <button class="button button-full button-positive" ng-disabled="signinForm.$invalid" style='margin-top:75px; border-radius:8px;'>Login</button>
+
+        <hr style="width:50%; margin-top:15 px;">
+
+        <button class="button button-full button-positive" ng-click="logout()" style='border-radius:8px; margin-top:10px;'>Login with Google</button>
+
+     
+        <h4 style="color:#919191; text-align:center;">
+        <br>
+        <br>
+        <br>
+
+          Don't have an account?
+        </h4>
+
+       <button ui-sref="get-started" type="submit" class="button button-full button-calm" style='border-radius:8px; margin-top:20px;'>Sign Up</button>
+
+<!--         <button class="button button-full button-positive" ng-click="logout()" style='border-radius:10px;'>Logout</button> -->
       </div>
     </form>
+
+
+    <h5 style="text-align:center; color:#919191; margin-top: 10px;" href="#">
+      Forgot your password? Tap Here
+    </h5>
   </ion-content>
 </ion-view>

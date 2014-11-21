@@ -10,23 +10,27 @@ angular.module('app.controllers.user', [])
           $location.path('/tab/map');
         })
         .catch(function (error) {
-          console.error(error);
+          alert(error.data.error);
+          $location.path('/signup');
         });
     };
 
     $scope.signup = function() {
       AuthService.signup($scope.user)
-        .then(function (resp) {
+        .then(function(resp) {
           $scope.user = resp.data.user;
           $location.path('/tab/map');
         })
-        .catch(function (error) {
-          console.error(error);
+        .catch(function(error) {
+          alert(error.data.error);
+          $location.path('/signup');
         });
     };
 
     $scope.signout = function() {
       AuthService.signout();
       $scope.user = null;
-    }
+    };
   });
+
+  

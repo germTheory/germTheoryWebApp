@@ -57,6 +57,7 @@ var Location = sequelize.define('location', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   latitude: { type: Sequelize.FLOAT, allowNull: false },
   longitude: { type: Sequelize.FLOAT, allowNull: false },
+  // speed: { type: Sequelize.FLOAT, allowNull: false },
   date: { type: Sequelize.DATE, allowNull: false }
 }, {
   tableName: 'locations'

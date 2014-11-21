@@ -58,7 +58,7 @@ def mapcount(count, contagiousness, threshold):
     return 1 - math.exp((-1)*(contagiousness/(threshold * (modifier/timeInterval) * dayDifference )) * count)
 
 try:
-    conn = psycopg2.connect("dbname='d21pkb4ibembvk' user='uer1d0n84nrcv8' host='ec2-54-243-218-135.compute-1.amazonaws.com' password='p81tjh25nn1g288d13fmt54kro3'")
+    conn = psycopg2.connect("dbname='dnihfp6jn1o20' user='u736nm030ufb7r' host='ec2-54-243-237-213.compute-1.amazonaws.com' password='p4mkfm0sdqv8n2ergt79tuhuta1' port='5442'")
     print("Connected to Database")
 except:
     print("Unable to connect to the database.")

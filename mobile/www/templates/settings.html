@@ -1,10 +1,37 @@
 <ion-view title="Settings">
-  <ion-content>
-    <ul class="list" style='padding:10px;'>
-      <br><br>
-      <li class="item item-toggle">Our Mission</li>
-      <li class="item item-toggle">Contact</li>
-      <li class="item item-toggle">Frequently Asked Questions</li>
+
+  <ion-content ng-controller="SettingsCtrl">
+    <div class="userStats"> 
+
+      <div class="myHealthInfo">
+        <b>My Health Info</b>
+      </div>
+      <div>
+        <h4 class="name">
+          <b>Name</b>
+            <span style="float:right;">
+              <button ui-sref="tab.settings-edit" class="button button-small button-positive">
+                Edit Info
+              </button>
+            </span>
+        <br>
+          {{userName}}
+  
+        </h4>
+
+        <h4 class="name">
+          <b>Email</b>
+        <br>
+          {{userEmail}}
+        </h4>
+
+      </div>
+    </div>
+
+    <ul class="list" style="clear:both;">
+      <li class="item"><b>Our Mission <span class="icon ion-ios7-arrow-forward" style="float:right; font-size:1.2em;"></span></li> 
+      <li class="item">Contact <span class="icon ion-ios7-arrow-forward" style="float:right; font-size:1.2em;"></li>
+      <li class="item">Frequently Asked Questions <span class="icon ion-ios7-arrow-forward" style="float:right; font-size:1.2em;"></li>
       <li class="item item-toggle">Push Notifications
         <label class="toggle toggle-calm">
           <input type="checkbox">

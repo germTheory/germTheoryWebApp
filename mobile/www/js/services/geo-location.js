@@ -1,37 +1,36 @@
 angular.module('app.services.geo-location', ['ngCordova'])
 
-  // This background geo location is for the background location- 
+// This background geo location is for the background location- 
   // tracking service
   .factory('BackgroundGeoLocation', function($cordovaGeolocation){
+    
+    var bgGeo;
+    var onDeviceReady = function() {
 
-    var bgGeo = window.plugins.backgroundGeoLocation;
+      bgGeo = window.plugins.backgroundGeoLocation;
+      // This would be your own callback for Ajax-requests after POSTing
+      // background geolocation to your server.
+      // var yourAjaxCallback = function(response) {
+      //   bgGeo.finish();
+      // };
 
-    // This would be your own callback for Ajax-requests after POSTing
-    // background geolocation to your server.
-    // var yourAjaxCallback = function(response) {
-    //   bgGeo.finish();
-    // };
+      // This callback will be executed every time a geolocation is recorded in the background.
+      // Only for iOS, not for Android
+      var successFn = function(location) {
+        var data = {
+          latitude: location.latitudue,
+          longitude: location.longitude,
+          user_id: 1
+        };
+        console.log("Location data: ", data);
 
-    // This callback will be executed every time a geolocation is recorded in the background.
-    // Only for iOS, not for Android
-    var successFn = function(location) {
-      var data = {
-        latitude: location.latitudue,
-        longitude: location.longitude,
-        user_id: 1
+        bgGeo.finish();
+        // yourAjaxCallback.call(this);
       };
-      console.log("Location data: ", data);
 
-      bgGeo.finish();
-      // yourAjaxCallback.call(this);
-    };
-
-    var failureFn = function(error) {
-      alert('BackgroundGeoLocation error' + error);
-    };
-
-    var startBGLocationService = function () {
-
+      var failureFn = function(error) {
+        alert('BackgroundGeoLocation error' + error);
+      };
       // app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
       // in order to prompt the user for Location permission.
       window.navigator.geolocation.getCurrentPosition(function(location) {
@@ -39,14 +38,10 @@ angular.module('app.services.geo-location', ['ngCordova'])
       });
 
       bgGeo.configure(successFn, failureFn, {
-        url: 'http://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
+        url: 'https://germ-tracker.herokuapp.com/api/locations', // Android only; ios allows javascript callbacks for your http
         // url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
         params: {     
-          user_id: 1,
-          email: "dummy@xyz.com",
-          gender: "N",
-          token: "not-yet",
-          password: "none"
+          user_id: 104,
         },
         headers: {
         },
@@ -62,7 +57,11 @@ angular.module('app.services.geo-location', ['ngCordova'])
         debug: false,                               // enable this hear sounds for background-geolocation life-cycle.
         stopOnTerminate: false                      // set to false if it should continue after the app terminates
       });
+    
+    }; // END document device ready listener
 
+    var startBGLocationService = function () {
+     
       // Turn ON the background-geolocation system.
       // The user will be tracked whenever they suspend the app.
       bgGeo.start();
@@ -74,10 +73,13 @@ angular.module('app.services.geo-location', ['ngCordova'])
     };
 
     return {
+      onDeviceReady: onDeviceReady,
       startBGLocationService: startBGLocationService,
       stopBGLocationService: stopBGLocationService
     };
+
   })
+
   
   // This Geolocation is for the Mapping of
   // high risk areas centered around the user's 

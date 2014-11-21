@@ -43,6 +43,15 @@ angular.module('app', [
           }
         }
       })
+      .state('tab.settings-edit', {
+        url: '/settings-edit',
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/edit-info.html',
+            controller: 'SettingsCtrl'
+          }
+        }
+      })
       .state('tab.settings', {
         url: '/settings',
         views: {
@@ -51,6 +60,11 @@ angular.module('app', [
             controller: 'SettingsCtrl'
           }
         }
+      })
+      .state('get-started', {
+        url: '/get-started',
+        templateUrl: 'templates/get-started.html',
+        controller: 'UserCtrl'
       })
       .state('signin', {
         url: '/signin',
@@ -69,7 +83,7 @@ angular.module('app', [
     $httpProvider.interceptors.push('AuthInterceptor');
   })
 
-  .run(function ($ionicPlatform, $rootScope, $location, AuthService) {
+  .run(function ($ionicPlatform, $rootScope, $location, AuthService, BackgroundGeoLocation) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -80,12 +94,16 @@ angular.module('app', [
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+      if (window.plugins && window.plugins.backgroundGeoLocation) {
+        BackgroundGeoLocation.onDeviceReady();
+      }
+
     });
 
     // Check if a user is authenticated here before moving to a new state
     // If auth-token is not present, redirect to 'signin' state unless next state is either 'signin' or 'signout'
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      if (!(toState.name === 'signin' || toState.name === 'signup') && !AuthService.isAuthenticated()) {
+      if (AuthService.shouldAuthenticate(toState.name) && !AuthService.isAuthenticated()) {
         $location.path('/signin');
       }
     });
