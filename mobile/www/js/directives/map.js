@@ -99,7 +99,10 @@ angular.module('app.directives.map', [])
 
           $http({
             method: 'GET',
-            url:  Config.url + '/api/locations/users/16'
+            url:  Config.url + '/api/locations/users/16',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }).then(function(resp){
             console.log(resp);
             data = resp.data;
