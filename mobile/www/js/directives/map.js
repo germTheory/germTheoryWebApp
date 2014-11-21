@@ -24,13 +24,16 @@ angular.module('app.directives.map', [])
     /**
      * Add a new report to the map
      */
-    var addReportToMap = function(report, map, type){
+    var addReportToMap = function(report, map, type, popupMsg){
       if(type === "infected"){
         var marker = L.circle([report.latitude, report.longitude], 10, {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.5
         }).addTo(map);
+        if (popupMsg){
+          marker.bindPopup(popupMsg);
+        }
         markers.push(marker);
       } else if(type === "user"){
         var marker = L.circle([report.latitude, report.longitude], 10, {
@@ -38,6 +41,9 @@ angular.module('app.directives.map', [])
           fillColor: '#365CF1',
           fillOpacity: 0.5
         }).addTo(map);
+        if (popupMsg){
+          marker.bindPopup(popupMsg);
+        }
         markers.push(marker);
       }
     };
@@ -69,7 +75,7 @@ angular.module('app.directives.map', [])
               
               var radius = e.accuracy / 2;
 
-              L.marker(e.latlng).addTo(map);
+              L.marker(e.latlng).addTo(map).bindPopup('<b>You are here!</b>');
 
               L.circle(e.latlng, radius).addTo(map);
           }
@@ -94,7 +100,8 @@ angular.module('app.directives.map', [])
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
-              addReportToMap(report, map, "infected");
+              diseaseName = report.disease.name;
+              addReportToMap(report, map, "infected", "<b>" + diseaseName + '</b><br>Date: ' + report.date + '<br>' + report.description);
             }
           });
 
