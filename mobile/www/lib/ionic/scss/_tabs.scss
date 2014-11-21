@@ -139,7 +139,7 @@
 @mixin tabs-color($style, $color) {
   &.#{$style} {
     .tab-item {
-      color: rgba($color, $tabs-striped-off-opacity);
+      color: #000;
       opacity: 1;
       .badge{
         opacity:$tabs-striped-off-opacity;
@@ -148,7 +148,6 @@
       &.active,
       &.activated {
         margin-top: -$tabs-striped-border-width;
-        color: $color;
         border: 0 solid $color;
         border-top-width: $tabs-striped-border-width;
         .badge{
@@ -266,12 +265,12 @@
   @include flex(1);
   display: block;
   overflow: hidden;
-  background-color:#BDC3C7;
+  background-color:#fff;
 
   max-width: $tab-item-max-width;
   height: 100%;
 
-  color: #fff;
+  color: #22C1AC;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -285,10 +284,10 @@
 
   &:hover {
     cursor: pointer;
-    background-color:#00C0F5;
+    color:#22C1AC;
   }
   &:selected {
-    background-color:#00BAF7;
+    color:#22C1AC;
   }
   &.tab-hidden{
     display:none;
@@ -309,14 +308,22 @@
 }
 
 .tab-item .icon {
+  color:#5B5C5B;
   display: block;
   margin: 0 auto;
-  padding-top: 5px;
+  padding-top: 8px;
   height: 100%;
-  font-size: 400%;
+  font-size: 350%;
   border-style:solid;
   border-width: 1px;
-  border-color: #FFF;
+  border-color: #fff;
+
+  &:hover {
+    color:#22C1AC;
+  }
+  &:selected {
+    color:#22C1AC;
+  }
 }
 
 .tabs-icon-left.tabs .tab-item,
