@@ -3180,7 +3180,7 @@ a.subdued {
   bottom: 0;
   z-index: 5;
   width: 100%;
-  height: 65px;
+  height: 60px;
   border-style: solid;
   border-top-width: 1px;
   background-size: 0;
@@ -3655,13 +3655,13 @@ a.subdued {
   display: none; }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item {
-  margin-top: 15px;
   font-size: 39%;
   line-height: 14px; }
 
 .tab-item .icon {
   display: block;
   margin: 0 auto;
+  padding-top: 5px;
   height: 100%;
   font-size: 400%;
   border-style: solid;
