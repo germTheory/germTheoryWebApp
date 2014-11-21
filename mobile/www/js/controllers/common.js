@@ -5,9 +5,7 @@ angular.module('app.controllers.common', [])
     $scope.locations = [];
     $scope.Config = Config;
     $scope.onMapCreated = function(map){
-      Geolocation.getCurrentPosition().then(function(pos){
-        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      });
+      
     };
 
   })
