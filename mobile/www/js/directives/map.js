@@ -26,7 +26,7 @@ angular.module('app.directives.map', [])
      */
     var addReportToMap = function(report, map, type, popupMsg){
       if(type === "infected"){
-        var marker = L.circle([report.latitude, report.longitude], 15, {
+        var marker = L.circle([report.latitude, report.longitude], 30, {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.5
@@ -91,7 +91,7 @@ angular.module('app.directives.map', [])
           map.on('locationerror', onLocationError);
           // var map = new google.maps.Map($element[0], mapOptions);
 
-
+          // get all cases
           $http({
             method: 'GET',
             url: '/api/cases'
@@ -100,12 +100,13 @@ angular.module('app.directives.map', [])
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
-              momentDate = new moment(report.date).format('MMMM Do YYYY');
+              momentDate = new moment(report.date).format('MMMM Do, YYYY');
               diseaseName = report.disease.name;
               addReportToMap(report, map, "infected", "<b>" + diseaseName + ' Report</b><br>Date: ' + momentDate + '<br>' + report.description);
             }
           });
 
+          // get all locations for signed in user
           $http({
             method: 'GET',
             url:  '/api/locations/users/' + LocalStorageService.getItem('id'),
@@ -121,11 +122,12 @@ angular.module('app.directives.map', [])
             }
           });
 
-          // Stop the side bar from dragging when mousedown/tapdown on the map
-          // google.maps.event.addDomListener($element[0], 'mousedown', function (e) {
-          //   e.preventDefault();
-          //   return false;
-          // });
+          // zoom to a marker when clicked
+          map.on('popupopen', function(centerMarker) {
+                  var cM = map.project(centerMarker.popup._latlng);
+                  cM.y -= centerMarker.popup._container.clientHeight/2;
+                  map.setView(map.unproject(cM),16, {animate: true});
+              });
         }
 
         if (document.readyState === "complete") {
