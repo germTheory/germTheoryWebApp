@@ -24,19 +24,28 @@ angular.module('app.directives.map', [])
     /**
      * Add a new report to the map
      */
-    var addReportToMap = function(report,map){
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(report.latitude, report.longitude),
-        map: map,
-        title:report.description,
-        icon : 'img/marker.png'
-      });
-      markers.push(marker);
+    var addReportToMap = function(report, map, type){
+      if(type === "infected"){
+        var marker = L.circle([report.latitude, report.longitude], 10, {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5
+        }).addTo(map);
+        markers.push(marker);
+      } else if(type === "user"){
+        var marker = L.circle([report.latitude, report.longitude], 10, {
+          color: 'blue',
+          fillColor: '#365CF1',
+          fillOpacity: 0.5
+        }).addTo(map);
+        markers.push(marker);
+      }
     };
 
     // Return various things
     return {
-      restrict: 'E',
+      restrict: 'EA',
+      transclude: true,
       scope: {
       },
       link: function ($scope, $element, $attr) {
@@ -53,6 +62,7 @@ angular.module('app.directives.map', [])
             touchZoom: true,
             tap: false
           });
+
           map.locate({ setView: true, maxZoom: 14 });
           function onLocationFound(e) {
               console.log("found location");
@@ -64,7 +74,8 @@ angular.module('app.directives.map', [])
               L.circle(e.latlng, radius).addTo(map);
           }
           L.tileLayer('http://{s}.tiles.mapbox.com/v3/kmeurer.k9ccphdb/{z}/{x}/{y}.png', {
-              maxZoom: 18
+              maxZoom: 18,
+              dragging: true
           }).addTo(map);
 
           function onLocationError(e) {
@@ -75,15 +86,28 @@ angular.module('app.directives.map', [])
           // var map = new google.maps.Map($element[0], mapOptions);
 
 
-          // $http.get(Config.url+'/api/cases').then(function(resp){
-          //   data = resp.data;
-          //   for(var i = 0; i < data.length; i++){
-          //     var report = data[i];
-          //     addReportToMap(report,map);
-          //   }
-          //   var mcOptions = {gridSize: 50, maxZoom: 15, styles: clusterStyles};
-          //   var mc = new MarkerClusterer(map, markers, mcOptions);
-          // });
+          $http({
+            method: 'GET',
+            url: Config.url + '/api/cases'
+          }).then(function(resp){
+            data = resp.data;
+            for(var i = 0; i < data.length; i++){
+              var report = data[i];
+              addReportToMap(report, map, "infected");
+            }
+          });
+
+          $http({
+            method: 'GET',
+            url:  Config.url + '/api/locations/users/16'
+          }).then(function(resp){
+            console.log(resp);
+            data = resp.data;
+            for(var i = 0; i < data.length; i++){
+              var report = data[i];
+              addReportToMap(report, map, "user");
+            }
+          });
 
           // Stop the side bar from dragging when mousedown/tapdown on the map
           // google.maps.event.addDomListener($element[0], 'mousedown', function (e) {

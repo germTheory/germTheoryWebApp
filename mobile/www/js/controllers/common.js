@@ -1,8 +1,9 @@
 angular.module('app.controllers.common', [])
   .controller('AuthCtrl', function($scope) {
   })
-  .controller('MapCtrl', function($scope, Geolocation) {
+  .controller('MapCtrl', function($scope, Config, Geolocation) {
     $scope.locations = [];
+    $scope.Config = Config;
     $scope.onMapCreated = function(map){
       Geolocation.getCurrentPosition().then(function(pos){
         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
