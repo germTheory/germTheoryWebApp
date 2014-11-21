@@ -125,9 +125,6 @@ angular.module('app.directives.map', [])
           // zoom to a marker when clicked
           map.on('popupopen', function(centerMarker) {
                   map.panTo(centerMarker.popup._latlng);
-                  // var cM = map.project(centerMarker.popup._latlng);
-                  // cM.y -= centerMarker.popup._container.clientHeight/2;
-                  // map.setView(map.unproject(cM),16, {animate: true});
               });
         }
 
