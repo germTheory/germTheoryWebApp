@@ -12,6 +12,8 @@ module.exports = {
       .then(function (user) {
         res.set('Content-Type', 'application/json');
         res.status(200).send(user);
+      },function(err){
+        res.status(400).send(err);
       });
   },
 

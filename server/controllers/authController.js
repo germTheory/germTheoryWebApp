@@ -121,12 +121,14 @@ module.exports = {
   },
   /**
    * Gets info for the current logged in user
+   *
    */
-  getInfo: function(req,res,next){
+  getUserInfo: function(req,res,next){
 
     if(req.user){
       User.find({ where: { id: req.user.id }})
         .then(function(user) {
+
           res.send({ user: user });
         });
     }else{

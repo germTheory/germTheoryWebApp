@@ -7,13 +7,13 @@ describe('Auth specs', function() {
 
   it('should return a 401 if not logged in',function(done){
     request(app)
-      .get('/auth/me')
+      .get('/api/users/me')
       .expect(401, done);
   });
-
   it('should not crash if logging in with empty params',function(done){
     request(app)
       .post('/api/users/login')
+
       .expect(400,done);
   });
 

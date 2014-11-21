@@ -43,7 +43,7 @@ module.exports = {
     res.status(401);
     res.end();
   },
-  isLoggedIn: function(req, res, next) {
+  isLoggedInWeb: function(req, res, next) {
     if (req.isAuthenticated()) {
       console.log('logged in');
       return next();

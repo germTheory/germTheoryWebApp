@@ -10,26 +10,26 @@ var passport = require('passport');
 
 module.exports = function (app) {
   // Mobile auth routes
-  app.get('/mobile', helpers.isLoggedIn, authController.showMobile);
-  app.get('/', helpers.isLoggedIn, function(req, res){
+  app.get('/mobile', helpers.isLoggedInWeb, authController.showMobile);
+  app.get('/', helpers.isLoggedInWeb, function(req, res){
     res.render('home');
   });
   // Web auth routes
-  app.get('/users', helpers.isLoggedIn, userController.showAllUsers);
-  app.get('/users/:id', helpers.isLoggedIn, userController.showUserInfo);
+  app.get('/users', helpers.isLoggedInWeb, userController.showAllUsers);
+  app.get('/users/:id', helpers.isLoggedInWeb, userController.showUserInfo);
   
-  app.get('/locations', helpers.isLoggedIn, locationController.showAllLocations);
-  app.get('/cases', helpers.isLoggedIn, caseController.showAllReportedCase);
+  app.get('/locations', helpers.isLoggedInWeb, locationController.showAllLocations);
+  app.get('/cases', helpers.isLoggedInWeb, caseController.showAllReportedCase);
   
   // REPORTS
-  app.get('/reports', helpers.isLoggedIn, reportController.showAllProximityReports);
-  app.post('/reports', helpers.isLoggedIn, processingController.createReport);
+  app.get('/reports', helpers.isLoggedInWeb, reportController.showAllProximityReports);
+  app.post('/reports', helpers.isLoggedInWeb, processingController.createReport);
   
   // DISEASE INFORMATION
-  app.get('/diseases', helpers.isLoggedIn, diseaseController.getDiseasesPage);
-  app.get('/newReportedCase', helpers.isLoggedIn, caseController.newReportedCase );
-  app.get('/newRiskReport', helpers.isLoggedIn, reportController.newRiskReport );
-  app.get('/*', helpers.isLoggedIn, function(req, res, next) {
+  app.get('/diseases', helpers.isLoggedInWeb, diseaseController.getDiseasesPage);
+  app.get('/newReportedCase', helpers.isLoggedInWeb, caseController.newReportedCase );
+  app.get('/newRiskReport', helpers.isLoggedInWeb, reportController.newRiskReport );
+  app.get('/*', helpers.isLoggedInWeb, function(req, res, next) {
     res.render('index');
   });
 };
