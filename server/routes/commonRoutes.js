@@ -26,8 +26,8 @@ module.exports = function (app) {
   app.post('/reports', helpers.isLoggedIn, processingController.createReport);
   
   // DISEASE INFORMATION
-  app.get('/diseases', helpers.isLoggedIn, diseaseController.getDiseasesPage)
-  app.get('/newReportedCase', helpers.isLoggedIn, caseController.newReportedCase )
+  app.get('/diseases', helpers.isLoggedIn, diseaseController.getDiseasesPage);
+  app.get('/newReportedCase', helpers.isLoggedIn, caseController.newReportedCase );
   app.get('/newRiskReport', helpers.isLoggedIn, reportController.newRiskReport );
   app.get('/*', helpers.isLoggedIn, function(req, res, next) {
     res.render('index');
