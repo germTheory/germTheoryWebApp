@@ -51,7 +51,7 @@ angular.module('app.directives.map', [])
             center: [30.505, -100.09],
             zoom: 3,
             touchZoom: true,
-            tap: true
+            tap: false
           });
           map.locate({ setView: true, maxZoom: 14 });
           function onLocationFound(e) {

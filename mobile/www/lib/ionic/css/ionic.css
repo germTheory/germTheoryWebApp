@@ -2727,7 +2727,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 55px;
+  height: 60px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -3126,10 +3126,6 @@ a.subdued {
   border-bottom-width: 1px; }
   .bar-header.has-tabs-top {
     border-bottom-width: 0px; }
-
-.bar-header img {
-  width: 250;
-  height: 50; }
 
 .bar-footer {
   bottom: 0;
