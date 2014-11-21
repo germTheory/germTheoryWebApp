@@ -11,9 +11,15 @@ describe('Auth specs', function() {
       .expect(401, done);
   });
 
+  it('should not crash if logging in with empty params',function(){
+    request(app)
+      .post('/api/users/login')
+      .expect(400,done);
+  });
+
   it('should return the user object if its logged in', function(done){
     request(app)
-      .post('/auth/login')
+      .post('/api/users/login')
       .expect(200,done);
   });
 
