@@ -5,7 +5,7 @@ var diseaseController = require('./diseaseController.js');
 module.exports = {
 
   getAllReportedCases: function(req, res, next) {
-    ReportedCase.findAll({ limit: 100 })
+    ReportedCase.findAll({ include: [ Disease ] ,limit: 100 })
       .success(function(reportedCases) {
         res.status(200).send(reportedCases);
       });

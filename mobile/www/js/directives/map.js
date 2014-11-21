@@ -1,5 +1,5 @@
 angular.module('app.directives.map', [])
-  .directive('spotsMap', function(Config, $http) {
+  .directive('spotsMap', function(Config, LocalStorageService, $http) {
     var markers = [];
     var clusterStyles = [
       {
@@ -24,13 +24,16 @@ angular.module('app.directives.map', [])
     /**
      * Add a new report to the map
      */
-    var addReportToMap = function(report, map, type){
+    var addReportToMap = function(report, map, type, popupMsg){
       if(type === "infected"){
-        var marker = L.circle([report.latitude, report.longitude], 10, {
+        var marker = L.circle([report.latitude, report.longitude], 30, {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.5
         }).addTo(map);
+        if (popupMsg){
+          marker.bindPopup(popupMsg);
+        }
         markers.push(marker);
       } else if(type === "user"){
         var marker = L.circle([report.latitude, report.longitude], 10, {
@@ -38,6 +41,9 @@ angular.module('app.directives.map', [])
           fillColor: '#365CF1',
           fillOpacity: 0.5
         }).addTo(map);
+        if (popupMsg){
+          marker.bindPopup(popupMsg);
+        }
         markers.push(marker);
       }
     };
@@ -69,7 +75,7 @@ angular.module('app.directives.map', [])
               
               var radius = e.accuracy / 2;
 
-              L.marker(e.latlng).addTo(map);
+              L.marker(e.latlng).addTo(map).bindPopup('<b>You are here!</b>');
 
               L.circle(e.latlng, radius).addTo(map);
           }
@@ -79,29 +85,33 @@ angular.module('app.directives.map', [])
           }).addTo(map);
 
           function onLocationError(e) {
-              alert("GermTheory was unable to access your location.  Have you turned on location data in the settings?");
+              console.log("fail silently");
           }
           map.on('locationfound', onLocationFound);
           map.on('locationerror', onLocationError);
           // var map = new google.maps.Map($element[0], mapOptions);
 
-
+          // get all cases
           $http({
             method: 'GET',
-            url: Config.url + '/api/cases'
+            url: '/api/cases'
           }).then(function(resp){
+            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
-              addReportToMap(report, map, "infected");
+              momentDate = new moment(report.date).format('MMMM Do, YYYY');
+              diseaseName = report.disease.name;
+              addReportToMap(report, map, "infected", "<b>" + diseaseName + ' Report</b><br>Date: ' + momentDate + '<br>' + report.description);
             }
           });
 
+          // get all locations for signed in user
           $http({
             method: 'GET',
-            url:  Config.url + '/api/locations/users/16',
+            url:  '/api/locations/users/' + LocalStorageService.getItem('id'),
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/jsonp'
             }
           }).then(function(resp){
             console.log(resp);
@@ -112,11 +122,13 @@ angular.module('app.directives.map', [])
             }
           });
 
-          // Stop the side bar from dragging when mousedown/tapdown on the map
-          // google.maps.event.addDomListener($element[0], 'mousedown', function (e) {
-          //   e.preventDefault();
-          //   return false;
-          // });
+          // zoom to a marker when clicked
+          map.on('popupopen', function(centerMarker) {
+                  map.panTo(centerMarker.popup._latlng);
+                  // var cM = map.project(centerMarker.popup._latlng);
+                  // cM.y -= centerMarker.popup._container.clientHeight/2;
+                  // map.setView(map.unproject(cM),16, {animate: true});
+              });
         }
 
         if (document.readyState === "complete") {
