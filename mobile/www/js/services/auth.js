@@ -28,7 +28,7 @@ angular.module('app.services.auth', [])
         url: '/api/users/signup',
         data: user
       })
-        .then(function (resp) {
+        .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
           return resp;
         });

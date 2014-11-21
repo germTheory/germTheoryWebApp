@@ -63,7 +63,9 @@ module.exports = {
     User.find({ where: { email: username }})
       .then(function(user) {
         if (user) {
-          next(new Error('User already exist!'));
+          var alreadyExist = new Error('User already exist!');
+          alreadyExist.status = 400;
+          next(alreadyExist);
         } else {
           // make a new user if not exist
           return User.create({
