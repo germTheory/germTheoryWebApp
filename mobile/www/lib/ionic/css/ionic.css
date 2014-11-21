@@ -2727,7 +2727,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 60px;
+  height: 55px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -3127,6 +3127,10 @@ a.subdued {
   .bar-header.has-tabs-top {
     border-bottom-width: 0px; }
 
+.bar-header img {
+  width: 250;
+  height: 50; }
+
 .bar-footer {
   bottom: 0;
   border-top-width: 1px;
@@ -3180,7 +3184,7 @@ a.subdued {
   bottom: 0;
   z-index: 5;
   width: 100%;
-  height: 65px;
+  height: 60px;
   border-style: solid;
   border-top-width: 1px;
   background-size: 0;
@@ -3655,13 +3659,13 @@ a.subdued {
   display: none; }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item {
-  margin-top: 15px;
   font-size: 39%;
   line-height: 14px; }
 
 .tab-item .icon {
   display: block;
   margin: 0 auto;
+  padding-top: 5px;
   height: 100%;
   font-size: 400%;
   border-style: solid;
