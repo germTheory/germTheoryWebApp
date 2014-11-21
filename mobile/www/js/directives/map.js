@@ -26,7 +26,7 @@ angular.module('app.directives.map', [])
      */
     var addReportToMap = function(report, map, type, popupMsg){
       if(type === "infected"){
-        var marker = L.circle([report.latitude, report.longitude], 10, {
+        var marker = L.circle([report.latitude, report.longitude], 15, {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.5
@@ -100,8 +100,9 @@ angular.module('app.directives.map', [])
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
+              momentDate = new moment(report.date).format('MMMM Do YYYY');
               diseaseName = report.disease.name;
-              addReportToMap(report, map, "infected", "<b>" + diseaseName + '</b><br>Date: ' + report.date + '<br>' + report.description);
+              addReportToMap(report, map, "infected", "<b>" + diseaseName + ' Report</b><br>Date: ' + momentDate + '<br>' + report.description);
             }
           });
 
