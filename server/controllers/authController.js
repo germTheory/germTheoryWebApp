@@ -35,7 +35,7 @@ module.exports = {
       })
       .then(function (user) {
         if (!user) {
-          next(new Error('User does not exist'));
+          next(new Error('User account does not exist.  Please sign up.'));
         } else {
           // TODO: Currently, we do not hash password until we implement pre-save hook to generate a hashed password
 /*          return user.comparePassword(password)
@@ -63,7 +63,7 @@ module.exports = {
     User.find({ where: { email: username }})
       .then(function(user) {
         if (user) {
-          var alreadyExist = new Error('User already exist!');
+          var alreadyExist = new Error('This user account already exists');
           alreadyExist.status = 400;
           next(alreadyExist);
         } else {

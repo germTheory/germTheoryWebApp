@@ -4,24 +4,30 @@ angular.module('app.services.common', [])
       url: 'https://germ-tracker.herokuapp.com'
     }
   })
-  .factory('LocalStorage', ['$window', function($window) {
+  .factory('LocalStorageService', function($window) {
+    var store = $window.localStorage;
+
+    var setItem = function(key, value) {
+      store.setItem(key, value);
+    };
+
+    var getItem = function(key, defaultValue) {
+      return store.getItem(key) || defaultValue;
+    };
+
+    var removeItem = function(key) {
+      store.removeItem(key);
+    };
+
     return {
-      set: function(key, value) {
-        $window.localStorage[key] = value;
-      },
-      get: function(key, defaultValue) {
-        return $window.localStorage[key] || defaultValue;
-      },
-      setObject: function(key, value) {
-        $window.localStorage[key] = JSON.stringify(value);
-      },
-      getObject: function(key) {
-        return JSON.parse($window.localStorage[key] || '{}');
-      }
+      setItem: setItem,
+      getItem: getItem,
+      removeItem: removeItem
     }
-  }])
+  })
   .factory('RiskIndexService', function($http) {
     var getRiskIndex = function(userId) {
+      console.log('userId', userId);
       return $http({
         method: 'GET',
         url: '/api/proximity/users/' + userId

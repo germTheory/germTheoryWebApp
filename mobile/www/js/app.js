@@ -39,8 +39,7 @@ angular.module('app', [
         url: '/report',
         views: {
           'tab-report': {
-            templateUrl: 'templates/report.html',
-            controller: 'ReportCtrl'
+            templateUrl: 'templates/report.html'
           }
         }
       })

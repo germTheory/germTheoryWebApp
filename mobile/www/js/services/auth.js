@@ -1,5 +1,5 @@
 angular.module('app.services.auth', [])
-  .factory('AuthService', function AuthService($http, $location, AuthTokenService) {
+  .factory('AuthService', function AuthService($http, $location, AuthTokenService, LocalStorageService) {
 
     var signin = function (user) {
       return $http({
@@ -9,6 +9,7 @@ angular.module('app.services.auth', [])
       })
         .then(function (resp) {
           AuthTokenService.setToken(resp.data.token);
+          LocalStorageService.setItem('id', resp.data.user.id);
           return resp;
         });
     };
@@ -28,6 +29,7 @@ angular.module('app.services.auth', [])
       })
         .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
+          LocalStorageService.setItem('id', resp.data.user.id);
           return resp;
         });
     };
@@ -38,6 +40,7 @@ angular.module('app.services.auth', [])
 
     var signout = function () {
       AuthTokenService.setToken();
+      LocalStorageService.removeItem('id');
       $location.path('/signin');
     };
 
