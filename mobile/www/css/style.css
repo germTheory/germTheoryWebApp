@@ -10,6 +10,15 @@ spots-map {
     height: 100%;
 }
 
+/*
+.gradient {
+    background: -webkit-linear-gradient(left, #1eab99 , #22C1AC, #1eab99); 
+    background: -o-linear-gradient(right, #1eab99, #22C1AC,  #1eab99); 
+    background: -moz-linear-gradient(right, #1eab99, #22C1AC,  #1eab99); 
+    background: linear-gradient(to right, #1eab99 , #22C1AC,  #1eab99); 
+}
+*/
+
 .userStats {
   position: relative; 
   text-align:center; 
@@ -47,6 +56,16 @@ spots-map {
   margin-left: 25px;
   margin-top:30px;
   background-color:#fff;
+}
+
+.bigButton {
+  font-size:1.5em;
+  color:#fff;
+}
+
+.medButton {
+  font-size:1.3em;
+  color:#fff;
 }
 
 .big {
