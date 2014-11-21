@@ -2,16 +2,16 @@
   <ion-content>
     <div id='signup'>
       <form name="signupForm" ng-submit='signup($signupForm.$valid)'>
-        <div class="list">
+        <div class="list" style="margin:50px 25px 25px 25px;">
           <label class="item item-input">
-            <span class="input-label">Username</span>
-            <input type="email" ng-model='user.username' ng-required='true'>
+            <span class="input-label">Email</span>
+            <input type="email" ng-model='user.username' ng-required='true' placeholder='Enter your email address'>
           </label>
           <label class="item item-input">
             <span class="input-label">Password</span>
-            <input type="password" ng-model='user.password' ng-required='true'>
+            <input type="password" ng-model='user.password' ng-required='true' placeholder='Enter a new password'>
           </label>
-          <button class="button button-full button-positive" ng-disabled="signupForm.$invalid">Sign Up</button>
+          <button class="button button-full button-calm" ng-disabled="signupForm.$invalid" style='margin-top:20px; border-radius:8px;'>Sign Up</button>
         </div>
       </form>
     </div>

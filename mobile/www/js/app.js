@@ -62,6 +62,16 @@ angular.module('app', [
           }
         }
       })
+      .state('get-started', {
+        url: '/get-started',
+        templateUrl: 'templates/get-started.html',
+        controller: 'UserCtrl'
+      })
+      .state('user-info', {
+        url: '/user-info',
+        templateUrl: 'templates/user-info.html',
+        controller: 'UserCtrl'
+      })
       .state('signin', {
         url: '/signin',
         templateUrl: 'templates/signin.html',
@@ -99,7 +109,7 @@ angular.module('app', [
     // Check if a user is authenticated here before moving to a new state
     // If auth-token is not present, redirect to 'signin' state unless next state is either 'signin' or 'signout'
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      if (!(toState.name === 'signin' || toState.name === 'signup') && !AuthService.isAuthenticated()) {
+      if (AuthService.shouldAuthenticate(toState.name) && !AuthService.isAuthenticated()) {
         $location.path('/signin');
       }
     });

@@ -13,6 +13,15 @@ angular.module('app.services.auth', [])
         });
     };
 
+    var shouldAuthenticate = function(state) {
+      if (state === 'signin' || state === 'signup' || state === 'get-started' || state === 'user-info') {
+        console.log('got into state');
+
+        return false;
+      }
+      return true;
+    }
+
     var signup = function (user) {
       return $http({
         method: 'POST',
@@ -38,7 +47,8 @@ angular.module('app.services.auth', [])
       signin: signin,
       signup: signup,
       isAuthenticated: isAuthenticated,
-      signout: signout
+      signout: signout,
+      shouldAuthenticate: shouldAuthenticate
     };
   })
   .factory('AuthTokenService', function AuthTokenFactory($window) {
