@@ -28,6 +28,10 @@ module.exports = {
   signin: function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    if(username===undefined||password===undefined){
+      res.status(400).end();
+      return;
+    }
 
     User.find({
       where: { email: username },

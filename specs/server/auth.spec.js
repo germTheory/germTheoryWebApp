@@ -11,7 +11,7 @@ describe('Auth specs', function() {
       .expect(401, done);
   });
 
-  it('should not crash if logging in with empty params',function(){
+  it('should not crash if logging in with empty params',function(done){
     request(app)
       .post('/api/users/login')
       .expect(400,done);
