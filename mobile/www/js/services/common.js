@@ -1,7 +1,7 @@
 angular.module('app.services.common', [])
   .factory('Config',function(){
     return {
-      url: 'http://localhost:4568'
+      url: 'https://germ-tracker.herokuapp.com'
     }
   })
   .factory('LocalStorage', ['$window', function($window) {
