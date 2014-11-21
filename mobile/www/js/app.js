@@ -8,8 +8,7 @@ angular.module('app', [
   'app.services.geo-location',
   'app.services.settings',
   'app.services.auth',
-  'app.directives.map',
-  'leaflet-directive'])
+  'app.directives.map'])
 
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
