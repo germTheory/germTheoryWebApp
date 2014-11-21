@@ -1,5 +1,5 @@
 angular.module('app.directives.map', [])
-  .directive('spotsMap', function(Config, $http) {
+  .directive('spotsMap', function(Config, LocalStorageService, $http) {
     var markers = [];
     var clusterStyles = [
       {
@@ -88,8 +88,9 @@ angular.module('app.directives.map', [])
 
           $http({
             method: 'GET',
-            url: Config.url + '/api/cases'
+            url: '/api/cases'
           }).then(function(resp){
+            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
@@ -99,9 +100,9 @@ angular.module('app.directives.map', [])
 
           $http({
             method: 'GET',
-            url:  Config.url + '/api/locations/users/16',
+            url:  '/api/locations/users/' + LocalStorageService.getItem('id'),
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/jsonp'
             }
           }).then(function(resp){
             console.log(resp);
