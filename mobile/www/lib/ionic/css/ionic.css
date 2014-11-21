@@ -2732,7 +2732,7 @@ a.subdued {
   border-style: solid;
   border-top: 1px solid transparent;
   border-bottom: 1px solid #ddd;
-  background-color: #C0C2C0;
+  background-color: #22C1AC;
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
   background-size: 0; }
@@ -2743,7 +2743,7 @@ a.subdued {
       background-position: bottom;
       background-size: 100% 1px;
       background-repeat: no-repeat;
-      background-color: #C0C2C0; } }
+      background-color: #22C1AC; } }
   .bar.bar-clear {
     border: none;
     background: none;
