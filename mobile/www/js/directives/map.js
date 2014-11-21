@@ -88,7 +88,7 @@ angular.module('app.directives.map', [])
 
           $http({
             method: 'GET',
-            url: 'http://localhost:4568/api/cases'
+            url: Config.url + '/api/cases'
           }).then(function(resp){
             data = resp.data;
             for(var i = 0; i < data.length; i++){
@@ -99,7 +99,7 @@ angular.module('app.directives.map', [])
 
           $http({
             method: 'GET',
-            url: 'http://localhost:4568/api/locations/users/16'
+            url:  Config.url + '/api/locations/users/16'
           }).then(function(resp){
             console.log(resp);
             data = resp.data;
