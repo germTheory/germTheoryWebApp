@@ -67,11 +67,6 @@ angular.module('app', [
         templateUrl: 'templates/get-started.html',
         controller: 'UserCtrl'
       })
-      .state('user-info', {
-        url: '/user-info',
-        templateUrl: 'templates/user-info.html',
-        controller: 'UserCtrl'
-      })
       .state('signin', {
         url: '/signin',
         templateUrl: 'templates/signin.html',
