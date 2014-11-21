@@ -14,7 +14,7 @@ for(var i = 1; i < 101; i++){
 
 db.sequelize.sync({force: true}).then(function(){
     db.User.bulkCreate(users).then(function(newUsers){
-      var result = seed.simulate(userIds, 1415318400000, 1415577600000, 1200000);
+      var result = seed.simulate(userIds, new Date().getTime() - (24 * 60 * 60 * 1000), new Date().getTime(), 1200000);
       db.Location.bulkCreate(result).then(function(){
       	db.Disease.create( {name: 'Ebola', contagiousness: 6, incubation_period: 3, description: "Ebola virus disease (EVD; also Ebola hemorrhagic fever, or EHF), or simply Ebola, is a disease of humans and other primates caused by ebolaviruses."}).then(function(disease){
       		db.User.find(1).then(function(user){
