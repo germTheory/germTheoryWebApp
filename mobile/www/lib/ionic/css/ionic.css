@@ -3196,7 +3196,7 @@ a.subdued {
       background-position: top;
       background-size: 100% 1px;
       background-repeat: no-repeat;
-      background-color: #3F92D2; } }
+      background-color: #fff; } }
 
 /* Allow parent element of tabs to define color, or just the tab itself */
 .tabs-light > .tabs, .tabs.tabs-light {
@@ -3625,7 +3625,7 @@ a.subdued {
   background-color: #fff;
   max-width: 150px;
   height: 100%;
-  color: #22C1AC;
+  color: #5B5C5B;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -3635,7 +3635,6 @@ a.subdued {
   font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
-    cursor: pointer;
     color: #22C1AC; }
   .tab-item:selected {
     color: #22C1AC; }
@@ -3699,7 +3698,7 @@ a.subdued {
 /* Navigational tab */
 /* Active state for tab */
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
-  opacity: 1; }
+  opacity: 0.7; }
   .tab-item.tab-item-active.tab-item-light, .tab-item.active.tab-item-light, .tab-item.activated.tab-item-light {
     color: #fff; }
   .tab-item.tab-item-active.tab-item-stable, .tab-item.active.tab-item-stable, .tab-item.activated.tab-item-stable {
