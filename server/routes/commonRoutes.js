@@ -13,7 +13,7 @@ module.exports = function (app) {
   app.get('/mobile', helpers.isLoggedIn, authController.showMobile);
   app.get('/', helpers.isLoggedIn, function(req, res){
     res.render('home');
-  })
+  });
   // Web auth routes
   app.get('/users', helpers.isLoggedIn, userController.showAllUsers);
   app.get('/users/:id', helpers.isLoggedIn, userController.showUserInfo);
