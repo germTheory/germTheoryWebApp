@@ -7,8 +7,14 @@ describe('Auth specs', function() {
 
   it('should return a 401 if not logged in',function(done){
     request(app)
-      .get('/api/me')
+      .get('/auth/me')
       .expect(401, done);
-  })
+  });
+
+  it('should return the user object if its logged in', function(done){
+    request(app)
+      .post('/auth/login')
+      .expect(200,done);
+  });
 
 });
