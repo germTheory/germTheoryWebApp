@@ -36,6 +36,13 @@ module.exports = {
     }
   },
 
+  isLoggedInApi: function(req, res,next){
+    if(req.isAuthenticated()){
+      return next();
+    }
+    res.status(401);
+    res.end();
+  },
   isLoggedIn: function(req, res, next) {
     if (req.isAuthenticated()) {
       console.log('logged in');

@@ -7,7 +7,7 @@ describe('Auth specs', function() {
 
   it('should return a 401 if not logged in',function(done){
     request(app)
-      .get('/api/secure')
+      .get('/api/me')
       .expect(401, done);
   })
 
