@@ -1,6 +1,5 @@
 angular.module('app.controllers.settings', [])
-  .controller('SettingsCtrl', function($scope, Settings) {
-    $scope.asdf = "aaaa";
+  .controller('SettingsCtrl', function($scope, Settings, LocalStorageService) {
     $scope.locationTracking = Settings.getLocationTracking();
     $scope.submitName;
     $scope.submitEmail;
@@ -8,22 +7,23 @@ angular.module('app.controllers.settings', [])
     $scope.user = {};
 
     $scope.getUsername = function() {
-      // User id hardcoded until we have a way to get id of current user from OAuth or local login
-      Settings.getUsername('1')
+
+      var userId = LocalStorageService.getItem('user_id');
+      Settings.getUsername(userId)
         .then(function(user) {
-          $scope.userName = user.name;
-          $scope.userEmail = user.email;
+          $scope.user.name = user.name;
+          $scope.user.email = user.email;
         });
     };
 
     $scope.editSubmit = function() {
       console.log($scope.user.name, $scope.user.email);
-      Settings.editSubmit('1', $scope.user.name, $scope.user.email)
+      Settings.editSubmit(userId, $scope.user.name, $scope.user.email)
         .then(function(user) {
           alert('Updated user info!');
           location.reload();
         });
-    }
+    };
 
     /*
      * Note: There is a bug in Ionic where ng-click fires twice on clicking a button
@@ -35,7 +35,7 @@ angular.module('app.controllers.settings', [])
       event.stopPropagation();
       $scope.locationTracking = ($scope.locationTracking === true) ? false: true;
       Settings.setLocationTracking($scope.locationTracking);
-     }
+     };
 
      $scope.getUsername();
   });
