@@ -1,5 +1,4 @@
 angular.module('app.services.settings', ['app.services.common', 'app.services.geo-location'])
-<<<<<<< HEAD
   .factory('Settings', ['LocalStorageService', 'BackgroundGeoLocation', 'Config', function($http, LocalStorageService, BackgroundGeoLocation, Config) {
     var getLocationTracking = function() {
       return LocalStorageService.getItem('locationTracking');
