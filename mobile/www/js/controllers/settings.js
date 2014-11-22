@@ -1,9 +1,6 @@
 angular.module('app.controllers.settings', [])
-  .controller('SettingsCtrl', function($scope, Settings, LocalStorageService) {
+  .controller('SettingsCtrl', function($scope, $location, Settings, LocalStorageService) {
     $scope.locationTracking = Settings.getLocationTracking();
-    $scope.submitName;
-    $scope.submitEmail;
-    $scope.submitBirthdate;
     $scope.user = {};
 
     $scope.getUsername = function() {
@@ -17,11 +14,10 @@ angular.module('app.controllers.settings', [])
     };
 
     $scope.editSubmit = function() {
-      console.log($scope.user.name, $scope.user.email);
-      Settings.editSubmit(userId, $scope.user.name, $scope.user.email)
-        .then(function(user) {
-          alert('Updated user info!');
-          location.reload();
+      var userId = LocalStorageService.getItem('user_id');
+      Settings.editSubmit(userId, $scope.user)
+        .then(function() {
+          $location.path('/tab/settings');
         });
     };
 

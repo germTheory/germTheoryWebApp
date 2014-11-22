@@ -29,7 +29,7 @@ angular.module('app.services.auth', [])
       })
         .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
         });
     };
