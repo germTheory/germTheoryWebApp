@@ -1,5 +1,5 @@
 angular.module('app.services.settings', ['app.services.common', 'app.services.geo-location'])
-  .factory('Settings', ['LocalStorageService', 'BackgroundGeoLocation', 'Config', function($http, LocalStorageService, BackgroundGeoLocation, Config) {
+  .factory('Settings', function($http, LocalStorageService, BackgroundGeoLocation, Config) {
     var getLocationTracking = function() {
       return LocalStorageService.getItem('locationTracking');
     };
@@ -42,4 +42,4 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
       getUsername: getUsername,
       editSubmit: editSubmit
     };
-  }]);
+  });
