@@ -9,8 +9,10 @@ angular.module('app.services.auth', [])
       })
         .then(function (resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('user_id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
+        }, function(err) {
+          console.error(err);
         });
     };
 
@@ -31,6 +33,8 @@ angular.module('app.services.auth', [])
           AuthTokenService.setToken(resp.data.token);
           LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
+        }, function(err) {
+          console.error(err);
         });
     };
 
