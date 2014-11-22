@@ -8,7 +8,8 @@ describe('Auth specs', function() {
   var authToken;
 
   before(function(done){
-    User.bulkCreate([
+    db.sequelize.sync({ force: true }).success(function() {
+       User.bulkCreate([
       { name: 'John Lennon', gender: 'M', email: 'john@beatles.com' },
       { name: 'Paul McCartney', gender: 'M', email: 'paul@beatles.com' },
       { name: 'George Harrison', gender: 'M', email: 'george@beatles.com' },
@@ -25,6 +26,9 @@ describe('Auth specs', function() {
             done();
           });
       });
+
+    });
+
   });
   it('should return a 401 if not logged in',function(done){
     request(app)
