@@ -121,7 +121,6 @@ module.exports = {
   },
   /**
    * Gets info for the current logged in user
-   *
    */
   getUserInfo: function(req,res,next){
 

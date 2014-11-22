@@ -1,5 +1,24 @@
 var jwt  = require('jwt-simple');
 
+var decode = function(req, res, next) {
+    var token = req.headers['x-access-token'];
+    var user;
+
+    if (!token) {
+      return res.send(401); // send unauthorized if a token is not provided
+    }
+    try {
+      // decode token and attach user to the request
+      // for use inside our controllers
+      user = jwt.decode(token, 'fjkdlsajfoew239053/3uk');
+      req.user = user;
+      next();
+    } catch(error) {
+      error.status = 403;
+      return next(error);
+    }
+  };
+
 module.exports = {
   errorLogger: function(error, req, res, next) {
     console.error(error.stack);
@@ -17,31 +36,9 @@ module.exports = {
     res.send(405, { message: "Method not allowed" });
   },
 
-  decode: function(req, res, next) {
-    var token = req.headers['x-access-token'];
-    var user;
-
-    if (!token) {
-      return res.send(403); // send forbidden if a token is not provided
-    }
-
-    try {
-      // decode token and attach user to the request
-      // for use inside our controllers
-      user = jwt.decode(token, 'secret');
-      req.user = user;
-      next();
-    } catch(error) {
-      return next(error);
-    }
-  },
 
   isLoggedInApi: function(req, res,next){
-    if(req.isAuthenticated()){
-      return next();
-    }
-    res.status(401);
-    res.end();
+    decode(req,res,next);
   },
   isLoggedInWeb: function(req, res, next) {
     if (req.isAuthenticated()) {
