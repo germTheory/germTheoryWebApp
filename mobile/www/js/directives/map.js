@@ -1,26 +1,6 @@
 angular.module('app.directives.map', [])
   .directive('spotsMap', function(Config, LocalStorageService, $http) {
     var markers = [];
-    var clusterStyles = [
-      {
-        textColor: 'white',
-        url: 'img/marker.png',
-        height: 35,
-        width: 34
-      },
-      {
-        textColor: 'white',
-        url: 'img/clusters2.png',
-        height: 38,
-        width: 38
-      },
-      {
-        textColor: 'white',
-        url: 'img/clustersbig.png',
-        height: 56,
-        width: 56
-      }
-    ];
     /**
      * Add a new report to the map
      */
@@ -96,7 +76,6 @@ angular.module('app.directives.map', [])
             method: 'GET',
             url: '/api/cases'
           }).then(function(resp){
-            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
@@ -114,7 +93,6 @@ angular.module('app.directives.map', [])
               'Content-Type': 'application/jsonp'
             }
           }).then(function(resp){
-            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];

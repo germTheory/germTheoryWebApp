@@ -9,7 +9,8 @@ angular.module('app', [
   'app.services.settings',
   'app.services.auth',
   'app.directives.map',
-  'angularMoment'])
+  'angularMoment',
+  'datePicker'])
 
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider

@@ -1,9 +1,19 @@
 angular.module('app.controllers.common', [])
-  .controller('MapCtrl', function($scope, Config, Geolocation) {
+  .controller('MapCtrl', function($scope, $ionicModal, Config, Geolocation) {
     $scope.locations = [];
     $scope.Config = Config;
-    $scope.onMapCreated = function(map){
-    };
+    $ionicModal.fromTemplateUrl('datepicker-modal.html', function(modal) {
+        $scope.dateModal = modal;
+        // $scope.dateModal.show();
+      }, {
+        scope: $scope,
+        animation: 'slide-in-up'
+      });
+    $scope.options = {
+      format: 'yyyy-mm-dd', // ISO formatted date
+      onClose: function(e) { 
+      }
+    }
   })
   .controller('MyRiskCtrl', function($scope, $location, RiskIndexService, LocalStorageService) {
     $scope.data = {};
