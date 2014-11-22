@@ -50,6 +50,14 @@ module.exports = function (app, express) {
   app.use('/api/cases', caseRouter);
   app.use('/api/proximity', proximityRouter);
   app.use('/auth', authRouter);
+
+  // respond 404 if no route is found in api
+  app.route('/:url(api|auth)/*')
+    .get(function(req,res){
+      res.status(404);
+      res.end();
+    });
+
   app.use('/', commonRouter);
 
   // Error handling middleware

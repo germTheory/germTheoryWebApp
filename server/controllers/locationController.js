@@ -40,6 +40,7 @@ module.exports = {
   },
 
   sendUserLocations: function(req, res, next){
+  
     Location.findAll({where: {user_id: req.params.id}}).then(function(locations){
       res.status(200).send(locations);
     });

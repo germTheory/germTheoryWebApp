@@ -11,7 +11,13 @@ var helpers = require('../../server/lib/helpers');
 var passport = require('passport');
 
 describe('Route Test Suites', function() {
-
+  describe('Router error handling', function(){
+    it('should 404 if a route api does not exist' ,function(done){
+      request(app)
+        .get('/api/not/existent')
+        .expect(404, done);
+    });
+  });
   describe('User Routes Tests', function() {
 
     it('should invoke userController.getAllUser when receiving a GET request to /api/users', function(done) {

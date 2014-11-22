@@ -1,5 +1,5 @@
 var locationController = require('../controllers/locationController');
-
+var helpers = require('../lib/helpers');
 module.exports = function (app) {
   app.route('/')
     .get(locationController.getAllLocations)

@@ -28,6 +28,10 @@ module.exports = {
   signin: function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    if(username===undefined||password===undefined){
+      res.status(400).end();
+      return;
+    }
 
     User.find({
       where: { email: username },
@@ -113,6 +117,21 @@ module.exports = {
         .fail(function (error) {
           next(error);
         });
+    }
+  },
+  /**
+   * Gets info for the current logged in user
+   */
+  getUserInfo: function(req,res,next){
+
+    if(req.user){
+      User.find({ where: { id: req.user.id }})
+        .then(function(user) {
+
+          res.send({ user: user });
+        });
+    }else{
+      res.status(401).end();
     }
   }
 };
