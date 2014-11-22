@@ -47,7 +47,6 @@ describe('Auth specs', function() {
         if (err) return done(err);
         done();
       });
-    console.log(authToken);
   });
   it('should return the user object if its logged in', function(done){
     request(app)
@@ -58,7 +57,6 @@ describe('Auth specs', function() {
         if (err) return done(err);
         done();
       });
-    console.log(authToken);
   });
 
 });

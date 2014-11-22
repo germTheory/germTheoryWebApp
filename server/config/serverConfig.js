@@ -56,7 +56,9 @@ module.exports = function (app, express) {
     .get(function(req,res){
       res.status(404);
       res.end();
-    });  app.use('/', commonRouter);
+    });
+
+  app.use('/', commonRouter);
 
   // Error handling middleware
   app.use(helpers.errorLogger);
