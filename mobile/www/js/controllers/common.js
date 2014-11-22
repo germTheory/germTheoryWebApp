@@ -2,17 +2,22 @@ angular.module('app.controllers.common', [])
   .controller('MapCtrl', function($scope, $ionicModal, Config, Geolocation) {
     $scope.locations = [];
     $scope.Config = Config;
-    $ionicModal.fromTemplateUrl('datepicker-modal.html', function(modal) {
-        $scope.dateModal = modal;
-        // $scope.dateModal.show();
-      }, {
-        scope: $scope,
-        animation: 'slide-in-up'
-      });
+    $scope.date = 10;
+    // $ionicModal.fromTemplateUrl('datepicker-modal.html', function(modal) {
+    //     $scope.dateModal = modal;
+    //   }, {
+    //     scope: $scope,
+    //     animation: 'slide-in-up'
+    //   });
     $scope.options = {
-      format: 'yyyy-mm-dd', // ISO formatted date
+      format: 'yyyy/mm/dd', // ISO formatted date
       onClose: function(e) { 
+        $scope.date = this.$node[0].value;
       }
+    }
+
+    $scope.triggerDatepicker = function(){
+      angular.element('input').trigger('click');
     }
   })
   .controller('MyRiskCtrl', function($scope, $location, RiskIndexService, LocalStorageService) {

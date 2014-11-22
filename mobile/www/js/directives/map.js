@@ -34,14 +34,14 @@ angular.module('app.directives.map', [])
       transclude: true,
       scope: {
       },
-      link: function ($scope, $element, $attr) {
+      link: function (scope, element, attr) {
         function initialize() {
           // var mapOptions = {
           //   center: new google.maps.LatLng(37.7836830,-122.4092210),
           //   zoom: 16,
           //   mapTypeId: google.maps.MapTypeId.ROADMAP
           // };
-          var map = L.map($element[0], {
+          var map = L.map(element[0], {
             dragging: true,
             center: [30.505, -100.09],
             zoom: 3,
@@ -69,7 +69,7 @@ angular.module('app.directives.map', [])
           }
           map.on('locationfound', onLocationFound);
           map.on('locationerror', onLocationError);
-          // var map = new google.maps.Map($element[0], mapOptions);
+          // var map = new google.maps.Map(element[0], mapOptions);
 
           // get all cases
           $http({
