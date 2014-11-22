@@ -17,7 +17,7 @@ describe('Route Test Suites', function() {
         .get('/api/not/existent')
         .expect(404, done);
     });
-  })
+  });
   describe('User Routes Tests', function() {
 
     it('should invoke userController.getAllUser when receiving a GET request to /api/users', function(done) {
