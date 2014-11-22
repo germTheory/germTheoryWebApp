@@ -1,26 +1,6 @@
 angular.module('app.directives.map', [])
   .directive('spotsMap', function(Config, LocalStorageService, $http) {
     var markers = [];
-    var clusterStyles = [
-      {
-        textColor: 'white',
-        url: 'img/marker.png',
-        height: 35,
-        width: 34
-      },
-      {
-        textColor: 'white',
-        url: 'img/clusters2.png',
-        height: 38,
-        width: 38
-      },
-      {
-        textColor: 'white',
-        url: 'img/clustersbig.png',
-        height: 56,
-        width: 56
-      }
-    ];
     /**
      * Add a new report to the map
      */
@@ -54,14 +34,14 @@ angular.module('app.directives.map', [])
       transclude: true,
       scope: {
       },
-      link: function ($scope, $element, $attr) {
+      link: function (scope, element, attr) {
         function initialize() {
           // var mapOptions = {
           //   center: new google.maps.LatLng(37.7836830,-122.4092210),
           //   zoom: 16,
           //   mapTypeId: google.maps.MapTypeId.ROADMAP
           // };
-          var map = L.map($element[0], {
+          var map = L.map(element[0], {
             dragging: true,
             center: [30.505, -100.09],
             zoom: 3,
@@ -89,14 +69,13 @@ angular.module('app.directives.map', [])
           }
           map.on('locationfound', onLocationFound);
           map.on('locationerror', onLocationError);
-          // var map = new google.maps.Map($element[0], mapOptions);
+          // var map = new google.maps.Map(element[0], mapOptions);
 
           // get all cases
           $http({
             method: 'GET',
             url: '/api/cases'
           }).then(function(resp){
-            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
@@ -114,7 +93,6 @@ angular.module('app.directives.map', [])
               'Content-Type': 'application/jsonp'
             }
           }).then(function(resp){
-            console.log(resp);
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
@@ -125,9 +103,6 @@ angular.module('app.directives.map', [])
           // zoom to a marker when clicked
           map.on('popupopen', function(centerMarker) {
                   map.panTo(centerMarker.popup._latlng);
-                  // var cM = map.project(centerMarker.popup._latlng);
-                  // cM.y -= centerMarker.popup._container.clientHeight/2;
-                  // map.setView(map.unproject(cM),16, {animate: true});
               });
         }
 
