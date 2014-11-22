@@ -25,12 +25,12 @@ angular.module('app.services.common', [])
       removeItem: removeItem
     }
   })
-  .factory('RiskIndexService', function($http) {
+  .factory('RiskIndexService', function($http, Config) {
     var getRiskIndex = function(userId) {
       console.log('userId', userId);
       return $http({
         method: 'GET',
-        url: '/api/proximity/users/' + userId
+        url: Config.url + '/api/proximity/users/' + userId
       })
         .then(function(resp) {
           return resp.data;
