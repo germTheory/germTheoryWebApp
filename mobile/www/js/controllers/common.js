@@ -5,11 +5,11 @@ angular.module('app.controllers.common', [])
     $scope.onMapCreated = function(map){
     };
   })
-  .controller('MyRiskCtrl', function($scope, RiskIndexService, LocalStorageService) {
+  .controller('MyRiskCtrl', function($scope, $location, RiskIndexService, LocalStorageService) {
     $scope.data = {};
     $scope.getMyRiskIndex = function() {
 
-      var userId = LocalStorageService.getItem('id');
+      var userId = LocalStorageService.getItem('user_id');
       if (!userId) {
         // redirect to /login page if userId is not present
         $location.path('/signin');

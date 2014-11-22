@@ -1,8 +1,7 @@
 <ion-view title="Settings">
 
   <ion-content ng-controller="SettingsCtrl">
-    <div class="userStats"> 
-
+    <div class="userStats" style="margin-top:72px;"> 
       <div class="myHealthInfo">
         <b>My Health Info</b>
       </div>
@@ -15,16 +14,13 @@
               </button>
             </span>
         <br>
-          {{userName}}
-  
+          {{ user.name }}
         </h4>
-
         <h4 class="name">
           <b>Email</b>
         <br>
-          {{userEmail}}
+          {{ user.email }}
         </h4>
-
       </div>
     </div>
 

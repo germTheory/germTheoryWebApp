@@ -8,7 +8,8 @@ angular.module('app', [
   'app.services.geo-location',
   'app.services.settings',
   'app.services.auth',
-  'app.directives.map'])
+  'app.directives.map',
+  'angularMoment'])
 
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
@@ -71,13 +72,18 @@ angular.module('app', [
         templateUrl: 'templates/signin.html',
         controller: 'UserCtrl'
       })
+      .state('landing', {
+        url: '/landing',
+        templateUrl: 'templates/landing.html',
+        controller: 'UserCtrl'
+      })
       .state('signup', {
         url: '/signup',
         templateUrl: 'templates/signup.html',
         controller: 'UserCtrl'
       });
 
-    $urlRouterProvider.otherwise('/signin');
+    $urlRouterProvider.otherwise('/landing');
 
     // Add our $httpInterceptor into the array of interceptors here
     $httpProvider.interceptors.push('AuthInterceptor');

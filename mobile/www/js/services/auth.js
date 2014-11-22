@@ -9,7 +9,7 @@ angular.module('app.services.auth', [])
       })
         .then(function (resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user.id);
           return resp;
         });
     };
@@ -19,7 +19,7 @@ angular.module('app.services.auth', [])
         return false;
       }
       return true;
-    }
+    };
 
     var signup = function (user) {
       return $http({
@@ -29,7 +29,7 @@ angular.module('app.services.auth', [])
         })
         .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
         });
     };
@@ -40,7 +40,7 @@ angular.module('app.services.auth', [])
 
     var signout = function () {
       AuthTokenService.setToken();
-      LocalStorageService.removeItem('id');
+      LocalStorageService.removeItem('user_id');
       $location.path('/signin');
     };
 

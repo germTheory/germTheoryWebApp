@@ -11,7 +11,7 @@ angular.module('app.controllers.user', [])
         })
         .catch(function (error) {
           alert(error.data.error);
-          $location.path('/signin');
+          $location.path('/signup');
         });
     };
 
