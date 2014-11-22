@@ -38,7 +38,7 @@
     background-position: top;
     background-size: 100% 1px;
     background-repeat: no-repeat;
-    background-color:#3F92D2;
+    background-color:#fff;
   }
 
 }
@@ -270,7 +270,7 @@
   max-width: $tab-item-max-width;
   height: 100%;
 
-  color: #22C1AC;
+  color: #5B5C5B;
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -283,7 +283,6 @@
   opacity: 0.7;
 
   &:hover {
-    cursor: pointer;
     color:#22C1AC;
   }
   &:selected {
@@ -382,7 +381,7 @@
 .tab-item.tab-item-active,
 .tab-item.active,
 .tab-item.activated {
-  opacity: 1;
+  opacity: .7;
 
   &.tab-item-light {
     color: $light;

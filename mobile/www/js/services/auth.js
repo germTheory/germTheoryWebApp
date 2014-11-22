@@ -1,10 +1,10 @@
 angular.module('app.services.auth', [])
-  .factory('AuthService', function AuthService($http, $location, AuthTokenService, LocalStorageService) {
+  .factory('AuthService', function AuthService($http, $location, AuthTokenService, LocalStorageService, Config) {
 
     var signin = function (user) {
       return $http({
         method: 'POST',
-        url: '/api/users/login',
+        url: Config.url + '/api/users/login',
         data: user
       })
         .then(function (resp) {
@@ -24,12 +24,12 @@ angular.module('app.services.auth', [])
     var signup = function (user) {
       return $http({
         method: 'POST',
-        url: '/api/users/signup',
+        url: Config.url + '/api/users/signup',
         data: user
-      })
+        })
         .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
         });
     };
