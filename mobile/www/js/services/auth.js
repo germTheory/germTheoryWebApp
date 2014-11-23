@@ -4,13 +4,15 @@ angular.module('app.services.auth', [])
     var signin = function (user) {
       return $http({
         method: 'POST',
-        url: Config.url + '/api/users/login',
+        url: '/api/users/login',
         data: user
       })
         .then(function (resp) {
           AuthTokenService.setToken(resp.data.token);
-          LocalStorageService.setItem('user_id', resp.data.user.id);
+          LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
+        }, function(err) {
+          console.error(err);
         });
     };
 
@@ -24,13 +26,15 @@ angular.module('app.services.auth', [])
     var signup = function (user) {
       return $http({
         method: 'POST',
-        url: Config.url + '/api/users/signup',
+        url: '/api/users/signup',
         data: user
         })
         .then(function(resp) {
           AuthTokenService.setToken(resp.data.token);
           LocalStorageService.setItem('user_id', resp.data.user);
           return resp;
+        }, function(err) {
+          console.error(err);
         });
     };
 
