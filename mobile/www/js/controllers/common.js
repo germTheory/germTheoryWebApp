@@ -38,9 +38,9 @@ angular.module('app.controllers.common', [])
           if (indexValue >= 0.75) {
             $scope.data["myRiskValue"] = "High"
           } else if (indexValue >= 0.5 && indexValue < .75){
-            $scope.data["myRiskValue"] = "Medium-High"
+            $scope.data["myRiskValue"] = "Elevated"
           } else if (indexValue >= 0.3 && indexValue < 0.5) {
-            $scope.data["myRiskValue"] = "Medium-Low"
+            $scope.data["myRiskValue"] = "Medium"
           } else  {
             $scope.data["myRiskValue"] = "Low"
           }

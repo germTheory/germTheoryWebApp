@@ -1,36 +1,70 @@
-.risk-view {
+h3 {
+  margin: 2%;
+  font-size: 1.2rem;
+  height: 20%;
+  color: #808080;
+}
+
+p {
+  color: transparent;
+}
+
+.stats-view {
+  margin-top: 1%;
   height: 25%;
+  color: #22c1ac;
+  display: inline-block;
+  background-color: #e9e9e9;
+}
+
+.left-stat{
+  float: left;
+}
+
+.right-stat{
+  float: right;
+}
+
+.risk-view {
+  height: 20%;
   width: 100%;
+  margin: none;
+  display: block;
 }
 
 .pill-container {
-  width: 90%;
-  height: 40%;
+  width: 100%;
+  height: 80%;
   margin: auto;
   position: relative;
 }
 
 .pill-levels {
-  width: 100%;
-  height: 75%;
+  width: 90%;
+  height: 43%;
   border-radius: 500px;
   background-image: url('../img/levels.png');
   background-size: cover;
   background-color: black;
-
+  margin: auto;
 }
 
 .popup {
-  background-color: blue;
+  content: 'hello';
+  background-color: black;
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  width: 30%;
+  height: 2rem;
   position: absolute;
+  padding: 2%;
+  margin-top:2%;
+  left: 0;
   text-align: center;
   text-decoration: none;
   border-radius: 5px;
-  
+  font-size: 1.2rem;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
@@ -42,15 +76,47 @@
   height: 0;
   position: absolute;
   width: 0;
-  border-bottom: 8px solid blue;
+  border-bottom: 8px solid black;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   left: 50%;
   margin-left: -8px;
-  top: -8px;  
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
+  top: -8px;
+}
+
+.popup.value-Low {
+  background-color: #2BCB2C;
+}
+
+.arrow-up.value-Low:before {
+  border-bottom: 8px solid #2BCB2C;
+}
+
+.popup.value-High{
+  left: 68%;
+  background-color: #F61435;
+}
+
+.arrow-up.value-High:before {
+  border-bottom: 8px solid #F61435;
+}
+
+.popup.value-Medium{
+  left: 23%;
+  color: #808080;
+  background-color: #FFF800;
+}
+
+.arrow-up.value-Medium:before {
+  border-bottom: 8px solid #FFF800;
+}
+
+.popup.value-Elevated{
+  left: 46%;
+  background-color: #F97A18;
+}
+
+.arrow-up.value-Elevated:before {
+  border-bottom: 8px solid #F97A18;
 }
 
