@@ -54,6 +54,15 @@ module.exports = function(grunt) {
       }
     },
 
+    karma: {
+      unit: {
+        configFile: 'mobile/karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS', 'Firefox'],
+        logLevel: 'ERROR'
+      }
+    },
+
     shell: {
       setupDB: {
         command: function(DBName) {
@@ -73,6 +82,7 @@ module.exports = function(grunt) {
           }
         }
       },
+
       createDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
@@ -88,6 +98,7 @@ module.exports = function(grunt) {
           }
         }
       },
+
       dropDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
@@ -103,6 +114,7 @@ module.exports = function(grunt) {
           }
         }
       },
+
       populateDB: {
         command: function(DBName) {
           grunt.config.set('DBName', DBName);
@@ -118,6 +130,7 @@ module.exports = function(grunt) {
           }
         }
       },
+
       checkDB: {
         command: function(DBName) {
           return 'psql -l | grep ' + DBName + ' | wc -l';
@@ -133,6 +146,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-npm-install');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -162,7 +176,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', 'Setup database and run mocha tests', [
     //'setupDB',
-    'mochaTest'
+    'mochaTest',
+    'karma'
   ]);
 
   grunt.registerTask('build', 'Run npm-install, jshint, mochaTest and jsdoc tasks', [
