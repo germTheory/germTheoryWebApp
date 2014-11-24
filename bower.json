@@ -1,11 +1,20 @@
 {
   "name": "germ-theory",
   "version": "0.0.1",
+  "devDependencies": {
+    "angular-mocks": "1.2.23"
+  },
   "dependencies": {
+    "angular-moment": "~0.8.2",
+    "angular-native-picker": "~1.0.4",
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
     "jquery": "~2.0.3",
-    "underscore": "~1.7.0",
     "bootstrap": "~3.2.0",
-    "ngCordova": "~0.1.7-alpha"
+    "ngCordova": "~0.1.7-alpha",
+    "underscore": "~1.7.0"
+  },
+  "resolutions": {
+    "angular": "1.2.23"
   },
   "ignore": [
     "**/.*",

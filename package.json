@@ -55,6 +55,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "grunt test"
   }
 }
