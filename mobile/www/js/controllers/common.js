@@ -33,14 +33,16 @@ angular.module('app.controllers.common', [])
       RiskIndexService.getRiskIndex(userId)
         .then(function(resp) {
           var indexValue = (resp && resp.value) || 0;
-
+          $scope.data["riskIndex"] = Math.round(indexValue * 100) / 100;
           // Note: Hardcode index threshold values for now
           if (indexValue >= 0.75) {
-            $scope.data["myRiskIndex"] = "High"
-          } else if (indexValue >= 0.3 && indexValue < 0.75) {
-            $scope.data["myRiskIndex"] = "Medium"
+            $scope.data["myRiskValue"] = "High"
+          } else if (indexValue >= 0.5 && indexValue < .75){
+            $scope.data["myRiskValue"] = "Medium-High"
+          } else if (indexValue >= 0.3 && indexValue < 0.5) {
+            $scope.data["myRiskValue"] = "Medium-Low"
           } else  {
-            $scope.data["myRiskIndex"] = "Low"
+            $scope.data["myRiskValue"] = "Low"
           }
         })
         .catch(function (error) {
