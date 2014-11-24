@@ -69,7 +69,7 @@ module.exports = {
         if (user) {
           var alreadyExist = new Error('This user account already exists');
           alreadyExist.status = 400;
-          next(alreadyExist);
+          throw alreadyExist;
         } else {
           // make a new user if not exist
           return User.create({
