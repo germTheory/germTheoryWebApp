@@ -56,7 +56,10 @@ module.exports = function(grunt) {
 
     karma: {
       unit: {
-        configFile: 'mobile/karma.conf.js'
+        configFile: 'mobile/karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS'],
+        logLevel: 'ERROR'
       }
     },
 
