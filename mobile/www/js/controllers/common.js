@@ -14,7 +14,7 @@ angular.module('app.controllers.common', [])
       onClose: function(e) { 
         $scope.date = this.$node[0].value;
       }
-    }
+    };
 
     $scope.triggerDatepicker = function(){
       angular.element('input').trigger('click');
@@ -32,7 +32,7 @@ angular.module('app.controllers.common', [])
 
       RiskIndexService.getRiskIndex(userId)
         .then(function(resp) {
-          var indexValue = resp || 0;
+          var indexValue = (resp && resp.value) || 0;
 
           // Note: Hardcode index threshold values for now
           if (indexValue >= 0.75) {
@@ -51,17 +51,14 @@ angular.module('app.controllers.common', [])
     $scope.getMyRiskIndex();
   })
   .controller('StorageCtrl', ['$scope', 'LocalStorageService', function($scope, LocalStorageService) {
-    $scope.toggleTrack = LocalStorage.get('tracking');
+    $scope.toggleTrack = LocalStorageService.get('tracking');
 
     $scope.pushTrack = function() {
-      console.log('got into pushTrack');
-      if (LocalStorage.get('tracking') === 'false') {
-        LocalStorage.setItem('tracking', 'true');
-        console.log(LocalStorage.get('tracking'));
+      if (LocalStorageService.get('tracking') === 'false') {
+        LocalStorageService.setItem('tracking', 'true');
       }
       else {
-        LocalStorage.setItem('tracking', 'false');
-        console.log(LocalStorage.get('tracking'));
+        LocalStorageService.setItem('tracking', 'false');
       }
     };
   }]);
