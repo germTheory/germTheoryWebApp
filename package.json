@@ -22,7 +22,9 @@
     "karma-mocha": "^0.1.9",
     "karma-nested-reporter": "^0.1.1",
     "karma-nyan-reporter": "0.0.43",
+    "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^1.20.1",
+    "phantomjs": "^1.9.12",
     "request": "^2.47.0",
     "should": "^4.1.0",
     "sinon": "^1.11.1",
@@ -53,6 +55,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "grunt test"
   }
 }
