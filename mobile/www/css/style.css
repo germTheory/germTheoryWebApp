@@ -31,7 +31,7 @@ h4.report {
 }
 
 h5.topMargin {
-  margin-top:-20px;
+  margin-top:7px;
 }
 
 .buttonMed {
@@ -125,7 +125,7 @@ img.resizeIcon{
   margin-top: 6px;
 }
 
-.tabPosition i {
+.tabPosition{
   margin-bottom:8px; 
   margin-top:-7px;
 }
