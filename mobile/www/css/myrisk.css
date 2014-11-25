@@ -13,7 +13,6 @@ p {
 div.calc-info-view {
   width: 112%;
   margin-left: -6%;
-  /*margin-right: -6%;*/
   height: 6%;
   background-color: #E4E4E4;
 }
@@ -25,14 +24,15 @@ div.calc-info-view p {
   top: -.6rem;
   padding: 0px;
   margin: 0px;
+  color: #9E9E9E;
 }
 
 span.info-icon {
   float: right;
   position: absolute;
   left: 90%;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 100%;
   background-color: #BABABA;
   margin-top: .1rem;
@@ -43,14 +43,14 @@ span.info-icon i {
   position: absolute;
   left: 40%;
   top: 12%;
-
+  color: #F1F1F1;
 }
 
 /* STYLES FOR STATISTICS SECTION */
 div.stats-view {
   width: 106%;
   border-top: 1px solid #DCDCDC;
-  border-bottom: 1px solid #DCDCDC;
+  border-bottom: 2px solid #DCDCDC;
   height: 23%;
   padding: none;
   margin-left: -6%;
@@ -85,6 +85,7 @@ div.stats-view {
   float: left;
   width: 49.5%;
   height: 100%;
+  padding: 1%;
 }
 
 .right-stat p, .left-stat p {
