@@ -43,8 +43,8 @@ angular.module('app.directives.map', [])
           // };
           var map = L.map(element[0], {
             dragging: true,
-            center: [30.505, -100.09],
-            zoom: 3,
+            center: [37.741399, -122.43782],
+            zoom: 12,
             touchZoom: true,
             tap: false
           });

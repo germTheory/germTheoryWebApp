@@ -38,6 +38,5 @@ i.fa {
 
 .vert-align {
 	position: relative;
-	top: 50%;
-	transform: translateY(-70%);
+	top: 15%;
 }

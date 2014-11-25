@@ -57,7 +57,7 @@ module.exports = {
           }
         })
         for( var i = 0; i < sortedCases.length; i++){
-          sortedCases[i].dataValues.date = moment(sortedCases[i].dataValues.date).format('MMMM Do YYYY')
+          sortedCases[i].dataValues.date = moment(sortedCases[i].dataValues.date).format('MMMM Do, YYYY')
         }
         res.render('reportedCases', { cases: sortedCases });
       });
