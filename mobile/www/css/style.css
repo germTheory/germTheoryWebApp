@@ -101,7 +101,6 @@ img.resizeIcon{
   font-size: 1rem !important;
 }
 
-
 /* SIGNIN STYLES*/
 #signinForm {
   margin-top: 20% !important;
@@ -138,6 +137,16 @@ img.resizeIcon{
   height: .7em;
   margin: .5em;
   display: inline-block;
+}
+
+/* GET STARTED STYLES */
+#get-started h4 {
+  color: #808080;
+  margin: 20% 0;
+}
+
+#get-started-button {
+  margin-top: 60% !important;
 }
 
 /* Custom dropdown */
