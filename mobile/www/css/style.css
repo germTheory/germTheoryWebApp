@@ -26,7 +26,7 @@ h4.report {
   padding: 15px; 
   padding-top:100px; 
   padding-bottom:0px; 
-  margin-bottom:80px; 
+  margin-bottom:60px; 
   color:#808080;
 }
 
@@ -46,6 +46,7 @@ h5.topMargin {
   width:95%; 
   font-size:.4em; 
   margin-top:5em; 
+  margin-bottom:5%;
   border-radius:8px;
 }
 
@@ -124,6 +125,11 @@ img.resizeIcon{
     width:100%;
     height: auto;
     padding: 18px 12px 0px 12px;
+}
+
+.labelUp {
+  margin-bottom: 1%;
+  border-radius: 5px
 }
 
 .topLogo {
@@ -228,7 +234,7 @@ img.resizeIcon{
 
 /* SIGNIN STYLES*/
 #signinForm {
-  margin-top: 20% !important;
+  margin-top: 5% !important;
 }
 
 #signinForm h1 {
@@ -240,9 +246,16 @@ img.resizeIcon{
   color:#fff;
 }
 
+.formUp {
+  margin-top:10px; 
+  margin-left:25px; 
+  margin-right:25px;
+}
+
 .medButton {
   font-size:1.3em;
   color:#fff;
+  margin-bottom:10%;
 }
 
 .loginButton {

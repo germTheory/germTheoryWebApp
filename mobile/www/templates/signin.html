@@ -1,12 +1,12 @@
 <ion-view>
   <ion-content class='standardBG gradient'>
-    <form name="signinForm" id="signinForm" ng-submit='signin()' style='margin-top:10px; margin-left:25px; margin-right:25px;'>
+    <form name="signinForm" class='formUp' id="signinForm" ng-submit='signin()'>
     <h1>Login</h1>
-      <label class="item item-input" style="margin-bottom: 1%; border-radius: 5px">
+      <label class="labelUp item item-input">
         <span class="input-label">Email</span>
         <input type="email" ng-model='user.username' placeholder='Enter your email address' required>
       </label>
-      <label class="item item-input" style="margin-bottom: 1%; border-radius: 5px">
+      <label class="labelUp item item-input">
         <span class="input-label">Password</span>
         <input type="password" ng-model='user.password' placeholder='Enter your password' required>
       </label>
