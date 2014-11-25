@@ -1,7 +1,19 @@
+
 h1 {
   color: #344456;
   font-size: 3rem;
   text-align: center;
+}
+
+/** Overridding Ionic Defaults */
+h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider{
+    font-family: 'Avendir', sans-serif;
+    font-weight: 200;
+}
+
+@font-face {
+  font-family: Avendir;
+  src: url(../lib/ionic/fonts/AvenirMedium.otf);
 }
 
 a.greenTrack {
