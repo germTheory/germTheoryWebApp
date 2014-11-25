@@ -1,3 +1,9 @@
+h1 {
+  color: #344456;
+  font-size: 3rem;
+  text-align: center;
+}
+
 a.greenTrack {
   background-color:#00EB66;
 }
@@ -11,8 +17,11 @@ spots-map {
 }
 
 img.resize{
-    width:100%;
-    height: auto;
+    width: auto;
+    height: 70%;
+    display: block;
+    text-align: center;
+    margin: 0 auto !important;
     padding:20px;
 }
 
@@ -95,7 +104,7 @@ img.resizeIcon{
 
 /* SIGNIN STYLES*/
 #signinForm {
-  margin-top: 25% !important;
+  margin-top: 20% !important;
 }
 
 .bigButton {
