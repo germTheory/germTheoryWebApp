@@ -18,6 +18,15 @@ module.exports = {
       });
   },
 
+  getUserByName: function(req, res, next){
+    User.find({
+      where: {name: req.body.name}
+    })
+    .then(function(user){
+      next(user);
+    });
+  },
+
   editUser: function(req, res, next){
     User.update(
       { name: req.body.name, email: req.body.email },

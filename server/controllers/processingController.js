@@ -11,8 +11,8 @@ var _createReport = function(req, res, next){
 	data.reportName = req.body.reportName;
 	data.diseaseName = req.body.diseaseName;
 	data.contagiousness = parseInt(req.body.contagiousness);
-	startArr = req.body.startDate.split('/');
-	endArr = req.body.endDate.split('/');
+	var startArr = req.body.startDate.split('/');
+	var endArr = req.body.endDate.split('/');
 	data.startTime = new Date(startArr[2], startArr[0] - 1, startArr[1]);
 	data.endTime = new Date(endArr[2], endArr[0] - 1, endArr[1]);
 	// Find DiseaseId
