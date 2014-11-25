@@ -32,9 +32,14 @@ var _invalidMethod = function(req, res, next) {
 // Return the index value for the requested user
 var _getUserIndex = function(req, res, next) {
   Proximity
-    .findAll({ where: { user_id: req.body.user_id } })
-    .then(function(userEntry) {
-      res.status(200).send(userEntry);
+    .findAll({
+      where: { user_id: req.body.user_id },
+      attributes: ['id', 'user_id', 'value', 'disease_id', 'created_at'],
+      limit: 1,
+      order: 'created_at DESC'
+    })
+    .then(function(userIndex) {
+      res.status(200).send(userIndex[0]);
     }, function(err) {
       res.send(err);
     });
