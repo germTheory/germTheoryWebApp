@@ -6,7 +6,7 @@ h1 {
 }
 
 /** Overridding Ionic Defaults */
-h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider{
+h1, h2, h3, h4, h5, h6, p, span, div, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider{
     font-family: 'Avendir', sans-serif;
     font-weight: 200;
 }
