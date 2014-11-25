@@ -3,7 +3,12 @@ var Location = require('../database/dbSchema').Location;
 module.exports = {
 
   getAllLocations: function(req, res, next) {
-    Location.findAll({ limit: 100 }).then(function(data) {
+    var constraints = {};
+    if(req.user !== undefined){
+      //filter by id
+      constraints = {user_id: req.user.id};
+    }
+    Location.findAll({ limit: 100, where: constraints}).then(function(data) {
       res.status(200).send(data);
     });
   },
