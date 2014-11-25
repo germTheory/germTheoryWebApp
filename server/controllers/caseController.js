@@ -1,5 +1,6 @@
 var ReportedCase = require('../database/dbSchema').ReportedCase;
 var Disease = require('../database/dbSchema').Disease;
+var moment = require('moment');
 var diseaseController = require('./diseaseController.js');
 
 module.exports = {
@@ -43,7 +44,22 @@ module.exports = {
   showAllReportedCase: function(req, res, next) {
     ReportedCase.findAll({ include: [ Disease ], order: 'created_at DESC' }).
       success(function(reportedCases) {
-        res.render('reportedCases', { cases: reportedCases });
+        var sortedCases = [];
+        for(var i = 0; i < reportedCases.length; i++){
+          reportedCases[i].dataValues.date = moment(reportedCases[i].dataValues.date);
+          sortedCases.push(reportedCases[i]);
+        }
+        sortedCases.sort(function(a, b){
+          if(a.dataValues.date.isBefore(b.dataValues.date)){
+            return 1;
+          } else {
+            return -1;
+          }
+        })
+        for( var i = 0; i < sortedCases.length; i++){
+          sortedCases[i].dataValues.date = moment(sortedCases[i].dataValues.date).format('MMMM Do YYYY')
+        }
+        res.render('reportedCases', { cases: sortedCases });
       });
   },
 
