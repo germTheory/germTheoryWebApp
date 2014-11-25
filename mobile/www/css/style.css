@@ -119,6 +119,12 @@ img.resizeIcon{
   margin-top: 5%;
 }
 
+.iconFloat {
+  margin:-5px;
+  float:right; 
+  font-size:1.2em;
+}
+
 .standardBG {
   background-color:#22C1AC;
 }
