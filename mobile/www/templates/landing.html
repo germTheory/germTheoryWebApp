@@ -3,22 +3,20 @@
     <div class='landing-content'>
       <img class="resize" src="./img/germTheorySS.png" style="text-align:center;">
       <form name="signinForm" id="landing-form" ng-submit='signin()' style='margin-top:40px;'>
-          <button ui-sref="get-started" type="submit" class="button button-full button-calm landing-button">
-           <span class="bigButton">
+          <button ui-sref="get-started" type="submit" class="button button-full button-calm general-button">
+           <span class="medButton">
             Sign Up
            </span>
           </button>
 
           <hr id="landing-horiz-line">
 
-          <button class="button button-full button-calm landing-button" ui-sref="signin">
+          <button class="button button-full button-calm general-button" ui-sref="signin">
             <span class="medButton">
               Login
             </span>
           </button>
-
-
-          <button class="button button-full button-calm landing-button" ng-click="logout()">
+          <button class="button button-full button-calm general-button" ng-click="logout()">
             <span class="medButton">
               Login with Facebook
             </span>

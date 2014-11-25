@@ -74,12 +74,22 @@ img.resizeIcon{
   margin-top: 0 !important;
 }
 
-.landing-button {
+#landing-horiz-line {
+  width: 70%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: #22C1AC;
+}
+
+.button.general-button {
   margin-top: 2% !important;
   width: 80% !important;
+  height: 10% !important;
   margin: auto;
   border: none;
+  padding: 0 !important;
   border-radius: 400px !important;
+  font-size: 1rem !important;
 }
 
 
