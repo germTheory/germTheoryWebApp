@@ -16,6 +16,71 @@ h1, h2, h3, h4, h5, h6, p, span, div, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-
   src: url(../lib/ionic/fonts/AvenirMedium.otf);
 }
 
+h4.editInfo {
+  margin-top:10px; 
+  padding: 15px; 
+  color:#808080;
+}
+
+h4.report {
+  padding: 15px; 
+  padding-top:100px; 
+  padding-bottom:0px; 
+  margin-bottom:80px; 
+  color:#808080;
+}
+
+.buttonMed {
+  width:95%; 
+  font-size:.4em; 
+  margin-top:5em; 
+  border-radius:8px;
+}
+
+.mapHeight {
+  height:100%;
+}
+
+#dateContainer {
+  width: 55px;
+  height: 55px;
+  background-color: #22c1ac;
+  z-index: 20;
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  border-radius: 100%;
+}
+
+#datepicker {
+  background-color: transparent;
+  color: transparent;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+#dateContainer .icon {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  font-size: 35px;
+  color: white;
+}
+
+.cloned-text-input {
+  background-color: transparent;
+  color: transparent !important;
+}
+
+.picker__input {
+  background-color: transparent;
+  color: transparent !important;
+}
+
+.center {
+  text-align:center;
+}
+
 a.greenTrack {
   background-color:#00EB66;
 }
@@ -26,6 +91,12 @@ spots-map {
 }
 .scroll {
     height: 100%;
+}
+
+.buttonLarge {
+  width:92%; 
+  margin-top:2%; 
+  border-radius:8px;
 }
 
 img.resize{
