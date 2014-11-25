@@ -125,6 +125,10 @@ img.resizeIcon{
   font-size:1.2em;
 }
 
+.floatRight {
+  float:right;
+}
+
 .standardBG {
   background-color:#22C1AC;
 }
