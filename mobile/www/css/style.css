@@ -1,3 +1,9 @@
+h1 {
+  color: #344456;
+  font-size: 3rem;
+  text-align: center;
+}
+
 a.greenTrack {
   background-color:#00EB66;
 }
@@ -11,8 +17,11 @@ spots-map {
 }
 
 img.resize{
-    width:100%;
-    height: auto;
+    width: auto;
+    height: 70%;
+    display: block;
+    text-align: center;
+    margin: 0 auto !important;
     padding:20px;
 }
 
@@ -62,6 +71,45 @@ img.resizeIcon{
   background-color:#fff;
 }
 
+/* LANDING PAGE STYLES */
+.landing-content {
+  width: 100%;
+  height: 50%;
+}
+
+#landing-form {
+  width: 100%;
+  height: 60%;
+  margin-top: 0 !important;
+}
+
+#landing-horiz-line {
+  width: 70%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: #22C1AC;
+}
+
+.button.general-button {
+  margin-top: 2% !important;
+  width: 80% !important;
+  height: 10% !important;
+  margin: auto;
+  border: none;
+  padding: 0 !important;
+  border-radius: 400px !important;
+  font-size: 1rem !important;
+}
+
+/* SIGNIN STYLES*/
+#signinForm {
+  margin-top: 20% !important;
+}
+
+#signinForm h1 {
+  margin-bottom: 10% !important;
+}
+
 .bigButton {
   font-size:1.5em;
   color:#fff;
@@ -70,6 +118,10 @@ img.resizeIcon{
 .medButton {
   font-size:1.3em;
   color:#fff;
+}
+
+.loginButton {
+  margin-top: 5% !important;
 }
 
 .big {
@@ -87,11 +139,22 @@ img.resizeIcon{
   display: inline-block;
 }
 
+/* GET STARTED STYLES */
+#get-started h4 {
+  color: #808080;
+  margin: 20% 0;
+}
+
+#get-started-button {
+  margin-top: 50% !important;
+}
+
 /* Custom dropdown */
 .custom-dropdown {
   position: relative;
   display: inline-block;
   vertical-align: middle;
+  text-align: center !important;
   margin: 10px; /* demo only */
 }
 

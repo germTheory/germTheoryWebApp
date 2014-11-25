@@ -1,32 +1,27 @@
 <ion-view >
   <ion-content class='gradient' style="background-color:#22C1AC;" drag-content="false" scroll="false">
-    <form name="signinForm" ng-submit='signin()' style='margin-top:40px;'>
+    <div class='landing-content'>
       <img class="resize" src="./img/germTheorySS.png" style="text-align:center;">
-      <div class="list" style="margin:25px;">
+      <form name="signinForm" id="landing-form" ng-submit='signin()' style='margin-top:40px;'>
+          <button ui-sref="get-started" type="submit" class="button button-full button-calm general-button">
+           <span class="medButton">
+            Sign Up
+           </span>
+          </button>
 
-      <button ui-sref="get-started" type="submit" class="button button-full button-calm" style='border-style:none; border-radius:25px; margin-top:20px;'>
-       <span class="bigButton">
-        Sign Up
-       </span>
-      </button>
+          <hr id="landing-horiz-line">
 
-      <hr style="width:80%; margin-top:25px; margin-bottom:25px; color:#22C1AC;">
-
-      <button class="button button-full button-calm" ui-sref="signin" style='margin-top:10px; border-style:none; border-radius:25px;'>
-        <span class="medButton">
-          Login
-        </span>
-      </button>
-
-
-      <button class="button button-full button-calm" ng-click="logout()" style='border-radius:25px; border-style:none; margin-top:10px;'>
-        <span class="medButton">
-          Login with Facebook
-        </span>
-      </button>
-
-      </div>
-    </form>
-
+          <button class="button button-full button-calm general-button" ui-sref="signin">
+            <span class="medButton">
+              Login
+            </span>
+          </button>
+          <button class="button button-full button-calm general-button" ng-click="logout()">
+            <span class="medButton">
+              Login with Facebook
+            </span>
+        </button>
+      </form>
+    </div>
   </ion-content>
 </ion-view>

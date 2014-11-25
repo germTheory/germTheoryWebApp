@@ -1,17 +1,16 @@
 <ion-view>
   <ion-content class='gradient' style="background-color:#22C1AC;">
-    <form name="signinForm" ng-submit='signin()' style='margin-top:10px; margin-left:25px; margin-right:25px;'>
-
-      <label class="item item-input" style="margin-top:20px;">
+    <form name="signinForm" id="signinForm" ng-submit='signin()' style='margin-top:10px; margin-left:25px; margin-right:25px;'>
+    <h1>Login</h1>
+      <label class="item item-input" style="margin-bottom: 1%; border-radius: 5px">
         <span class="input-label">Email</span>
         <input type="email" ng-model='user.username' placeholder='Enter your email address' required>
       </label>
-      <label class="item item-input">
+      <label class="item item-input" style="margin-bottom: 1%; border-radius: 5px">
         <span class="input-label">Password</span>
         <input type="password" ng-model='user.password' placeholder='Enter your password' required>
       </label>
-
-      <button class="button button-full button-calm" ng-disabled="signinForm.$invalid" style='margin-top:390px;border-style:none; border-radius:25px;'>
+      <button class="button button-full button-calm loginButton" ng-disabled="signinForm.$invalid">
         <span class="medButton">
           Login
         </span>

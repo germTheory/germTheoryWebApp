@@ -1,4 +1,5 @@
 var db = require('../database/dbSchema.js');
+var moment = require('moment');
 var User = db.User;
 var Proximity = db.Proximity;
 var Location = db.Location;
@@ -45,6 +46,10 @@ module.exports = {
     //User.findAll({ include: [ Proximity ], where: { is_admin: false }, limit: 50, order: 'name' })
     User.findAll({ include: [ Proximity ], order: 'id DESC' })
       .success(function(results) {
+        for(var i = 0; i < results.length; i++){
+          results[i].dataValues.created_at = moment(results[i].dataValues.created_at).format('MMMM Do, YYYY');
+          console.log(results[i].dataValues.created_at);
+        }
         res.set('Content-Type', 'text/html');
         res.render('users', { results: results });
       });
