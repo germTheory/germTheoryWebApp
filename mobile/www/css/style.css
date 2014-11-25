@@ -34,6 +34,14 @@ h5.topMargin {
   margin-top:7px;
 }
 
+.thirtyTop {
+  margin-top:30px;
+}
+
+.twoTop {
+  margin-top:200px;
+}
+
 .buttonMed {
   width:95%; 
   font-size:.4em; 
@@ -273,6 +281,8 @@ img.resizeIcon{
   vertical-align: middle;
   text-align: center !important;
   margin: 10px; /* demo only */
+  text-align:center;
+  width:92%;
 }
 
 .custom-dropdown select {
@@ -283,10 +293,12 @@ img.resizeIcon{
   padding-right: 2.5em; 
   border: 0;
   margin: 0;
-  border-radius: 3px;
+  border-radius: 15px;
   text-indent: 0.01px;
   text-overflow: '';
   -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  text-align:center;
+  width:100%;
 }
 
 .custom-dropdown::before,
@@ -294,6 +306,7 @@ img.resizeIcon{
   content: "";
   position: absolute;
   pointer-events: none;
+  border-radius:15px;
 }
 
 .custom-dropdown::after { /*  Custom dropdown arrow */
@@ -316,16 +329,20 @@ img.resizeIcon{
 
 .custom-dropdown select[disabled] {
   color: rgba(0,0,0,.3);
+  border-radius:15px;
 }
 
 .custom-dropdown select[disabled]::after {
   color: rgba(0,0,0,.1);
+  border-radius:15px;
 }
 
 .custom-dropdown::before {
   background-color: rgba(0,0,0,.15);
+  border-radius:15px;
 }
 
 .custom-dropdown::after {
   color: rgba(0,0,0,.4);
+  border-radius:15px;
 }
