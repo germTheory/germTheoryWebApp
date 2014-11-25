@@ -30,6 +30,10 @@ h4.report {
   color:#808080;
 }
 
+h5.topMargin {
+  margin-top:-20px;
+}
+
 .buttonMed {
   width:95%; 
   font-size:.4em; 
@@ -114,6 +118,18 @@ img.resizeIcon{
     padding: 18px 12px 0px 12px;
 }
 
+.topLogo {
+  width: 7em; 
+  height: 1.5em; 
+  margin: 0 auto; 
+  margin-top: 6px;
+}
+
+.tabPosition i {
+  margin-bottom:8px; 
+  margin-top:-7px;
+}
+
 .riskHeader {
   text-align:center; 
   margin-top: 5%;
@@ -138,7 +154,7 @@ img.resizeIcon{
   text-align:center; 
   margin:26px 15px 15px 15px; 
   width:92%; 
-  height:185px; 
+  height:9.6rem; 
   border:solid; 
   border-width:3px; 
   border-color:#A1A1A1; 
