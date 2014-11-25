@@ -1,7 +1,97 @@
+
 h1 {
   color: #344456;
   font-size: 3rem;
   text-align: center;
+}
+
+/** Overridding Ionic Defaults */
+h1, h2, h3, h4, h5, h6, p, span, div, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider{
+    font-family: 'Avendir', sans-serif;
+    font-weight: 200;
+}
+
+@font-face {
+  font-family: Avendir;
+  src: url(../lib/ionic/fonts/AvenirMedium.otf);
+}
+
+h4.editInfo {
+  margin-top:10px; 
+  padding: 15px; 
+  color:#808080;
+}
+
+h4.report {
+  padding: 15px; 
+  padding-top:100px; 
+  padding-bottom:0px; 
+  margin-bottom:60px; 
+  color:#808080;
+}
+
+h5.topMargin {
+  margin-top:7px;
+}
+
+.thirtyTop {
+  margin-top:30px;
+}
+
+.twoTop {
+  margin-top:200px;
+}
+
+.buttonMed {
+  width:95%; 
+  font-size:.4em; 
+  margin-top:5em; 
+  margin-bottom:5%;
+  border-radius:8px;
+}
+
+.mapHeight {
+  height:100%;
+}
+
+#dateContainer {
+  width: 55px;
+  height: 55px;
+  background-color: #22c1ac;
+  z-index: 20;
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  border-radius: 100%;
+}
+
+#datepicker {
+  background-color: transparent;
+  color: transparent;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+#dateContainer .icon {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  font-size: 35px;
+  color: white;
+}
+
+.cloned-text-input {
+  background-color: transparent;
+  color: transparent !important;
+}
+
+.picker__input {
+  background-color: transparent;
+  color: transparent !important;
+}
+
+.center {
+  text-align:center;
 }
 
 a.greenTrack {
@@ -14,6 +104,12 @@ spots-map {
 }
 .scroll {
     height: 100%;
+}
+
+.buttonLarge {
+  width:92%; 
+  margin-top:2%; 
+  border-radius:8px;
 }
 
 img.resize{
@@ -31,13 +127,48 @@ img.resizeIcon{
     padding: 18px 12px 0px 12px;
 }
 
+.labelUp {
+  margin-bottom: 1%;
+  border-radius: 5px
+}
+
+.topLogo {
+  width: 7em; 
+  height: 1.5em; 
+  margin: 0 auto; 
+  margin-top: 6px;
+}
+
+.tabPosition{
+  margin-bottom:8px; 
+  margin-top:-7px;
+}
+
+.riskHeader {
+  text-align:center; 
+  margin-top: 5%;
+}
+
+.iconFloat {
+  margin:-5px;
+  float:right; 
+  font-size:1.2em;
+}
+
+.floatRight {
+  float:right;
+}
+
+.standardBG {
+  background-color:#22C1AC;
+}
 
 .userStats {
   position: relative; 
   text-align:center; 
   margin:26px 15px 15px 15px; 
   width:92%; 
-  height:185px; 
+  height:9.6rem; 
   border:solid; 
   border-width:3px; 
   border-color:#A1A1A1; 
@@ -103,7 +234,7 @@ img.resizeIcon{
 
 /* SIGNIN STYLES*/
 #signinForm {
-  margin-top: 20% !important;
+  margin-top: 5% !important;
 }
 
 #signinForm h1 {
@@ -115,9 +246,16 @@ img.resizeIcon{
   color:#fff;
 }
 
+.formUp {
+  margin-top:10px; 
+  margin-left:25px; 
+  margin-right:25px;
+}
+
 .medButton {
   font-size:1.3em;
   color:#fff;
+  margin-bottom:10%;
 }
 
 .loginButton {
@@ -156,6 +294,8 @@ img.resizeIcon{
   vertical-align: middle;
   text-align: center !important;
   margin: 10px; /* demo only */
+  text-align:center;
+  width:92%;
 }
 
 .custom-dropdown select {
@@ -166,10 +306,12 @@ img.resizeIcon{
   padding-right: 2.5em; 
   border: 0;
   margin: 0;
-  border-radius: 3px;
+  border-radius: 15px;
   text-indent: 0.01px;
   text-overflow: '';
   -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  text-align:center;
+  width:100%;
 }
 
 .custom-dropdown::before,
@@ -177,6 +319,7 @@ img.resizeIcon{
   content: "";
   position: absolute;
   pointer-events: none;
+  border-radius:15px;
 }
 
 .custom-dropdown::after { /*  Custom dropdown arrow */
@@ -199,16 +342,20 @@ img.resizeIcon{
 
 .custom-dropdown select[disabled] {
   color: rgba(0,0,0,.3);
+  border-radius:15px;
 }
 
 .custom-dropdown select[disabled]::after {
   color: rgba(0,0,0,.1);
+  border-radius:15px;
 }
 
 .custom-dropdown::before {
   background-color: rgba(0,0,0,.15);
+  border-radius:15px;
 }
 
 .custom-dropdown::after {
   color: rgba(0,0,0,.4);
+  border-radius:15px;
 }
