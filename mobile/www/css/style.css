@@ -154,6 +154,7 @@ img.resizeIcon{
   position: relative;
   display: inline-block;
   vertical-align: middle;
+  text-align: center !important;
   margin: 10px; /* demo only */
 }
 
