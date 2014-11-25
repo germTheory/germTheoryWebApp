@@ -114,6 +114,10 @@ img.resizeIcon{
     padding: 18px 12px 0px 12px;
 }
 
+.riskHeader {
+  text-align:center; 
+  margin-top: 5%;
+}
 
 .userStats {
   position: relative; 
