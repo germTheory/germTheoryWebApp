@@ -9,6 +9,12 @@ p {
   font-size: 1rem;
 }
 
+/* STYLES FOR NEWS VIEW SECTION */
+.news-view {
+  background-color: #F1F1F1;
+}
+
+
 /* STYLES FOR INFO SECTION*/
 div.calc-info-view {
   width: 112%;
