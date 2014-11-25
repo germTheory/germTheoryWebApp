@@ -33,6 +33,7 @@ angular.module('app.controllers.common', [])
       RiskIndexService.getRiskIndex(userId)
         .then(function(resp) {
           var indexValue = (resp && resp.value) || 0;
+          indexValue = 0.94;
           $scope.data["riskIndex"] = Math.round(indexValue * 100) / 100;
           // Note: Hardcode index threshold values for now
           if (indexValue >= 0.75) {

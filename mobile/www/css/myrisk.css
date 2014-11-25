@@ -6,23 +6,65 @@ h3 {
 }
 
 p {
-  color: transparent;
+  font-size: 1rem;
 }
 
 .stats-view {
-  margin-top: 1%;
-  height: 25%;
+  width: 105%;
+  border-top: 1px solid #DCDCDC;
+  border-bottom: 1px solid #DCDCDC;
+  height: 23%;
+  padding: none;
+  margin-left: -5%;
+  margin-right: -5%;
+  margin-top: 5%;
   color: #22c1ac;
   display: inline-block;
-  background-color: #e9e9e9;
+  background-color: #F1F1F1;
+  /*#e9e9e9*/
+}
+
+.vertical-line {
+  border-left: 1px solid #DCDCDC;
+  display: inline;
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 18%;
+  top: 26%;
+}
+
+.statistic {
+  position: relative;
+  text-align: center;
+  color: #22c1ac;
+  font-size: 2.8rem;
+  margin: 0px;
+  padding: 0px;
+  font-weight: lighter;
 }
 
 .left-stat{
   float: left;
+  width: 49.5%;
+  height: 100%;
 }
 
 .right-stat{
-  float: right;
+  float: left;
+  width: 49.5%;
+  height: 100%;
+}
+
+.right-stat p, .left-stat p {
+  position: relative;
+  width: 80%;
+  font-size: 1rem;
+  text-align: center;
+  margin: auto;
+}
+
+.right-stat h2, .left-stat h2 {
 }
 
 .risk-view {
@@ -58,9 +100,10 @@ p {
   width: 30%;
   height: 2rem;
   position: absolute;
-  padding: 2%;
+  padding: 10px;
   margin-top:2%;
   left: 0;
+  line-height: 50%;
   text-align: center;
   text-decoration: none;
   border-radius: 5px;
