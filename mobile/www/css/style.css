@@ -119,6 +119,10 @@ img.resizeIcon{
   margin-top: 5%;
 }
 
+.standardBG {
+  background-color:#22C1AC;
+}
+
 .userStats {
   position: relative; 
   text-align:center; 
