@@ -1,0 +1,245 @@
+h3 {
+  margin: 2%;
+  font-size: 1.2rem;
+  height: 20%;
+  color: #808080;
+}
+
+p {
+  font-size: 1rem;
+}
+
+/* STYLES FOR NEWS VIEW SECTION */
+.news-view {
+  background-color: #F1F1F1;
+  border-top: 2px solid #DCDCDC;
+  width: 112%;
+  margin-left: -6%;
+  padding-top: 5%;
+  height: 50%;
+}
+
+.news-icon {
+  font-size: 2rem;
+  float: left;
+  width: 10%;
+  color: #22c1ac;
+}
+
+.health-news-card {
+  background-color: #FFFFFF;
+  margin: 0 5%;
+  margin-bottom: 3%;
+  padding: 2%;
+  display: inline-block;
+  position: relative;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 1px 3px 0px #808080;
+  -moz-box-shadow:    0px 1px 3px 0px #808080;
+  box-shadow:         0px 1px 3px 0px #808080;
+}
+
+.news-content {
+  float: left;
+  text-align: left;
+  width: 85%;
+  margin-left: 1%;
+  /*position: absolute;*/
+}
+
+.news-content h3{
+  margin-left: 0;
+  color: #22c1ac;
+  font-size: 1.3rem;
+}
+
+.news-content p {
+  color: #808080;
+}
+
+/* STYLES FOR INFO SECTION*/
+div.calc-info-view {
+  width: 112%;
+  margin-left: -6%;
+  height: 6%;
+  background-color: #E4E4E4;
+}
+
+div.calc-info-view p {
+  clear: both;
+  display: inline-block;
+  position: relative;
+  font-size: .9rem;
+  top: -.6rem;
+  padding: 0px;
+  margin: 0px;
+  color: #9E9E9E;
+}
+
+span.info-icon {
+  float: right;
+  position: absolute;
+  left: 90%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  background-color: #BABABA;
+  margin-top: .1rem;
+}
+
+i.ion-ios7-information {
+  font-size: 1.6rem;
+  position: absolute;
+  left: 90%;
+  top: 47%;
+  float: right;
+  color: #BABABA;
+}
+
+/* STYLES FOR STATISTICS SECTION */
+div.stats-view {
+  width: 106%;
+  border-top: 1px solid #DCDCDC;
+  border-bottom: 2px solid #DCDCDC;
+  height: 23%;
+  padding: none;
+  margin-left: -6%;
+  margin-right: -6%;
+  margin-top: 5%;
+  color: #22c1ac;
+  display: inline-block;
+  background-color: #F1F1F1;
+}
+
+.vertical-line {
+  border-left: 1px solid #DCDCDC;
+  display: inline;
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 18%;
+  top: 26%;
+}
+
+.statistic {
+  position: relative;
+  text-align: center;
+  color: #22c1ac;
+  font-size: 2.8rem;
+  margin: 0px;
+  padding: 0px;
+  font-weight: lighter;
+}
+
+.left-stat, .right-stat{
+  float: left;
+  width: 49.5%;
+  height: 100%;
+  padding: 1%;
+}
+
+.right-stat p, .left-stat p {
+  position: relative;
+  width: 80%;
+  font-size: 1rem;
+  text-align: center;
+  margin: auto;
+}
+
+/* STYLES FOR PILL RISK VIEW*/
+.risk-view {
+  height: 20%;
+  width: 100%;
+  margin: none;
+  display: block;
+}
+
+.pill-container {
+  width: 100%;
+  height: 80%;
+  margin: auto;
+  position: relative;
+}
+
+.pill-levels {
+  width: 90%;
+  height: 43%;
+  border-radius: 500px;
+  background-image: url('../img/levels.png');
+  background-size: cover;
+  background-color: black;
+  margin: auto;
+}
+
+.popup {
+  content: 'hello';
+  background-color: white;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  width: 30%;
+  height: 2rem;
+  position: absolute;
+  padding: 10px;
+  margin-top:2%;
+  left: 0;
+  line-height: 50%;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+}
+
+.arrow-up:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+  border-bottom: 8px solid white;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  left: 50%;
+  margin-left: -8px;
+  top: -8px;
+}
+
+.popup.value-Low {
+  background-color: #2BCB2C;
+}
+
+.arrow-up.value-Low:before {
+  border-bottom: 8px solid #2BCB2C;
+}
+
+.popup.value-High{
+  left: 68%;
+  background-color: #F61435;
+}
+
+.arrow-up.value-High:before {
+  border-bottom: 8px solid #F61435;
+}
+
+.popup.value-Medium{
+  left: 23%;
+  color: #808080;
+  background-color: #FFF800;
+}
+
+.arrow-up.value-Medium:before {
+  border-bottom: 8px solid #FFF800;
+}
+
+.popup.value-Elevated{
+  left: 46%;
+  background-color: #F97A18;
+}
+
+.arrow-up.value-Elevated:before {
+  border-bottom: 8px solid #F97A18;
+}
+
