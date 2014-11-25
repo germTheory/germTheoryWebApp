@@ -10,14 +10,18 @@ spots-map {
     height: 100%;
 }
 
-/*
-.gradient {
-    background: -webkit-linear-gradient(left, #1eab99 , #22C1AC, #1eab99); 
-    background: -o-linear-gradient(right, #1eab99, #22C1AC,  #1eab99); 
-    background: -moz-linear-gradient(right, #1eab99, #22C1AC,  #1eab99); 
-    background: linear-gradient(to right, #1eab99 , #22C1AC,  #1eab99); 
+img.resize{
+    width:100%;
+    height: auto;
+    padding:20px;
 }
-*/
+
+img.resizeIcon{
+    width:100%;
+    height: auto;
+    padding: 18px 12px 0px 12px;
+}
+
 
 .userStats {
   position: relative; 
