@@ -9,19 +9,56 @@ p {
   font-size: 1rem;
 }
 
-.stats-view {
-  width: 105%;
+/* STYLES FOR INFO SECTION*/
+div.calc-info-view {
+  width: 112%;
+  margin-left: -6%;
+  /*margin-right: -6%;*/
+  height: 6%;
+  background-color: #E4E4E4;
+}
+
+div.calc-info-view p {
+  clear: both;
+  display: inline-block;
+  position: relative;
+  top: -.6rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+span.info-icon {
+  float: right;
+  position: absolute;
+  left: 90%;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 100%;
+  background-color: #BABABA;
+  margin-top: .1rem;
+}
+
+span.info-icon i {
+  font-size: 1.3rem;
+  position: absolute;
+  left: 40%;
+  top: 12%;
+
+}
+
+/* STYLES FOR STATISTICS SECTION */
+div.stats-view {
+  width: 106%;
   border-top: 1px solid #DCDCDC;
   border-bottom: 1px solid #DCDCDC;
   height: 23%;
   padding: none;
-  margin-left: -5%;
-  margin-right: -5%;
+  margin-left: -6%;
+  margin-right: -6%;
   margin-top: 5%;
   color: #22c1ac;
   display: inline-block;
   background-color: #F1F1F1;
-  /*#e9e9e9*/
 }
 
 .vertical-line {
@@ -44,13 +81,7 @@ p {
   font-weight: lighter;
 }
 
-.left-stat{
-  float: left;
-  width: 49.5%;
-  height: 100%;
-}
-
-.right-stat{
+.left-stat, .right-stat{
   float: left;
   width: 49.5%;
   height: 100%;
@@ -64,9 +95,7 @@ p {
   margin: auto;
 }
 
-.right-stat h2, .left-stat h2 {
-}
-
+/* STYLES FOR PILL RISK VIEW*/
 .risk-view {
   height: 20%;
   width: 100%;
