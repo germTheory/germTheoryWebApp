@@ -107,6 +107,10 @@ img.resizeIcon{
   margin-top: 20% !important;
 }
 
+#signinForm h1 {
+  margin-bottom: 10% !important;
+}
+
 .bigButton {
   font-size:1.5em;
   color:#fff;
