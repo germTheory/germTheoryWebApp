@@ -34,6 +34,11 @@ h5.topMargin {
   margin-top:7px;
 }
 
+.fifty {
+  text-align:center;
+  margin-top:10%;
+}
+
 .thirtyTop {
   margin-top:30px;
 }
@@ -164,22 +169,21 @@ img.resizeIcon{
 }
 
 .userStats {
-  position: relative; 
   text-align:center; 
-  margin:26px 15px 15px 15px; 
-  width:92%; 
+  margin:9% 2% 2% 2%;
+  width:96%; 
   height:9.6rem; 
   border:solid; 
   border-width:3px; 
   border-color:#A1A1A1; 
-  border-radius: 10px;
+  border-radius:10px;
   clear:both;
 }
 
 .myHealthInfo {
   color: #6B6B6B;
   position:absolute;
-  width:40%;
+  width:8em;
   text-align:center;
   border:none; 
   border-width:5px; 
@@ -198,7 +202,7 @@ img.resizeIcon{
 
   font-size:.3em;
   margin-left: 25px;
-  margin-top:30px;
+  margin-top:15px;
   background-color:#fff;
 }
 
