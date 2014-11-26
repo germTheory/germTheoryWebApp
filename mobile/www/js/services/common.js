@@ -31,7 +31,7 @@ angular.module('app.services.common', [])
       console.log('userId', userId);
       return $http({
         method: 'GET',
-        url: Config.url+'/api/proximity/users/' + userId
+        url: Config.url + '/api/proximity/users/' + userId
       })
         .then(function(resp) {
           return resp.data;

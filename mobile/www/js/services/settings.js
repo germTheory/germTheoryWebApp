@@ -17,7 +17,7 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
     };
 
     var getUsername = function(user_id) {
-      return $http.get(Config.url+'/api/users/' + user_id)
+      return $http.get(Config.url + '/api/users/' + user_id)
       .then(function(user) {
         return user.data;
       })
@@ -27,7 +27,7 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
     };
 
     var editSubmit = function(user_id, user) {
-      return $http.put('/api/users/' + user_id, user)
+      return $http.put(Config.url + '/api/users/' + user_id, user)
         .then(function(user) {
           return user.data;
         })
