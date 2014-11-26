@@ -31,8 +31,10 @@ describe('User Test Suites', function(){
         })
     });
 
-    afterEach(function() {
-      User.destroy();
+    afterEach(function(done) {
+      User.destroy().then(function(){
+        done();
+      });
     });
 
     it('should add a user to the database', function(done) {
