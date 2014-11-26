@@ -85,7 +85,7 @@ angular.module('app.services.auth', [])
           config.headers = config.headers || {};
           config.headers['x-access-token'] = jwt;
         }
-        config.headers['Allow-Control-Allow-Origin'] = '*';
+        //config.headers['Allow-Control-Allow-Origin'] = '*';
         return config;
       }
     };
