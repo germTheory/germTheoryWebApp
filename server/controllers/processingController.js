@@ -18,7 +18,7 @@ var _createReport = function(req, res, next){
   // Find DiseaseId
   console.log(JSON.stringify(data));
   var spawn = require('child_process').spawn;
-  python = spawn('python', ['./server/processing/locations.py', JSON.stringify(data)]);
+  python = spawn('python', ['~/server/processing/locations.py', JSON.stringify(data)]);
   python.stdout.on('data', function (data) {
     console.log('stdout: ' + data);
   });
