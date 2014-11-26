@@ -5,18 +5,30 @@ angular.module('app.directives.map', [])
      * Add a new report to the map
      */
     var addReportToMap = function(report, map, type, popupMsg){
+      var date = new Date();
+      var date2 = new Date(report.date)
+      console.log(report.date);
+      var dateDiff = date.getTime() - date2.getTime();
+      console.log(dateDiff);
       if(type === "infected"){
-        var marker = L.circle([report.latitude, report.longitude], 30, {
-          color: 'red',
+        var marker = L.circle([report.latitude, report.longitude], (1/(dateDiff*.75)) * 100000000000, {
+          color: '#f03',
           fillColor: '#f03',
-          fillOpacity: 0.5
+          fillOpacity: 0.6,
+          opacity: 0.01
+        }).addTo(map);
+        L.circle([report.latitude, report.longitude], (1/(dateDiff*.75)) * 100000000000, {
+          color: '#f03',
+          fillColor: '#f03',
+          fillOpacity: 0.6,
+          opacity: 0.01
         }).addTo(map);
         if (popupMsg){
           marker.bindPopup(popupMsg);
         }
         markers.push(marker);
       } else if(type === "user"){
-        var marker = L.circle([report.latitude, report.longitude], 10, {
+        var marker = L.circle([report.latitude, report.longitude], 30, {
           color: 'blue',
           fillColor: '#365CF1',
           fillOpacity: 0.5
@@ -76,13 +88,23 @@ angular.module('app.directives.map', [])
             method: 'GET',
             url: Config.url+'/api/cases'
           }).then(function(resp){
-            data = resp.data;
-            for(var i = 0; i < data.length; i++){
-              var report = data[i];
-              momentDate = new moment(report.date).format('MMMM Do, YYYY');
-              diseaseName = report.disease.name;
-              addReportToMap(report, map, "infected", "<b>" + diseaseName + ' Report</b><br>Date: ' + momentDate + '<br>' + report.description);
+            var data = resp.data;
+            var diseasePoints = [];
+            for( var i = 0; i < data.length; i++ ){
+              diseasePoints.push([data[i].latitude, data[i].longitude]);
             }
+            var heat = L.heatLayer(diseasePoints, {
+              radius: 30,
+              max: .15,
+              blur: 15,
+              maxZoom: 17
+            }).addTo(map);
+            // for(var i = 0; i < data.length; i++){
+            //   var report = data[i];
+            //   momentDate = new moment(report.date).format('MMMM Do, YYYY');
+            //   diseaseName = report.disease.name;
+            //   addReportToMap(report, map, "infected", "<b>" + diseaseName + ' Report</b><br>Date: ' + momentDate + '<br>' + report.description);
+            // }
           });
 
           // get all locations for signed in user
