@@ -2,10 +2,6 @@ body {
   margin-top: 55px;
 }
 
-h1 {
-
-}
-
 /* GENERAL BUTTON STYLES */
 .next-btn {
   padding: 1rem 4rem;
@@ -38,6 +34,7 @@ h1 {
 
 .entry-module.user-info{
   padding: 10px 20px;
+  margin-top: 10px;
   width: 49%;
   height: 30rem;
   margin-right: 2%;
@@ -47,6 +44,7 @@ h1 {
 .entry-module.infected-form{
   padding: 10px 20px;
   width: 48%;
+  margin-top: 10px;
   height: 30rem;
   float:left;
   overflow-y: scroll;
