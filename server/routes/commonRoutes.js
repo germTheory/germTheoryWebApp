@@ -69,10 +69,13 @@ module.exports = function (app) {
     });
 
   });
+  app.get('/addinfected', helpers.isLoggedInWeb, function( req, res ){
+    res.render('addinfected');
+  })
   app.get('/diseases', helpers.isLoggedInWeb, diseaseController.getDiseasesPage);
   app.get('/newReportedCase', helpers.isLoggedInWeb, caseController.newReportedCase );
   app.get('/newRiskReport', helpers.isLoggedInWeb, reportController.newRiskReport );
   app.get('/*', helpers.isLoggedInWeb, function(req, res, next) {
-    res.render('index');
+    res.render('home');
   });
 };
