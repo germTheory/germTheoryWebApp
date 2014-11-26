@@ -2191,7 +2191,7 @@ body, .ionic-body {
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -2519,7 +2519,7 @@ cite {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;
   font-weight: 500;
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -3651,7 +3651,7 @@ a.subdued {
 .tab-item .icon {
   color: #5B5C5B;
   display: block;
-  margin: 0 auto;
+  margin: -7px 0px -20px 0px;
   padding-top: 8px;
   height: 100%;
   font-size: 350%;
@@ -4974,7 +4974,7 @@ label, input, button, select, textarea {
   line-height: 1.42857; }
 
 input, button, select, textarea {
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 
 .item-input {
   display: -webkit-box;
@@ -7754,9 +7754,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
  * Apply roboto font
  */
 .roboto {
-  font-family: "Roboto", Helvetica, Arial, "Lucida Grande", sans-serif; }
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
   .roboto input {
-    font-family: "Roboto", Helvetica, Arial, "Lucida Grande", sans-serif; }
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 
 /*
 .platform-android {

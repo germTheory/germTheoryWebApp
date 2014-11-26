@@ -1,0 +1,43 @@
+<% layout('layout') -%>
+<div>
+    <div class="container"></div>
+</div>
+<h1>An Existing User Has Been Found</h1>
+<div class="col-sm-12">
+  <div>
+    <div id="user-info">  
+      <p>Name: <%= user.name %></p>
+      <p>Gender: <%= user.gender %></p>
+      <p>Email: <%= user.email %></p>
+    </div>
+  </div>
+  <form action="/confirminfected" method="POST" id="confirm-infected">
+      <input type="hidden" name="user_id" value="<%= user.id %>"/>
+      <div class="form-group">
+        <h3>What disease does this user have?</h3>
+        <select name="disease_id">
+          <% diseases.forEach(function(disease) { %>
+          <option value="<%= disease.id %>" selected><%= disease.name %></option> 
+          <% }); %>
+        </select>
+      </div>
+      <div class="form-group">
+        <h3>Approximate Date of Infection</h3>
+        <input type="text" id="date_of_infection" class="form-control" name="date_of_infection" required>
+      </div>
+      <div class="form-group">
+        <h3>Approximate Date of First Symptoms</h3>
+        <input type="text" id="date_of_symptoms" class="form-control" name="date_of_symptoms" required>
+      </div>
+      <div style="text-align:center">
+        <h3>Is this correct?</h3>
+        <a href="/createnewinfected" class="btn btn-danger btn-lg">No</a>
+        <button type="submit" class="btn btn-success btn-lg">Yes</button>
+      </div>
+  </form>
+  <script>
+    $(function() {
+      $( "#date_of_infection" ).datepicker();
+      $( "#date_of_symptoms" ).datepicker();
+    });
+  </script>
