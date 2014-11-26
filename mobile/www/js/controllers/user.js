@@ -7,7 +7,7 @@ angular.module('app.controllers.user', [])
       AuthService.signin($scope.user)
         .then(function (resp) {
           $scope.user = resp.data.user;
-          $location.path('/tab/map');
+          $location.path('/tab/myrisk');
         })
         .catch(function (error) {
           alert(error.data.error);
@@ -19,7 +19,7 @@ angular.module('app.controllers.user', [])
       AuthService.signup($scope.user)
         .then(function(resp) {
           $scope.user = resp.data.user;
-          $location.path('/tab/map');
+          $location.path('/tab/myrisk');
         })
         .catch(function(error) {
           alert(error.data.error);
