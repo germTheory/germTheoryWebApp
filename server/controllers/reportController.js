@@ -2,8 +2,9 @@ var db = require("../database/dbSchema.js");
 var diseaseController = require("./diseaseController.js")
 
 var _showAllProximityReports = function(req, res, next){
-	db.ProximityReport.findAll({ order: 'id DESC' })
+	db.ProximityReport.findAll({include: [ db.Disease ], order: 'id DESC' })
       .success(function(results) {
+      	console.log(results);
         res.set('Content-Type', 'text/html');
         res.render('reports', { results: results }); 
       });
