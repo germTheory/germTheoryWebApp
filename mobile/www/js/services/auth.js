@@ -4,7 +4,7 @@ angular.module('app.services.auth', [])
     var signin = function (user) {
       return $http({
         method: 'POST',
-        url: '/api/users/login',
+        url: Config.url+'/api/users/login',
         data: user
       })
         .then(function (resp) {
