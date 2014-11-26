@@ -99,6 +99,10 @@ h5.topMargin {
   text-align:center;
 }
 
+.left {
+  text-align:lefts;
+}
+
 a.greenTrack {
   background-color:#00EB66;
 }
@@ -284,11 +288,11 @@ img.resizeIcon{
 /* GET STARTED STYLES */
 #get-started h4 {
   color: #808080;
-  margin: 20% 0;
+  margin: 10% 0;
 }
 
 #get-started-button {
-  margin-top: 50% !important;
+  margin-top: 30% !important;
 }
 
 /* Custom dropdown */
