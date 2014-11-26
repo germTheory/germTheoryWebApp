@@ -42,7 +42,7 @@ for( var i = 0; i < 40; i++ ) {
 }
 
 console.log("Building West Africa Cases")
-for( var i = 0; i < 500; i++ ){
+for( var i = 0; i < 2000; i++ ){
   cases.push({
     description: "Sierra Leone Ebola Case.", 
     date: faker.date.between(new Date(2014, 9, 9), new Date()), 

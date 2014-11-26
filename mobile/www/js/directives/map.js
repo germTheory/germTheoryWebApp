@@ -95,7 +95,7 @@ angular.module('app.directives.map', [])
             }
             var heat = L.heatLayer(diseasePoints, {
               radius: 30,
-              max: .15,
+              max: .25,
               blur: 15,
               maxZoom: 17
             }).addTo(map);
