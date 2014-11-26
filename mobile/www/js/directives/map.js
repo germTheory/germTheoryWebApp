@@ -88,7 +88,7 @@ angular.module('app.directives.map', [])
           // get all locations for signed in user
           $http({
             method: 'GET',
-            url:  '/api/locations/users/' + LocalStorageService.getItem('id'),
+            url:  Config.url + '/api/locations/users/' + LocalStorageService.getItem('id'),
             headers: {
               'Content-Type': 'application/jsonp'
             }
