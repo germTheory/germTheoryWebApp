@@ -2,37 +2,39 @@
 <div>
     <div class="container"></div>
 </div>
-<h1>An Existing User Has Been Found</h1>
+<h1 style="text-align: center">An Existing User Has Been Found</h1>
 <div class="col-sm-12">
-  <div>
-    <div id="user-info">  
-      <p>Name: <%= user.name %></p>
-      <p>Gender: <%= user.gender %></p>
-      <p>Email: <%= user.email %></p>
-    </div>
+  <div class="entry-module user-info">
+    <h3>User Information</h3>
+    <p>Name: <%= user.name %></p>
+    <p>Gender: <%= user.gender %></p>
+    <p>Email: <%= user.email %></p>
   </div>
   <form action="/confirminfected" method="POST" id="confirm-infected">
-      <input type="hidden" name="user_id" value="<%= user.id %>"/>
-      <div class="form-group">
-        <h3>What disease does this user have?</h3>
-        <select name="disease_id">
-          <% diseases.forEach(function(disease) { %>
-          <option value="<%= disease.id %>" selected><%= disease.name %></option> 
-          <% }); %>
-        </select>
-      </div>
-      <div class="form-group">
-        <h3>Approximate Date of Infection</h3>
-        <input type="text" id="date_of_infection" class="form-control" name="date_of_infection" required>
-      </div>
-      <div class="form-group">
-        <h3>Approximate Date of First Symptoms</h3>
-        <input type="text" id="date_of_symptoms" class="form-control" name="date_of_symptoms" required>
+      <div class="entry-module infected-form">
+        <h3>Infection Data</h3>
+        <input type="hidden" name="user_id" value="<%= user.id %>"/>
+        <div class="form-group">
+          <label>What disease does this user have?</label>
+          <br>
+          <select name="disease_id">
+            <% diseases.forEach(function(disease) { %>
+            <option value="<%= disease.id %>" selected><%= disease.name %></option> 
+            <% }); %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Approximate Date of Infection</label>
+          <input type="text" id="date_of_infection" class="form-control" name="date_of_infection" required>
+        </div>
+        <div class="form-group">
+          <label>Approximate Date of First Symptoms</label>
+          <input type="text" id="date_of_symptoms" class="form-control" name="date_of_symptoms" required>
+        </div>
       </div>
       <div style="text-align:center">
-        <h3>Is this correct?</h3>
-        <a href="/createnewinfected" class="btn btn-danger btn-lg">No</a>
-        <button type="submit" class="btn btn-success btn-lg">Yes</button>
+        <a href="/createnewinfected" class="btn btn-danger btn-lg prev-btn"><i class="fa fa-long-arrow-left"></i></a>
+        <button type="submit" class="btn btn-success btn-lg next-btn"><i class="fa fa-long-arrow-right"></i></button>
       </div>
   </form>
   <script>
