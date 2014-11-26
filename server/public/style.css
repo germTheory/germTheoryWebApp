@@ -8,6 +8,22 @@ body {
   background-color: #eee;
 }
 
+.center {
+  text-align:center;
+}
+
+.buttonPlace {
+  margin-top:1%;
+}
+
+.buttonPlace2 {
+  margin-top:2%;
+}
+
+.margTop {
+  margin-top:10%;
+}
+
 .navigation ul {
   margin: 0;
   padding: 0;

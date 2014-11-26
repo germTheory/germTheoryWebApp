@@ -1,5 +1,5 @@
 <% layout('layout') -%>
-<div class="col-sm-6 col-sm-offset-3" >
+<div class="center col-sm-12">
 
   <!--    <h1 style="text-align:center;"> Login</h1>
       <form action="/auth/login" method="post">
@@ -15,12 +15,23 @@
           <button type="submit" class="btn btn-warning btn-lg">Login</button>
         </div>
       </form>-->
-    <h1 style="text-align:center; margin-top:50px;"><span class="fa fa-lock"></span>Login with Google to Continue
-        <br>
-        <a href="/auth/google" class="btn btn-danger" style="margin-top:30px;"><span class="fa fa-google-plus"></span> Google</a>
-        </h1>
+
+    <h2 class="margTop">You've reached the Administrative Web Portal
+      <br>
+    </h2>
+    <h3><span class="fa fa-lock"></span> Are you're a Public Health Official?
+      <br>
+      <a href="/auth/google" class="buttonPlace2 btn btn-danger"><span class="fa fa-google-plus"></span> Login With Google</a>
+      </h1>
       <div>
       <br>
+    </h3>
+    <h3 class="margTop">
+      Looking for the Mobile App?
+    </h3>
+    <a href="/mobile" class="buttonPlace btn btn-info">Continue to Mobile App</a>
+
+
 
       <!-- <p>Need to register? <a href="/auth/signup">  Signup</a></p> -->
     </div>
