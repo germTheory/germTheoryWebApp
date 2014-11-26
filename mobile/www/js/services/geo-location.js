@@ -38,10 +38,10 @@ angular.module('app.services.geo-location', ['ngCordova'])
       });
 
       bgGeo.configure(successFn, failureFn, {
-        url: '/api/locations', // Android only; ios allows javascript callbacks for your http
+        url: Config.url+'/api/locations', // Android only; ios allows javascript callbacks for your http
         // url: 'http://10.6.25.244:4568/api/locations', //  Android only required for ; ios allows javascript callbacks for your http
         params: {     
-          user_id: 104,
+          user_id: 104
         },
         headers: {
         },

@@ -1,8 +1,9 @@
 angular.module('app.services.common', [])
   .factory('Config',function(){
     return {
-      url: 'https://germ-tracker.herokuapp.com'
-    }
+     // url: 'http://localhost:4568'
+      url: ''
+    };
   })
   .factory('LocalStorageService', function($window) {
     var store = $window.localStorage;
@@ -30,7 +31,7 @@ angular.module('app.services.common', [])
       console.log('userId', userId);
       return $http({
         method: 'GET',
-        url: '/api/proximity/users/' + userId
+        url: Config.url+'/api/proximity/users/' + userId
       })
         .then(function(resp) {
           return resp.data;

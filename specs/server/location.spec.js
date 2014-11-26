@@ -6,6 +6,7 @@ var seed = require('../../server/config/seed.js');
 
 describe('Location Test Suite', function() {
   var lastid;
+  var otherId;
   var fakeLocations = [];
 
   before(function(done) {
@@ -21,7 +22,10 @@ describe('Location Test Suite', function() {
           };
           fakeLocations.push(fakeLoc);
         }
-        done();
+        db.User.create({ name: 'john', gender: 'M', token: 'johnToken', email: 'john@john.com' }).then(function(user){
+          otherId = user.dataValues.id;
+          done();
+        });
       });
     });
   });
@@ -50,33 +54,64 @@ describe('Location Test Suite', function() {
 
   describe('Location REST Tests', function() {
 
+    var authToken;
     describe('GET: /api/locations', function() {
       before(function(done) {
         db.Location.bulkCreate(fakeLocations).then(function(created) {
-          done();
+          request(app)
+          .post('/api/users/login')
+          .send({username:'john@john.com',password:123})
+          .expect(200)
+          .end(function(err, res){
+            authToken = res.body.token;
+            done();
+          });
         });
       });
 
       it('should have locations endpoint', function(done) {
         request(app)
           .get('/api/locations')
+          .set('x-access-token',authToken) // sets the token for login
           .expect(200, done);
       });
 
-      it('should return locations array ', function(done) {
+      it('should not return locations array if anonymous ', function(done) {
         request(app)
           .get('/api/locations')
-          .expect(200)
-          .expect(function(res) {
-            expect(res.body.length).to.be.greaterThan(0);
-            expect(res.body[0].user_id).to.equal(lastid);
-          })
+          .expect(401)
           .end(done);
       });
+
+
+      it('should retrieve only logged in user locations if logged in', function(done) {
+        db.Location.create({
+          user_id: otherId,
+          latitude: 12.345,
+          longitude: 23.456,
+          date: Date.now()
+        }).then(function(created) {
+          console.log(authToken);
+          request(app)
+            .get('/api/locations/')
+            .set('x-access-token',authToken) // sets the token for login
+            .expect(200)
+            .end(function(err, res) {
+              if (err) {
+                done(err);
+                return;
+              }
+
+              expect(res.body.length).to.equal(1);
+              done();
+            });
+        });
+      });
+
     });
 
     describe('GET: /api/locations/:id', function() {
-      it('should retrieve location by id', function(done) {
+      it('should fail to retrieve location by id if is from another user', function(done) {
         db.Location.create({
           user_id: lastid,
           latitude: 12.345,
@@ -85,9 +120,34 @@ describe('Location Test Suite', function() {
         }).then(function(created) {
           request(app)
             .get('/api/locations/' + created.id)
+            .set('x-access-token',authToken) // sets the token for login
+            .expect(403)
+            .end(function(err, res) {
+              if (err) {
+                done(err);
+                return;
+              }
+
+              done();
+            });
+        });
+      });
+      it('should succeed to retrieve location by id if is owned by user', function(done) {
+        db.Location.create({
+          user_id: otherId,
+          latitude: 12.345,
+          longitude: 23.456,
+          date: Date.now()
+        }).then(function(created) {
+          request(app)
+            .get('/api/locations/' + created.id)
+            .set('x-access-token',authToken) // sets the token for login
             .expect(200)
             .end(function(err, res) {
-              expect(res.body.latitude).to.equal(12.345);
+              if (err) {
+                done(err);
+                return;
+              }
               done();
             });
         });
@@ -96,8 +156,14 @@ describe('Location Test Suite', function() {
       it('should respond empty object if not exist', function(done) {
         request(app)
           .get('/api/locations/' + 3000)
+          .set('x-access-token',authToken) // sets the token for login
           .expect(200)
           .end(function(err, res) {
+            if (err) {
+              done(err);
+              return;
+            }
+
             expect(res.body).to.deep.equal({});
             done();
           });
@@ -108,12 +174,14 @@ describe('Location Test Suite', function() {
       it('should reject empty locations added', function(done) {
         request(app)
           .post('/api/locations')
-          .expect(500, done);
+          .set('x-access-token',authToken) // sets the token for login
+          .expect(400, done);
       });
 
       it('should add properly created locations', function(done) {
         request(app)
           .post('/api/locations')
+          .set('x-access-token',authToken) // sets the token for login
           .send({
             user_id: lastid,
             location: {

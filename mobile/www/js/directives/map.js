@@ -74,7 +74,7 @@ angular.module('app.directives.map', [])
           // get all cases
           $http({
             method: 'GET',
-            url: '/api/cases'
+            url: Config.url+'/api/cases'
           }).then(function(resp){
             data = resp.data;
             for(var i = 0; i < data.length; i++){

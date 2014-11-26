@@ -17,7 +17,7 @@ angular.module('app.services.settings', ['app.services.common', 'app.services.ge
     };
 
     var getUsername = function(user_id) {
-      return $http.get('/api/users/' + user_id)
+      return $http.get(Config.url+'/api/users/' + user_id)
       .then(function(user) {
         return user.data;
       })

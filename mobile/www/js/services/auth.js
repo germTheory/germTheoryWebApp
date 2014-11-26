@@ -4,7 +4,7 @@ angular.module('app.services.auth', [])
     var signin = function (user) {
       return $http({
         method: 'POST',
-        url: '/api/users/login',
+        url: Config.url+'/api/users/login',
         data: user
       })
         .then(function (resp) {
@@ -85,7 +85,7 @@ angular.module('app.services.auth', [])
           config.headers = config.headers || {};
           config.headers['x-access-token'] = jwt;
         }
-        config.headers['Allow-Control-Allow-Origin'] = '*';
+        //config.headers['Allow-Control-Allow-Origin'] = '*';
         return config;
       }
     };
