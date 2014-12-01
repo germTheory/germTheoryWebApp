@@ -2,7 +2,7 @@
   <ion-content class='gradient' style="background-color:#22C1AC;" drag-content="false" scroll="false">
     <div class='landing-content'>
       <img class="resize" src="./img/germTheorySS.png" style="text-align:center;">
-      <form name="signinForm" id="landing-form" ng-submit='signin()' style='margin-top:40px;'>
+      <form name="signinForm" id="landing-form" style='margin-top:40px;'>
           <button ui-sref="get-started" type="submit" class="button button-full button-calm general-button">
            <span class="medButton">
             Sign Up
@@ -16,7 +16,7 @@
               Login
             </span>
           </button>
-          <button class="button button-full button-calm general-button" ng-click="logout()">
+          <button class="button button-full button-calm general-button" ng-click="loginWithFacebook()">
             <span class="medButton">
               Login with Facebook
             </span>

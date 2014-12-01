@@ -31,6 +31,13 @@ angular.module('app.controllers.user', [])
       AuthService.signout();
       $scope.user = null;
     };
+
+    // This is a place holder function to handle attempts to login with Facebook
+    // (Which is a feature that has not yet been implemented)
+    $scope.loginWithFacebook = function() {
+      alert('This functionality is not yet implemented');
+    };
+
   });
 
   
