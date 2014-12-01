@@ -53,7 +53,7 @@ module.exports = {
 
   showAllUsers: function(req, res, next) {
     //User.findAll({ include: [ Proximity ], where: { is_admin: false }, limit: 50, order: 'name' })
-    User.findAll({ include: [ Proximity ], order: 'id DESC' })
+    User.findAll({ include: [ Proximity ], order: 'id ASC' })
       .success(function(results) {
         for(var i = 0; i < results.length; i++){
           results[i].dataValues.created_at = moment(results[i].dataValues.created_at).format('MMMM Do, YYYY');
