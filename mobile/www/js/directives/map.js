@@ -115,7 +115,7 @@ angular.module('app.directives.map', [])
             data = resp.data;
             for(var i = 0; i < data.length; i++){
               var report = data[i];
-              addReportToMap(report, map, "user");
+              //addReportToMap(report, map, "user");
             }
           });
 
