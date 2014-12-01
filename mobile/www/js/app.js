@@ -111,7 +111,7 @@ angular.module('app', [
     // If auth-token is not present, redirect to 'signin' state unless next state is either 'signin' or 'signout'
     $rootScope.$on('$stateChangeStart', function (event, toState) {
       if (AuthService.shouldAuthenticate(toState.name) && !AuthService.isAuthenticated()) {
-        $location.path('/signin');
+        $location.path('/landing');
       }
     });
   });
