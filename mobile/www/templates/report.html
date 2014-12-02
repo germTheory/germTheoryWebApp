@@ -1,19 +1,28 @@
 <ion-view title="Report">
   <ion-content has-header="true" padding="true" class="center">
-
-
-  <h4 class="report">
-    "Germ-Theory" relies on information from people around the world to track dangerous diseases
-    <br>
-    <br>
-    If you or someone you know has been diagnosed with a disease, report it now.
-  </h4>
-
-
-  <button class="buttonMed button button-large button-positive">
-    <b>
-    Create a New Report
-    </b>
-  </button>
+  
+    <button class="buttonMed button button-large button-positive general-button report-button">
+      <b>
+      Create New Report
+      </b>
+    </button>
+    <div id="report-header">
+      <p>Previous Reports</p>
+    </div>
+    <div id="past-reports">
+      <div class="past-report-card">
+          <div class="report-content">
+            <a><h3 class="report-title">Ebola<span class="report-date">Wed, Nov 14</span></h3></a>
+            <p class="report-body">Patient: Craig Spencer <br>Location: New York City, NY, USA</p>
+          </div>
+        </div>
+        <div class="past-report-card">
+          <div class="report-content">
+            <a><h3 class="report-title">Ebola<span class="report-date">Mon, Nov 12</span></h3></a>
+            <p class="report-body">Patient: Craig Spencer <br>Location: New York City, NY, USA</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
