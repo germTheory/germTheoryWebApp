@@ -26,7 +26,7 @@ p {
   color: #22c1ac;
 }
 
-.health-news-card {
+.health-news-card, .past-report-card {
   background-color: #FFFFFF;
   margin: 0 5%;
   margin-bottom: 3%;
@@ -39,7 +39,7 @@ p {
   box-shadow:         0px 1px 3px 0px #808080;
 }
 
-.news-content {
+.news-content, .report-content {
   float: left;
   text-align: left;
   width: 85%;
@@ -47,13 +47,13 @@ p {
   /*position: absolute;*/
 }
 
-.news-content h3{
+.news-content h3, .report-content h3{
   margin-left: 0;
   color: #22c1ac;
   font-size: 1.3rem;
 }
 
-.news-content p {
+.news-content p, .report-content p {
   color: #808080;
 }
 
@@ -70,7 +70,7 @@ div.calc-info-view p {
   display: inline-block;
   position: relative;
   font-size: .9rem;
-  top: -.6rem;
+  top: -.3rem;
   padding: 0px;
   margin: 0px;
   color: #9E9E9E;

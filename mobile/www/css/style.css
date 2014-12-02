@@ -22,14 +22,6 @@ h4.editInfo {
   color:#808080;
 }
 
-h4.report {
-  padding: 15px; 
-  padding-top:100px; 
-  padding-bottom:0px; 
-  margin-bottom:60px; 
-  color:#808080;
-}
-
 h5.topMargin {
   margin-top:7px;
 }
@@ -237,7 +229,7 @@ img.resizeIcon{
   border: none;
   padding: 0 !important;
   border-radius: 400px !important;
-  font-size: 1rem !important;
+  font-size: 1rem;
 }
 
 /* SIGNIN STYLES*/
@@ -366,4 +358,10 @@ img.resizeIcon{
 .custom-dropdown::after {
   color: rgba(0,0,0,.4);
   border-radius:15px;
+}
+
+.button.report-button {
+  font-size: 1.4rem;
+  margin-top: 7% !important;
+  font-weight: lighter;
 }

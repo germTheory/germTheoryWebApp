@@ -1,0 +1,14 @@
+span.report-date {
+	font-size: 1rem;
+	float: right;
+	margin-top: 2%;
+}
+
+.past-reports {
+	background-color: #F1F1F1;
+	border-top: 2px solid #DCDCDC;
+	width: 112%;
+	margin-left: -6%;
+	padding-top: 5%;
+	height: 50%;
+}
