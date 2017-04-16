@@ -51,7 +51,8 @@
     "pg": "^3.6.2",
     "q": "^1.0.1",
     "request": "^2.47.0",
-    "sequelize": "^2.0.0-rc2"
+    "sequelize": "^2.0.0-rc2",
+    "sequelize-cli": "^0.3.3"
   },
   "engines": {
     "node": ">= 0.8.0"
